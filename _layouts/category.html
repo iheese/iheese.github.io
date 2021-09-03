@@ -60,9 +60,9 @@ layout: default
         </div>
       </div>
       <div class="col-lg-4 col-md-2">
-        <ul>
+        <ul class="category">
         {% for category in site.categories %}
-          <li><a href= "/category/{{ category | first }}">{{ category | first }} ({{ category | last | size }})</a></li>
+          <li {% if category[0] == page.cateogory %}class="active"{% endif %}><a href= "/category/{{ category | first }}">{{ category | first }} ({{ category | last | size }})</a></li>
         {% endfor %}
       </ul>
       </div>
