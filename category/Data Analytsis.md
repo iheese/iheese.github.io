@@ -1,4 +1,3 @@
 ---
 layout: category
-category: python
----
+category: Data Analytsis
