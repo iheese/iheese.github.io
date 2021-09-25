@@ -34,3 +34,18 @@ highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
+
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      mathjax: true
