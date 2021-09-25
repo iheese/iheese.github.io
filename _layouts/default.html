@@ -17,6 +17,10 @@
     <!-- syntax.css -->
     <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
   
+    {% if page.use_math %}
+       {% include mathjax_support.html %}
+    {% endif %}
+  
 {% include head.html %}
 
 <body>
