@@ -4,7 +4,7 @@ layout: post
 title: '타이타닉 생존자 예측'
 subtitle: 'Logistic, DecisionTree'
 date: 2021-10-03 21:00:00 +0900
-categories: 'Data_Analysis'
+categories: 'Data Analysis'
 use_math: true
 
 ---
