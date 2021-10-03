@@ -1,10 +1,12 @@
 ---
+
 layout: post
 title: '타이타닉 생존자 예측'
 subtitle: 'Logistic, DecisionTree'
 date: 2021-10-03 21:00:00 +0900
 categories: 'Data Analysis'
 use_math: true
+
 ---
 
 
@@ -13,8 +15,9 @@ use_math: true
 import pandas as pd  #판다스
 from sklearn.linear_model import LogisticRegression #로지스틱 회귀 모델
 from sklearn.tree import DecisionTreeClassifier #의사결정 나무 모델
-
 ```
+
+
 
 
 ```python
@@ -25,9 +28,10 @@ test=pd.read_csv('../input/titanic/test.csv') #모델 시험지
 submission=pd.read_csv('../input/titanic/gender_submission.csv') #답안지
 ```
 
+## EDA
+
 
 ```python
-#EDA
 train.head()
 
 ```
@@ -128,7 +132,13 @@ train.head()
     </tr>
   </tbody>
 </table>
+PassengerId: 탑승객의 고유 아이디/ Survival: 생존유무(0: 사망, 1: 생존)/ Pclass: 등실의 등급/
 
+Name:이름/ Sex: 성별/ Age: 나이/ Sibsp: 함께 탑승한 형제자매, 아내, 남편의 수/
+
+Parch: 함께 탑승한 부모, 자식의 수/ Ticket: 티켓번호/ Fare: 티켓의 요금/
+
+Cabin: 객실번호/ Embarked: 배에 탑승한 위치(C = Cherbourg, Q = Queenstown, S = Southampton)
 
 
 ```python
@@ -225,7 +235,7 @@ test.head()
     </tr>
   </tbody>
 </table>
-</div>
+
 
 
 ```python
@@ -276,14 +286,11 @@ train.tail()
 ```
 
 
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -380,14 +387,14 @@ train.tail()
     </tr>
   </tbody>
 </table>
-</div>
 
 
+- 훈련 데이터, 테스트 데이터 파악
 
 
 ```python
-print(train.shape) #속성은 괄호가 없다.
-print(test.shape)
+print(train.shape) #속성을 나타내는 shape 메소드는 ()쓰지 않는다. 
+print(test.shape) #각 파일의 데이터 크기 파악
 print(submission.shape)
 ```
 
@@ -395,10 +402,8 @@ print(submission.shape)
     (418, 11)
     (418, 2)
 
-
-
 ```python
-train.info()
+train.info() #기본적이고 전체적인 데이터 파악
 ```
 
     <class 'pandas.core.frame.DataFrame'>
@@ -449,7 +454,7 @@ test.info()
 
 
 ```python
-print(train.describe())
+print(train.describe()) #각 데이터의 기술 통계량 확인
 print(test.describe())
 ```
 
@@ -485,12 +490,8 @@ print(test.describe())
 
 
 ```python
-#describe()는 데이터프레임
-#value_counts 는 시리즈에서만 실행 시리즈는 하나의 열
-train['Embarked'].value_counts()
+train['Embarked'].value_counts() #배에 탑승한 위치
 ```
-
-
 
 
     S    644
@@ -502,13 +503,11 @@ train['Embarked'].value_counts()
 
 
 ```python
-train['Embarked'].unique() #유니크도 시리즈만
+train['Embarked'].unique() #unique 메소드는 시리즈로 접근
 ```
 
 
-
-
-    array(['S', 'C', 'Q', nan], dtype=object)
+    array(['S', 'C', 'Q', nan], dtype=object) #나오는 순서대로 나옴
 
 
 
@@ -518,22 +517,11 @@ train.groupby('Sex').mean()
 ```
 
 
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -580,8 +568,6 @@ train.groupby('Sex').mean()
     </tr>
   </tbody>
 </table>
-</div>
-
 
 
 
@@ -590,22 +576,11 @@ train.groupby('Pclass').mean()
 ```
 
 
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -657,7 +632,7 @@ train.groupby('Pclass').mean()
     </tr>
   </tbody>
 </table>
-</div>
+
 
 
 
@@ -666,10 +641,8 @@ train.groupby('Pclass').mean()
 #시각화
 #pd.Series.plot(kind='bar')
 
-train.groupby('Pclass').mean()['Survived'].plot(kind='bar', rot=0)  #rot=0 x축 돌아간거 수정 45는 비스듬히
+train.groupby('Pclass').mean()['Survived'].plot(kind='bar', rot=0)  #rot=0 x축 명칭 회전 수정/ rot=45는 비스듬히(각도)
 ```
-
-
 
 
     <AxesSubplot:xlabel='Pclass'>
@@ -677,14 +650,13 @@ train.groupby('Pclass').mean()['Survived'].plot(kind='bar', rot=0)  #rot=0 x축 
 
 
 
-​    
-![png](output_14_1.png)
+​    ![클래스별 생존율](/img/posts/titanic_14_1.png)
 ​    
 
 
 
 ```python
-train['Age'].plot(kind='hist',bins=50,grid=True) #bins 도수를 더 잘게 나눔 보조선까지 추가
+train['Age'].plot(kind='hist',bins=50,grid=True) #bins 도수를 더 잘게 나눔 grid로 보조선까지 추가
 ```
 
 
@@ -695,9 +667,8 @@ train['Age'].plot(kind='hist',bins=50,grid=True) #bins 도수를 더 잘게 나�
 
 
 
-​    
-![png](output_15_1.png)
-​    
+![나이별 생존자 수](/img/posts/titanic_15_1.png)
+    
 
 
 
@@ -713,19 +684,15 @@ train.plot(x='Age',y='Fare',kind='scatter')
 
 
 
-​    
-![png](output_16_1.png)
-​    
+![요금과 나이 산점도 분포](/img/posts/titanic_16_1.png)
+    
 
-
+## 데이터 전처리
 
 ```python
-##데이터 전처리 //결측값 처리 공부
+#결측값 파악
 train.isna().sum()
-
 ```
-
-
 
 
     PassengerId      0
@@ -744,12 +711,12 @@ train.isna().sum()
 
 
 
+- 나이 결측값 해결
+
 
 ```python
-train['Age'].median()
+train['Age'].median() #중앙값으로 대체
 ```
-
-
 
 
     28.0
@@ -758,16 +725,14 @@ train['Age'].median()
 
 
 ```python
-train['Age'].fillna(28)#이것만 쓰면 저장이 안됨!
-train['Age']=train['Age'].fillna(28)
+train['Age'].fillna(28)#이것만 쓰면 저장이 안됨! 일시적으로 나타내주기만 한다. 
+train['Age']=train['Age'].fillna(28) #train['Age'] 에 다시 저장
 ```
 
 
 ```python
-train.isna().sum()# Age 확인
+train.isna().sum() #Age 확인
 ```
-
-
 
 
     PassengerId      0
@@ -786,12 +751,12 @@ train.isna().sum()# Age 확인
 
 
 
+- 좌석 등급 결측값
+
 
 ```python
 train['Embarked'].value_counts()
 ```
-
-
 
 
     S    644
@@ -803,15 +768,13 @@ train['Embarked'].value_counts()
 
 
 ```python
-train['Embarked']=train['Embarked'].fillna('S')
+train['Embarked']=train['Embarked'].fillna('S') #제일 많은 값인 S로 채워주겠다.
 ```
 
 
 ```python
-train.isna().sum()# Embarked 확인
+train.isna().sum() #Embarked 확인
 ```
-
-
 
 
     PassengerId      0
@@ -828,21 +791,23 @@ train.isna().sum()# Embarked 확인
     Embarked         0
     dtype: int64
 
+- 객실번호는 유의미한 변수가 아니라 판단, 전처리 과정에서 제외하겠다. 
+
 
 
 
 ```python
-#pd.Series.map() #시리즈 내 값을 변환할 떄 사용하는 함수
-
+#pd.Series.map() #시리즈 내 값을 변환할 때 사용하는 함수
+#남자는 0, 여자는 1로 값 변경
 train['Sex']=train['Sex'].map({'male':0,'female':1})
 ```
+
+
 
 
 ```python
 train['Sex']
 ```
-
-
 
 
     0      0
@@ -860,9 +825,12 @@ train['Sex']
 
 
 
+## 모델링
+
 
 ```python
 #X -> MODEL -> y
+#변수는 성별과 좌석 등급으로 정했다. 
 X_train=train[['Sex','Pclass']]
 y_train=train['Survived']
 ```
@@ -879,22 +847,11 @@ X_test
 ```
 
 
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -962,8 +919,6 @@ X_test
   </tbody>
 </table>
 <p>418 rows × 2 columns</p>
-</div>
-
 
 
 
@@ -978,8 +933,6 @@ lr.fit(X_train,y_train)
 ```
 
 
-
-
     LogisticRegression()
 
 
@@ -988,8 +941,6 @@ lr.fit(X_train,y_train)
 ```python
 dt.fit(X_train,y_train)
 ```
-
-
 
 
     DecisionTreeClassifier()
@@ -1013,22 +964,11 @@ submission
 ```
 
 
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1096,8 +1036,6 @@ submission
   </tbody>
 </table>
 <p>418 rows × 2 columns</p>
-</div>
-
 
 
 
@@ -1113,21 +1051,6 @@ submission
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1195,11 +1118,19 @@ submission
   </tbody>
 </table>
 <p>418 rows × 2 columns</p>
-</div>
-
-
-
 
 ```python
-submission.to_csv('decision_tree_pred.csv',index=False)
+submission.to_csv('decision_tree_pred.csv',index=False) #정답지 제출
 ```
+
+
+
+- 로지스틱, 결정트리모형을 이용해 제출해봤으나 비슷한 점수가 나왔고 추후 로지스틱 회귀 모형에 변수를 추가하는 방식으로 접근했다.
+- 올바른 변수를 선택하는 법을 조금 더 고려해보아야 할 것 같다. 
+
+
+
+Reference:
+
+- 데이콘의 타이타닉 생존자 예측하기 실습
+- Kaggle의 타이타닉 생존자 예측 데이터 자료

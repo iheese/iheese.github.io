@@ -1,3 +1,3 @@
 ---
 layout: category
-category: Data Analytsis
+category: Data Analysis
