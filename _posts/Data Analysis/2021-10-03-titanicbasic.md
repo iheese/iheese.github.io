@@ -281,108 +281,6 @@ submission.head()  #여성 1 남성 0
 </table>
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>PassengerId</th>
-      <th>Survived</th>
-      <th>Pclass</th>
-      <th>Name</th>
-      <th>Sex</th>
-      <th>Age</th>
-      <th>SibSp</th>
-      <th>Parch</th>
-      <th>Ticket</th>
-      <th>Fare</th>
-      <th>Cabin</th>
-      <th>Embarked</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>886</th>
-      <td>887</td>
-      <td>0</td>
-      <td>2</td>
-      <td>Montvila, Rev. Juozas</td>
-      <td>male</td>
-      <td>27.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>211536</td>
-      <td>13.00</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>887</th>
-      <td>888</td>
-      <td>1</td>
-      <td>1</td>
-      <td>Graham, Miss. Margaret Edith</td>
-      <td>female</td>
-      <td>19.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>112053</td>
-      <td>30.00</td>
-      <td>B42</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>888</th>
-      <td>889</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Johnston, Miss. Catherine Helen "Carrie"</td>
-      <td>female</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>2</td>
-      <td>W./C. 6607</td>
-      <td>23.45</td>
-      <td>NaN</td>
-      <td>S</td>
-    </tr>
-    <tr>
-      <th>889</th>
-      <td>890</td>
-      <td>1</td>
-      <td>1</td>
-      <td>Behr, Mr. Karl Howell</td>
-      <td>male</td>
-      <td>26.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>111369</td>
-      <td>30.00</td>
-      <td>C148</td>
-      <td>C</td>
-    </tr>
-    <tr>
-      <th>890</th>
-      <td>891</td>
-      <td>0</td>
-      <td>3</td>
-      <td>Dooley, Mr. Patrick</td>
-      <td>male</td>
-      <td>32.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>370376</td>
-      <td>7.75</td>
-      <td>NaN</td>
-      <td>Q</td>
-    </tr>
-  </tbody>
-</table>
-
 - 훈련 데이터, 테스트 데이터 파악
 
 
@@ -510,12 +408,6 @@ train['Embarked'].unique() #unique 메소드는 시리즈로 접근
 train.groupby('Sex').mean()
 ```
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -565,16 +457,12 @@ train.groupby('Sex').mean()
 
 
 
+
 ```python
 train.groupby('Pclass').mean()
 ```
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -626,6 +514,7 @@ train.groupby('Pclass').mean()
     </tr>
   </tbody>
 </table>
+
 
 
 
@@ -841,11 +730,6 @@ X_test
 ```
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -916,6 +800,7 @@ X_test
 
 
 
+
 ```python
 lr=LogisticRegression()
 dt=DecisionTreeClassifier()
@@ -958,11 +843,6 @@ submission
 ```
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1030,6 +910,7 @@ submission
   </tbody>
 </table>
 <p>418 rows × 2 columns</p>
+
 
 
 
