@@ -4,7 +4,7 @@ layout: post
 title: '타이타닉 생존자 예측'
 subtitle: 'Logistic, DecisionTree'
 date: 2021-10-03 21:00:00 +0900
-categories: 'Data Analysis'
+categories: 'Data_Analysis'
 use_math: true
 
 ---
@@ -33,7 +33,6 @@ submission=pd.read_csv('../input/titanic/gender_submission.csv') #답안지
 
 ```python
 train.head()
-
 ```
 
 <table border="1" class="dataframe">
@@ -141,6 +140,8 @@ Parch: 함께 탑승한 부모, 자식의 수/ Ticket: 티켓번호/ Fare: 티�
 Cabin: 객실번호/ Embarked: 배에 탑승한 위치(C = Cherbourg, Q = Queenstown, S = Southampton)
 
 
+
+
 ```python
 test.head()
 ```
@@ -239,7 +240,7 @@ test.head()
 
 
 ```python
-submission.head()  #여성 1 남성0
+submission.head()  #여성 1 남성 0
 ```
 
 <table border="1" class="dataframe">
@@ -278,12 +279,6 @@ submission.head()  #여성 1 남성0
     </tr>
   </tbody>
 </table>
-
-
-
-```python
-train.tail()
-```
 
 
 <div>
@@ -387,7 +382,6 @@ train.tail()
     </tr>
   </tbody>
 </table>
-
 
 - 훈련 데이터, 테스트 데이터 파악
 
