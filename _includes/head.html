@@ -19,17 +19,19 @@
   
    <!-- tipuesearch -->
   <link rel="stylesheet" href="/assets/tipuesearch/css/tipuesearch.css">
+  {% if page.tipue_search_active %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="/assets/tipuesearch/tipuesearch_content.js"></script>
   <script src="/assets/tipuesearch/tipuesearch_set.js"></script>
   <script src="/assets/tipuesearch/tipuesearch.min.js"></script>
+  {% endif %}
 
  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
 
- </head>
+</head>
 
- {% if page.use_math %}
+{% if page.use_math %}
   {% include mathjax_support.html %}
 {% endif %}
 
