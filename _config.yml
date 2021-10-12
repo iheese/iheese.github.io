@@ -52,7 +52,7 @@ defaults:
       
 tipue_search:
      include:
-         pages: false
+         posts: false
          collections: []
      exclude:
          files: [search.html, index.html, tags.html]
