@@ -38,9 +38,9 @@ http://www.tipue.com/search
 #tipue_search_input
 {
       color: #333;
-      max-width: 150px;
-      max-height: 20px;
-     padding: 17px;
+      max-width: 100px;
+      max-height: 15px;
+     padding: 13px;
      border: 2px solid #626591;
      border-radius: 0;
      -moz-appearance: none;
@@ -51,17 +51,16 @@ http://www.tipue.com/search
 }
 .tipue_search_icon
 {
-      width: 19px;
-      height: 19px;
+      width: 15px;
+      height: 15px;
       margin-bottom: 0rem;
       background-color: #626591;
 }
-.tipue_search_left
+.tipue_search_right
 {
-      float: left;
+      float: right;
       padding: 10px 5px 0 0;
       color: #e3e3e3;
-      max-height: 20px;
 }
 
 
