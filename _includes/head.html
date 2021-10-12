@@ -17,16 +17,7 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="{{"/assets/main.css" | relative_url }}">
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
-
-</head>
-
-{% if page.use_math %}
-  {% include mathjax_support.html %}
-{% endif %}
-
-<!-- tipuesearch -->
+  <!-- tipuesearch -->
 <link rel="stylesheet" href="/assets/tipuesearch/css/tipuesearch.css">
 {% if page.tipue_search_active %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -34,4 +25,13 @@
 <script src="/assets/tipuesearch/tipuesearch_set.js"></script>
 <script src="/assets/tipuesearch/tipuesearch.min.js"></script>
 {% endif %}
+
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
+</head>
+
+{% if page.use_math %}
+  {% include mathjax_support.html %}
+{% endif %}
+
 
