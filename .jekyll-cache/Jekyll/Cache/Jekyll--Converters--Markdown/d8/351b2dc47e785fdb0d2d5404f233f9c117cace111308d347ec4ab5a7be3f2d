@@ -1,4 +1,4 @@
-I"�5<h2 id="선형-모델">선형 모델</h2>
+I"}5<h2 id="선형-모델">선형 모델</h2>
 
 <ul>
   <li>회귀 문제에서 특성벡터 $x = (x_1,\cdots,x_n)^{\rm T}$의 특성값 $x_i\, (i=1,\cdots,n)$에 대한 선형결합으로 레이블 $y$ 를 예측하는 학습 모델</li>
@@ -8,21 +8,16 @@
 <h2 id="선형회귀-학습모델">선형회귀 학습모델</h2>
 
 <ul>
-  <li>
-    <p>지도학습</p>
-  </li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>훈련 데이터셋 ${(\mathbf x _i,\mathbf y_i)</td>
-          <td>1\le i\le m}$ (단, $\mathbf x <em>i=(x</em>{i1},\cdots,x_{in}^{\rm T}$)에 대한 학습모델을 다음과 같이 각 특성값에 대해 선형이 되도록 가정하는 판별모델의 일종</td>
-        </tr>
-      </tbody>
-    </table>
+  <li>지도학습</li>
+  <li>훈련 데이터셋 아래에 대한 학습모델을 다음과 같이 각 특성값에 대해 선형이 되도록 가정하는 판별모델의 일종</li>
+  <li></li>
+</ul>
+
+\[\{(\mathbf x_i,\mathbf y_i)|1\le i\le m\}  (단,\mathbf x_i=(x_{i1},\cdots,x_{in})^{\rm T})\]
 
 \[\hat y = \theta_0 +\theta_1 x_1+\cdots +\theta_nx_n\]
-  </li>
+
+<ul>
   <li>
     <p>편향(또는 절편) $\theta_0$와 가중치 $\theta_i\, (1\le i\le n)$를 합쳐서 모델 파라미터</p>
   </li>
@@ -44,7 +39,9 @@
   <li>
     <p>MSE가 최소가 되는 $\boldsymbol{\theta}$를 구하는 것은 <strong><em>*RSS(Residual Sum of Square)*</em></strong>$=\sum_{i=1}^m (\hat y_i - y_i)^2$이 최소가 되는 $\boldsymbol{\theta}$를 구하는 것과 같음</p>
   </li>
-  <li>MSE는 일종의 비용함수</li>
+  <li>
+    <p>MSE는 일종의 비용함수</p>
+  </li>
 </ul>
 
 <h3 id="선형회귀-모델의-학습해석적-방법">선형회귀 모델의 학습(해석적 방법)</h3>
@@ -57,10 +54,7 @@
 \[(\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})) = \dfrac 2 m \mathbf X^{\rm T}(\mathbf X\boldsymbol{\theta}-\mathbf y)=\mathbf 0 \cdots \cdots (2)\]
 
 <p>이 성립하는 $\hat{\boldsymbol{\theta}}$를 구하면 
-$$
-\hat{\boldsymbol{\theta}} = (\mathbf X^{\rm T}\mathbf X)^{-1}\mathbf X^{\rm T}\mathbf y</p>
-
-<p>$$</p>
+\(\hat{\boldsymbol{\theta}} = (\mathbf X^{\rm T}\mathbf X)^{-1}\mathbf X^{\rm T}\mathbf y\)</p>
 
 <h3 id="선형회귀-모델의-학습수치해석적-방법">선형회귀 모델의 학습(수치해석적 방법)</h3>
 

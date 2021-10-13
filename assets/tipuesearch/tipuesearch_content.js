@@ -4,6 +4,7 @@
 # v1.4
 layout: null
 ---
+
 {%- assign index = "" | split: "" -%}
 {%- assign excluded_files = site.tipue_search.exclude.files -%}
 {%- assign excluded_tags = site.tipue_search.exclude.tags | uniq -%}

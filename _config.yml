@@ -51,10 +51,10 @@ defaults:
       mathjax: true
       
 tipue_search:
-     include:
-         posts: false
-         collections: []
-     exclude:
-         files: [search.html, index.html, tags.html]
-         categories: []
-         tags: []
+  include:
+    pages: false
+    collections: []
+  exclude:
+    files: [search.html, tags.html, index.html]
+    categories: []
+    tags: []
