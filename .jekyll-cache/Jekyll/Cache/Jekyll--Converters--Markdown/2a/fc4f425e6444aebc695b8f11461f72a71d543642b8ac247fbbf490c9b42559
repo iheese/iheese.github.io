@@ -1,0 +1,24 @@
+I"�<p>내 답</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">H</span><span class="p">,</span><span class="n">M</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">H</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">M</span><span class="o">&gt;=</span><span class="mi">45</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">M</span><span class="o">-</span><span class="mi">45</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">H</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">M</span><span class="o">&lt;</span><span class="mi">45</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">H</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">M</span><span class="o">+</span><span class="mi">60</span><span class="o">-</span><span class="mi">45</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">H</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">M</span><span class="o">&lt;</span><span class="mi">45</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"23"</span><span class="p">,</span><span class="n">M</span><span class="o">+</span><span class="mi">60</span><span class="o">-</span><span class="mi">45</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>참고할 만한 답</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">H</span><span class="p">,</span><span class="n">M</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">M</span><span class="o">&gt;</span><span class="mi">44</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">m</span><span class="o">-</span><span class="mi">45</span><span class="p">):</span>
+<span class="k">elif</span> <span class="n">M</span><span class="o">&lt;</span><span class="mi">45</span> <span class="ow">and</span> <span class="n">H</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">H</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">M</span><span class="o">+</span><span class="mi">15</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span><span class="n">M</span><span class="o">+</span><span class="mi">15</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>나올 수 있는 경우를 잘 나누어서 IF문에 적용</p>
+:ET

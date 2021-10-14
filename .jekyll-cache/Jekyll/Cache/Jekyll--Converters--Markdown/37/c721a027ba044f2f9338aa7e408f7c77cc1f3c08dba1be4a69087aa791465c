@@ -1,0 +1,242 @@
+I"
+b<h2 id="데이터-정제-전처리">데이터 정제, 전처리</h2>
+
+<p>: 훈련데이터에 에러, 이상치(outlier) 등이 있으면 기계학습 시스템이 내재된 패턴을 찾기 힘들기 때문에 적절한 작업이 필요</p>
+
+<ul>
+  <li>일부 샘플에 특성 몇 개가 빠져있으면, 이 특성을 무시할 지, 이 샘플을 무시할 지, 빠진 값을 (평균값 등으로) 채워 넣을지를 결정. 경우에 따라서는 이들을 제거한 모델과 적절하게 채워넣은 모델을 각각 훈련시켜 비교</li>
+</ul>
+
+<blockquote>
+  <p>isnull() 메소드: 빠진 샘플 확인</p>
+
+  <p>fillna() 메소드: 빠진 샘플 채우기 ; inplace=True 바로 변수 대체</p>
+
+  <p>dropna() 메소드: 빠진 샘플 삭제</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p>일부 샘플이 이상치라는 것이 명확하면 제거, 그렇지 않으면 수정 (데이터에 대한 사전 지식이 필요)</p>
+  </li>
+  <li>
+    <p>표본에 대한 다양한 통계량(표본의 몇 몇 특성을 수치화한 것)을 이용하여 판단:</p>
+
+    <blockquote>
+      <p>표본평균, 표본분산, 최솟값, 최댓값, 중앙값, 표본 분위수(quantile) 등</p>
+
+      <p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.quantile.html?highlight=quantile#pandas.DataFrame.quantile">Pandas의 분위수 API</a></p>
+    </blockquote>
+
+    <ul>
+      <li>
+        <p>boxplot</p>
+
+        <blockquote>
+          <p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.box.html?highlight=box#pandas.DataFrame.plot.box">Pandas의 DataFrame에 대한 <code class="language-plaintext highlighter-rouge">plot.box()</code> API</a></p>
+
+          <p><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.boxplot.html#pandas.DataFrame.boxplot">Pandas의 DataFrame에 대한 <code class="language-plaintext highlighter-rouge">boxplot()</code> API</a> : 더 많은 파라미터를 가지고 있다.</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="데이터-실습-with-pimaindiansdiabetescsv">데이터 실습 with PimaIndiansDiabetes.csv</h2>
+
+<p>PimaIndiansDiabetes.csv: Pima Indian(미국 토착 인디언 부족) 768명의 성인 여성의 의료 정보와 당뇨병 여부가 담긴 데이터셋</p>
+
+<p>​																																								-출처: kaggle</p>
+
+<h3 id="데이터-정제">데이터 정제</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'./datasets/PimaIndiansDiabetes.csv'</span><span class="p">)</span> <span class="c1">#csv 데이터 읽기
+</span><span class="n">data_subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'Blood Glucose'</span><span class="p">,</span> <span class="s">'BMI'</span><span class="p">,</span> <span class="s">'Class'</span><span class="p">]]</span> <span class="c1">#혈당, BMI, 당뇨병 여부(1,0) 데이터만 추출
+</span>
+<span class="n">data_subset</span><span class="p">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.75</span><span class="p">])</span>
+<span class="n">data_subset</span><span class="p">[[</span><span class="s">'Blood Glucose'</span><span class="p">,</span> <span class="s">'BMI'</span><span class="p">]].</span><span class="n">plot</span><span class="p">.</span><span class="n">box</span><span class="p">()</span> <span class="c1"># quantile값, 상자그림을 통해 이상치 파악 및 데이터 탐색
+</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/ML5_boxplot.png" alt="boxplot" /></p>
+
+<ul>
+  <li>혈당과 BMI  모두 0 근처에서 이상치 발견» 최솟값을 이용해 값 확인</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">data_subset</span><span class="p">.</span><span class="nb">min</span><span class="p">())</span> <span class="c1">#모두 최솟값이 0으로 나옴
+</span></code></pre></div></div>
+
+<ul>
+  <li>두 변수 모두 당뇨병 진단과 관련성이 있으므로 하나라도 0이면 샘플 삭제, 두 변수 모두 0의 값을 가질 수는 없다.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bg_mask</span> <span class="o">=</span> <span class="n">data_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">"Blood Glucose"</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span>
+<span class="n">bmi_mask</span> <span class="o">=</span> <span class="n">data_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">"BMI"</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span>
+<span class="n">clean_data_subset</span> <span class="o">=</span> <span class="n">data_subset</span><span class="p">[</span><span class="n">bg_mask</span> <span class="o">&amp;</span> <span class="n">bmi_mask</span><span class="p">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>X_train0,X_train1의 각 열에 대해 히스토그램을 그려 p(x1</td>
+          <td>0),p(x1</td>
+          <td>1),p(x2</td>
+          <td>0),p(x2</td>
+          <td>1)을 추정</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span> <span class="o">=</span> <span class="n">clean_data_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'Blood Glucose'</span><span class="p">,</span> <span class="s">'BMI'</span><span class="p">]]</span> <span class="c1"># 특성벡터 지정
+</span><span class="n">y</span> <span class="o">=</span> <span class="n">clean_data_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s">'Class'</span><span class="p">]</span> <span class="c1">#레이블 지정
+</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span> 
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="c1">#데이터셋 훈련용과 테스트용으로 나누기
+</span>
+<span class="n">X_train0</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="n">y_train</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> 
+<span class="n">X_train1</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="n">y_train</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">m0</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train</span><span class="o">==</span><span class="mi">0</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train</span><span class="o">==</span><span class="mi">1</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span> <span class="c1">#class별 갯수
+</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X_train0</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'Blood Glucose'</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="s">'fd'</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">X_train0</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'Blood Glucose'</span><span class="p">].</span><span class="n">plot</span><span class="p">.</span><span class="n">density</span><span class="p">()</span> <span class="c1">#p(x1|0)
+</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X_train0</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'BMI'</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="s">'fd'</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">X_train0</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'BMI'</span><span class="p">].</span><span class="n">plot</span><span class="p">.</span><span class="n">density</span><span class="p">()</span>   <span class="c1">#p(x2|0)
+</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X_train1</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'Blood Glucose'</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="s">'fd'</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">X_train1</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'Blood Glucose'</span><span class="p">].</span><span class="n">plot</span><span class="p">.</span><span class="n">density</span><span class="p">()</span>  <span class="c1">#p(x1|1)
+</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X_train1</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'BMI'</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="s">'fd'</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">X_train1</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'BMI'</span><span class="p">].</span><span class="n">plot</span><span class="p">.</span><span class="n">density</span><span class="p">()</span> <span class="c1">#p(x2|1)
+</span>
+<span class="c1"># bins='fd' 는 Freeman-Diaconis rule에 의해 가장 분포를 잘 보여주는 bin의 갯수를 결정한다. 
+# X 변수와 y 레이블에 따라 분포가 히스토그램이 어떻게 그려지는지 파악한다. 
+</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위 히스토그램을 보고 완벽하게 같진 않지만 정규분포라고 가정하고 확률함수를 계산해보자</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fit_distribution</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">):</span>
+    <span class="c1">#정규분포의 평균과 표준편차를 추정 
+</span>    <span class="n">mu</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">col_idx</span><span class="p">].</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">col_idx</span><span class="p">].</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#pd.Series.std(ddof=0)은 표준편차/ 
+</span>    								 <span class="c1">#pd.Series.std(ddof=1)은 표본표준편차(default)    
+</span>    
+    <span class="c1"># 확률분포 구하기 
+</span>    <span class="n">dist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dist</span>
+
+<span class="n">X_train0</span> <span class="o">=</span> <span class="n">X_train0</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="c1">#훈련데이터를 Numpy array로 바꾼다. 
+</span><span class="n">X_train1</span> <span class="o">=</span> <span class="n">X_train1</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">distX1y0</span> <span class="o">=</span> <span class="n">fit_distribution</span><span class="p">(</span><span class="n">X_train0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#'Blood Glucose'
+</span><span class="n">distX2y0</span> <span class="o">=</span> <span class="n">fit_distribution</span><span class="p">(</span><span class="n">X_train0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">#'BMI'
+</span><span class="n">distX1y1</span> <span class="o">=</span> <span class="n">fit_distribution</span><span class="p">(</span><span class="n">X_train1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#'Blood Glucose'
+</span><span class="n">distX2y1</span> <span class="o">=</span> <span class="n">fit_distribution</span><span class="p">(</span><span class="n">X_train1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">#'BMI'
+</span>
+<span class="n">prior0</span> <span class="o">=</span> <span class="n">m0</span><span class="o">/</span><span class="p">(</span><span class="n">m0</span><span class="o">+</span><span class="n">m1</span><span class="p">)</span>
+<span class="n">prior1</span> <span class="o">=</span> <span class="n">m1</span><span class="o">/</span><span class="p">(</span><span class="n">m0</span><span class="o">+</span><span class="n">m1</span><span class="p">)</span> <span class="c1">#사전확률
+</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"P(y=1)=</span><span class="si">{</span><span class="n">prior1</span><span class="p">:.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">, P(y=0)=</span><span class="si">{</span><span class="n">prior0</span><span class="p">:.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span> <span class="c1">#P(y=1)=0.361, P(y=0)=0.639
+</span>
+<span class="c1">#p(x,0)=p(0)p(x1|0)p(x2|0) 와  p(x,1)=p(1)p(x1|1)p(x2|1) 을 계산
+</span><span class="k">def</span> <span class="nf">joint_prob</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">distX0</span><span class="p">,</span> <span class="n">distX1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">prior</span> <span class="o">*</span> <span class="n">distX0</span><span class="p">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">distX1</span><span class="p">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span> 
+
+<span class="c1"># 훈련 데이터셋에 대한 예측 
+</span><span class="n">train_prob0</span> <span class="o">=</span> <span class="n">joint_prob</span><span class="p">(</span><span class="n">X_train</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">prior0</span><span class="p">,</span> <span class="n">distX1y0</span><span class="p">,</span><span class="n">distX2y0</span><span class="p">)</span>
+<span class="n">train_prob1</span> <span class="o">=</span> <span class="n">joint_prob</span><span class="p">(</span><span class="n">X_train</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">prior1</span><span class="p">,</span> <span class="n">distX1y1</span><span class="p">,</span><span class="n">distX2y1</span><span class="p">)</span>
+
+<span class="n">train_prediction</span> <span class="o">=</span> <span class="p">(</span><span class="n">train_prob1</span><span class="o">&gt;</span><span class="n">train_prob0</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># 정확도 계산
+</span><span class="n">train_acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">train_prediction</span> <span class="o">==</span> <span class="n">y_train</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"훈련 데이터셋에 대한 정확도=</span><span class="si">{</span><span class="n">train_acc</span> <span class="o">*</span> <span class="mi">100</span> <span class="p">:</span> <span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">%"</span><span class="p">)</span>
+<span class="c1">#테스트 데이터셋에 대한 정확도= 77.5%
+</span>
+<span class="c1"># 테스트 데이터셋에 대한 예측 
+</span><span class="n">test_prob0</span> <span class="o">=</span> <span class="n">joint_prob</span><span class="p">(</span><span class="n">X_test</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">prior0</span><span class="p">,</span> <span class="n">distX1y0</span><span class="p">,</span><span class="n">distX2y0</span><span class="p">)</span>
+<span class="n">test_prob1</span> <span class="o">=</span> <span class="n">joint_prob</span><span class="p">(</span><span class="n">X_test</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">prior1</span><span class="p">,</span> <span class="n">distX1y1</span><span class="p">,</span><span class="n">distX2y1</span><span class="p">)</span>
+
+<span class="n">test_prediction</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_prob1</span><span class="o">&gt;</span><span class="n">test_prob0</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># 정확도 계산
+</span><span class="n">test_acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_prediction</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"테스트 데이터셋에 대한 정확도=</span><span class="si">{</span><span class="n">test_acc</span> <span class="o">*</span> <span class="mi">100</span> <span class="p">:</span> <span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">%"</span><span class="p">)</span>
+
+<span class="c1">#테스트 데이터셋에 대한 정확도= 77.5%
+</span></code></pre></div></div>
+
+<h3 id="scikit-learn의-나이브-베이즈-분류기-사용하기">Scikit-learn의 나이브 베이즈 분류기 사용하기</h3>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>skilearn.naive_bayes</strong> module의 <strong>GaussianNB</strong>가  p(X</td>
+          <td>y) 를 정규분포로 가정하는 나이브 베이즈 분류기</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span> <span class="c1">#GaussianNB 분류기 불러오기
+</span>
+<span class="n">classifierGNB</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">classifierGNB</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span> <span class="c1">#훈련
+</span>
+<span class="n">train_acc</span> <span class="o">=</span> <span class="n">classifierGNB</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span> <span class="c1">#훈련셋의 정확도
+</span><span class="n">test_acc</span> <span class="o">=</span> <span class="n">classifierGNB</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span> <span class="c1">#테스트셋의 정확도
+</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Prediction Accuracy for Train Data set:</span><span class="si">{</span><span class="n">train_acc</span> <span class="p">:.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="se">\n</span><span class="s">Prediction Accuracy for Test Data set:</span><span class="si">{</span><span class="n">test_acc</span> <span class="p">:.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="c1">#Prediction Accuracy for Train Data set:0.757
+#Prediction Accuracy for Test Data set:0.775
+</span>
+<span class="n">classifierGNB</span><span class="p">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="c1">#array([[0.5866136 , 0.4133864 ],[0.32890518, 0.67109482],[0.55879185, 0.44120815],[0.93848913, 0.06151087],[0.89546209, 0.10453791]])
+</span></code></pre></div></div>
+
+<h3 id="분류문제에-대한-학습모델의-성능-평가-기준">분류문제에 대한 학습모델의 성능 평가 기준</h3>
+
+<ul>
+  <li>
+    <p>학습모델 성능평가 기준으로 정확도를 이용했지만 경우에 따라 다른 기준이 의미를 가진다.</p>
+
+    <blockquote>
+      <p>예) 임상자료를 이용하여 환자가 특정 희귀 암에 걸렸는지(양성: 레이블1 ,음성: 레이블2)를 분류하는 학습 모델의 경우 정확도는 좋은 모델의 측도로 적합하지 않음</p>
+
+      <p>100명 중 한 명이 암에 걸린 경우, 모든 환자가 음성이라고 판별하는 학습모델의 경우 정확도는 99%지만 쓸모없는 학습모델임</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>분류기의 성능을 평가하는 좋은 방법은 오차행렬(Confusion matrix) 또한 이를 요약한 지표를 살펴보는 것이다.</p>
+  </li>
+</ul>
+
+<p>Reference:</p>
+
+<ul>
+  <li>
+    <p>기계학습_하길찬 교수님 수업을 바탕으로 공부한 내용입니다.</p>
+  </li>
+  <li>
+    <p><a href="https://bkshin.tistory.com/entry/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-1%EB%82%98%EC%9D%B4%EB%B8%8C-%EB%B2%A0%EC%9D%B4%EC%A6%88-%EB%B6%84%EB%A5%98-Naive-Bayes-Classification">귀퉁이 서재님의 나이브 베이즈 분류</a></p>
+  </li>
+  <li>
+    <p><a href="https://blogyong.tistory.com/33">Generative model과 Discriminate model, BLOG_용이</a></p>
+  </li>
+</ul>
+
+:ET
