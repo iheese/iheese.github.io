@@ -1,0 +1,91 @@
+I"�+<h2 id="경사-하강법-실습">경사 하강법 실습</h2>
+
+<ul>
+  <li>
+    <p>$Y=4+3X+\epsilon$ ($0\le X \le 2$)를 따르는 샘플 100개를 생성한 후 선형회귀를 적용</p>
+  </li>
+  <li>
+    <p>SVD를 이용한 선형회귀인 LinearRegression, SGD를 이용한 선형회귀인 SGDRegressor, 배치 경사 하강법, 미니배치 경사 하강법을 비교 실습</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 데이터 샘플 생성 
+</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span> 
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDRegressor</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span> 
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="c1">#랜덤시드 고정
+</span>
+<span class="n">X</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#0~1의 균일분포 표준정규분포 난수를 matrix array(m,n) 생성
+</span><span class="n">y</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#평균0, 표준편차1의 가우시안 표준정규분포 난수를 matrix array(m,n) 생성
+</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s">'b.'</span><span class="p">)</span> <span class="c1">#파란색으로 산점도 그리기
+</span><span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"$x_1$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"$y$"</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span> <span class="c1">#plt.axis([xmin,xmax,ymin,ymax]) 
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 각 특성벡터의 첫 번째 좌표에 bias에 대응되는 1을 추가하여 Xb로 수정 
+# 여러 가지 경사 하강법을 직접 구현해 볼 때 사용
+</span>
+<span class="n">Xb</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> <span class="n">X</span><span class="p">))</span>  <span class="c1">##배열을 열로 만들어서 붙이기
+</span>
+<span class="n">X_new</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">Xb_new</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> <span class="n">X_new</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="linearregression">LinearRegression</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n_reg_svd</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span> 
+<span class="n">lin_reg_svd</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">theta_svd</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">lin_reg_svd</span><span class="p">.</span><span class="n">intercept_</span><span class="p">,</span> <span class="n">lin_reg_svd</span><span class="p">.</span><span class="n">coef_</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="c1">#intercept_: 편향, coef_: 가중치
+</span><span class="n">theta_svd</span> 
+
+<span class="c1">#array([[3.8115615 ],
+</span>       <span class="p">[</span><span class="mf">3.23892352</span><span class="p">]])</span>
+       
+<span class="n">y_predict_svd</span> <span class="o">=</span> <span class="n">lin_reg_svd</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+<span class="n">y_predict_svd</span>
+
+<span class="c1">#array([[ 3.8115615 ],
+</span>       <span class="p">[</span><span class="mf">10.28940854</span><span class="p">]])</span>
+    
+<span class="c1"># 모델의 예측을 그래프에 나타내기 
+</span><span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'b.'</span><span class="p">)</span> <span class="c1">#파란색 점으로 산점도
+</span><span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span> <span class="n">y_predict_svd</span><span class="p">,</span> <span class="s">'r-'</span><span class="p">)</span> <span class="c1">#빨간색 선으로 회귀직선 그리기
+</span><span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"$x_1$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#x좌표축
+</span><span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"$y$"</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#y좌표축
+</span><span class="n">plt</span><span class="p">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span> 
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Linear regression with SVD"</span><span class="p">)</span> <span class="c1">#제목
+</span></code></pre></div></div>
+
+<h3 id="배치-경사-하강법-1">배치 경사 하강법 1</h3>
+
+<ul>
+  <li>그래디언트를 구하는 식 — (2)</li>
+</ul>
+
+\[(\nabla_{\boldsymbol{\theta}} L(\boldsymbol{\theta})) = \dfrac 2 m \mathbf X^{\rm T}(\mathbf X\boldsymbol{\theta}-\mathbf y)=\mathbf 0\]
+
+<ul>
+  <li>${\theta}$를 업데이트하는 식 — (3)</li>
+</ul>
+
+\[{\theta}^{(t+1)}:= \boldsymbol{\theta}^{(t)}-\alpha \nabla_L({\theta}^{(t)})\ (t\ge 0)\]
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">eta</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># 학습률 
+</span><span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># epoch 수 
+</span><span class="n">m</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># 샘플수 
+</span>
+<span class="n">theta_bgd</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 무작위로 theta 초깃값 설정 
+</span>
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+    <span class="n">gradients</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">Xb</span><span class="p">.</span><span class="n">T</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Xb</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta_bgd</span><span class="p">)</span> <span class="o">-</span><span class="n">y</span><span class="p">)</span>   <span class="c1"># 설명의 식 (2) 구현
+</span>    <span class="n">theta_bgd</span> <span class="o">=</span> <span class="n">theta_bgd</span> <span class="o">-</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">gradients</span>                <span class="c1"># 설명의 식 (3) 구현 
+</span></code></pre></div></div>
+
+:ET

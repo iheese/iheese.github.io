@@ -2,7 +2,7 @@ title:              Modest Data
 email:              imbc0224@naver.ocm
 description:        keep going
 author:             ddungi
-baseurl:            ""
+baseurl:            
 url:                "https://ddungi.github.io"
 
 # Social Profiles
@@ -36,6 +36,9 @@ excerpt_separator: "\n\n"
 incremental: false
 
 permalink: pretty
+
+sass:
+  style: compressed
 
 # Defaults
 defaults:
