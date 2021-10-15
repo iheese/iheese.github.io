@@ -1,0 +1,94 @@
+I"I=<h3 id="비선형-데이터셋에-선형회귀-모델을-적용하는-방법">비선형 데이터셋에 선형회귀 모델을 적용하는 방법</h3>
+
+<ul>
+  <li>EX) 관계식 $Y=0.5X^2+X+2+$noise ($-3\le X\le 3$)에 따라 생성된 100개의 샘플에 다항회귀 모델을 적용해보자.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span> 
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDRegressor</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span> 
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1">#일정한 값을 위해 시드 설정
+</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span> <span class="c1">#0~1 사이의 균인 분포에 (m,1) 행렬생성
+</span><span class="n">y2</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">X2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">X2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">#np.random.randn 은 가우시안 표준 정규분포에서 (m,1) 행렬 생성
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s">"b."</span><span class="p">)</span> <span class="c1">#파랑색 점으로 산점도 그리기
+</span><span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"$x_1$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"$y$"</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span> <span class="c1">#xmin, xmax, ymin, ymax
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 원래 속성은 x이지만, 특성벡터를 (x,x**2)으로 변환 
+</span><span class="n">X2_poly</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">X2</span><span class="p">,</span><span class="n">X2</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="c1">#array 형태를 세워서 두 개의 열로 붙여 행렬 만들기
+</span>
+<span class="c1"># 확장된 훈련 데이터셋에 대해 선형회귀 모델 학습 
+</span><span class="n">poly2_reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span> <span class="c1">#모델 생성
+</span><span class="n">poly2_reg</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X2_poly</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="c1">#fit() 새로운 특성벡터를 입력
+</span><span class="n">poly2_reg</span><span class="p">.</span><span class="n">intercept_</span><span class="p">,</span> <span class="n">poly2_reg</span><span class="p">.</span><span class="n">coef_</span> <span class="c1">#편향 가중치를 출력
+</span>
+<span class="c1">#학습된 결과를 그림으로 
+</span><span class="n">X2_new</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">#(100,1) 행렬로 만들기
+</span><span class="n">X2_new_poly</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">X2_new</span><span class="p">,</span><span class="n">X2_new</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">y2_new</span> <span class="o">=</span> <span class="n">poly2_reg</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X2_new_poly</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s">"b."</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X2_new</span><span class="p">,</span> <span class="n">y2_new</span><span class="p">,</span> <span class="s">"r-"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">"Predictions"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"$x_1$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"$y$"</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">"upper left"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>sklearn.preprocessing 의 PolynomialFeatures를 이용한 데이터셋 확장</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+  
+<span class="n">poly_features</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="c1">#2차 다항식 속성을 구하는 패키지
+</span><span class="n">X2_poly2</span> <span class="o">=</span> <span class="n">poly_features</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X2</span><span class="p">)</span>
+  
+<span class="c1"># 직접 확장한 데이터셋과 동일함을 확인 
+</span><span class="p">(</span><span class="n">X2_poly2</span> <span class="o">==</span> <span class="n">X2_poly</span><span class="p">).</span><span class="nb">all</span><span class="p">()</span>     <span class="c1">#np.ndarray.all
+</span>  
+<span class="c1">#True
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="모델의-복잡도가-적절한지-판단하는-법-교차-검증-학습-곡선">모델의 복잡도가 적절한지 판단하는 법: 교차 검증, 학습 곡선</h3>
+
+<ul>
+  <li>고차 다항회귀를 적용하면 선형회귀, 낮은 차수의 회귀보다 더 많은 훈련 데이터셋에 맞추려고 한다.</li>
+  <li>고차 다항회귀는 과대적합될 확률이, 단순회귀적합은 과소적합될 확률이 높다. 상황에 맞는 적절한 차수를 이용해야 한다.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span> <span class="c1">#다항식 특성으로 확장할 때 원활한 학습을 위해 스케일링 적용
+</span>
+<span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">degree</span> <span class="ow">in</span> <span class="p">((</span><span class="s">"g-"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="p">(</span><span class="s">"b-"</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s">"r--"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+    <span class="n">poly_features</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="c1">#차수별로 다항식 회귀 만들기
+</span>    <span class="n">std_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> <span class="c1">#스케일링
+</span>    <span class="n">lin_reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span> <span class="c1">#선형회귀
+</span>    
+    <span class="n">X2_poly</span> <span class="o">=</span> <span class="n">poly_features</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X2</span><span class="p">)</span> <span class="c1">#다항식 변환
+</span>    <span class="n">X2_poly_scaled</span> <span class="o">=</span> <span class="n">std_scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X2_poly</span><span class="p">)</span> <span class="c1">#스케일링
+</span>    <span class="n">lin_reg</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X2_poly_scaled</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> 
+    
+    <span class="n">y2_new_pred</span> <span class="o">=</span> <span class="n">lin_reg</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">std_scaler</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">poly_features</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X2_new</span><span class="p">)))</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X2_new</span><span class="p">,</span> <span class="n">y2_new_pred</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">degree</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s">"b."</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">"upper left"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"$x_1$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"$y$"</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p><img src="/img/ML7/poly.png" alt="poly_features" /></p>
+
+:ET

@@ -532,8 +532,7 @@ train.groupby('Pclass').mean()['Survived'].plot(kind='bar', rot=0)  #rot=0 x축 
 
 
 
-
-​    ![클래스별 생존율](/img/posts/titanic_14_1.png)
+​    ![클래스별 생존율](/img/posts/titanic/titanic_14_1.png)
 ​    
 
 
@@ -550,7 +549,7 @@ train['Age'].plot(kind='hist',bins=50,grid=True) #bins 도수를 더 잘게 나�
 
 
 
-![나이별 생존자 수](/img/posts/titanic_15_1.png)
+![나이별 생존자 수](/img/posts/titanic/titanic_15_1.png)
     
 
 
@@ -567,7 +566,7 @@ train.plot(x='Age',y='Fare',kind='scatter')
 
 
 
-![요금과 나이 산점도 분포](/img/posts/titanic_16_1.png)
+![요금과 나이 산점도 분포](/img/posts/titanic/titanic_16_1.png)
     
 
 ## 데이터 전처리
