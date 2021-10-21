@@ -1,0 +1,593 @@
+I"	<h2 id="과대적합을-감소시키는-방법-규제regularization">과대적합을 감소시키는 방법: 규제(Regularization)</h2>
+
+<ul>
+  <li>
+    <dl>
+      <dt>주어진 학습모델의 과대적합을 감소시키는 방법</dt>
+      <dd>
+        <p>모델의 복잡도를 줄이는 것(다항회귀의 경우 다항식 차수를 감소)</p>
+      </dd>
+    </dl>
+  </li>
+  <li>
+    <p>선형회귀 모델에서는 모델의 가중치를 제한함으로써 규제를 가해 과대적합을 감소시킬 수 있음</p>
+  </li>
+  <li>손실함수 RSS$(\theta)$에 규제항(regularization term)을 추가한 손실함수 $J(\theta)$가 최소가 되는 모델 파라미터 $\theta$를 구함 : 모델의 가중치가 가능한 한 작게 유지되면서 학습 알고리즘이 데이터에 맞추도록 학습</li>
+</ul>
+
+\[J(\theta)= RSS(\theta)+\alpha(||\mathbf w||_p)^p (\alpha &gt;0)
+=\text{RSS}(\theta ) + \alpha\ \sum_{i=1}^n |\theta_i|^p 
+\cdots\cdots (1)\]
+
+<p>(단, 모델 파라미터 ${\theta}=(\theta_0,\theta_1,\cdots,\theta_n)^{\rm T}$에서 $\theta_0$는 절편, $\mathbf w=(\theta_1,\cdots,\theta_n)^{\rm T}$는 가중치)</p>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>규제항은 학습하는 동안에만 비용함수에 추가되고, 성능을 평가할 때는 MSE로만 평가</p>
+    </li>
+    <li>
+      <p>$\alpha$는 모델의 가중치를 얼마나 규제할 지 조절하는 하이퍼파라미터</p>
+
+      <blockquote>
+        <ul>
+          <li>$\alpha$=0는 규제가 없는 선형회귀</li>
+          <li>$\alpha$가 아주 크면 모든 가중치가 거의 0에 가까워지고, 결국 데이터의 평균을 지나는 수평선에 가까워짐</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>규제가 있는 모델은 데이터의 스케일링이 꼭 필요함.</p>
+    </li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>
+    <p>p=2일 때, 즉, 패널티로 $\ell_2$ 노름(norm)을 사용할 때 릿지회귀 (Ridge Regression)</p>
+  </li>
+  <li>
+    <p>p=1일 때, 즉, 패널티로 $\ell_1$ 노름(norm)을 사용할 때 라쏘회귀 (Lasso Regression)</p>
+  </li>
+  <li>
+    <p>엘라스틱넷(elastic net): 규제항을 릿지회귀의 규제항과 라쏘회귀의 규제항에 대한 내분점으로 정의.</p>
+
+    <p>즉, $0\le r \le 1$에 대해 다음과 같이 손실함수를 정의
+\(J( \theta)=\text{RSS}(\theta ) + r(\alpha||\mathbf w||_1 )+(1-r)({\alpha} ||\mathbf w||_2^2)\)</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="릿지-회귀ridge-regression">릿지 회귀(Ridge Regression)</h2>
+
+<ul>
+  <li>
+    <p>릿지 회귀를 학습하기 위해 정규방정식을 이용할 수도 있고 경사하강법을 이용할 수도 있음</p>
+  </li>
+  <li>
+    <p>릿지회귀에 대한 정규방정식
+\(J(\theta)= RSS(\theta)+\alpha(||\mathbf w||_2)^2 (\alpha &gt;0)
+=\text{RSS}(\theta ) + \alpha\ \sum_{i=1}^n |\theta_i|^2\)</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>위의 경우 손실함수 $J(\theta)$는 아래로 볼록한 함수(convex function)이 되므로 $\nabla_{\theta}J(\theta)=\mathbf 0$이 되는 $\theta$에서 최소가 된다.</p>
+
+          <p>(단, (n+1) X (n+1) 행렬 $\mathbf A$는 $A_{11}=0$이고 $A_{ii}=1\ (1\le i \le n)$인 대각행렬)</p>
+        </li>
+        <li>
+          <p>$(\mathbf X^{\rm T}\mathbf X+\alpha \mathbf A)\theta = \mathbf X^{\rm T}\mathbf y$로부터 $\hat{\theta} = (\mathbf X^{\rm T}\mathbf X +\alpha \mathbf A)^{-1}\mathbf X^{\rm T}\mathbf y$</p>
+        </li>
+        <li>
+          <p>위 식은 확장된 $m$개의 특성벡터 $\mathbf x=(x_0,x_1,\cdots,x_n)^{\rm T}=(1,x_1,\cdots,x_n)^{\rm T}$로부터 생성된 $m\times (n+1)$ 행렬 $\mathbf X$에 대한 식</p>
+        </li>
+        <li>
+          <p>$x_0=1$을 추가하지 않은 m개의 특성벡터 $\mathbf x$로부터 생성된 $m\times n$ 행렬 $\mathbf X$와 편향(절편) $\theta_0$를 제외한 가중치로만 이루어진 파라미터 $\mathbf w=(\theta_1,\cdots,\theta_n)^{\rm T}$에 대한 정규방정식은 $\hat {\mathbf w}=(\mathbf X^{\rm T}\mathbf X +\alpha \mathbf I_n)^{-1}\mathbf X^{\rm T}\mathbf y$</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>규제가 없는 선형회귀 모델에서 설명했듯이 행렬에 대한 특잇값 분해를 이용하거나 <strong>촐레스키 분해(cholesky decomposition)</strong>을 이용하여 구현하는 것이 빠름</li>
+    <li><strong>촐레스키 분해</strong>: 양의 정부호(positive definite)인 대칭행렬 $\mathbf A$를 하삼각행렬 $\mathbf L$을 이용하여 $\mathbf A=\mathbf L\mathbf L^{\rm T}$와 같이 분해하는 것 (<a href="https://en.wikipedia.org/wiki/Cholesky_decomposition">참고링크</a>)</li>
+    <li>sklearn.linear_model모듈의 Rigde를 사용하여 예측기 객체를 생성 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html?highlight=ridge#sklearn.linear_model.Ridge">API</a>): <code class="language-plaintext highlighter-rouge">Ridge</code>객체의 입력 옵션 중 <code class="language-plaintext highlighter-rouge">solver</code>의 기본값은 ‘auto’이고 ‘svd’, ‘cholesky’ 등을 선택할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>
+    <p>릿지 회귀에 대한 확률적 경사하강법</p>
+
+    <blockquote>
+      <ul>
+        <li>sklearn.linear_model 모듈의 SGDRegressor에서 입력변수 <code class="language-plaintext highlighter-rouge">penalty</code>를 “l2”로 지정하여 릿지모델 생성 가능</li>
+        <li>sklearn.linear_model 모듈의 Ridge에서 입력변수 <code class="language-plaintext highlighter-rouge">solver</code>를 “cholesky” ,”sag” 를 주어 정규방정식의 해를 다른 방법으로 구할 수 있음</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#릿지회귀 python 예시
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span> <span class="c1">#선형회귀
+</span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span> <span class="c1">#릿지모델
+</span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDRegressor</span> <span class="c1"># 확률적경사하강법
+</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span> <span class="c1">#스케일링
+</span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span> <span class="c1"># 높은 차수 식
+</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>  <span class="c1">#그래프
+</span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">X</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X_new</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="n">y_new</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">X_new</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_model_pre</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="o">**</span><span class="n">model_kargs</span><span class="p">):</span> <span class="c1">#딕셔너리 형태로 받아들임 *args 는 튜플의 형태로 받아들임
+</span>    <span class="k">for</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">style</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="p">(</span><span class="s">"b-"</span><span class="p">,</span> <span class="s">"g-"</span><span class="p">,</span> <span class="s">"r-"</span><span class="p">)):</span> <span class="c1">#각 알파 값에 파랑, 초록, 빨강 순으로 그래프에 그려질 색 정함
+</span>        <span class="n">model</span> <span class="o">=</span> <span class="n">model_class</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="o">**</span><span class="n">model_kargs</span><span class="p">)</span> <span class="k">if</span> <span class="n">alpha</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">LinearRegression</span><span class="p">()</span>
+        
+        <span class="n">poly_features</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="c1">#X0 제외. 10차 방정식
+</span>        <span class="n">std_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span> <span class="c1">#스케일링
+</span>            
+        <span class="n">X_poly</span> <span class="o">=</span> <span class="n">poly_features</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c1">#생성, 변환 한번에
+</span>        <span class="n">X_poly_scaled</span> <span class="o">=</span> <span class="n">std_scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_poly</span><span class="p">)</span> <span class="c1"># 생성, 변환 한번에
+</span>        <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_poly_scaled</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1">#학습
+</span>        
+        <span class="n">y_new_regul</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">std_scaler</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">poly_features</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_new</span><span class="p">)))</span> <span class="c1">#예측
+</span>        <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span> <span class="n">y_new_regul</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s">"$\alpha = {}$"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span>
+        
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">"b."</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span><span class="n">y_new</span><span class="p">,</span> <span class="s">"m."</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mf">0.3</span><span class="o">*</span><span class="n">X_new</span><span class="p">,</span> <span class="s">"m--"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">"upper left"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"$x_1$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plot_model_pre</span><span class="p">(</span><span class="n">Ridge</span><span class="p">,</span> <span class="n">alphas</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">),</span> <span class="n">solver</span><span class="o">=</span><span class="s">"cholesky"</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1">#solver="cholesky" 는 숄레스키 분해라고 하는 행렬분해-정규방정식의 해를 구한다.
+#solver="sag"는 확률적 평균 경사하강법(Stochastic Average Gradient Descent) 이는 SGD와 비슷하지만 현재 그래디언트와 이전 단계에서 구한 모든 그래디언트를 합해서 평균한 값으로 모델 파라미터를 갱신한다. 
+</span><span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"$y$"</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/ML8/ridge.png" alt="ridge regression" /></p>
+
+<p><br /></p>
+
+<h3 id="pipeline-클래스-활용">Pipeline 클래스 활용</h3>
+
+<ul>
+  <li>앞의 코드에서 보듯이 주어진 속성으로부터 다항식 특성벡터로 변환하고 scailing을 적용한 다음 예측기의 입력으로 전달하는 일련의 과정은 정확하고 순서대로 실행되어야 함.</li>
+  <li>연속된 변환을 순서대로 처리하도록 도와주는 sklearn.pipeline 모듈의 Pipeline 클래스를 이용하면 편리함 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html?highlight=pipeline#sklearn.pipeline.Pipeline">API</a>)</li>
+  <li>Pipeline은 연속된 단계를 나타내는 이름/변환기(추정기) 쌍의 목록을 입력으로 받는데, 마지막 단계에는 <code class="language-plaintext highlighter-rouge">변환기</code>와 <code class="language-plaintext highlighter-rouge">추정기</code>를 모두 사용할 수 있고, 그 외에는 변환기만 가능</li>
+  <li>이름은 나중에 하이퍼파라미터를 조정할 때 이용</li>
+  <li>Pipeline의 <code class="language-plaintext highlighter-rouge">fit()</code> 메소드를 호출하면 모든 변환기의 <code class="language-plaintext highlighter-rouge">fit_transform()</code>메소드를 순서대로 호출하면서 해당 단계의 출력을 다음 단계의 입력으로 전달하고, 마지막 단계에서는 <code class="language-plaintext highlighter-rouge">fit()</code> 메소드만 호출함</li>
+  <li>Pipeline의 객체는 마지막 추정기와 동일한 메소드를 제공함</li>
+</ul>
+
+<h3 id="pipeline-클래스-실습">Pipeline 클래스 실습</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span> <span class="c1">#Pipeline 불러오기
+</span>
+<span class="k">def</span> <span class="nf">plot_model</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="o">**</span><span class="n">model_kargs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">style</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="p">(</span><span class="s">"b-"</span><span class="p">,</span> <span class="s">"g-"</span><span class="p">,</span> <span class="s">"r-"</span><span class="p">)):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model_class</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="o">**</span><span class="n">model_kargs</span><span class="p">)</span> <span class="k">if</span> <span class="n">alpha</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">LinearRegression</span><span class="p">()</span>
+        
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+                    <span class="p">(</span><span class="s">"poly_features"</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)),</span>
+                    <span class="p">(</span><span class="s">"std_scaler"</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+                    <span class="p">(</span><span class="s">"regul_reg"</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span> 
+                <span class="p">])</span> <span class="c1">#앞의 코드와 같은 코드이다. Pipeline 이용해서 작성할 수 있다. 
+</span>        <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1">#마지막은 fit() ,앞선 모든 변환기는 fit_transform()
+</span>        <span class="n">y_new_regul</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+        <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span> <span class="n">y_new_regul</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s">"$\alpha = {}$"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span>
+        
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">"b."</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span><span class="n">y_new</span><span class="p">,</span> <span class="s">"m."</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mf">0.3</span><span class="o">*</span><span class="n">X_new</span><span class="p">,</span> <span class="s">"m--"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">"upper left"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"$x_1$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+    
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">Ridge</span><span class="p">,</span> <span class="n">alphas</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"$y$"</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">rcdefaults</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>위와 동일한 그래프가 그려진다.</p>
+
+<p><br /></p>
+
+<h3 id="릿지-회귀에서-규제-정도를-조절하는-하이퍼파라미터">릿지 회귀에서 규제 정도를 조절하는 하이퍼파라미터</h3>
+
+<ul>
+  <li>
+    <p>하이퍼 파라미터 $\alpha$ 의 조정: 교차검증을 통해</p>
+  </li>
+  <li>
+    <p>sklearn.linear_model 모듈의 RidgeCV 클래스를 이용하면 최적의 $\alpha$에 대한 Ridge 추정기를 쉽게 얻을 수 있음 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html#sklearn.linear_model.RidgeCV">API</a>)</p>
+  </li>
+  <li>
+    <p>성능평가 기준은 입력변수 <code class="language-plaintext highlighter-rouge">scoring</code>에 문자열로 전달</p>
+
+    <blockquote>
+      <ul>
+        <li>sklearn에서 score는 큰 값이 좋은 것으로 구현되어 있으므로 MSE로 평가하려면 ‘neg_mean_squared_error’, R2로 평가하려면 ‘r2’를 전달</li>
+        <li>그 외 scoring에 전달할 수 있는 문자열과 대응되는 <code class="language-plaintext highlighter-rouge">sklearn.metrics</code> 모듈의 함수는 다음 링크의 3.3.1.2를 참고 (<a href="https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter">API</a>)</li>
+      </ul>
+    </blockquote>
+
+    <ul>
+      <li>$\alpha$ 조정 예시</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">my_tr</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+                <span class="p">(</span><span class="s">"poly_features"</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)),</span> 
+                <span class="p">(</span><span class="s">"std_scaler"</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">())])</span>
+<span class="n">X_tr</span> <span class="o">=</span> <span class="n">my_tr</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeCV</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1e2</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">],</span> <span class="n">scoring</span><span class="o">=</span><span class="s">"r2"</span><span class="p">).</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span><span class="p">.</span><span class="n">alpha_</span>  <span class="c1">#0.1
+</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">scoring</span><span class="o">=</span><span class="s">"r2"</span><span class="p">).</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span><span class="p">.</span><span class="n">alpha_</span>  <span class="c1">#0.5
+</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span> <span class="n">scoring</span><span class="o">=</span><span class="s">"r2"</span><span class="p">).</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span><span class="p">.</span><span class="n">alpha_</span> <span class="c1">#0.3
+</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">],</span> <span class="n">scoring</span><span class="o">=</span><span class="s">"r2"</span><span class="p">).</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span><span class="p">.</span><span class="n">alpha_</span> <span class="c1">#0.3 #계속 범위를 줄여 나간다. 더 줄일 수 있지만 이 정도에서 마무리한다. 
+</span>
+
+<span class="n">clf</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">my_tr</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_new</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
+<span class="c1">#array([[1.0350755 ],
+</span>       <span class="p">[</span><span class="mf">1.04196859</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">1.04887989</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">1.05580933</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">1.06275684</span><span class="p">]])</span>
+
+<span class="n">clf</span><span class="p">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">clf</span><span class="p">.</span><span class="n">intercept_</span> <span class="c1">#가중치 ,편향
+</span>
+<span class="c1">#(array([[ 2.04383040e-01,  2.75877253e-02, -2.34940881e-03,
+</span>         <span class="o">-</span><span class="mf">8.88173617e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.55326984e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.38695956e-03</span><span class="p">,</span>
+          <span class="mf">1.88318873e-05</span><span class="p">,</span>  <span class="mf">8.98776960e-03</span><span class="p">,</span>  <span class="mf">1.97985145e-02</span><span class="p">,</span>
+          <span class="mf">3.17796667e-02</span><span class="p">]]),</span>
+<span class="c1">#array([1.38465065]))
+</span>
+
+<span class="n">clf</span><span class="p">.</span><span class="n">best_score_</span> <span class="c1">#제일 좋은 스코어
+#0.8660278843491014
+</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">Ridge</span><span class="p">,</span> <span class="n">alphas</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"$y$"</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># alpha 값에 따른 그래프 
+</span></code></pre></div></div>
+
+<p><img src="/img/posts/ML8/ridge2.png" alt="ridge regression" /></p>
+
+<p><br /></p>
+
+<h2 id="라쏘-회귀-lasso-regression">라쏘 회귀 (Lasso regression)</h2>
+
+<ul>
+  <li>
+    <p>라쏘회귀의 경우에 릿지회귀의 경우와 달리 손실함수가 최소가 되는 $\theta$를 해석적으로 구할 수 없으므로 경사하강법 또는 좌표별하강법(coordinate descent)를 이용</p>
+
+    <blockquote>
+      <ul>
+        <li>라쏘회귀의 손실함수는 $\theta_i=0$ $(i=1,\cdots,n)$에서 미분 가능하지 않지만, 그래디언트 벡터 대신 서브그래디언트(subgradient) 벡터를 이용하면 경사하강법을 적용할 수 있다.</li>
+        <li>$f:\mathbb R^n\to \mathbb R$의 $ \theta=\theta_0$에서의 서브그래디언트 벡터 $\mathbf v\in \mathbb R^n$는 다음 조건을 만족시키는 임의의 벡터를 의미한다.</li>
+      </ul>
+    </blockquote>
+
+\[f(\theta)\ge f(\theta_0)+\mathbf v^{\rm T}(\theta-\theta_0)\text{ for all }\theta\in \mathbb R^n\]
+
+    <blockquote>
+      <ul>
+        <li>
+\[\text{예를 들어} f(\theta)=||\theta||_1=\sum_{i=1}^n|\theta_i|\text{에 대해} (\text{sign}(\theta_1),\cdots,\text{sign}(\theta_n))^{\rm T}\text{는  서브그래디언트 벡터 중 하나가 된다}\]
+        </li>
+        <li>
+          <p>단,
+\(\text{sign}(\theta_i)=\begin{cases} 1 &amp;\text{ if }\theta_i&gt;0 \\ 0 &amp;\text{ if }\theta_i=0\\ -1 &amp; \text{ if }\theta_i&lt;0\end{cases}\)</p>
+        </li>
+        <li>
+          <p>미분가능한 점에서의 서브그래디언트 벡터는 그래디언트 벡터 뿐이다.</p>
+        </li>
+        <li>함수가 최소가 되는 점에서의 서브그래디언트 벡터 중에는  0이 항상 포함됨</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>좌표별하강법(Coordinate Desecnt): 아래로 볼록한 함수 $f$가 모든 점에서 미분가능하면, $\theta=\mathbf a=(a_1,\cdots,a_n)$에서 $f$가 최소가 된다는 것은 다음 함수 $f_i(t)$가 모두 $t=a_i$에서 최소가 된다는 것과 동치이다.</p>
+
+\[\begin{align}
+f_1(t)=f(t,a_2,a_3,&amp;\cdots,a_n)\\
+f_2(t)=f(a_1,t,a_3,&amp;\cdots,a_n)\\ \vdots\\
+f_n(t)=f(a_1,\cdots,&amp;a_{n-1},t)
+\end{align}\]
+  </li>
+  <li>
+    <p>아래로 볼록한 함수 f가 모든 점에서 미분가능하지 않은 경우에는 일반적으로 위 결과가 성립하지 않음</p>
+  </li>
+  <li>
+    <p>하지만, 함수 $f$가 다음과 같이 아래로 볼록한 함수 $g,\ h_i$들의 합 $f(\theta)=g(\theta)+\sum_{i=1}^n h_i(\theta_i)$</p>
+
+    <p>이고 $g$가 모든 점에서 미분가능한 함수인 경우에는 $f$가 $\theta=\mathbf a$에서 최소라는 것과 각 좌표축에 대해 최소라는 것이 동치이다. $\cdots\cdots$ (3)</p>
+
+    <details>
+    <summary>왜냐하면!(클릭)</summary>
+    <div>
+        <p>\(\begin{align}
+\ f(\theta)-f(\mathbf a) = &amp; g(\theta)-g(\mathbf a)+\sum_{i=1}^n (h_i(\theta_i)-h_i(a_i))\\
+\ge &amp;\nabla_{\theta}g(\mathbf a)(\theta -\mathbf a)+\sum_{i=1}^n (h_i(\theta_i)-h_i(a_i))\\
+= &amp;\sum_{i=1}^n \left(\dfrac{\partial g}{\partial\theta_i}(\mathbf a)(\theta_i-a_i)+h_i(\theta_i)-h_i(a_i)\right)\ge 0
+\end{align}\)
+ 위 부등식의 마지막은 f가 $\theta=\mathbf a$에서 각 좌표축에 최소라는 것으로부터 각 $i=1,\cdots,n$에 대해 $-\dfrac{\partial g}{\partial \theta_i}(\mathbf a)$가 $\theta_i=a_i$에서 $h_i$의 서브그래디언트가 되어 \(h_i(\theta_i)\ge h_i(a_i)-\dfrac{\partial g}{\partial \theta_i}(\mathbf a)(\theta_i-a_i)\)
+이 성립하기 때문</p>
+
+      </div></details>
+  </li>
+  <li>
+    <p>위 (3)의 상황에서 다음과 같이 반복적으로 각 좌표축을 따라 움직이며 함수의 최솟값을 찾는 최적화 알고리즘을 <strong>좌표별하강법</strong>이라고 함</p>
+  </li>
+  <li>
+    <p>$\theta^{(0)}$를 임의로 선택한 후 다음과 같이 $\theta^{(k)}$로부터 $\theta^{(k+1)}$로 업데이트 
+\(\begin{align}
+\theta_1^{(k+1)} \in\ \text{argmin}_t &amp;f(t,\theta_2^{(k)},\theta_3^{(k)}\cdots,\theta_n^{(k)}) \\   \theta_2^{(k+1)} \in\ \text{argmin}_t &amp;f(\theta_1^{(k+1)},t,\theta_3^{(k)},\cdots,\theta_n^{(k)}) \\   
+\vdots \\   
+\theta_n^{(k+1)} \in\ \text{argmin}_t &amp;f(\theta_1^{(k+1)},\cdots,\theta_{n-1}^{(k+1)},t)
+\end{align}\)</p>
+  </li>
+  <li>
+    <p>위의 반복과정에서 각 좌표축 별로 최소가 되는 θi를 구할 때, (서브그래디언트를 이용한) 경사하강법을 적용할 수 있음</p>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p>라쏘회귀는 릿지회귀에 비해 덜 중요한 특성의 가중치를 제거하는 경향이 있음: 덜 중요한 특성의 가중치가 1이 됨, 중요한 특성만 선택하는 효과</p>
+  </li>
+</ul>
+
+<p><img src="/img/posts/ML8/l1_l2.png" alt="l1 and l2" /></p>
+
+<blockquote>
+  <ul>
+    <li>두 경우 모두 $\theta_1=2, \theta_2=0.5$로 초기화하고 경사하강법을 적용하여 각 함수가 최소가 되는 $\theta$를 구하면 $\ell_1$의 경우에는 서브그래디언트 벡터가 $(\text{sign}(\theta_1),\text{sign}(\theta_2))^{\rm T}$이므로 $\theta_2$가 먼저 0이 되고, $\theta_1$이 0이 될 때까지 $\theta_1$ 축을 따라 이동.</li>
+    <li>$\ell_2$의 경우에는 그래디언트 벡터가 $2(\theta_1,\theta_2)^{\rm T}$이므로 원점까지 직선을 따라 이동</li>
+    <li>경사하강법의 고정된 학습률에 대해 $\ell_2$의 경우, 원점에 가까워질 수록 업데이트되는 정도가 줄어들면서 수렴. $\ell_1$의 경우에는 학습률을 스케쥴링 하지 않으면 진동 (따라서, 수렴을 시키려면 점진적으로 학습률을 감소시켜야 함)</li>
+    <li>라쏘회귀는 sklearn.linear_model 모듈의 Lasso 클래스(<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html?highlight=lasso#sklearn.linear_model.Lasso">API</a>) 또는 SGDRegressor(penalty=”l1”)을 이용</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>라쏘회귀에서 규제를 조절하는 하이퍼파라미터 $\alpha$를 조정하는 것은 릿지회귀의 경우처럼 교차검증을 이용</li>
+  <li>라쏘회귀에 대한 교차검증을 쉽게 하는 방법은 LassoCV(<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV">API</a>)</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="엘라스틱넷elastic-net">엘라스틱넷(Elastic Net)</h2>
+
+<ul>
+  <li>
+    <p>일반적으로 규제가 없는 선형회귀보다는 릿지회귀를 적용하지만, 쓰이는 특성이 몇 개뿐이라고 의심될 때는 라쏘회귀 또는 엘라스틱넷을 적용 (라쏘는 변수 선택의 효과가 있기 때문)</p>
+  </li>
+  <li>
+    <p>특성 수가 샘플 수보다 많거나 특성 몇 개가 강하게 연관되어 있을 때(다중공선성 의심) 라쏘회귀가 문제를 일으킬 수 있는데, 이럴 때 엘라스틱넷을 주로 사용</p>
+  </li>
+  <li>
+    <p>sklearn.linear_model 모듈의 ElasticNet 클래스 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html?highlight=elasticnet#sklearn.linear_model.ElasticNet">API</a>) 또는 SGDRegressor(penalty=”elasticnet”)을 이용</p>
+
+    <blockquote>
+      <ul>
+        <li>엘라스틱넷의 하이퍼파라미터는 규제를 조절하는 α에 해당되는 입력변수 <code class="language-plaintext highlighter-rouge">alpha</code>와 ℓ1 페널티와 ℓ2 패널티를 결합하는 비율을 결정하는 r에 해당되는 입력변수 <code class="language-plaintext highlighter-rouge">l1_ratio</code>를 교차검증을 통해 선택해야 함</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#간단한 엘라스틱넷의 예시
+</span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">ElasticNet</span>
+<span class="n">elastic_net</span> <span class="o">=</span> <span class="n">ElasticNet</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">elastic_net</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">elastic_net</span><span class="p">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">1.5</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="객체를-생성후-하이퍼파라미터를-수정하는-방법">객체를 생성후 하이퍼파라미터를 수정하는 방법</h3>
+
+<ul>
+  <li>SGDRegressor<code class="language-plaintext highlighter-rouge">, </code>Ridge<code class="language-plaintext highlighter-rouge">, </code>Lasso<code class="language-plaintext highlighter-rouge">, </code>ElasticNet의 객체를 생성한 후 파라미터를 수정하기 위해서는 생성된 객체의 set_params(**kwargs) 메소드를 이용하면 됨.</li>
+  <li>SGDRegressor<code class="language-plaintext highlighter-rouge">, </code>Ridge<code class="language-plaintext highlighter-rouge">, </code>Lasso<code class="language-plaintext highlighter-rouge">, </code>ElasticNet의 객체를 학습시킨 후(fit) 성능지표로 <strong>$R^2$</strong>을 계산하기 위해서는 학습된 객체의 score(X, y) 메소드를 이용하면 됨.</li>
+  <li><code class="language-plaintext highlighter-rouge">Ridge</code>나 <code class="language-plaintext highlighter-rouge">Lasso</code>의 경우처럼 <code class="language-plaintext highlighter-rouge">ElasticNetCV</code>를 이용하여 규제를 조절하는 ‘alpha’ 하이퍼파라미터를 검증 데이터셋으로 선택할 수 있음(<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNetCV.html?highlight=elasticnet#sklearn.linear_model.ElasticNetCV">API</a>)</li>
+</ul>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># 데이터 수
+</span><span class="n">X</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 0~1 난수*3 
+</span><span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.5</span>   <span class="c1"># 1차방정식 형태
+</span><span class="n">X_new</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 0~3사이 100개 
+</span>
+<span class="c1">#릿지회귀
+</span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+
+<span class="n">ridge_reg</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">solver</span><span class="o">=</span><span class="s">"cholesky"</span><span class="p">,</span>
+                 <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">ridge_reg</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">ridge_reg</span><span class="p">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">1.5</span><span class="p">]])</span> 
+</code></pre></div></div>
+
+<h2 id="조기-종료early-stopping">조기 종료(Early Stopping)</h2>
+
+<ul>
+  <li>
+    <p>경사하강법과 같이 반복적인 학습 알고리즘을 규제하는 또 다른 방식은 검증에러가 최솟값(검증 성능이 최댓값)에 도달하면 바로 훈련을 중지시키는 것으로 <strong>조기 종료</strong>라고 함</p>
+  </li>
+  <li>
+    <p>보통 학습 에포크가 진행됨에 알고리즘이 점차 학습되어 훈련 데이터셋에 대한 오차와 검증 데이터셋에 대한 오차가 모두 줄어들다가, 검증 오차는 다시 상승하기 시작함 (과대적합이 되기 시작)</p>
+  </li>
+  <li>
+    <p>조기종료는 검증 오차가 최소에 도달하는 즉시 학습을 멈추는 것</p>
+  </li>
+  <li>
+    <p>확률적 경사하강법이나 미니배치 경사하강법과 같이 불규칙하게 움직이며 수렴해가는 경우는 검증 오차가 최솟값에 도달했는지를 확인하기 쉽지 않음</p>
+
+    <blockquote>
+      <ul>
+        <li>검증 오차가 일정 시간 동안 현재까지의 최솟값보다 클 때, 학습을 멈추고 검증 에러가 최소였을 때의 모델 파라미터로 되돌리는 것으로 극복</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>손실함수 $f$가 최소가 되는지를 확인하는 방법</p>
+  </li>
+</ul>
+
+\[|f(\theta^{(k+1)})-f(\theta^{(k)})|&lt; \epsilon \\
+||\nabla_{\theta}f(\theta)||&lt;\epsilon\]
+
+<h3 id="조기-종료-실습">조기 종료 실습</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">SGDRegressor</code>에서 <code class="language-plaintext highlighter-rouge">warm_start=True</code>로 설정하면 <code class="language-plaintext highlighter-rouge">fit()</code>메소드가 호출될 때 처음부터 다시 학습을 시작하지 않고 이전 모델 파라미터에서 훈련을 이어감</li>
+  <li>학습률에 대한 스케쥴링을 하지 않고 규제없이 조기종료를 이용하여 학습을 시켜보자.(<code class="language-plaintext highlighter-rouge">penalty=None</code>, <code class="language-plaintext highlighter-rouge">learning_rate="constant"</code>)</li>
+  <li>학습된 추정기를 복사하는 방법: sklearn.base 모듈의 clone을 이용 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.base.clone.html?highlight=clone#sklearn.base.clone">API</a>)</li>
+  <li>그림에 화살표를 이용하여 주석을 다는 법: plt.annotate()를 이용 (<a href="https://matplotlib.org/3.3.2/api/_as_gen/matplotlib.pyplot.annotate.html">API</a>)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">clone</span>  <span class="c1"># 학습된 예측기를 복사 
+</span>
+<span class="c1"># 데이터셋 생성 
+</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">X2</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">X2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 데이터셋 나누기 
+</span><span class="n">X2_train</span><span class="p">,</span> <span class="n">X2_val</span><span class="p">,</span> <span class="n">y2_train</span><span class="p">,</span> <span class="n">y2_val</span><span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X2</span><span class="p">[:</span><span class="mi">50</span><span class="p">],</span><span class="n">y2</span><span class="p">[:</span><span class="mi">50</span><span class="p">].</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 90차 다항식 특성벡터로 확장하고 스케일링
+</span><span class="n">poly_scaler</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">"poly_features"</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)),</span><span class="c1">#x0은 제외
+</span>        <span class="p">(</span><span class="s">"std_scaler"</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">())</span>
+    <span class="p">])</span>
+
+<span class="n">X2_train_poly_scaled</span> <span class="o">=</span> <span class="n">poly_scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X2_train</span><span class="p">)</span>
+<span class="n">X2_val_poly_scaled</span> <span class="o">=</span> <span class="n">poly_scaler</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X2_val</span><span class="p">)</span>
+
+<span class="c1"># 추정기 객체 생성 (`penalty=None`, `learning_rate="constant"`)
+</span><span class="n">sgd_reg</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">infty</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="c1">#fit() 메소드 호출마다 기존 유지
+</span>                       <span class="n">penalty</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="s">"constant"</span><span class="p">,</span> <span class="n">eta0</span><span class="o">=</span><span class="mf">0.0005</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">minimum_val_error</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">"inf"</span><span class="p">)</span> <span class="c1">#초기 검증 오차 무한대로 지정
+</span>
+<span class="n">best_epoch</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">best_model</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">1000</span> 
+<span class="n">time_limit</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">time_ctr</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+    <span class="n">sgd_reg</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X2_train_poly_scaled</span><span class="p">,</span> <span class="n">y2_train</span><span class="p">)</span>  <span class="c1"># 연속적으로 fit() 메소드 호출
+</span>    <span class="n">y2_val_predict</span> <span class="o">=</span> <span class="n">sgd_reg</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X2_val_poly_scaled</span><span class="p">)</span> <span class="c1">#검증 세트 훈련
+</span>    <span class="n">val_error</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y2_val</span><span class="p">,</span> <span class="n">y2_val_predict</span><span class="p">)</span> <span class="c1"># 검증 세트 mse
+</span>    <span class="n">time_ctr</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">val_error</span> <span class="o">&lt;</span> <span class="n">minimum_val_error</span><span class="p">:</span> <span class="c1">#검증오차 계속 비교하며 최적 단계, 모델 찾기
+</span>        <span class="n">minimum_val_error</span> <span class="o">=</span> <span class="n">val_error</span>
+        <span class="n">best_epoch</span> <span class="o">=</span> <span class="n">epoch</span>
+        <span class="n">best_model</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">sgd_reg</span><span class="p">)</span>
+        <span class="n">time_ctr</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">time_ctr</span> <span class="o">&gt;=</span> <span class="n">time_limit</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"best epoch:</span><span class="si">{</span><span class="n">best_epoch</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="c1">#best epoch:239
+</span>
+<span class="c1"># 위에서 얻은 결과를 그림으로 그리기 
+</span><span class="n">sgd_reg</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">infty</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                       <span class="n">penalty</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="s">"constant"</span><span class="p">,</span> <span class="n">eta0</span><span class="o">=</span><span class="mf">0.0005</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1">#반복횟수
+</span><span class="n">train_errors</span><span class="p">,</span> <span class="n">val_errors</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+    <span class="n">sgd_reg</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X2_train_poly_scaled</span><span class="p">,</span> <span class="n">y2_train</span><span class="p">)</span>
+    <span class="n">y2_train_predict</span> <span class="o">=</span> <span class="n">sgd_reg</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X2_train_poly_scaled</span><span class="p">)</span>
+    <span class="n">y2_val_predict</span> <span class="o">=</span> <span class="n">sgd_reg</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X2_val_poly_scaled</span><span class="p">)</span>
+    <span class="n">train_errors</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y2_train</span><span class="p">,</span> <span class="n">y2_train_predict</span><span class="p">))</span>
+    <span class="n">val_errors</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y2_val</span><span class="p">,</span> <span class="n">y2_val_predict</span><span class="p">))</span>
+
+<span class="n">best_epoch</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">val_errors</span><span class="p">)</span>
+<span class="n">best_val_rmse</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">val_errors</span><span class="p">[</span><span class="n">best_epoch</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="c1">###################################################
+# 주석달기 
+</span><span class="n">plt</span><span class="p">.</span><span class="n">annotate</span><span class="p">(</span><span class="s">'early stopping'</span><span class="p">,</span>
+             <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">best_epoch</span><span class="p">,</span> <span class="n">best_val_rmse</span><span class="p">),</span>
+             <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">best_epoch</span><span class="p">,</span> <span class="n">best_val_rmse</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+             <span class="n">ha</span><span class="o">=</span><span class="s">"center"</span><span class="p">,</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s">'black'</span><span class="p">,</span> <span class="n">arrowstyle</span><span class="o">=</span><span class="s">'fancy'</span><span class="p">),</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span>
+            <span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">],</span> <span class="p">[</span><span class="n">best_val_rmse</span><span class="p">,</span> <span class="n">best_val_rmse</span><span class="p">],</span> <span class="s">"k:"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">val_errors</span><span class="p">),</span> <span class="s">"b-"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">"Validation set"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">train_errors</span><span class="p">),</span> <span class="s">"r--"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">"Training set"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">"upper right"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"Epoch"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"RMSE"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/ML8/earlystopping.png" alt="early_stopping" /></p>
+
+<ul>
+  <li>그래프에서 보면 검증 세트는 알고리즘이 학습되면서 RMSE는 감소하면서 최솟값에 도달했다가 상승한다. 이는 과대적합이 되고 있다는 증거임</li>
+  <li>SGD나 미니배치 경사하강법은 비용함수의 곡선이 매끄럽지 않아 최솟값에 도달햇는지 확인이 어려울 수 있음</li>
+  <li>검증오차가 일정 횟수 동안 최솟값보다 클 때 모델이 더 개선되지 않는다고 판단해 학습을 멈추고 최소였던 검증오차로 되돌아가는 방법을 사용할 수 있음</li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+
+<ul>
+  <li>기계학습_하길찬 교수님 수업을 듣고 공부한 내용입니다.</li>
+  <li><a href="https://brunch.co.kr/@princox/180">*args와 **kwargs</a> 에 관한 개미님의 글</li>
+  <li>
+    <p><a href="https://github.com/ratsgo/ratsgo.github.io/blob/master/_posts/2017-05-22-RLR.md">Lasso, Ridge</a> 에 관한 ratsgo님의 깃헙</p>
+  </li>
+  <li><a href="https://yganalyst.github.io/ml/ML_chap3-4/">Lasso, Ridge</a> 에 관한 신용근님의 깃헙 블로그</li>
+</ul>
+:ET
