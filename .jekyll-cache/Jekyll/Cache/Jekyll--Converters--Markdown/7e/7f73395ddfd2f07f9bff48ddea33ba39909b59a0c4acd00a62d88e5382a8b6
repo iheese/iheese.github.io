@@ -1,4 +1,4 @@
-I"	<h2 id="과대적합을-감소시키는-방법-규제regularization">과대적합을 감소시키는 방법: 규제(Regularization)</h2>
+I"	<h2 id="과대적합을-감소시키는-방법-규제regularization">과대적합을 감소시키는 방법: 규제(Regularization)</h2>
 
 <ul>
   <li>
@@ -588,6 +588,6 @@ f_n(t)=f(a_1,\cdots,&amp;a_{n-1},t)
   <li>
     <p><a href="https://github.com/ratsgo/ratsgo.github.io/blob/master/_posts/2017-05-22-RLR.md">Lasso, Ridge</a> 에 관한 ratsgo님의 깃헙</p>
   </li>
-  <li><a href="https://yganalyst.github.io/ml/ML_chap3-4/">Lasso, Ridge</a> 에 관한 신용근님의 깃헙 블로그</li>
+  <li><a href="https://yganalyst.github.io/ml/ML_chap3-4/">Lasso, Ridge</a> 에 관한 신용근님의 깃헙 블로그—</li>
 </ul>
 :ET

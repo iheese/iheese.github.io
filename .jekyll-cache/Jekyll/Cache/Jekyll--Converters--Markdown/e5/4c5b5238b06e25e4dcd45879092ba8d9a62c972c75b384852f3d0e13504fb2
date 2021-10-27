@@ -1,0 +1,108 @@
+I"'"<h2 id="로지스틱-회귀logistic-regression-의-학습-모델">로지스틱 회귀(Logistic Regression) 의 학습 모델</h2>
+
+<ul>
+  <li>
+    <p>레이블이 1, 0인 두 개의 클래스에 대한 분류문제에서 샘플이 특정 클래스에 속할 확률을 추정하는 지도학습의 한 가지</p>
+  </li>
+  <li>
+    <p>선형회귀 모델과 같이 입력 특성의 가중치의 합(편향 포함) $\theta^{\rm T}\mathbf x = \theta_0+\theta_1 x_1+\cdots +\theta_nx_n$을 계산한 다음 시그모이드 함수(sigmoid) $\sigma(t)=\dfrac{1}{1+\exp(-t)}$를 취한 값 $\sigma (\theta^{\rm T} \mathbf x)$를 ${\rm P}(Y=1 \mid X= \mathbf x)$ 에 대한 추정값 $\hat p(\mathbf x)$로 추정하는 모델.</p>
+  </li>
+  <li>
+    <p>즉, 모델 파라미터 ${\theta}=(\theta_0,\cdots,\theta_n)^{\rm T}$에 대한 로지스틱 회귀 모델을 $h_{\theta}$라 할 때</p>
+
+\[\hat p(\mathbf x) = h_{\theta}(\mathbf x)= \sigma({\theta}^{\rm T}\mathbf x)
+=\dfrac{1}{1+\exp(-{\theta}^{\rm T}\mathbf x)}=\dfrac{1}{1+\exp(-(\theta_0+\theta_1x_1+\cdots+\theta_n x_n))} \cdots(1)\]
+  </li>
+  <li>
+    <p>시그모이드 함수를 생각하는 이유:</p>
+
+    <blockquote>
+      <ul>
+        <li>확률 $0&lt;p&lt;1$에 대해 오즈(odds) $\dfrac{p}{1-p}$는 $(0,\infty)$사이의 값을 가지므로 로그-오즈(log-odds) 또는 로짓이라 부르는 $\ln \left(\dfrac{p}{1-p}\right)$는 $(-\infty, \infty)$ 사이의 값을 가짐</li>
+        <li>이 로짓을 선형모델로 추정하는 것이 로지스틱 회귀모델. 즉, $\ln (\dfrac{p}{1-p})=\theta^{\rm T}\mathbf x$으로부터 $p$를 구하면 식(1)이 나옴</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>로지스틱 회귀 모델을 통한 레이블의 예측:</p>
+
+    <blockquote>
+      <ul>
+        <li>샘플 $\mathbf x$가 양성 클래스(y=1)에 속할 확률 $\hat p(\mathbf x)=h_\theta}(\mathbf x)$를 추정한 후 다음과 같이 예측 $\hat y$를 구함 
+\(\hat y = \begin{cases} 0 &amp; \text{ if  }&amp; \hat p(\mathbf x)&lt;0.5\\ 1 &amp;\text{ if }&amp; \hat p(\mathbf x)\ge0.5
+\end{cases}\)</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li></li>
+</ul>
+
+<h3 id="시그모이드-함수-그려보기">시그모이드 함수 그려보기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span> 
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">xlist</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">ylist</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">xlist</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlist</span><span class="p">,</span><span class="n">ylist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s">"$\sigma (t)=\dfrac{1}{1+\exp(-t)}$"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="s">'r--'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s">'r--'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="s">'r--'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s">'r--'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">"upper left"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/ML9/sigmoid.png" alt="sigmoid" /></p>
+
+<p><br /></p>
+
+<h2 id="로지스틱-회귀모델의-학습">로지스틱 회귀모델의 학습</h2>
+
+<ul>
+  <li>
+    <p>훈련 데이터셋 ${(\mathbf x_i,y_i) \mid1\le i \le m}$이 주어질 때, 다음과 같이 정의되는 로지스틱 회귀의 비용함수(로그손실 함수) 
+\(J({\theta}) = -\dfrac 1 m \sum_{i=1}^m
+(y_i \ln p_i + (1-y_i)\ln (1-p_i)) \\
+(단, p_i= \sigma({\theta}^{\rm T}\mathbf x_i)) \cdots (2)\)</p>
+
+    <p>가 최소가 되는 모델 파라미터 $\theta$를 구하는 것</p>
+
+    <blockquote>
+      <ul>
+        <li>$\text{P}(Y_i=1 \mid X=\mathbf x_i)=p_i$이므로 $\text{P}(Y_i=0 \mid X=\mathbf x_i)=1-p_i$이고 훈련 데이터셋은 iid 확률변수 $(X_i,Y_i)$ $(1\le i \le m)$에 대한 값이므로 로지스틱 회귀 모델에 대한 비용함수가 최소가 되는 $\theta$를 구하는 것은 $\theta$에 대한 로그우도함수 $\ell(\theta)= \ln(\text{P}(y_1,\cdots,y_m \mid \mathbf x_1,\cdots,\mathbf x_m:{\theta}))$가 최대가 되는 $\theta$를 구하는 것과 같다.</li>
+      </ul>
+    </blockquote>
+
+\[\begin{align}
+J(\theta)=&amp;  -\dfrac 1 m \ln\left(\prod_{i=1}^m p_i^{y_i} (1-p_i)^{(1-y_i)}\right) \\
+=&amp; -\dfrac 1 m \ln\left(\text{P}(Y_1=y_1,\cdots,Y_m=y_m|X_1=\mathbf x_1,\cdots,X_m=\mathbf x_m :\theta\right)
+\end{align}\]
+
+    <ul>
+      <li>비용함수 $J(\theta)$는 $\theta$에 대해 아래로 볼록한 함수이므로 최솟값이 존재함을 보장할 수 있지만, 정규방정식처럼 해를 구하는 공식은 없음</li>
+    </ul>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>경사하강법 또는 다른 최적화 알고리즘을 이용하여 해의 근삿값을 구함 (<code class="language-plaintext highlighter-rouge">sklearn.linear_model</code> 모듈의 <code class="language-plaintext highlighter-rouge">LogisticRegression</code>의 <code class="language-plaintext highlighter-rouge">solver</code>참고)</p>
+        </li>
+        <li>
+          <p>배치 경사하강법을 적용할 때 비용함수에 대한 그래디언트 벡터 $\boldsymbol{\nabla_{\theta}}J(\theta)$ : 각 $i$ ($1\le i\le m)$에 대해  $\nabla_\theta J(\theta)$의 $j$번째 성분은 
+\(\dfrac{\partial}{\partial \theta_j} J(\theta)= \dfrac 1 m \sum_{i=1}^m 
+(\sigma({\theta}^{\rm T}\mathbf x_i)-y_i)x_{ij},\\ \mathbf x_i=(1,x_{i1},\cdots,x_{in})\)</p>
+        </li>
+      </ul>
+
+    </blockquote>
+  </li>
+</ul>
+
+:ET

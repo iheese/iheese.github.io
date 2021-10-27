@@ -1,0 +1,18 @@
+I"D<h2 id="로지스틱-회귀logistic-regression-의-학습-모델">로지스틱 회귀(Logistic Regression) 의 학습 모델</h2>
+
+<ul>
+  <li>
+    <p>레이블이 1, 0인 두 개의 클래스에 대한 분류문제에서 샘플이 특정 클래스에 속할 확률을 추정하는 지도학습의 한 가지</p>
+  </li>
+  <li>
+    <p>선형회귀 모델과 같이 입력 특성의 가중치의 합(편향 포함) $\theta^{\rm T}\mathbf x = \theta_0+\theta_1 x_1+\cdots +\theta_nx_n$을 계산한 다음 시그모이드 함수(sigmoid) $\sigma(t)=\dfrac{1}{1+\exp(-t)}$를 취한 값 $\sigma (\theta^{\rm T} \mathbf x)$를 \({\rm P}(Y=1 \| X= \mathbf x)\) 에 대한 추정값 $\hat p(\mathbf x)$로 추정하는 모델.</p>
+  </li>
+  <li>
+    <p>즉, 모델 파라미터 ${\theta}=(\theta_0,\cdots,\theta_n)^{\rm T}$에 대한 로지스틱 회귀 모델을 $h_{\theta}$라 할 때</p>
+
+\[\hat p(\mathbf x) = h_{\theta}(\mathbf x)= \sigma({\theta}^{\rm T}\mathbf x)
+=\dfrac{1}{1+\exp(-{\theta}^{\rm T}\mathbf x)}=\dfrac{1}{1+\exp(-(\theta_0+\theta_1x_1+\cdots+\theta_n x_n))}\]
+  </li>
+</ul>
+
+:ET
