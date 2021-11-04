@@ -1,4 +1,4 @@
-I"�8<h2 id="최적화-문제optimization-problem에-있어서의-쌍대성duality">최적화 문제(Optimization Problem)에 있어서의 쌍대성(Duality)</h2>
+I"'6<h2 id="최적화-문제optimization-problem에-있어서의-쌍대성duality">최적화 문제(Optimization Problem)에 있어서의 쌍대성(Duality)</h2>
 
 <ul>
   <li>
@@ -25,15 +25,15 @@
     <blockquote>
 \[\begin{aligned}
 
-   &amp; \text{min}_{\mathbf x}\ f(\mathbf x)\\
+&amp; \text{min}_{\mathbf x}\ f(\mathbf x)\\
 
-   &amp; {s.t}\ h_i(\mathbf x)\le 0,\quad i=1,\cdots,m\\
+&amp; {s.t}\ h_i(\mathbf x)\le 0,\quad i=1,\cdots,m\\
 
-   &amp;  l_j(\mathbf x)=0,\quad j=1,\cdots,n
+&amp;  l_j(\mathbf x)=0,\quad j=1,\cdots,n
 
-   \end{aligned}
+\end{aligned}
 
-  \cdots\cdots (1)\]
+\cdots\cdots (1)\]
     </blockquote>
   </li>
   <li>
@@ -111,15 +111,15 @@
     <p>쌍대문제의 최적값을 $g^* \text{라 하면} f^* \ge g^*$가 성립하고, 이를 <strong>약한 쌍대성</strong>(weak duality)라고 함</p>
   </li>
   <li>
-    <p>원초문제의 최적값 $f^<em>$와 쌍대문제의 최적값 $g^</em>$에 대해 $f^<em>=g^</em>$가 성립할 때 <strong>강한 쌍대성</strong>(strong duality)이 만족된다고 함 (이 경우 원초문제의 최적값을 구하는 대신 쌍대문제의 최적값을 구하면 됨)</p>
+    <p>원초문제의 최적값 $f^* \text{와 쌍대문제의 최적값}$ $g^* \text{ 에 대해 }$ $f^*=g^*$가 성립할 때 <strong>강한 쌍대성</strong>(strong duality)이 만족된다고 함 (이 경우 원초문제의 최적값을 구하는 대신 쌍대문제의 최적값을 구하면 됨)</p>
   </li>
   <li>
     <p>원초문제의 $f(\mathbf x)$와 쌍대문제의 $g(\mathbf u,\mathbf v)$에 대해 두 값의 차이 $f(\mathbf x)-g(\mathbf u,\mathbf v)$를 <strong>쌍대차이(duality gap)</strong>이라고 함</p>
 
     <blockquote>
       <ul>
-        <li>각 문제에 대해 실현가능한 $\mathbf x,\, \mathbf u,\, \mathbf v$와 각 문제의 최적값 $f^<em>, g^</em>$에 대해 다음 관계식이 항상 성립함 $0\le f(\mathbf x)-f^* \le f(\mathbf x)-g(\mathbf u,\mathbf v)$</li>
-        <li>즉, $f(\mathbf x)$와 $g(\mathbf u,\mathbf v)$에 대한 쌍대차이가 $0$이 되면 $\mathbf x$는 원초문제의 최적해 $\mathbf x^<em>$가 되고, $\mathbf u,\mathbf v$는 쌍대문제의 최적해 $\mathbf u^</em>,\,\mathbf v^<em>$가 됨 (이때, $f^</em>=f(\mathbf x^<em>)=g(\mathbf u^</em>,\mathbf v^<em>)= g^</em>$가 성립하여 강한 쌍대성이 성립) $\cdots\cdots (3)$</li>
+        <li>각 문제에 대해 실현가능한 $\mathbf x,\, \mathbf u,\, \mathbf v$와 각 문제의 최적값 $f^*, g^*$에 대해 다음 관계식이 항상 성립함 $0\le f(\mathbf x)-f^* \le f(\mathbf x)-g(\mathbf u,\mathbf v)$</li>
+        <li>즉, $f(\mathbf x)$와 $g(\mathbf u,\mathbf v)$에 대한 쌍대차이가 $0$이 되면 $\mathbf x$는 원초문제의 최적해 $\mathbf x^*$가 되고, $\mathbf u,\mathbf v$는 쌍대문제의 최적해 $\mathbf u^*,\,\mathbf v^*$가 됨 (이때, $f^*=f(\mathbf x^*)=g(\mathbf u^*,\mathbf v^*)= g^*$가 성립하여 강한 쌍대성이 성립) $\cdots\cdots (3)$</li>
         <li>반복적으로 근사시키는 방식으로 최적해를 구하는 알고리즘에서는 쌍대차이에 대해 $f(\mathbf x)-g(\mathbf u,\mathbf v)&lt;\epsilon$이 성립하는 것을 stopping 판별 조건으로 사용할 수 있음</li>
       </ul>
     </blockquote>
@@ -151,60 +151,28 @@
 
     <blockquote>
       <ul>
-        <li>
-          <p>$\mathbf u=(u_1,\cdots,u_m)\succeq 0$일 때, $g(u,v)=\min_{\mathbf x}(f(\mathbf x)+\sum_{i=1}^m u_i h_i(\mathbf x)+\sum_{j=1}^n v_j l_j(\mathbf x))$</p>
-
-          <table>
-            <tbody>
-              <tr>
-                <td>[원초문제]</td>
-                <td>$ $</td>
-                <td>[쌍대문제]</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <p>|-|-|-|</p>
-
-          <table>
-            <tbody>
-              <tr>
-                <td>$$ \begin{aligned}</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <p>&amp; \quad \text{min}_{\mathbf x}\ f(\mathbf x)\</p>
-
-          <p>&amp; \quad {s.t}\ h_i(\mathbf x)\le 0,\quad i=1,\cdots,m\</p>
-
-          <p>&amp; \qquad \ l_j(\mathbf x)=0,\quad j=1,\cdots,n</p>
-
-          <table>
-            <tbody>
-              <tr>
-                <td>\end{aligned}$$</td>
-                <td>\(\qquad\)</td>
-                <td>$$\begin{aligned}</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <p>&amp; \max_{\mathbf u,\mathbf v}g(\mathbf u,\mathbf v)\</p>
-
-          <p>&amp; \text{ s.t }\quad \mathbf u\succeq 0</p>
-
-          <p>\end{aligned}</p>
-
-          <table>
-            <tbody>
-              <tr>
-                <td>$$</td>
-              </tr>
-            </tbody>
-          </table>
-        </li>
+        <li>$\mathbf u=(u_1,\cdots,u_m)\succeq 0$일 때, $g(u,v)=\min_{\mathbf x}(f(\mathbf x)+\sum_{i=1}^m u_i h_i(\mathbf x)+\sum_{j=1}^n v_j l_j(\mathbf x))$</li>
       </ul>
+
+\[\begin{aligned}
+   &amp;\text{[원초문제] }\\
+   
+   &amp; \text{min}_{\mathbf x}\ f(\mathbf x)\\
+  
+   &amp; {s.t}\ h_i(\mathbf x)\le 0, i=1,\cdots,m\\  
+  
+   &amp;  \ l_j(\mathbf x)=0, j=1,\cdots,n
+  
+   \end{aligned} 
+  
+   \qquad \begin{aligned}
+   
+  &amp; \text{[쌍대문제]}\\
+  &amp; \max_{\mathbf u,\mathbf v}g(\mathbf u,\mathbf v)\\
+  
+  &amp; \text{ s.t } \mathbf u\succeq 0
+  
+  \end{aligned}\]
     </blockquote>
 
     <p><br /></p>
@@ -234,24 +202,26 @@
           <blockquote>
             <ul>
               <li>
-                <p>$\mathbf x^<em>,\,\mathbf u^</em>,\,\mathbf v^*$가 원초문제에 대한 KKT 조건을 만족하면, 쌍대차이 $f(\mathbf x) -g(\mathbf u,\mathbf v)=0$을 만족시키는 해가 된다.</p>
+                <p>$\mathbf x^*,\,\mathbf u^*,\,\mathbf v^*$가 원초문제에 대한 KKT 조건을 만족하면, 쌍대차이 $f(\mathbf x) -g(\mathbf u,\mathbf v)=0$을 만족시키는 해가 된다.</p>
               </li>
               <li>
-                <p>즉, $\mathbf x^<em>,\,\mathbf u^</em>,\,\mathbf v^<em>$가 원초문제에 대한 KKT 조건을 만족하면, $f(\mathbf x^</em>)$는 원초문제의 최적값 $f^<em>$가 되고, $g(\mathbf u^</em>,\mathbf v^<em>)$는 쌍대문제의 최적값 $g^</em>$가 되며 $f^<em>=g^</em>$가 성립한다.</p>
+                <p>즉, $\mathbf x^*,\,\mathbf u^*,\,\mathbf v^*$가 원초문제에 대한 KKT 조건을 만족하면, $f(\mathbf x^*)$는 원초문제의 최적값 $f^*$가 되고, $g(\mathbf u^*,\mathbf v^*)$는 쌍대문제의 최적값 $g^*$가 되며 $f^*=g^*$가 성립한다.</p>
 
                 <details>
 <summary>증명 클릭!</summary>
 <div>
-                    <p>$L(\mathbf x,\mathbf u^<em>,\mathbf v^</em>)$는 $\mathbf x$에 대해 아래로 볼록한 함수이므로 최솟	값을 가지고, $\mathbf x^<em>$에서의 서브그래디언트가 $\mathbf 0$을 포함하므로 $L(\mathbf 		x^</em>,\mathbf u^<em>,\mathbf v^</em>)$가 최솟값이다.(앞서 배운 ML2020-07-01(라쏘회귀 부분)의 서브그래디언트 설명 참고) 또, KKT 조건의 (Complementary slackness)와 (primal feasibility)를 이용하면 다음이 성립 
+                    <p>$L(\mathbf x,\mathbf u^*,\mathbf v^*)$는 $\mathbf x$에 대해 아래로 볼록한 함수이므로 최솟	값을 가지고, $\mathbf x^*$에서의 서브그래디언트가 $\mathbf 0$을 포함하므로 $L(\mathbf 		x^*,\mathbf u^*,\mathbf v^*)$가 최솟값이다.(앞서 배운 ML2020-07-01(라쏘회귀 부분)의 서브그래디언트 설명 참고) 또, KKT 조건의 (Complementary slackness)와 (primal feasibility)를 이용하면 다음이 성립</p>
+
+                    <p><br />
 \(\begin{aligned}
 g(\mathbf u^*,\mathbf v^*)=&amp;\min_{\mathbf x}L(\mathbf x,\mathbf u^*,\mathbf v^*)\\
-=&amp;L(\mathbf x^*,\mathbf u^*,\mathbf v^*) \\
+=&amp; L(\mathbf x^*,\mathbf u^*,\mathbf v^*) \\
 =&amp; f(\mathbf x^*)+\sum_{i=1}^m u_i^* h_i(\mathbf x^*)+\sum_{j=1}^n v_j^* 			l_j(\mathbf x^*)\\
 =&amp; f(\mathbf x^*)
 \end{aligned}\)</p>
                     <ul>
-                      <li>에서 마지막 부등식에서 등호가 성립하려면 $\sum_{i=1}^m u_i^* h_i(\mathbf x^<em>)=0$이 되어야 하고, 모든 $1\le i\le i$에 대해 $h_i(\mathbf x^</em>)\le 0$이므로 $u_i^<em>h_i(\mathbf x^</em>)=0$이 성립해야 함 (KKT 조건의 Complementary slackness)</li>
-                      <li>마지막으로 위 식의 첫 번째 부등식에서 등호가 성립하려면 $L(\mathbf x,\mathbf u^<em>,\mathbf v^</em>)$가 $\mathbf x^<em>$에서 최소가 되어야 하므로 $\mathbf x^</em>$에서의 서브그래디언트에 $\mathbf 0$이 포함됨 (KKT 조건의 Stationary)</li>
+                      <li>에서 마지막 부등식에서 등호가 성립하려면 $\sum_{i=1}^m u_i^* h_i(\mathbf x^*)=0$이 되어야 하고, 모든 $1\le i\le i$에 대해 $h_i(\mathbf x^*)\le 0$이므로 $u_i^*h_i(\mathbf x^*)=0$이 성립해야 함 (KKT 조건의 Complementary slackness)</li>
+                      <li>마지막으로 위 식의 첫 번째 부등식에서 등호가 성립하려면 $L(\mathbf x,\mathbf u^*,\mathbf v^*)$가 $\mathbf x^*$에서 최소가 되어야 하므로 $\mathbf x^*$에서의 서브그래디언트에 $\mathbf 0$이 포함됨 (KKT 조건의 Stationary)</li>
                     </ul>
                   </div></details>
               </li>
@@ -259,29 +229,34 @@ g(\mathbf u^*,\mathbf v^*)=&amp;\min_{\mathbf x}L(\mathbf x,\mathbf u^*,\mathbf 
           </blockquote>
 
           <ul>
-            <li>
-              <p>종합하면,</p>
-            </li>
-            <li>
-              <p>원초문제와 쌍대문제 사이에 강한 쌍대성이 만족되면,</p>
-
-              <p>$\quad \mathbf x^<em>$와 $\mathbf u^</em>,\,\mathbf v^*$가 각각 원초문제와 쌍대문제의 최적해 $\Longleftrightarrow$</p>
-
-              <p>$\mathbf x^<em>$와 $\mathbf u^</em>,\,\mathbf v^*$가 KKT 조건을 만족</p>
-            </li>
-            <li>
-              <p>원초문제가 컨벡스 최적화 문제일 때, 엄밀하게 실현가능한 $\mathbf x$가 존재하면,</p>
-
-              <p>$\quad \mathbf x^<em>$와 $\mathbf u^</em>,\,\mathbf v^*$가 각각 원초문제와 쌍대문제의 최적해 $\Longleftrightarrow$</p>
-
-              <p>$\mathbf x^<em>$와 $\mathbf u^</em>,\,\mathbf v^*$가 KKT 조건을 만족</p>
-            </li>
-            <li>
-              <p>주의할 점:</p>
-            </li>
-            <li>원초문제의 목적함수 $f$가 미분가능한 경우에도, KKT 조건의 Stationary 조건에서 $\mathbf x$에서의 서브그래디언트에 $\mathbf 0$이 포함된다는 것과 $\mathbf x$에서의 그래디언트 벡터가 $\mathbf 0$이 된다는 것은 일반적으로 동일한 조건이 아님</li>
-            <li>하지만, 목적함수 $f$가 미분가능하고 아래로 볼록한 경우에는 $\mathbf x$에서의 서브그래디언트는 그래디언트 벡터만으로 이루어짐</li>
+            <li>종합하면,</li>
           </ul>
+
+          <blockquote>
+            <ul>
+              <li>
+                <p>원초문제와 쌍대문제 사이에 강한 쌍대성이 만족되면, $ \mathbf x^*$와 $\mathbf u^*,\,\mathbf v^*$가 각각 원초문제와 쌍대문제의 최적해 $\Longleftrightarrow$ $\mathbf x^*$와 $\mathbf u^*,\,\mathbf v^*$가 KKT 조건을 만족</p>
+              </li>
+              <li>
+                <p>원초문제가 컨벡스 최적화 문제일 때, 엄밀하게 실현가능한 $\mathbf x$가 존재하면,</p>
+
+                <p>$ \mathbf x^*$와 $\mathbf u^*,\,\mathbf v^*$가 각각 원초문제와 쌍대문제의 최적해</p>
+
+                <p>$\Longleftrightarrow$ $\mathbf x^*$와 $\mathbf u^*,\,\mathbf v^*$가 KKT 조건을 만족</p>
+              </li>
+            </ul>
+          </blockquote>
+
+          <ul>
+            <li>주의할 점:</li>
+          </ul>
+
+          <blockquote>
+            <ul>
+              <li>원초문제의 목적함수 $f$가 미분가능한 경우에도, KKT 조건의 Stationary 조건에서 $\mathbf x$에서의 서브그래디언트에 $\mathbf 0$이 포함된다는 것과 $\mathbf x$에서의 그래디언트 벡터가 $\mathbf 0$이 된다는 것은 일반적으로 동일한 조건이 아님</li>
+              <li>하지만, 목적함수 $f$가 미분가능하고 아래로 볼록한 경우에는 $\mathbf x$에서의 서브그래디언트는 그래디언트 벡터만으로 이루어짐</li>
+            </ul>
+          </blockquote>
         </blockquote>
       </li>
     </ul>
@@ -292,7 +267,10 @@ g(\mathbf u^*,\mathbf v^*)=&amp;\min_{\mathbf x}L(\mathbf x,\mathbf u^*,\mathbf 
 
 <ul>
   <li>기계학습_하길찬 교수님 수업을 듣고 공부한 자료입니다.</li>
-  <li>Ryan Tibshirani의 컨벡스 최적화(Convex Optimization) 강의_카네기 멜런 대학교(Carnegie Mellon University) 통계학과를 참고해 구성된 강의 내용입니다. (<a href="http://www.stat.cmu.edu/~ryantibs/convexopt/">강의 홈페이지 및 PPT 자료 링크</a>)</li>
+  <li>
+    <p>Ryan Tibshirani의 컨벡스 최적화(Convex Optimization) 강의_카네기 멜런 대학교(Carnegie Mellon University) 통계학과를 참고해 구성된 강의 내용입니다. (<a href="http://www.stat.cmu.edu/~ryantibs/convexopt/">강의 홈페이지 및 PPT 자료 링크</a>)</p>
+  </li>
+  <li><a href="https://convex-optimization-for-all.github.io/">모두를 위한 컨벡스 최적화(Convex Optimization for All)</a>: 이해를 돕는 좋은 자료</li>
 </ul>
 
 :ET
