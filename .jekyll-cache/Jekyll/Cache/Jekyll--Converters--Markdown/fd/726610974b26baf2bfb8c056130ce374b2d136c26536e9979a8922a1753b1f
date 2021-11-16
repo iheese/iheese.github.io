@@ -1,0 +1,652 @@
+I"��<h2 id="비선형-svm-분류와-커널-kernel-svm-분류-모델">비선형 SVM 분류와 커널 (Kernel) SVM 분류 모델</h2>
+
+<h3 id="1-비선형-svm-분류">1. 비선형 SVM 분류</h3>
+
+<ul>
+  <li>선형적으로 분류할 수 없는 비선형 데이터셋이 주어질 때, 선형회귀 모델에서 다루었던 것처럼 다항 특성, 다른 비선형 특성 추가해서 선형 SVM 모델을 학습시키는 것이 가능</li>
+  <li>낮은 차수 다항식은 복잡한 데이터셋을 설명하는데 어려움이 있고 높은 차수 다항식 특성은 많은 특성은 추가해야 하기 때문에 모델 학습 시간이 오래 걸림</li>
+</ul>
+
+<h3 id="2-커널과-커널-트릭">2. 커널과 커널 트릭</h3>
+
+<ul>
+  <li>소프트마진 SVM 최적화 문제에 대한 쌍대문제</li>
+</ul>
+
+\[\begin{aligned}
+&amp;\quad \min_{\alpha} \dfrac 1 2 \sum_{i=1}^m\sum_{j=1}^m y_iy_j\langle \mathbf x_i,\mathbf x_j\rangle \alpha_i\alpha_j -\sum_{i=1}^m \alpha_i\\
+&amp;\text{s.t }\ 0\le \alpha_i\le C,\qquad (1\le i \le m)\\
+&amp;\quad \sum_{i=1}^m y_i\alpha_i=0 
+\end{aligned} \cdots (3)\]
+
+<ul>
+  <li>
+    <p>SVM 분류의 학습 문제와 동등한 쌍대문제인 위 식(3)을 보면, 실제로 계산에 필요한 것은 특성벡터 사이의 내적 $\langle \mathbf x_i,\mathbf x_j\rangle$이 중요하며, 이 내적을 특성벡터의 차원과 상관없이 효율적으로 계산할 수 있으면 앞에서 언급한 특성 추가시의 문제점을 해결할 수 있음</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>예를 들어, 주어진 샘플 벡터가 $\mathbf x = (x_1,x_2)^{\rm T}$일 때, 이차다항식 특성벡터를 $\phi(\mathbf x)=(x_1^2,x_2^2,\sqrt 2 x_1x_2,\sqrt 2 x_1,\sqrt 2 x_2,1)^{\rm T}$와 같이 생성하고, 새로 얻은 특성벡터 사이의 내적을 계산하면 (단, $\mathbf x_i = (x_{i1},x_{i2})^{\rm T})$
+\(\langle \phi(\mathbf x_i),\phi(\mathbf x_j)\rangle = x_{i1}^2x_{j1}^2+x_{i2}^2x_{j2}^2+2x_{i1}x_{i2}x_{j1}x_{j2}+2x_{i1}x_{j1}+2x_{i2}x_{j2}+1\\=(\langle\mathbf x_i,\mathbf x_j\rangle +1)^2\)</p>
+
+          <ul>
+            <li>
+              <p>$\mathbf x_i$로부터 새로운 특성벡터를 생성하는 함수를 <strong>특성맵(feature map)</strong>이라고 함</p>
+            </li>
+            <li>
+              <p>위의 예에서, (편차제외하고 5차원 벡터) $\phi(\mathbf x_i)$와 $\phi(\mathbf x_j)$를 직접 구하지 않더라도(즉, 특성맵을 구하지 않더라도) 2차원 벡터에 대한 $\langle\mathbf x_i,\mathbf x_j\rangle$의 함수 $K(\mathbf x_i,\mathbf x_j):=(\langle \mathbf x_i,\mathbf x_j\rangle+1)^2$을 이용하면 식 (3)에서 특성벡터 $\phi(\mathbf x_i)$에 대한 SVM을 적용시킬 수 있음</p>
+            </li>
+            <li>
+              <p>일반적으로 $d$차 다항 특성벡터에 대한 대한 내적 $\langle\phi(\mathbf x_i),\phi(\mathbf x_j)\rangle$는 $\phi(\mathbf x_i)$를 구하지 않더라도 $K(\mathbf x_i,\mathbf x_j):=(\langle \mathbf x_i,\mathbf x_j\rangle+1)^d$와 같이 계산할 수 있음</p>
+            </li>
+          </ul>
+
+          <blockquote>
+            <ul>
+              <li>이때, 함수 $K(\mathbf x_i,\mathbf x_j):=(\langle \mathbf x_i,\mathbf x_j\rangle+1)^d$를 <strong>$d$차 다항식 커널(kernel)</strong>이라고 함</li>
+              <li>이처럼 커널을 이용하여 특성벡터를 직접 구하지 않고, SVM 분류기를 학습시키는 방법을 <strong>커널 트릭(kernel trick)</strong>이라고 함</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="3-일반적인-커널">3. 일반적인 커널</h3>
+
+<ul>
+  <li>일반적으로 연속함수 $K:\mathbb R^n\times \mathbb R^n\to \mathbb R$에 대해 다음 두 조건을 만족할 때 <strong>커널</strong>이라고 함</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>(조건 1) 임의의 두 벡터 $\mathbf x,\mathbf z\in \mathbb R^n$에 대해 $K(\mathbf x, \mathbf z) = K(\mathbf z, \mathbf x)$</p>
+    </li>
+    <li>
+      <p>(조건 2) 모든 자연수 $m$에 대해, $m$개의 벡터 $\mathbf x_1,\cdots,\mathbf x_m$와 $m$개의 실수 $c_1,\cdots,c_m$이 임의로 주어질 때,
+\(\sum_{i=1}^m\sum_{j=1}^m K(\mathbf x_i,\mathbf x_j)c_ic_j\ge 0\)</p>
+    </li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>$K:\mathbb R^n\times \mathbb R^n\to \mathbb R$가 위 조건을 만족하는 커널이면</li>
+</ul>
+
+<p>적당한 힐버트 공간 $\mathcal H$와 특성함수 $\phi:\mathbb R^n\to \mathcal H$가 존재해서 
+  \(K(\mathbf x,\mathbf z)=\langle \phi(\mathbf x),\phi(\mathbf z)\rangle_{\mathcal H}\)</p>
+
+<p>가 성립함을 보일 수 있고, SVM에 적용할 수 있음 (힐버트 공간이란 완비성을 만족하는 내적공간)</p>
+
+<p><br /></p>
+
+<h3 id="4-커널-svm">4. 커널 SVM</h3>
+
+<ul>
+  <li>
+    <p>SVM에서 특성벡터를 직접 구하는 대신 커널 $K$에 대한 커널 트릭을 사용하여 다음과 같이 SVM 최적화 문제의 쌍대문제를 해결하고 이를 통해 SVM 분류기 예측을 수행하는 모델을 <strong>커널 SVM</strong> 모델이라고 함</p>
+  </li>
+  <li>
+    <p>커널 SVM 쌍대문제
+\(\begin{aligned}
+&amp;\quad \min_{\alpha} \dfrac 1 2 \sum_{i=1}^m\sum_{j=1}^m y_iy_j K(\mathbf x_i,\mathbf x_j) \alpha_i\alpha_j -\sum_{i=1}^m \alpha_i\\
+&amp;\text{s.t }\ 0\le \alpha_i\le C,\qquad (1\le i \le m)\\
+&amp;\quad \sum_{i=1}^m y_i\alpha_i=0 
+\end{aligned} \quad\)</p>
+  </li>
+  <li>
+    <p>SVM에서 자주 사용하는 커널</p>
+
+    <blockquote>
+      <ul>
+        <li>선형 커널 : $K(\mathbf x,\mathbf z)=\mathbf x^{\rm T}\mathbf z$</li>
+        <li>$d$차 다항식 커널 : $K(\mathbf x,\mathbf z)=(\gamma \mathbf x^{\rm T}\mathbf z +r)^d$, $(\gamma,\, r\in \mathbb R)$</li>
+        <li>가우시안 RBF(Radial Basis Function) : $K(\mathbf x,\mathbf z)=\exp(-\gamma|| \mathbf x-\mathbf z||^2)$</li>
+        <li>시그모이드 : $K(\mathbf x,\mathbf z)=\text{tanh}(\gamma \mathbf x^{\rm T}\mathbf z + r)$</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>커널 SVM에서 예측하는 방법: 편차 $b^<em>$는 구할 수 있지만 모델 파라미터 $\mathbf w^</em>$는 직접 구할 수 없는 상황</p>
+  </li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>커널 SVM에서 학습 알고리즘은 선형 SVM의 쌍대문제에서 특성 맵 $\phi$을 통해 구체적인 특성벡터 $\phi(\mathbf x)$사이의 내적을 계산하는 대신 커널 트릭을 이용하는 것이므로 최적해를 주는 $\alpha^*$를 구할 수 있지만, 이로부터 원초문제의 $\mathbf w^*$를 구하면 KKT 조건_ stationary에 의해 
+\(\mathbf w^* = \sum_{i=1}^m \alpha_i^*y_i\phi(\mathbf x_i)\)
+가 되어 특성 맵을 모르면 $\mathbf w^*$를 구할 수 없다. (실제로 $\mathbf w^*$는 특성벡터 $\phi(\mathbf x_i)$와 같은 차원이어야 함)</p>
+    </li>
+    <li>
+      <p>하지만, 주어진 샘플 벡터 $\mathbf x$에 대한 예측은</p>
+
+\[\begin{aligned}
+  
+\langle \mathbf w^*,\phi(\mathbf x)\rangle+b^*= &amp;\langle \bigl(\sum_{i=1}^m \alpha^*y_i\phi(\mathbf x_i)\bigr),\phi(\mathbf x)\rangle+b^*\\
+  
+=&amp; \sum_{i=1}^m \alpha^*y_i \langle \phi(\mathbf x_i),\phi(\mathbf x)\rangle +b^*\\
+  
+=&amp; \sum_{i=1}^m \alpha^*y_i K(\mathbf x_i,\mathbf x) +b^*
+  
+\end{aligned}\]
+
+      <p>이므로 상수 $b^*$만 구할 수 있으면 $\mathbf w^*$를 직접 구하지 않고도 예측을 할 수 있음</p>
+    </li>
+    <li>
+      <p>실제로 편차 $b^*$는 $x_I$가 서포트벡터머신일 때  $0&lt;\alpha_i^*&lt;C$인 $i$에 대해 
+\(y_i\bigl(\langle \mathbf w^*,\phi(\mathbf x_i)\rangle+b^*\bigr)=1\)
+이 성립하므로 ${i|1\le i\le m, 0&lt;\alpha_i^*&lt;C}$의 원소의 개수를 $n_s$라 할 때, 
+\(\sum_{\substack{i=1\\ 0&lt;\alpha^*_i&lt;C}}^m \bigl(y_i-\langle \mathbf w^*,\phi(\mathbf x_i)\rangle\bigr) = n_s b^*\)
+가 되고, 이로부터 다음과 같이 $b^*$를 구할 수 있음 
+\(b^* = \dfrac 1{n_s} \sum_{\substack{i=1\\0&lt;\alpha_i^*&lt;C}}^m\left(y_i - \sum_{j=1}^m \alpha_j^* y_j K(\mathbf x_j,\mathbf x_i)\right)\)
+(위 등식에서 $\sum_{j=1}^m$은 $\sum_{\substack{j=1\0&lt;\alpha_j^*\le C}}^m$과 같아짐에 주목)</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p><br /></p>
+
+<h3 id="서포트벡터머신-분류-모델-sklearn의-사용가능한-클래스">서포트벡터머신 분류 모델 (sklearn의 사용가능한 클래스)</h3>
+
+<ul>
+  <li>소프트마진 선형 SVM 분류기에 대한 <code class="language-plaintext highlighter-rouge">sklearn</code>의 클래스들</li>
+</ul>
+
+<ol>
+  <li>손실함수 (커널 SVM 쌍대문제)의 최솟값을 효율적으로 구하는 최적화 알고리즘(liblinear 라이브러리)을 구현한 <code class="language-plaintext highlighter-rouge">sklearn.svm</code> 모듈의 <code class="language-plaintext highlighter-rouge">LinearSVC</code> 클래스 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html?highlight=linearsvc#sklearn.svm.LinearSVC">API</a>)</li>
+</ol>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>커널 트릭을 지원하지 않지만, 훈련 시간 복잡도는 샘플 수 $m$과 특성 수 $n$에 대해 대략 $O(m\times n)$</p>
+    </li>
+    <li><code class="language-plaintext highlighter-rouge">LinearSVC</code> 는 규제에 편향을 포함시켜 구현되어 있으므로, 훈련 데이터셋에서 평균을 빼서 변형한 데이터셋의 평균이 $0$이 되도록 조절해야 함(보통 <code class="language-plaintext highlighter-rouge">StandardScaler</code>를 통해 스케일링을 해야 하므로 이 문제는 해결됨)</li>
+    <li><code class="language-plaintext highlighter-rouge">loss</code>의 기본값이 “squared_hinge”로 설정되어 있으므로 <code class="language-plaintext highlighter-rouge">loss="hinge"</code>로 설정해주어야 함</li>
+    <li>훈련 샘플보다 특성의 개수가 많으면 <code class="language-plaintext highlighter-rouge">dual=True</code>로 설정하여 쌍대문제를 풀고, 훈련 샘플이 더 많은 경우는 <code class="language-plaintext highlighter-rouge">dual=False</code>로 설정하여 성능을 조절</li>
+  </ul>
+</blockquote>
+
+<ol>
+  <li>손실함수 의 최솟값을 구하기 위해 서브그래디언트에 대한 경사하강법을 사용하는 <code class="language-plaintext highlighter-rouge">sklearn.linear_model</code> 모듈의 <code class="language-plaintext highlighter-rouge">SGDClassifier(loss="hinge", alpha=1/(m*C))</code>클래스 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html?highlight=sgdclassifier#sklearn.linear_model.SGDClassifier">API</a>)</li>
+</ol>
+
+<blockquote>
+  <ul>
+    <li>손실함수를 “hinge”로 설정하고 규제 하이퍼파라미터는 <code class="language-plaintext highlighter-rouge">alpha</code>는 <code class="language-plaintext highlighter-rouge">C</code>의 역수이므로 위와 같이 설정(m은 샘플 수)</li>
+    <li><code class="language-plaintext highlighter-rouge">LinearSVC</code> 보다 빠르지 않지만, 데이터셋이 아주 커서 메모리에 적재할 수 없거나, 온라인 학습으로 분류문제를 다룰 때 유용</li>
+    <li>이 경우에도 스케일링이 필요함</li>
+  </ul>
+</blockquote>
+
+<ol>
+  <li>커널 트릭을 이용하여 SVM 분류에 대한 쌍대문제를 푸는 알고리즘(libsvm 라이브러리 기반)을 구현한 <code class="language-plaintext highlighter-rouge">sklearn.svm</code> 모듈의 <code class="language-plaintext highlighter-rouge">SVC</code> 클래스를 이용하여 <code class="language-plaintext highlighter-rouge">SVC(kernel="linear")</code>로 모델 객체를 생성 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html?highlight=svc#sklearn.svm.SVC">API</a>)</li>
+</ol>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>훈련 시간의 복잡도는 샘플 수 $m$과 특성 수 $n$에 대해 대략 $O(m^2\times n)$과 $O(m^3\times n)$사이</p>
+    </li>
+    <li>
+      <p>다항식 커널 $K(\mathbf x,\mathbf z)=(\gamma \mathbf x^{\rm T}\mathbf z +r)^d$을 사용하는 커널 SVM 분류기 모델의 대표적인 예 : <code class="language-plaintext highlighter-rouge">SVC(kernel="poly", degree=3, gamma="scale", coef0=1, C=5)</code>와 같은 형태로 객체 생성</p>
+
+      <p>(<code class="language-plaintext highlighter-rouge">degree</code>,<code class="language-plaintext highlighter-rouge">gamma</code>,<code class="language-plaintext highlighter-rouge">coef0</code>는 각각 커널식에서 $d$, $\gamma$, $r$에 대응되는 입력변수) [API 참고]</p>
+    </li>
+    <li>
+      <table>
+        <tbody>
+          <tr>
+            <td>가우시안 RBF 커널 $K(\mathbf x,\mathbf z)=\exp(-\gamma</td>
+            <td> </td>
+            <td>\mathbf x-\mathbf z</td>
+            <td> </td>
+            <td>^2)$을 사용하는 커널 SVM 분류기 모델 :</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><code class="language-plaintext highlighter-rouge">SVC(kernel="rbf", gamma=5, C=5)</code>와 같은 형태로 객체 생성  (<code class="language-plaintext highlighter-rouge">gamma</code>는 커널식에서 $\gamma$에 대응되는 입력변수) [API 참고]</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="서포트벡터머신-회귀">서포트벡터머신 회귀</h2>
+
+<ul>
+  <li>
+    <p>서포트벡터머신은 선형, 비선형 분류 뿐만 아니라 선형, 비선형 회귀 문제에도 이용할 수 있음</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$\epsilon&gt;0$과 훈련 데이터셋 ${(\mathbf x_1,y_1),\cdots,(\mathbf x_m,y_m)}$이 주어질 때, 선형 서포트벡터머신 회귀는 선형함수 $f(\mathbf x)=\langle \mathbf w,\mathbf x\rangle +b$ 중에서 $</td>
+          <td>y_i-f(\mathbf x_i)</td>
+          <td>\le \epsilon, (1\le i\le m)$이 되는 $\mathbf w,b$를 구하는 모델 (여기서 $\epsilon$은 마진에 해당)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <ul>
+        <li>위에서 기술한 목표는 <strong>하드마진 SVM 회귀문제</strong>에 해당</li>
+        <li>실제로는 위 조건(모든 $i=1,\cdots,m$)을 만족하는 $f(\mathbf x)$를 구할 수 없는 경우가 있으므로 <strong>소프트마진 SVM 회귀문제</strong>는 조건을 완하하여</li>
+      </ul>
+
+\[-\epsilon-\xi_i' \le y_i-(\langle \mathbf w,\mathbf x_i\rangle+b)\le \epsilon+\xi_i, \quad (\forall\, 1\le i\le m,\ \xi_i\ge 0,\, \xi_i'\ge 0)\]
+
+      <p>을 만족하는 $\mathbf w,b$를 찾는 문제를 생각 ($\xi_i$와 $\xi_i’$은 슬랙변수)</p>
+
+      <ul>
+        <li>
+          <p>즉, 분류 문제와는 반대로 제한된 마진오류 내에서 마진 경계사이에 최대한 많은 샘플이 포함되도록 학습</p>
+        </li>
+        <li>
+          <p>소프트마진 SVM 회귀문제를 규제항을 포함하여 힌지손실함수로 나타내면 다음과 같음
+\(\min_{\mathbf w,b}\left(\dfrac 1 2 ||\mathbf w||^2 + C\sum_{i=1}^m \max\bigl(0, |y_i-\langle \mathbf w,\mathbf x_i\rangle|-\epsilon\bigr)\right)\quad\)</p>
+        </li>
+        <li>
+          <p>위 손실함수를 최소화하는 것을 소프트마진 SVM 회귀 문제로 표현하면 
+$$
+\begin{aligned}</p>
+
+          <table>
+            <tbody>
+              <tr>
+                <td>&amp;\min_{\mathbf w,b,\xi,\xi’} \dfrac 1 2</td>
+                <td> </td>
+                <td>\mathbf w</td>
+                <td> </td>
+                <td>^2 +C\sum_{i=1}^m\bigl(\xi_i+\xi_i’\bigr)\</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>\text{s.t }&amp;\ y_i -\langle \mathbf w,\mathbf x_i\rangle-b \le \xi_i,\quad (1\le i \le m)\</p>
+
+          <p>&amp;\ \langle \mathbf w,\mathbf x_i\rangle+b-y_i \le \xi_i’, \quad (1\le i \le m)\</p>
+
+          <p>&amp;\ \xi_i\ge 0, \quad (1\le i \le m)\</p>
+
+          <p>&amp;\ \xi_i’\ge 0, \quad (1\le i \le m)\</p>
+
+          <p>\end{aligned}\quad
+$$</p>
+        </li>
+        <li>
+          <p>위 원초문제도 컨벡스 최적화 문제이고 Slater 조건을 만족하므로 강한 쌍대성이 만족되고, 쌍대문제를 구하고 나면 소프트마진 SVM 분류의 경우처럼 커널 트릭을 이용한 커널 SVM 회귀모델을 구성하는 것도 가능 (보다 자세한 내용은 <a href="https://scikit-learn.org/stable/modules/svm.html#svm-regression">링크를 참고</a>)</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="서포트벡터머신-회귀-모델sklearn의-사용가능한-클래스">서포트벡터머신 회귀 모델(sklearn의 사용가능한 클래스)</h3>
+
+<ul>
+  <li>
+    <p>SVM 분류기를 생성하는 <code class="language-plaintext highlighter-rouge">LinearSVC</code> 클래스의 회귀 버전에 해당하는 <code class="language-plaintext highlighter-rouge">sklearn.svm</code> 모듈의 <code class="language-plaintext highlighter-rouge">LinearSVR</code> 클래스 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVR.html?highlight=linearsvr#sklearn.svm.LinearSVR">API</a>)</p>
+  </li>
+  <li>
+    <p>커널 SVM 분류기를 생성하는 <code class="language-plaintext highlighter-rouge">SVC</code> 클래스의 회귀 버전에 해당하는 <code class="language-plaintext highlighter-rouge">sklearn.svm</code> 모듈의 <code class="language-plaintext highlighter-rouge">SVR</code> 클래스 (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html?highlight=svr#sklearn.svm.SVR">API</a>)</p>
+  </li>
+  <li>
+    <p>LinearSVR<code class="language-plaintext highlighter-rouge">은 훈련 데이터셋의 크기에 비례해서 선형적으로 학습 시간이 늘어나지만, </code>SVR`은 훨씬 느려짐에 유의</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="서포트-벡터머신에-대한-scikit-learn의-클래스들">서포트 벡터머신에 대한 Scikit-learn의 클래스들</h2>
+
+<ul>
+  <li>
+    <p>서포트벡터머신의 모델은 모두 특성벡터의 스케일에 민감하므로, 학습을 시키기 전에 스케일링을 하는 것을 기억</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sklearn.linear_model</code> 모듈의 확률적 경사하강법을 이용한 선형 서포트벡터머신 모델:</p>
+  </li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>회귀: <code class="language-plaintext highlighter-rouge">SGDRegressor(loss="epsilon_insensitive")</code>또는 <code class="language-plaintext highlighter-rouge">SGDRegressor(loss="squared_epsilon_insensitive")</code> (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html">API</a>)</li>
+    <li>분류: <code class="language-plaintext highlighter-rouge">SGDClassifier(loss="hinge")</code>또는 <code class="language-plaintext highlighter-rouge">SGDRegressor(loss="squared_hinge")</code> (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html?highlight=sgdclassifier#sklearn.linear_model.SGDClassifier">API</a>)</li>
+    <li>확률적 경사하강법으로 구현된 위의 클래스를 이용하여 생성된 SVM 모델의 객체에 대해서는 규제(regularization)에 대한 하이퍼파라미터가 <code class="language-plaintext highlighter-rouge">alpha</code> (C와 역수관계임에 유의, alpha가 커지면 규제가 커지고, alpha가 작아지면 규제가 작아짐)</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sklearn.svm</code> 모듈의 선형 서포트벡터머신 모델: <code class="language-plaintext highlighter-rouge">liblinear</code>라이브러리를 이용한 최적화 알고리즘 사용</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>회귀: <code class="language-plaintext highlighter-rouge">LinearSVR</code> (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVR.html?highlight=linearsvr#sklearn.svm.LinearSVR">API</a>)</p>
+
+          <blockquote>
+            <ul>
+              <li>손실함수의 기본값인 <code class="language-plaintext highlighter-rouge">loss="epsilon_insensitive"</code>를 사용하면 $\ell_1$ 규제를 사용, $\ell_2$ 규제를 사용하려면 <code class="language-plaintext highlighter-rouge">loss="squared_epsilon_insensitive"</code>로 설정</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <p>분류: <code class="language-plaintext highlighter-rouge">LinearSVC</code> (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html?highlight=linearsvc#sklearn.svm.LinearSVC">API</a>)</p>
+
+          <blockquote>
+            <ul>
+              <li>기본적인 선형 서포트벡터머신 분류기를 사용하려면 <code class="language-plaintext highlighter-rouge">loss="hinge"</code>로 설정 (기본값은 “sqaured_hinge”)</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <p>규제 하이퍼파라미터는 <code class="language-plaintext highlighter-rouge">C</code>임에 주의(C가 커지면 규제가 작아지고, C가 작아지면 규제가 커짐)</p>
+        </li>
+        <li>
+          <p>서포트벡터 모델에서의 최적화 문제에 대한 쌍대문제를 이용할 지를 결정하는 클래스 입력변수는 <code class="language-plaintext highlighter-rouge">dual</code></p>
+
+          <blockquote>
+            <ul>
+              <li>기본값은 <code class="language-plaintext highlighter-rouge">dual=True</code></li>
+              <li>일반적으로 샘플의 개수가 특성벡터의 개수보다 많을 때는 <code class="language-plaintext highlighter-rouge">dual=False</code>로 설정하는 것이 효율적</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sklearn.svm</code> 모듈의 (커널) 서포트벡터머신 모델: <code class="language-plaintext highlighter-rouge">libsvm</code>라이브러리를 이용한 최적화 알고리즘 사용</p>
+
+    <blockquote>
+      <ul>
+        <li>기본적으로 커널 서포트벡터머신 모델에서 쌍대문제에 대한 최적화를 하는 것이므로 훈련 데이터 샘플의 개수가 너무 많으면 비효율적임</li>
+      </ul>
+
+      <blockquote>
+        <ul>
+          <li>훈련 샘플의 개수가 수만개를 넘는 경우에는 비효율적일 수 있음</li>
+        </ul>
+      </blockquote>
+
+      <ul>
+        <li>
+          <p>회귀에 사용되는 <code class="language-plaintext highlighter-rouge">SVR</code> (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html?highlight=svr#sklearn.svm.SVR">API</a>)과 분류에 사용되는 <code class="language-plaintext highlighter-rouge">SVC</code>(<a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html?highlight=svc#sklearn.svm.SVC">API</a>)가 있음</p>
+
+          <blockquote>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">SVC</code>을 이용하여 3종류 이상의 레이블을 갖는 다중분류 문제를 해결하는 전략을 선택하는 변수는 <code class="language-plaintext highlighter-rouge">decision_function_shape</code></li>
+              <li>일대다 전략은 <code class="language-plaintext highlighter-rouge">decision_function_shape="ovr"</code>, 일대일 전략은 <code class="language-plaintext highlighter-rouge">decision_function_shape="ovo"</code>로 선택</li>
+              <li>레이블의 종류가 많은 경우에는 “ovo” 전략이 효율적일 수 있음</li>
+              <li>학습된 객체의 속성 <code class="language-plaintext highlighter-rouge">support_</code>를 이용하면 서포트벡터의 index를 구할 수 있고, 속성 <code class="language-plaintext highlighter-rouge">support_vectors_</code>를 이용하면 서포트벡터를 구할 수 있음</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <p>입력변수 <code class="language-plaintext highlighter-rouge">kernel</code>을 <code class="language-plaintext highlighter-rouge">"linear"</code>로 설정하면 쌍대문제를 이용한 선형 서포트벡터머신 모델</p>
+
+          <blockquote>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">kernel</code>로 선택할 수 있는 기본적인 커널함수는 “linear”, “poly”, “rbf”, “sigmoid”</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>
+          <p>사용자가 새롭게 정의한 커널을 사용하는 두 가지 방법이 있음 (자세한 내용은 다음 <a href="https://scikit-learn.org/stable/modules/svm.html#svm-kernels">reference</a>를 읽고 확인할 것, 참고할 <a href="https://scikit-learn.org/stable/auto_examples/svm/plot_custom_kernel.html#sphx-glr-auto-examples-svm-plot-custom-kernel-py">예제링크</a>)</p>
+
+          <blockquote>
+            <ul>
+              <li>조건을 만족하는 커널함수를 파이썬에서 mykernel로 정의한 후 <code class="language-plaintext highlighter-rouge">kernel=mykernel</code>과 같이 전달(문자열이 아닌 함수이름으로 전달하는 것이 주목)하는 방법</li>
+              <li>새롭게 정의한 커널함수 $K$를 이용하여 $m$개의 훈련 샘플에 대한 $m\times m$ Gram 행렬 $(K(\mathbf x_i, \mathbf x_j))$을 미리 계산하고, <code class="language-plaintext highlighter-rouge">kernel="precomputed"</code>로 설정한 다음 객체를 학습시킬 때 <code class="language-plaintext highlighter-rouge">fit()</code>에 대한 입력으로 훈련데이터셋에 행렬 대신, 계산된 Gram 행렬을 전달</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="mnist-데이터셋을-이용한-실습">MNIST 데이터셋을 이용한 실습</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span> 
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_openml</span>
+<span class="n">mnist</span> <span class="o">=</span> <span class="n">fetch_openml</span><span class="p">(</span><span class="s">'mnist_784'</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mnist</span><span class="p">.</span><span class="n">keys</span><span class="p">()</span>
+
+<span class="c1">#dict_keys(['data', 'target', 'frame', 'categories', 'feature_names', 'target_names', 'DESCR', 'details', 'url'])
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mnist</span><span class="p">[</span><span class="s">'DESCR'</span><span class="p">])</span> <span class="c1"># 데이터셋 설명
+</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mnist</span><span class="p">[</span><span class="s">"data"</span><span class="p">],</span> <span class="n">mnist</span><span class="p">[</span><span class="s">"target"</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1">#(70000, 784) (70000,)
+#str
+</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span> <span class="c1">#0~255 정수화
+</span>
+</code></pre></div></div>
+
+<h4 id="4와-나머지-숫자를-구분하는-서포트벡터머신-분류기">4와 나머지 숫자를 구분하는 서포트벡터머신 분류기</h4>
+
+<ul>
+  <li>
+    <p>데이터셋을 훈련 데이터셋과 테스트 데이터셋으로 나누고</p>
+  </li>
+  <li>
+    <p>레이블이 4인 것은 1, 4가 아닌 것은 0으로 수정한 후 학습</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">60000</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="mi">60000</span><span class="p">:],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">60000</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">60000</span><span class="p">:]</span>
+  
+<span class="n">y_train_4</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">y_test_4</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
+  
+<span class="n">y_train_4</span><span class="p">[:</span><span class="mi">10</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span> <span class="c1"># 0 OR 1
+</span>  
+</code></pre></div>    </div>
+
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="1-sgdclassifier를-이용한-svc-생성과-교차검증을-이용한-성능-측정">1. SGDClassifier를 이용한 SVC 생성과 교차검증을 이용한 성능 측정</h3>
+
+<ul>
+  <li>$k$-겹 교차검증에 대한 score만 구할 때: <code class="language-plaintext highlighter-rouge">sklearn.model_selection.cross_val_score</code> 이용</li>
+  <li>$k$-겹 교차검증에 대한 예측값이 필요할 때: <code class="language-plaintext highlighter-rouge">sklearn.model_selection.cross_val_predict</code> 이용</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
+
+<span class="n">sgd_clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"hinge"</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span> <span class="c1">#얼마나 걸리는지 보기 위해
+</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">sgd_clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train_4</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">"accuracy"</span><span class="p">))</span>
+<span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span>
+
+<span class="c1">#[0.9763  0.9735  0.95655]
+#26.294976234436035
+</span>
+<span class="c1">#정밀도
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">sgd_clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train_4</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">"precision"</span><span class="p">))</span>
+<span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span>
+
+<span class="c1">#[0.86769845 0.84177521 0.70243902]
+#24.624820232391357
+</span>
+<span class="c1">#재현율
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">sgd_clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train_4</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">"recall"</span><span class="p">))</span>
+<span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span>
+
+<span class="c1">#[0.89265537 0.89625064 0.96098563]
+#24.25176739692688
+</span>
+<span class="c1">#스케일링 후 정확도
+</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">float64</span><span class="p">))</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">sgd_clf</span><span class="p">,</span> <span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train_4</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">"accuracy"</span><span class="p">))</span>
+<span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span>
+
+<span class="c1">#[0.97885 0.97695 0.98005]
+#53.56697106361389
+</span></code></pre></div></div>
+
+<h3 id="2-svckernelrbf-를-이용한-svc-생성과-교차검증을-이용한-성능-측정">2. SVC(kernel=”rbf”) 를 이용한 SVC 생성과 교차검증을 이용한 성능 측정</h3>
+
+<ul>
+  <li>
+    <p>샘플의 개수(60000개)가 특성 수(784개) 보다 큰 경우: <code class="language-plaintext highlighter-rouge">LinearSVC(dual=False)</code>보다 시간이 많이 걸림</p>
+
+    <pre><code class="language-PYTHON">from sklearn.svm import SVC 
+svm_clf = SVC(kernel="rbf")
+  
+start = time()
+print(cross_val_score(svm_clf, X_train_scaled, y_train_4, cv=3, scoring="accuracy", n_jobs=-1))
+time()-start
+  
+#[0.9926  0.99085 0.99215]
+#370.1666090488434
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="3-svckernelrbf-decision_function_shapeovo을-이용한-다중-분류기">3. SVC(kernel=”rbf”, decision_function_shape=”ovo”)을 이용한 다중 분류기</h3>
+
+<ul>
+  <li>레이블이 0, 3, 4인 데이터 샘플만 추려서 3개의 클래스에 대한 분류를 실습</li>
+  <li>OvR 전략을 선택하는 경우 학습에 사용되는 훈련데이터 개수는 대략 30000개, 예측기 3개</li>
+  <li>OvO 전략을 선택하는 경우 학습에 사용되는 훈련데이터 개수는 대략 12000개, 6개</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label0</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">label3</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">label4</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">idx</span> <span class="o">=</span> <span class="n">label0</span> <span class="o">|</span> <span class="n">label3</span> <span class="o">|</span> <span class="n">label4</span>
+
+<span class="n">X_train_red</span> <span class="o">=</span> <span class="n">X_train_scaled</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+<span class="n">y_train_red</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+
+<span class="n">svm3_clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">"rbf"</span><span class="p">,</span> <span class="n">decision_function_shape</span><span class="o">=</span><span class="s">"ovo"</span><span class="p">)</span>
+<span class="n">svm3_clf</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_red</span><span class="p">,</span> <span class="n">y_train_red</span><span class="p">)</span>
+
+<span class="c1"># 학습된 다중(3개 클래스) 분류기에 대한 예측값과 실제값 비교 
+</span><span class="k">print</span><span class="p">(</span><span class="n">svm3_clf</span><span class="p">.</span><span class="n">predict</span><span class="p">([</span><span class="n">X_train_red</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">10</span><span class="p">]]))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y_train_red</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># 학습된 객체의 decision_function을 이용하면 각 샘플마다 각 클래스에 속할 score를 반환함 
+</span><span class="n">some_digit_score</span> <span class="o">=</span> <span class="n">svm3_clf</span><span class="p">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">X_train_red</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">some_digit_score</span><span class="p">)</span>
+
+<span class="c1"># 학습된 분류기 객체는 classes_ 속성에 레이블을 값으로 정렬하여 저장함 
+</span><span class="n">svm3_clf</span><span class="p">.</span><span class="n">classes_</span>
+
+<span class="c1"># 위에서 구한 score가 가장 높은 인덱스에 대응되는 클래스를 svm3_clf.classes_에서 읽으면 예측값 
+</span><span class="n">result_id</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">some_digit_score</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">svm3_clf</span><span class="p">.</span><span class="n">classes_</span><span class="p">[</span><span class="n">result_id</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y_train_red</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+
+</code></pre></div></div>
+
+<h3 id="3-커널-svc--실습">3. 커널 SVC  실습</h3>
+
+<ul>
+  <li>xor 연산과 관련된 데이터셋</li>
+  <li>퍼셉트론의 한계, 다층 신경망의 유용함을 보여준 예</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">logical_xor</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s">'b'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">'o'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'label1'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">c</span><span class="o">=</span><span class="s">'r'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">'s'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'label0'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s">"$x_1$"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s">"$x_2$"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/ML12/kernel.png" alt="kernel" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 2차 다항식 커널을 이용한 SVC모델 (xy 항이 생기므로 분리가능)
+</span>
+<span class="n">poly_svm_clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">"poly"</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">poly_svm_clf</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+
+<span class="n">poly_svm_clf1000</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">"poly"</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">poly_svm_clf1000</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="n">mpl</span>
+
+<span class="k">def</span> <span class="nf">plot_xor</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">x1min</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span> <span class="n">x1max</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">x2min</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span> <span class="n">x2max</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">xx1</span><span class="p">,</span> <span class="n">xx2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x1min</span><span class="p">,</span> <span class="n">x1max</span><span class="p">,</span><span class="mi">1000</span><span class="p">),</span>
+                         <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x2min</span><span class="p">,</span> <span class="n">x2max</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">zz</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span>
+        <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">xx1</span><span class="p">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">xx2</span><span class="p">.</span><span class="n">ravel</span><span class="p">()]).</span><span class="n">T</span><span class="p">),</span> <span class="n">xx1</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xx1</span><span class="p">,</span> <span class="n">xx2</span><span class="p">,</span> <span class="n">zz</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">mpl</span><span class="p">.</span><span class="n">cm</span><span class="p">.</span><span class="n">Paired_r</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">logical_xor</span><span class="p">(</span><span class="n">x1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">x2</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">'b'</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s">'o'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'label:1'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">[</span><span class="o">~</span><span class="n">y</span><span class="p">],</span> <span class="n">x2</span><span class="p">[</span><span class="o">~</span><span class="n">y</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s">'r'</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s">'s'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'label:0'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">x1min</span><span class="p">,</span> <span class="n">x1max</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">x2min</span><span class="p">,</span> <span class="n">x2max</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s">"$x_1$"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s">"$x_2$"</span><span class="p">)</span>
+   
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plot_xor</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">poly_svm_clf</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">"C=1"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plot_xor</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">poly_svm_clf1000</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">"C=1000"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/ML12/kernel2.png" alt="kernel" /></p>
+
+<p>Reference:</p>
+
+<ul>
+  <li>
+    <p>기계학습_하길찬 교수님 수업을 듣고 공부한 내용입니다.</p>
+  </li>
+  <li>
+    <p><a href="https://hleecaster.com/ml-svm-concept/">서포트 벡터 쉽게 이해하기_아무튼 워라밸</a></p>
+  </li>
+</ul>
+
+:ET
