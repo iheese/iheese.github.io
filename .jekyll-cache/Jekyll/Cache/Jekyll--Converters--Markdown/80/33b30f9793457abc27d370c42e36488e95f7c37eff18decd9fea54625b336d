@@ -1,4 +1,4 @@
-I"�<h2 id="비선형-svm-분류와-커널-kernel-svm-분류-모델">비선형 SVM 분류와 커널 (Kernel) SVM 분류 모델</h2>
+I"G�<h2 id="비선형-svm-분류와-커널-kernel-svm-분류-모델">비선형 SVM 분류와 커널 (Kernel) SVM 분류 모델</h2>
 
 <h3 id="1-비선형-svm-분류">1. 비선형 SVM 분류</h3>
 
@@ -123,29 +123,30 @@
 가 되어 특성 맵을 모르면 $\mathbf w^*$를 구할 수 없다. (실제로 $\mathbf w^*$는 특성벡터 $\phi(\mathbf x_i)$와 같은 차원이어야 함)</p>
     </li>
     <li>
-      <p>하지만, 주어진 샘플 벡터 $\mathbf x$에 대한 예측은 
-$$
-\begin{aligned}</p>
-
-      <p>\langle \mathbf w^<em>,\phi(\mathbf x)\rangle+b^</em>= &amp;\langle \bigl(\sum_{i=1}^m \alpha^<em>y_i\phi(\mathbf x_i)\bigr),\phi(\mathbf x)\rangle+b^</em>\</p>
-
-      <p>=&amp; \sum_{i=1}^m \alpha^<em>y_i \langle \phi(\mathbf x_i),\phi(\mathbf x)\rangle +b^</em>\</p>
-
-      <p>=&amp; \sum_{i=1}^m \alpha^<em>y_i K(\mathbf x_i,\mathbf x) +b^</em></p>
-
-      <p>\end{aligned}
-$$
-이므로 상수 $b^*$만 구할 수 있으면 $\mathbf w^*$를 직접 구하지 않고도 예측을 할 수 있음</p>
+      <p>하지만, 주어진 샘플 벡터 $\mathbf x$에 대한 예측은</p>
     </li>
-    <li>
-      <p>실제로 편차 $b^*$는 $x_I$가 서포트벡터머신일 때  $0&lt;\alpha_i^<em>&lt;C$인 $i$에 대해 
+  </ul>
+
+\[\begin{aligned}
+  
+  \langle \mathbf w^*,\phi(\mathbf x)\rangle+b^*= &amp;\langle \bigl(\sum_{i=1}^m \alpha^*y_i\phi(\mathbf x_i)\bigr),\phi(\mathbf x)\rangle+b^*\\
+  
+  =&amp; \sum_{i=1}^m \alpha^*y_i \langle \phi(\mathbf x_i),\phi(\mathbf x)\rangle +b^*\\
+  
+  =&amp; \sum_{i=1}^m \alpha^*y_i K(\mathbf x_i,\mathbf x) +b^*
+  
+  \end{aligned}\]
+
+  <p>이므로 상수 $b^*$만 구할 수 있으면 $\mathbf w^*$를 직접 구하지 않고도 예측을 할 수 있음</p>
+
+  <ul>
+    <li>실제로 편차 $b^*$는 $x_I$가 서포트벡터머신일 때  $0&lt;\alpha_i^*&lt;C$인 $i$에 대해 
 \(y_i\bigl(\langle \mathbf w^*,\phi(\mathbf x_i)\rangle+b^*\bigr)=1\)
-이 성립하므로 ${i|1\le i\le m, 0&lt;\alpha_i^</em>&lt;C}$의 원소의 개수를 $n_s$라 할 때, 
+이 성립하므로 ${i|1\le i\le m, 0&lt;\alpha_i^*&lt;C}$의 원소의 개수를 $n_s$라 할 때, 
 \(\sum_{\substack{i=1\\ 0&lt;\alpha^*_i&lt;C}}^m \bigl(y_i-\langle \mathbf w^*,\phi(\mathbf x_i)\rangle\bigr) = n_s b^*\)
-가 되고, 이로부터 다음과 같이 $b^<em>$를 구할 수 있음 
+가 되고, 이로부터 다음과 같이 $b^*$를 구할 수 있음 
 \(b^* = \dfrac 1{n_s} \sum_{\substack{i=1\\0&lt;\alpha_i^*&lt;C}}^m\left(y_i - \sum_{j=1}^m \alpha_j^* y_j K(\mathbf x_j,\mathbf x_i)\right)\)
-(위 등식에서 $\displaystyle{\sum_{j=1}^m}$은 $\displaystyle{\sum_{\substack{j=1\0&lt;\alpha_j^</em>\le C}}^m}$과 같아짐에 주목)</p>
-    </li>
+(위 등식에서 $\sum_{j=1}^m$은 $\sum_{\substack{j=1 \ 0&lt;\alpha_j^*\le C}}^m$과 같아짐에 주목)</li>
   </ul>
 </blockquote>
 
@@ -199,17 +200,7 @@ $$
       <p>(<code class="language-plaintext highlighter-rouge">degree</code>,<code class="language-plaintext highlighter-rouge">gamma</code>,<code class="language-plaintext highlighter-rouge">coef0</code>는 각각 커널식에서 $d$, $\gamma$, $r$에 대응되는 입력변수) [API 참고]</p>
     </li>
     <li>
-      <table>
-        <tbody>
-          <tr>
-            <td>가우시안 RBF 커널 $K(\mathbf x,\mathbf z)=\exp(-\gamma</td>
-            <td> </td>
-            <td>\mathbf x-\mathbf z</td>
-            <td> </td>
-            <td>^2)$을 사용하는 커널 SVM 분류기 모델 :</td>
-          </tr>
-        </tbody>
-      </table>
+      <p>가우시안 RBF 커널 $K(\mathbf x,\mathbf z)=\exp(-\gamma||\mathbf x-\mathbf z||^2)$을 사용하는 커널 SVM 분류기 모델 :</p>
 
       <p><code class="language-plaintext highlighter-rouge">SVC(kernel="rbf", gamma=5, C=5)</code>와 같은 형태로 객체 생성  (<code class="language-plaintext highlighter-rouge">gamma</code>는 커널식에서 $\gamma$에 대응되는 입력변수) [API 참고]</p>
     </li>
@@ -225,20 +216,12 @@ $$
     <p>서포트벡터머신은 선형, 비선형 분류 뿐만 아니라 선형, 비선형 회귀 문제에도 이용할 수 있음</p>
   </li>
   <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>$\epsilon&gt;0$과 훈련 데이터셋 ${(\mathbf x_1,y_1),\cdots,(\mathbf x_m,y_m)}$이 주어질 때, 선형 서포트벡터머신 회귀는 선형함수 $f(\mathbf x)=\langle \mathbf w,\mathbf x\rangle +b$ 중에서 $</td>
-          <td>y_i-f(\mathbf x_i)</td>
-          <td>\le \epsilon, (1\le i\le m)$이 되는 $\mathbf w,b$를 구하는 모델 (여기서 $\epsilon$은 마진에 해당)</td>
-        </tr>
-      </tbody>
-    </table>
+    <p>$\epsilon&gt;0$과 훈련 데이터셋 ${(\mathbf x_1,y_1),\cdots,(\mathbf x_m,y_m)}$이 주어질 때, 선형 서포트벡터머신 회귀는 선형함수 $f(\mathbf x)=\langle \mathbf w,\mathbf x\rangle +b$ 중에서 $|y_i-f(\mathbf x_i)| \le \epsilon, (1\le i\le m)$이 되는 $\mathbf w,b$를 구하는 모델 (여기서 $\epsilon$은 마진에 해당)</p>
 
     <blockquote>
       <ul>
         <li>위에서 기술한 목표는 <strong>하드마진 SVM 회귀문제</strong>에 해당</li>
-        <li>실제로는 위 조건(모든 $i=1,\cdots,m$)을 만족하는 $f(\mathbf x)$를 구할 수 없는 경우가 있으므로 <strong>소프트마진 SVM 회귀문제</strong>는 조건을 완하하여</li>
+        <li>실제로는 위 조건(모든 $i=1,\cdots,m$)을 만족하는 $f(\mathbf x)$를 구할 수 없는 경우가 있으므로 <strong>소프트마진 SVM 회귀문제</strong>는 조건을 완화하여</li>
       </ul>
 
 \[-\epsilon-\xi_i' \le y_i-(\langle \mathbf w,\mathbf x_i\rangle+b)\le \epsilon+\xi_i, \quad (\forall\, 1\le i\le m,\ \xi_i\ge 0,\, \xi_i'\ge 0)\]
@@ -254,36 +237,26 @@ $$
 \(\min_{\mathbf w,b}\left(\dfrac 1 2 ||\mathbf w||^2 + C\sum_{i=1}^m \max\bigl(0, |y_i-\langle \mathbf w,\mathbf x_i\rangle|-\epsilon\bigr)\right)\quad\)</p>
         </li>
         <li>
-          <p>위 손실함수를 최소화하는 것을 소프트마진 SVM 회귀 문제로 표현하면 
-$$
-\begin{aligned}</p>
-
-          <table>
-            <tbody>
-              <tr>
-                <td>&amp;\min_{\mathbf w,b,\xi,\xi’} \dfrac 1 2</td>
-                <td> </td>
-                <td>\mathbf w</td>
-                <td> </td>
-                <td>^2 +C\sum_{i=1}^m\bigl(\xi_i+\xi_i’\bigr)\</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <p>\text{s.t }&amp;\ y_i -\langle \mathbf w,\mathbf x_i\rangle-b \le \xi_i,\quad (1\le i \le m)\</p>
-
-          <p>&amp;\ \langle \mathbf w,\mathbf x_i\rangle+b-y_i \le \xi_i’, \quad (1\le i \le m)\</p>
-
-          <p>&amp;\ \xi_i\ge 0, \quad (1\le i \le m)\</p>
-
-          <p>&amp;\ \xi_i’\ge 0, \quad (1\le i \le m)\</p>
-
-          <p>\end{aligned}\quad
-$$</p>
+          <p>위 손실함수를 최소화하는 것을 소프트마진 SVM 회귀 문제로 표현하면</p>
         </li>
-        <li>
-          <p>위 원초문제도 컨벡스 최적화 문제이고 Slater 조건을 만족하므로 강한 쌍대성이 만족되고, 쌍대문제를 구하고 나면 소프트마진 SVM 분류의 경우처럼 커널 트릭을 이용한 커널 SVM 회귀모델을 구성하는 것도 가능 (보다 자세한 내용은 <a href="https://scikit-learn.org/stable/modules/svm.html#svm-regression">링크를 참고</a>)</p>
-        </li>
+      </ul>
+
+\[\begin{aligned}
+  
+  &amp;\min_{\mathbf w,b,\xi,\xi'} \dfrac 1 2 ||\mathbf w||^2 +C\sum_{i=1}^m\bigl(\xi_i+\xi_i'\bigr)\\
+  
+  \text{s.t }&amp;\ y_i -\langle \mathbf w,\mathbf x_i\rangle-b \le \xi_i,\quad (1\le i \le m)\\
+  
+  &amp;\ \langle \mathbf w,\mathbf x_i\rangle+b-y_i \le \xi_i', \quad (1\le i \le m)\\
+  
+  &amp;\ \xi_i\ge 0, \quad (1\le i \le m)\\
+  
+  &amp;\ \xi_i'\ge 0, \quad (1\le i \le m)\\
+  
+  \end{aligned}\quad\]
+
+      <ul>
+        <li>위 원초문제도 컨벡스 최적화 문제이고 Slater 조건을 만족하므로 강한 쌍대성이 만족되고, 쌍대문제를 구하고 나면 소프트마진 SVM 분류의 경우처럼 커널 트릭을 이용한 커널 SVM 회귀모델을 구성하는 것도 가능 (보다 자세한 내용은 <a href="https://scikit-learn.org/stable/modules/svm.html#svm-regression">링크를 참고</a>)</li>
       </ul>
     </blockquote>
   </li>
@@ -519,21 +492,19 @@ $$</p>
 <h3 id="2-svckernelrbf-를-이용한-svc-생성과-교차검증을-이용한-성능-측정">2. SVC(kernel=”rbf”) 를 이용한 SVC 생성과 교차검증을 이용한 성능 측정</h3>
 
 <ul>
-  <li>
-    <p>샘플의 개수(60000개)가 특성 수(784개) 보다 큰 경우: <code class="language-plaintext highlighter-rouge">LinearSVC(dual=False)</code>보다 시간이 많이 걸림</p>
-
-    <pre><code class="language-PYTHON">from sklearn.svm import SVC 
-svm_clf = SVC(kernel="rbf")
-  
-start = time()
-print(cross_val_score(svm_clf, X_train_scaled, y_train_4, cv=3, scoring="accuracy", n_jobs=-1))
-time()-start
-  
-#[0.9926  0.99085 0.99215]
-#370.1666090488434
-</code></pre>
-  </li>
+  <li>샘플의 개수(60000개)가 특성 수(784개) 보다 큰 경우: <code class="language-plaintext highlighter-rouge">LinearSVC(dual=False)</code>보다 시간이 많이 걸림</li>
 </ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span> 
+<span class="n">svm_clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">"rbf"</span><span class="p">)</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">svm_clf</span><span class="p">,</span> <span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train_4</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s">"accuracy"</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start</span>
+
+<span class="c1">#[0.9926  0.99085 0.99215]
+#370.1666090488434
+</span></code></pre></div></div>
 
 <h3 id="3-svckernelrbf-decision_function_shapeovo을-이용한-다중-분류기">3. SVC(kernel=”rbf”, decision_function_shape=”ovo”)을 이용한 다중 분류기</h3>
 
