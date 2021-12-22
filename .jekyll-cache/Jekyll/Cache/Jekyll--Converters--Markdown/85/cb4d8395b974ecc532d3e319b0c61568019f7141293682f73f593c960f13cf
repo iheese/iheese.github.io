@@ -1,0 +1,5 @@
+I"]<p>```python
+#4873 셀프넘버 
+set_natural=set(range(1,10001))
+set_generate=set()</p>
+:ET
