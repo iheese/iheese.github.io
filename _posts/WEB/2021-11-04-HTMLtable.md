@@ -3,7 +3,7 @@ layout: post
 title: 'HTML '
 subtitle: 'HTML_ 표 만들기'
 date: 2021-11-05 12:00:00 +0900
-categories: 'HTML'
+categories: 'WEB'
 use_math: true
 ---
 

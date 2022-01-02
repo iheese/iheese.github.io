@@ -3,7 +3,7 @@ layout: post
 title: 'HTML 기본 문법 및 문법'
 subtitle: 'HTML_ 기본 구성, id 선언 등'
 date: 2021-11-04 12:00:00 +0900
-categories: 'HTML'
+categories: 'WEB'
 use_math: true
 ---
 
