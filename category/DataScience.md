@@ -1,4 +1,4 @@
 ---
 layout: category
-category: ML,DATA
+category: DataScience
 ---
