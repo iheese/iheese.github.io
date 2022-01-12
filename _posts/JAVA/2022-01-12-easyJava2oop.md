@@ -2,7 +2,7 @@
 layout: post
 title: '쉽게 배우는 자바2'
 subtitle: '객체 지향 프로그래밍(OOP: Object Oriented Programming)'
-date: 2022-01-12 10:30:00 +0900
+date: 2022-01-12 11:00:00 +0900
 categories: 'JAVA'
 ---
 
