@@ -1,0 +1,195 @@
+I"gJ<p>*모든 실습은 eclipse에서 진행되고 있다.</p>
+
+<h2 id="객체-지향-프로그래밍oop-object-oriented-programming">객체 지향 프로그래밍(OOP: Object Oriented Programming)</h2>
+
+<ul>
+  <li>관련있는 변수와 메소드를 모은 수납상자 같은 클래스로 프로그램을 정리정돈</li>
+  <li>객체 지향 언어: 언어적 차원에서 이를 지원하는 언어</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.FileWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OthersOOP</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="c1">// class : System, Math, FileWriter</span>
+        <span class="c1">// instance : f1, f2</span>
+            <span class="nc">FileWriter</span> <span class="n">f1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"data.txt"</span><span class="o">);</span> <span class="c1">//인스턴스 생성</span>
+        <span class="n">f1</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
+        <span class="n">f1</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">" Java"</span><span class="o">);</span>
+         
+        <span class="nc">FileWriter</span> <span class="n">f2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"data2.txt"</span><span class="o">);</span> <span class="c1">//인스턴스 생성</span>
+        <span class="n">f2</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
+        <span class="n">f2</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">" Java2"</span><span class="o">);</span>
+        <span class="n">f2</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+         
+        <span class="n">f1</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"!!!"</span><span class="o">);</span>
+        <span class="n">f1</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+ 
+<span class="o">}</span>
+       
+</code></pre></div></div>
+<ul>
+  <li>인스턴스를 생성할 수 없는 클래스도 존재한다.(Ex: Math)</li>
+  <li>Math클래스 경우 내부적으로 어떤 상태를 계속 유지할 필요는 없다.(일회용처럼 사용하면 된다.)</li>
+  <li>FileWriter 클래스는 계속 작업을 추가할 수 있어 이에 유리한 인스턴스를 사용하게 제공된다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="class-만드는-방법">class 만드는 방법</h3>
+<ul>
+  <li>같은 java 파일 내 class를 만들 수도 있다.
+    <blockquote>
+      <ul>
+        <li>만들고 싶은 범위 드래그-오른쪽 클릭- Refactor - Extract Method (Alt+Shift+M)</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>class만 다른 파일로 빼내기
+    <blockquote>
+      <ul>
+        <li>원하는 class 드래그- Refactor - Move Type to New File</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="class와-instance">class와 instance</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Print</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">A</span><span class="o">()</span> <span class="o">{</span>  <span class="c1">//클래스 내 메소드 두 개 생성</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">delimiter</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A"</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">B</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">delimiter</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"B"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"B"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyOOP</span> <span class="o">{</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Print</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Print</span><span class="o">();</span>
+		<span class="n">p1</span><span class="o">.</span><span class="na">delimiter</span> <span class="o">=</span> <span class="s">"----"</span><span class="o">;</span>
+		<span class="nc">Print</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Print</span><span class="o">();</span>
+		<span class="n">p2</span><span class="o">.</span><span class="na">delimiter</span> <span class="o">=</span> <span class="s">"****"</span><span class="o">;</span>  
+        <span class="c1">//인스턴스가 있으면 쉽게 변수도 바꿀 수 있다.</span>
+		
+		<span class="n">p1</span><span class="o">.</span><span class="na">A</span><span class="o">();</span>
+		<span class="n">p2</span><span class="o">.</span><span class="na">A</span><span class="o">();</span>  <span class="c1">//인스턴스가 있으면 쉽게 메솓즈를 호출할 수 있다. </span>
+		<span class="n">p1</span><span class="o">.</span><span class="na">B</span><span class="o">();</span>
+		<span class="n">p2</span><span class="o">.</span><span class="na">B</span><span class="o">();</span>	
+	<span class="o">}</span>	
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>클래스의 복제본인 인스턴스는 같은 클래스를 다른 데이터 값으로 사용하고 싶을 때 사용 가능 하다.</li>
+</ul>
+
+<h3 id="static">static</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Foo</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="n">classVar</span> <span class="o">=</span> <span class="s">"I class var"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="n">instanceVar</span> <span class="o">=</span> <span class="s">"I instance var"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">classMethod</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classVar</span><span class="o">);</span> <span class="c1">// Ok</span>
+<span class="c1">//      System.out.println(instanceVar); // Error</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">instanceMethod</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">classVar</span><span class="o">);</span> <span class="c1">// Ok</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instanceVar</span><span class="o">);</span> <span class="c1">// Ok</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StaticApp</span> <span class="o">{</span>
+ 
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Foo</span><span class="o">.</span><span class="na">classVar</span><span class="o">);</span> <span class="c1">// OK</span>
+<span class="c1">//      System.out.println(Foo.instanceVar); // Error</span>
+        <span class="nc">Foo</span><span class="o">.</span><span class="na">classMethod</span><span class="o">();</span>
+<span class="c1">//      Foo.instanceMethod();</span>
+         
+        <span class="nc">Foo</span> <span class="n">f1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Foo</span><span class="o">();</span>
+        <span class="nc">Foo</span> <span class="n">f2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Foo</span><span class="o">();</span>
+<span class="c1">//      </span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f1</span><span class="o">.</span><span class="na">classVar</span><span class="o">);</span> <span class="c1">// I class var</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f1</span><span class="o">.</span><span class="na">instanceVar</span><span class="o">);</span> <span class="c1">// I instance var</span>
+<span class="c1">//      </span>
+        <span class="n">f1</span><span class="o">.</span><span class="na">classVar</span> <span class="o">=</span> <span class="s">"changed by f1"</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Foo</span><span class="o">.</span><span class="na">classVar</span><span class="o">);</span> <span class="c1">// changed by f1</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f2</span><span class="o">.</span><span class="na">classVar</span><span class="o">);</span>  <span class="c1">// changed by f1</span>
+<span class="c1">//      </span>
+        <span class="n">f1</span><span class="o">.</span><span class="na">instanceVar</span> <span class="o">=</span> <span class="s">"changed by f1"</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f1</span><span class="o">.</span><span class="na">instanceVar</span><span class="o">);</span> <span class="c1">// changed by f1</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f2</span><span class="o">.</span><span class="na">instanceVar</span><span class="o">);</span> <span class="c1">// I instance var</span>
+    <span class="o">}</span>
+ 
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>static 변수와 메소드는 클래스에서 생성된 모든 인스턴스가 공유하는 자원</li>
+  <li>static이 아닌 변수와 메소드는 인스턴스를 생성해야 접근할 수 있다.</li>
+  <li>static이 아닌 변수와 메소드는 각 고유의 값을 가지므로 인스턴스에서 변경한다 해도 다른 인스턴스와 클래스에 영향을 주지 않는다.</li>
+  <li>어떤 클래스에서 다른 인스턴스를 만들 때 고정시키고 싶은 값은 static을 붙인다.</li>
+  <li>어떤 클래스에서 다른 인스턴스를 만들 때 다양한 값이 들어올 것 같은 것, 변화를 주며 사용할 것 같은 것은 static을 붙이면 안된다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="생성자-this">생성자, this</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Print</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="nf">Print</span><span class="o">(</span><span class="nc">String</span> <span class="n">delimiter</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">delimiter</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">;</span> <span class="c1">//-------1번</span>
+	<span class="o">}</span>
+    <span class="c1">// this는 각 인스턴스를 가리키는 예약어</span>
+    <span class="kd">public</span> <span class="nf">Print</span><span class="o">(</span><span class="nc">String</span> <span class="n">_delimiter</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">delimiter</span> <span class="o">=</span> <span class="n">_delimiter</span><span class="o">;</span> <span class="c1">//-------2번</span>
+	<span class="o">}</span>
+    
+    <span class="c1">// 1번 2번 둘 다 가능하다. </span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">A</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">delimiter</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A"</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">B</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">delimiter</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"B"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"B"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyOOP</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Print</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Print</span><span class="o">(</span><span class="s">"----"</span><span class="o">);</span>
+        <span class="n">p1</span><span class="o">.</span><span class="na">A</span><span class="o">();</span>
+        
+        <span class="nc">Print</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Print</span><span class="o">(</span><span class="s">"****"</span><span class="o">);</span>
+        <span class="n">p2</span><span class="o">.</span><span class="na">B</span><span class="o">();</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>클래스는 따로 만들어주지 않아도 기본 생성자를 포함한다.(Print() 이와 같은)</li>
+  <li>클래스와 같은 이름으로 메소드를 만들면 생성자를 만들 수 있다.</li>
+  <li>생성자는 접근 권한을 설정할 수 있고, 리턴 타입은 명시하지 않으며, 초기화할 필드에 따라 파라미터를 설정한다.</li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+
+<ul>
+  <li>JAVA 객체지향 프로그래밍, 쉽게하는 자바2_생활코딩, 부스트코스 과정을 통해 공부한 내용입니다.</li>
+</ul>
+:ET

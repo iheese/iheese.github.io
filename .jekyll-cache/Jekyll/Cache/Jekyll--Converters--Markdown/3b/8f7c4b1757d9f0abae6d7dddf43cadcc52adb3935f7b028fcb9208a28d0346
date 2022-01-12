@@ -1,4 +1,12 @@
-I"�k<h3 id="java의-작동-원리">JAVA의 작동 원리</h3>
+I"�l<hr />
+<p>layout: post
+title: ‘쉽게 배우는 자바1’
+subtitle: ‘JAVA의 작동원리, 데이터 타입, 기본연산, 클래스, 메소드, 조건문, 반복문 등등’
+date: 2022-01-06 12:00:00 +0900
+categories: ‘JAVA’
+—</p>
+
+<h3 id="java의-작동-원리">JAVA의 작동 원리</h3>
 
 <ol>
   <li>
@@ -302,10 +310,10 @@
         <span class="kt">double</span> <span class="n">dividend1</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span> <span class="c1">//인덱스 0부터 시작 </span>
         <span class="kt">double</span> <span class="n">dividend2</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
         <span class="kt">double</span> <span class="n">dividend3</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span> 
-      <span class="c1">//인덱스로 접근 가    </span>
+      <span class="c1">//인덱스로 접근 가능   </span>
 </code></pre></div></div>
 
-<p>&lt; br&gt;</p>
+<p><br /></p>
 
 <h3 id="java-while-문">JAVA while 문</h3>
 

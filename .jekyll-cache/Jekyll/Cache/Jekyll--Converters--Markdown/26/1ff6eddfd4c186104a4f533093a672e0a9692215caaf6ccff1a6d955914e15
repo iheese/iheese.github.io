@@ -1,4 +1,4 @@
-I"�m<h3 id="java의-작동-원리">JAVA의 작동 원리</h3>
+I"�k<h3 id="java의-작동-원리">JAVA의 작동 원리</h3>
 
 <ol>
   <li>
@@ -162,7 +162,7 @@
     <p>클래스라는 팀이 있다면, 그 속의 다양한 역할을 맡은 팀원들이 메소드가 된다.</p>
   </li>
   <li>
-    <p>이클립스 상단의 Window - Show View - Outline 의 클래스의 포함된 변수와 메소트 확인 가능</p>
+    <p>이클립스 상단의 Window - Show View - Outline 의 클래스의 포함된 변수와 메소드 확인 가능</p>
   </li>
 </ul>
 
@@ -253,16 +253,11 @@
           <p>and: &amp;&amp;</p>
         </li>
         <li>
-          <table>
-            <tbody>
-              <tr>
-                <td>or:</td>
-                <td> </td>
-              </tr>
-            </tbody>
-          </table>
+          <p>or: ||</p>
         </li>
-        <li>not: !</li>
+        <li>
+          <p>not: !</p>
+        </li>
       </ul>
     </blockquote>
   </li>
@@ -278,23 +273,10 @@
           <p>ex) 1001 &amp; 0001 == 0001</p>
         </li>
         <li>
-          <table>
-            <tbody>
-              <tr>
-                <td>: 어떤 위치든 1이 있으면 1이된다. (or 과 비슷)</td>
-              </tr>
-            </tbody>
-          </table>
+          <p>|: 어떤 위치든 1이 있으면 1이된다. (or 과 비슷)</p>
         </li>
         <li>
-          <table>
-            <tbody>
-              <tr>
-                <td>ex) 1000</td>
-                <td>0001 == 1001</td>
-              </tr>
-            </tbody>
-          </table>
+          <p>ex) 1000 | 0001 == 1001</p>
         </li>
       </ul>
     </blockquote>
@@ -320,10 +302,10 @@
         <span class="kt">double</span> <span class="n">dividend1</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span> <span class="c1">//인덱스 0부터 시작 </span>
         <span class="kt">double</span> <span class="n">dividend2</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
         <span class="kt">double</span> <span class="n">dividend3</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span> 
-      <span class="c1">//인덱스로 접근 가    </span>
+      <span class="c1">//인덱스로 접근 가능   </span>
 </code></pre></div></div>
 
-<p>&lt; br&gt;</p>
+<p><br /></p>
 
 <h3 id="java-while-문">JAVA while 문</h3>
 
@@ -383,7 +365,7 @@
 
 <ul>
   <li>
-    <p>생활코딩_쉽게하는 자바1, 부스트코스 과정을 통해 공부한 내용입니다.</p>
+    <p>쉽게하는 자바1_생활코딩, 부스트코스 과정을 통해 공부한 내용입니다.</p>
   </li>
   <li>
     <p><a href="[[java] double을 문자열로 변환 - 리뷰나라](http://daplus.net/java-double%EC%9D%84-%EB%AC%B8%EC%9E%90%EC%97%B4%EB%A1%9C-%EB%B3%80%ED%99%98/)">리뷰나라_casting</a></p>

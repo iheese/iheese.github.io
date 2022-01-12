@@ -1,10 +1,19 @@
 ---
+tags: [Import-0cb4]
+title: JAVA의 작동 원리
+created: '2022-01-06T03:25:15.493Z'
+modified: '2022-01-06T08:27:08.271Z'
+---
+
+---
 layout: post
 title: '쉽게 배우는 자바1'
 subtitle: 'JAVA의 작동원리, 데이터 타입, 기본연산, 클래스, 메소드, 조건문, 반복문 등등'
 date: 2022-01-06 12:00:00 +0900
 categories: 'JAVA'
 ---
+
+
 
 ### JAVA의 작동 원리
 
@@ -152,7 +161,7 @@ public class Casting {
 
 - 클래스라는 팀이 있다면, 그 속의 다양한 역할을 맡은 팀원들이 메소드가 된다.
 
-- 이클립스 상단의 Window - Show View - Outline 의 클래스의 포함된 변수와 메소드 확인 가능
+- 이클립스 상단의 Window - Show View - Outline 의 클래스의 포함된 변수와 메소트 확인 가능
 
 <BR>
 
@@ -305,7 +314,7 @@ public class Main {
 
 Reference:
 
-- 쉽게하는 자바1_생활코딩, 부스트코스 과정을 통해 공부한 내용입니다.
+- 생활코딩_쉽게하는 자바1, 부스트코스 과정을 통해 공부한 내용입니다.
 
 - [리뷰나라_casting]([[java] double을 문자열로 변환 - 리뷰나라](http://daplus.net/java-double%EC%9D%84-%EB%AC%B8%EC%9E%90%EC%97%B4%EB%A1%9C-%EB%B3%80%ED%99%98/))
 
