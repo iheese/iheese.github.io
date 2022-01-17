@@ -75,6 +75,9 @@ use_math: true
 - 클라이언트 쪽에 비지니스 로직이 많을 경우 클라이언트 관리로 인해 과비용 문제가 발생한다.
 - 비지니스 로직을 클라이언트와 DBMS 사이의 미들웨어 서버에서 동작하도록 함으로써 클라이언트는 입출력만 담당하게 부담을 줄여주는 방식
 
+
+![was](/img/posts/webprogramming/was.png)
+
 #### WAS(Web Application Server)
 - WAS는 일종의 미들웨어로 웹 클라이언트의 요청 중 웹 애플리케이션이 동작하도록 지원하는 목적을 가짐
 - WAS도 자체적으로 웹 서버 기능을 내장함
@@ -87,4 +90,3 @@ use_math: true
 Reference:
 - 웹 프로그래밍(풀스택)_부스트코스를 학습한 내용입니다.
 - [webkitflow](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/)
-S
