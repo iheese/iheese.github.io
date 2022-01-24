@@ -1,0 +1,13 @@
+I" <h2 id="상속inheritance">상속(Inheritance)</h2>
+<p>```java
+class Cal {
+	public int sum(int v1, int v2) {
+		return v1 + v2;  //부모 클래스 더하기 구현
+	}
+}
+class Cal3 extends Cal{
+	   //Cal에서 상속된 자식  Cal3; extends 사용
+}
+…
+public class InheritanceApp {</p>
+:ET

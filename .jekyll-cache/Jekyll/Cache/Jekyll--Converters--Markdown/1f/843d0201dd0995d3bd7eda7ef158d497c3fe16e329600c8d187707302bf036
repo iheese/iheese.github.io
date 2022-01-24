@@ -1,0 +1,25 @@
+I"Q<h3 id="접기-펼치기">접기 펼치기</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;details&gt;</span>
+<span class="nt">&lt;summary&gt;</span>클릭!!<span class="nt">&lt;/summary&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">markdown=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+
+div 에 markdown attribute 를 1 로 
+하는 이유는 div 안에서
+markdown 을 사용하기 위해서!
+    
+여기다가 숨길 것을 쓰자
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/details&gt;</span>
+</code></pre></div></div>
+
+<h3 id="띄어쓰기">띄어쓰기</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;br&gt;</span>
+</code></pre></div></div>
+<p><br /></p>
+<h3 id="tex-문법_-위키-백과">Tex 문법_ 위키 백과</h3>
+
+<p><a href="https://ko.wikipedia.org/wiki/%EC%9C%84%ED%82%A4%EB%B0%B1%EA%B3%BC:TeX_%EB%AC%B8%EB%B2%95#%EC%9C%A0%EC%82%AC_%EB%AC%B8%EC%9E%90_%EA%B8%B0%ED%98%B8">Tex 문법</a></p>
+
+:ET

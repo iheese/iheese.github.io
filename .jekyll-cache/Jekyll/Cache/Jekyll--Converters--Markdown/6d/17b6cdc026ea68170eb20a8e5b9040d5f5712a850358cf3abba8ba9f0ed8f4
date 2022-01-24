@@ -1,0 +1,289 @@
+I"�\<p>*모든 실습은 eclipse에서 진행되고 있습니다.</p>
+
+<h2 id="예외exception">예외(Exception)</h2>
+<ul>
+  <li>예상한 범위를 벗어나는 경우</li>
+  <li>잘 대처하면 피할 수 있다.</li>
+  <li>Ex) 생각한 파일이 존재하지 않는 경우, 0으로 나눗셈을 하는 경우, 배열에서 인덱스를 벗어나 호출한 경우 등
+    <blockquote>
+      <ul>
+        <li>오류(Error): 피할 수 없는 경우</li>
+        <li>Ex) 문법 오류로 인해 컴파일 오류, 메모리 부족, 정전 등</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="예외-처리-방법">예외 처리 방법</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionApp</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+		<span class="kt">int</span><span class="o">[]</span> <span class="n">scores</span> <span class="o">=</span> <span class="o">{</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">30</span><span class="o">};</span>
+
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">scores</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>
+            <span class="c1">//ArrayIndexOutOfBoundsException</span>
+			<span class="c1">// 여기까지 실행 -&gt;</span>
+            <span class="c1">// catch(ArrayIndexOutOfBoundsException e)문으로 이동</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">0</span><span class="o">);</span> <span class="c1">//ArithmeticException</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">ArithmeticException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"잘못된 계산이네요."</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">ArrayIndexOutOfBoundsException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"없는 값을 찾고 계시네요~"</span><span class="o">);</span>
+		<span class="o">}</span>		
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span> 
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">//1</span>
+<span class="c1">//2</span>
+<span class="c1">//없는 값을 찾고 계시네요~</span>
+<span class="c1">//5</span>
+</code></pre></div></div>
+<ul>
+  <li>try,catch 문으로 예외를 처리할 수 있다.</li>
+  <li>try 중 예외가 발생하면 바로 그에 맞는 catch의 명령문으로 가고 catch의 중괄호를 벗어나 다음 명령어를 처리한다.</li>
+  <li>즉 try 명령문 내 예외 아래 있는 명령문은 실행되지 못한다.
+<br /></li>
+  <li>예외 처리도 클래스로 구현되어 있고 서로 상속되어 있다.</li>
+  <li>Ex) Exception(부모 클래스) - RuntimeException -ArithmeticException(자식 클래스)</li>
+  <li>ArithmeticException 같은 경우 Exception으로 포괄적으로 처리해줄 수도 있다.</li>
+  <li>예외가 발생했을 때 순서대로 catch문을 검사하며 내려가므로 순서도 중요하다.</li>
+  <li>포괄적인 예외처리는 구체적으로 어떤 예외 상황인지 알기 어려운 단점이  있다. 
+<br /></li>
+</ul>
+
+<h4 id="e-변수">e 변수</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionApp</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+		<span class="kt">int</span><span class="o">[]</span> <span class="n">scores</span> <span class="o">=</span> <span class="o">{</span><span class="mi">10</span><span class="o">,</span><span class="mi">20</span><span class="o">,</span><span class="mi">30</span><span class="o">};</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">0</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">ArithmeticException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"잘못된 계산이네용!!!!!"</span><span class="o">+</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="c1">//1</span>
+<span class="c1">//2</span>
+<span class="c1">//3</span>
+<span class="c1">//잘못된 계산이네용!!!!!/ by zero      0으로 나눈 것이 잘못되었다고 한다. </span>
+<span class="c1">//java.lang.ArithmeticException: / by zero</span>
+<span class="c1">//	at ExceptionApp.main(ExceptionApp.java:11)</span>
+<span class="c1">//5</span>
+    
+</code></pre></div></div>
+<ul>
+  <li>catch문의 변수 e는 인스턴스이다.</li>
+  <li>e.getMessage()를 이용하면 간단한 예외상황에 대한 정보를 알 수 있다.</li>
+  <li>e.printStackTrace()를 이용하면 자세한 예외 상황에 대한 정보를 알 수 있다.</li>
+  <li>하지만 이러한 정보는 코드의 내용과 구조를 공개할 수 있기 때문에 서버 측에서 로그 파일 등을 통해 관리자만 볼 수 있게 처리한다. 
+<br />
+###Checked, Unchecked Exception</li>
+</ul>
+
+<p><img src="/img/posts/easyjava/Exception.png" alt="checked, unchecked Exception" /></p>
+
+<ul>
+  <li>Checked Exception: 반드시 예외 처리를 해줘야 하는 예외
+    <blockquote>
+      <ul>
+        <li>RuntimeException으로 부터 상속된 예외 말고 모두</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>Unchecked Exception: 컴파일 실행은 가능한 예외, 콘솔에서 예외 발생 시 표시를 해준다.
+    <blockquote>
+      <ul>
+        <li>Throwable-Exception -RuntimeException 부터 상속된 모든 예외</li>
+        <li>이는 컴파일 시는 발생하지 않고 실행 도중에 발생한 예외이다. 
+<br /></li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="finally-자원resource">Finally, 자원(Resource)</h3>
+<ul>
+  <li>자원(Resource): 파일, 네트워크, 데이터베이스 같은 프로그램 외부의 것들</li>
+  <li>외부의 자원은 불안정하기 때문에(우리의 자바 프로그램만을 위한 것이 아니므로) 점유하고, 연결상태를 유지한 후 자원을 놓아주는 작업이 필요하다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.FileWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CheckedExceptionApp</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">FileWriter</span> <span class="n">f</span> <span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">f</span> <span class="o">=</span><span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"data.txt"</span><span class="o">);</span>
+			<span class="n">f</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
+			<span class="c1">//close() 하기 전에 예외 발생하면  close가 실행되지 않음</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span> 
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span> <span class="c1">//예외가 발생해도 무조건 finally는 실행된다.</span>
+			<span class="c1">//만약에 f가 null이 아니라면</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">f</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="k">try</span> <span class="o">{</span>
+				<span class="n">f</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+				<span class="o">}</span>
+				<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h3 id="try-with-resource">try with resource</h3>
+<ul>
+  <li>위는 조금 복잡한 코드가 될 수 있다.</li>
+  <li>AutoCloseable 인터페이스를 상속하면 try with resource 문을 사용할 수 있다.</li>
+  <li>Java SE 7 이상에서 작동한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.FileWriter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryWithResource</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">(</span><span class="nc">FileWriter</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"data.txt"</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">f</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span> <span class="c1">//close() 없이도 자동으로 종료된다. </span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="throw">throw</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyException</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"런타임 문제가 있습니다."</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="o">(</span><span class="s">"뭔가 문제가 있습니다."</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>   
+</code></pre></div></div>
+<ul>
+  <li>예외를 인스턴스 생성처럼 객체로 생성할 수도 있다.</li>
+</ul>
+
+<h3 id="throws">throws</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThrowException</span> <span class="o">{</span>
+
+	    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">error</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">IOException</span><span class="o">(</span><span class="s">"입출력 오류가 error 메소드에서 나왔습니다."</span><span class="o">);</span>
+	<span class="o">}</span>
+    
+ 	   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">ThrowException</span> <span class="n">sample</span> <span class="o">=</span><span class="k">new</span> <span class="nc">ThrowException</span><span class="o">();</span>
+            <span class="k">try</span><span class="o">{</span>
+            	<span class="nc">ThrowException</span><span class="o">.</span><span class="na">error</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"입출력 오류가 main으로 넘어왔습니다."</span><span class="o">);</span>
+            <span class="o">}</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>throws는 예외 상황이 발생하면 그 메소드를 사용하는 메소드로 책임을 전가한다.</li>
+  <li>main 메소드에서 try, catch문으로 예외를 처리하면 중간에 예외 발생으로 인해 실행되지 않는 명령문이 존재할 수 있다.</li>
+  <li>만약 throws를 사용하지 않고 error 메소드에서 예외를 처리하면 그 메소드를 불러 사용하는 main 메소드는 예외가 발생하더라도 모든 명령문이 실행된다.
+<br />
+    <h4 id="-트랜잭션transaction">+ 트랜잭션(Transaction)</h4>
+  </li>
+  <li>하나의 작업 단위</li>
+  <li>Ex) 상품발송이라는 트랜잭션이 있다면 그 속에는 포장, 영수증발행, 발송의 작업이  있다. 세 가지 작업 중 하나라도 실패하면 모두 취소하고 상품 발송 전 상태로 되돌리고 싶어할 것이다. (Rollback)이라  한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//나쁜예</span>
+<span class="n">상품발송</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">포장</span><span class="o">();</span>
+    <span class="n">영수증발행</span><span class="o">();</span>
+    <span class="n">발송</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="n">포장</span><span class="o">(){</span>
+    <span class="k">try</span> <span class="o">{</span>
+       <span class="o">...</span>
+    <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">예외</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">포장취소</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">영수증발행</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+       <span class="o">...</span>
+    <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">예외</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">영수증발행취소</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">발송</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+       <span class="o">...</span>
+    <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">예외</span><span class="o">)</span> <span class="o">{</span>
+       <span class="n">발송취소</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>각각의 메소드에 예외처리가 되어 있으면 포장은 되었는데 영수증 발행은 안되고 발송은 되는 엉터리 트랜잭션이 된다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//좋은 예</span>
+<span class="n">상품발송</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">포장</span><span class="o">();</span>
+        <span class="n">영수증발행</span><span class="o">();</span>
+        <span class="n">발송</span><span class="o">();</span>
+    <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">예외</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">모두취소</span><span class="o">();</span>  <span class="c1">// 하나라도 실패하면 모두 취소한다.</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">포장</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">예외</span> <span class="o">{</span>
+   <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="n">영수증발행</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">예외</span> <span class="o">{</span>
+   <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="n">발송</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">예외</span> <span class="o">{</span>
+   <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>각 메소드에서 예외를 main()(상품 발송) 메소드에서 처리하게 되면 하나라도 실패하면 바로 상품 발송이 취소된다.</li>
+  <li>예외 처리가 진행되는 메소드를 잘 이해하고 트랜잭션의 흐름을 잘 파악하는 것이 중요한 것 같다.</li>
+  <li>독립적으로 예외 처리해야하는 메소드와 묶어서 해결되는 것이 효율적인 메소드들을 잘 구분해야겠다.</li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li>쉽게 배우는 자바2_생활코딩, 부스트코스 과정을 학습한 내용입니다.</li>
+  <li><a href="https://velog.io/@wusi_univ/Java-%EC%98%88%EC%99%B8-checked-vs-unchecked-exception">checked,unchecked Exception_ wusi_univ.log</a></li>
+  <li><a href="https://wikidocs.net/229">예외처리(Exception)_점프 투 자바</a></li>
+</ul>
+:ET

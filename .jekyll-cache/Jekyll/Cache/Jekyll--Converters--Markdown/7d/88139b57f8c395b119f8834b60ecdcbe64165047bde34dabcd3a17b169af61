@@ -1,0 +1,7 @@
+I"H<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#백준_11021
+</span><span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+ <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">"Case #%d:"</span><span class="o">%</span><span class="n">i</span><span class="p">,</span><span class="n">B</span><span class="o">+</span><span class="n">A</span><span class="p">)</span> <span class="c1">#""안에 %d는 정수,%s는 문자, %.2f 소수점 2개 실수 ""끝나고 바로 %변수명/ 여러개는 %(a,b)
+</span></code></pre></div></div>
+:ET
