@@ -1,0 +1,291 @@
+I"�7<h3 id="html-구조">HTML 구조</h3>
+
+<p><img src="/img/posts/basiccss/htmllayout.jpg" alt="HTML 구조" /></p>
+
+<ul>
+  <li>레이아웃을 구성할 때 그 의미에 맞는 태그를 이용해야 가독성이 좋은 코드를 만들 수 있다.</li>
+  <li>CSS를 구현하기 전 HTML로 문서의 구조를 잡아나가는 것이 유리하다.</li>
+</ul>
+<p><br /></p>
+
+<h3 id="id와-class">id와 class</h3>
+<ul>
+  <li>태그 안에 고유한 속성을 주는 방법</li>
+  <li>코드의 가독성이 좋아지며 css 선언할 때 큰 도움이 된다.</li>
+</ul>
+
+<blockquote>
+  <p>id</p>
+  <ul>
+    <li>고유한 속성으로 HTML 문서에 하나만 사용 가능하다.</li>
+    <li>고유한 값이기 때문에 특별한 제어 가능, 검색에도 용이하다.</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <p>class</p>
+  <ul>
+    <li>하나의 HTML 문서 안에서 중복해서 사용 가능하다.</li>
+    <li>하나의 태그에 여러 개의 다른 class 이름을 공백을 기준으로 나열할 수 있다.</li>
+  </ul>
+</blockquote>
+
+<p><br /></p>
+
+<h3 id="css">CSS</h3>
+<h4 id="style을-html에-적용하는-방법">style을 HTML에 적용하는 방법</h4>
+
+<p>1.inline</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p</span> <span class="na">style=</span><span class="s">"border:10px solid gray; color:green; font-size:5em;"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+<ul>
+  <li>태그 안에 직접 style을 지정하는 방식</li>
+  <li>다른 CSS 파일에 적용한 것 보다 가장 먼저 적용된다.</li>
+</ul>
+
+<p>2.internal</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+<span class="nt">p</span>  <span class="p">{</span>
+  <span class="nl">font-size</span> <span class="p">:</span> <span class="m">10em</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span><span class="m">10px</span> <span class="nb">solid</span> <span class="no">gray</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">green</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+<ul>
+  <li>style 태그로 지정하는 방식, head 태그 부분에 보통 style 태그 삽입</li>
+  <li>구조와 스타일이 섞여 유지보수가 어렵다.</li>
+  <li>별도의 CSS 파일 관리하지 않아도 되며 CSS 파일을 부르기 위해 별도의 브라우저가 요청을 보낼 필요가 없다.</li>
+</ul>
+
+<p>3.external</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+	<span class="nt">&lt;head&gt;</span>
+		<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/address/style.css"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;/head&gt;</span>
+	<span class="nt">&lt;body&gt;</span>
+		<span class="nt">&lt;div&gt;</span>
+			...
+		<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>외부에 css 파일 만들어서 href로 연결해주는 방식 rel은 연결문서와의  관계를 말해준다.</p>
+  </li>
+  <li>inline은 우선순위를 가지며, internal과 external은 우선순위가 동등하다.</li>
+  <li>겹치는 선언이 있으면 나중에 선언된 속성이 반영된다.</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="cascading캐스캐이딩">Cascading(캐스캐이딩)</h4>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"a"</span> <span class="na">class=</span><span class="s">"b"</span><span class="nt">&gt;</span>
+	text....
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#a</span><span class="p">{</span>
+ <span class="nl">color</span> <span class="p">:</span> <span class="no">red</span><span class="p">;</span>  <span class="c">/*id에 style 적용  #이용 */</span>
+<span class="p">}</span>
+
+<span class="nc">.b</span><span class="p">{</span>
+ <span class="nl">color</span> <span class="p">:</span> <span class="no">blue</span><span class="p">;</span> <span class="c">/*class에 style 적용  .이용 */</span>
+<span class="p">}</span>
+
+<span class="nt">div</span><span class="p">{</span>
+ <span class="nl">color</span> <span class="p">:</span> <span class="no">green</span><span class="p">;</span> <span class="c">/*엘리먼트에 style 적용*/</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>우선순위: id &gt; class &gt; ELEMNET(엘리먼트)</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="css-selector">CSS Selector</h4>
+<ul>
+  <li>id는 #idname{}, class는 .classname{}, 엘레멘트는  element{}</li>
+  <li>그룹 선택은 h1, span, div#id{} 처럼 할 수 있다.</li>
+  <li>요소 선택
+    <blockquote>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"hi"</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;div&gt;</span>
+   <span class="nt">&lt;span&gt;</span> span tag <span class="nt">&lt;/span&gt;</span>
+ <span class="nt">&lt;/div&gt;</span>
+ <span class="nt">&lt;span&gt;</span> span tag 2 <span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>      </div>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#hi</span> <span class="nt">span</span><span class="p">{</span><span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;}</span> 
+<span class="c">/*div 안의 모든 span 요소가 빨간색 */</span>
+</code></pre></div>      </div>
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#hi</span> <span class="o">&gt;</span> <span class="nt">sapn</span><span class="p">{</span><span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span> <span class="p">}</span>
+<span class="c">/*div 바로 아래 자식 요소인 spans tag2 만 빨간색이 됨*/</span>
+</code></pre></div>      </div>
+    </blockquote>
+  </li>
+  <li>n번쨰 자식 요소 선택
+    <blockquote>
+      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"hi"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;h2&gt;</span>단락 선택<span class="nt">&lt;/h2&gt;</span>
+ 	<span class="nt">&lt;p&gt;</span>첫번째 단락입니다<span class="nt">&lt;/p&gt;</span>
+ 	<span class="nt">&lt;p&gt;</span>두번째 단락입니다<span class="nt">&lt;/p&gt;</span>
+ 	<span class="nt">&lt;p&gt;</span>세번째 단락입니다<span class="nt">&lt;/p&gt;</span>
+ 	<span class="nt">&lt;p&gt;</span>네번째 단락입니다<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>      </div>
+
+      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">#hi</span> <span class="o">&gt;</span> <span class="nt">p</span><span class="nd">:nth-child</span><span class="o">(</span><span class="err">2</span><span class="o">)</span> <span class="p">{</span> <span class="nl">color</span> <span class="p">:</span> <span class="no">red</span> <span class="p">}</span>
+<span class="c">/*위처럼 하면 첫번째 단락이 빨간색이 된다. hi class에서 p 자식 중에 선택 하려해도 앞의 형제 요소를 고려하여 숫자를 넣어야 한다.  */</span>
+<span class="nf">#jisu</span> <span class="o">&gt;</span> <span class="nt">p</span><span class="nd">:nth-child</span><span class="o">(</span><span class="err">1</span><span class="o">)</span> <span class="p">{</span> <span class="nl">color</span> <span class="p">:</span> <span class="no">red</span> <span class="p">}</span>
+<span class="c">/*아무 것도 빨간색으로 변하지 않는다. */</span>
+<span class="nf">#hi</span> <span class="nd">:nth-child</span><span class="o">(</span><span class="err">1</span><span class="o">)</span> <span class="p">{</span> <span class="nl">color</span> <span class="p">:</span> <span class="no">red</span> <span class="p">}</span>
+<span class="c">/*위처럼 하면 단락 선택이 빨간색이 된다. */</span>
+</code></pre></div>      </div>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="css-layout">CSS layout</h3>
+<h5 id="display">display</h5>
+<ul>
+  <li>block:
+    <blockquote>
+      <ul>
+        <li>한 줄에 나열하지 않고 화면에 그 자체로 한 줄을 완전히 차지한다.</li>
+        <li><code class="language-plaintext highlighter-rouge">&lt;p&gt;, &lt;div&gt;, &lt;h1&gt;</code> 대표적인 block 태그이다.</li>
+        <li>width, height, margin, padding 속성이 모두 반영된다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>inline:
+    <blockquote>
+      <ul>
+        <li>전후 줄바꿈 없이 한 줄에 나란히 배치된다.</li>
+        <li><code class="language-plaintext highlighter-rouge">&lt;span&gt;, &lt;a&gt;, &lt;em&gt;</code>이 대표적인 inline 태그이다.</li>
+        <li>width, height 속성은 지정해도 무시된다.</li>
+        <li>margin, padding 속성은 좌우 간격만 반영되고 상하 간격은 반영되지 않는다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>inline-block:
+    <blockquote>
+      <ul>
+        <li>inline 처럼 한 줄에 배치되지만 width, height, margin, padding 을 지정해줄 수 있다는 점이 다르다.</li>
+        <li><code class="language-plaintext highlighter-rouge">&lt;button&gt;, &lt;input&gt;, &lt;select&gt;</code> 태그가 있다.</li>
+        <li>한 줄에 여러 엘리멘트를 정확한 너비만큼 배치할 수 있다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>flex: 레이아웃 배치 전용 기능으로 고안된 레이아웃
+    <blockquote>
+      <ul>
+        <li>flex는 부모 요소인 Flex Container, 자식 요소인 Flex Item로 구성된다.</li>
+        <li>flex 아이템들은 가로 방향으로 배치되고, 자신이 가진 내용물 너비 만큼만 차지하게 된다. 높이는 컨테이너 높이만큼 늘어난다.</li>
+        <li>flex-direction: row; (기본값), column;, row-reverse;, column-reverse; 설정도 가능하다. 
+<a href="#target"> 클릭! 시각적으로 확인</a> 
+<br /></li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<h5 id="positon">positon</h5>
+<ul>
+  <li>static
+    <blockquote>
+      <ul>
+        <li>기본 속성, 순서대로(위에서 아래로, 좌에서 우로) 배치된다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>relative
+    <blockquote>
+      <ul>
+        <li>자기 자신을 기준으로 top, right, bottom, left 의 오프셋값을 적용한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>absolute
+    <blockquote>
+      <ul>
+        <li>static이 아닌 상위 엘리먼트의 position을 기준으로 top, right, bottom, left 의 오프셋값을 적용한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>fixed
+    <blockquote>
+      <ul>
+        <li>전체화면(viewport)의 좌측, 맨 위를 기준으로 동작한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a href="#target"> 클릭! 시각적으로 확인</a> 
+<br /></p>
+<h5 id="float">float</h5>
+<ul>
+  <li>한 요소가 보통 흐름에서 빠져 텍스트 및 인라인 요소가 그 주위를 감싸는 특별한 형태로 배치된다.</li>
+  <li>right, left, none(초기값)</li>
+</ul>
+
+<p><a href="#target"> 클릭! 시각적으로 확인</a></p>
+
+<p><br /></p>
+<h5 id="padding-border-margin">padding, border, margin</h5>
+
+<p><img src="/img/posts/basiccss/layout.png" alt="padding, border, margin" width="300" height="300" /></p>
+<ul>
+  <li>padding: content의 바로 밖의 요소 내부 빈공간
+    <blockquote>
+      <ul>
+        <li>padding: 10px; : 위, 오른쪽, 바닥, 왼쪽 모두 10px</li>
+        <li>padding: 10px 5px; : 위, 바닥 10px, 오른쪽, 왼쪽 5px</li>
+        <li>padding: 10px 5px 7px; : 위 10px, 오른쪽, 왼쪽 5px, 바닥 7px</li>
+        <li>padding: 10px 5px 7px 3px; : 위 10px, 오른쪽 5px, 바닥 7px, 왼쪽 3px</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>border: 요소의 테두리
+    <blockquote>
+      <ul>
+        <li>border: 너비 스타일 색; 순으로 축약형으로 사용 가능</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>margin: 요소 주위의 빈 공간
+    <blockquote>
+      <ul>
+        <li>padding과 같은 방식으로 오프셋 설정 가능
+<a href="#target"> 클릭! 시각적으로 확인</a></li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:<a name="target"> </a></p>
+<ul>
+  <li>웹 프로그래밍(풀스택)_부스트코스 과정을 학습한 내용입니다.</li>
+  <li><a href="https://www.daleseo.com/css-display-inline-block/">DaleSeo_css display 속성</a></li>
+  <li>flex 세부적인 설명은 [1분코딩_flex]{https://studiomeal.com/archives/197}</li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/CSS/position">MDN Web Docs_position 속성</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/CSS/float">MDN Web Docs_float 속성</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/CSS/padding">MDN Web Docs_padding 속성</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/CSS/border">MDN Web Docs_border 속성</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/CSS/margin">MDN Web Docs_margin 속성</a></li>
+</ul>
+:ET

@@ -1,4 +1,4 @@
-I"m<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span> <span class="c">&lt;!--HTML파일 선언--&gt;</span>
+I"|<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span> <span class="c">&lt;!--HTML파일 선언--&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
   <span class="nt">&lt;title&gt;</span>Ship To It - Company Packing List<span class="nt">&lt;/title&gt;</span>
@@ -66,5 +66,7 @@
 
 <p>Reference:</p>
 
-<p>Learn HTML_Codecademy를 바탕으로 공부하는 내용입니다.</p>
+<ul>
+  <li>Learn HTML_Codecademy를 바탕으로 공부하는 내용입니다.</li>
+</ul>
 :ET
