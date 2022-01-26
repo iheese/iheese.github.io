@@ -77,4 +77,4 @@ published: true
 
 Reference:
 
-Learn HTML_Codecademy를 바탕으로 공부하는 내용입니다. 
+- Learn HTML_Codecademy를 바탕으로 공부하는 내용입니다. 
