@@ -1,9 +1,9 @@
-I"O<p>*모든 실습은 eclipse에서 진행되고 있습니다.</p>
+I"=O<p>*모든 실습은 eclipse에서 진행되고 있습니다.</p>
 
 <h4 id="자바-웹-어플리케이션의-폴더-구조">자바 웹 어플리케이션의 폴더 구조</h4>
-<p><img src="/img/posts/servlet/javaweb.png" alt="자바 웹 어플리케이션의 구조" /></p>
+<p><img src="/img/posts/servlet/javaweb.png" alt="자바 웹 어플리케이션의 구조" width="700" height="300" /></p>
 
-<p>###Servlet(서블릿)</p>
+<h3 id="servlet서블릿">Servlet(서블릿)</h3>
 <ul>
   <li>자바를 사용하여 웹페이지를 동적으로 생성하는 서버측 프로그램</li>
   <li>웹 서버의 성능을 향상하기 위해 사용된다.</li>
@@ -106,7 +106,7 @@
 
 <h4 id="request-response-객체">Request, Response 객체</h4>
 
-<p><img src="/img/posts/servlet/reqres.png" alt="Request, Response 객체" /></p>
+<p><img src="/img/posts/servlet/reqres.png" alt="Request, Response 객체" width="800" height="300" /></p>
 
 <ol>
   <li>WAS는 웹 브라우저로부터 Servlet 요청을 받는다.</li>
@@ -144,8 +144,7 @@
 			<span class="nc">String</span> <span class="n">headerValue</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="n">headerName</span><span class="o">);</span>
 			<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">headerName</span> <span class="o">+</span> <span class="s">" : "</span> <span class="o">+</span> <span class="n">headerValue</span> <span class="o">+</span> <span class="s">" &lt;br&gt; "</span><span class="o">);</span>
 		<span class="o">}</span>		
-        
-        
+
 		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;/body&gt;"</span><span class="o">);</span>
 		<span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;/html&gt;"</span><span class="o">);</span>
 	<span class="o">}</span>
