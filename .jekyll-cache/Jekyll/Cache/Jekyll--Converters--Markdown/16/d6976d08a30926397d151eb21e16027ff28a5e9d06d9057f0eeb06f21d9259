@@ -1,0 +1,266 @@
+I"�V<h3 id="javascript-변수">JavaScript 변수</h3>
+
+<ul>
+  <li>var: 같은 이름의 변수로 선언하여도 에러 발생하지 않고 생성
+    <blockquote>
+      <ul>
+        <li>간단한 테스트 시 편리할 수 있으나 실제 업무에서는 문제 발생 여지가 많아진다.</li>
+        <li>ES6 이후 문제점 보완을 위해 let, const 가 추가됨</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>let: 변수 재선언이 불가능하지만 재할당(immutable)은 가능하다.</li>
+  <li>const: 변수 재선언, 변수 재할당 모두 불가능하다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hungry</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">//hungry</span>
+
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">thirsty</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">//thirsty   아무 에러가 발생하지 않는다.</span>
+
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">one</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// one</span>
+
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">two</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// Uncaught SyntaxError: Identifier 'b' has already been declared  </span>
+<span class="c1">// 에러가 뜬다. </span>
+
+<span class="nx">b</span><span class="o">=</span><span class="dl">'</span><span class="s1">three</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span> <span class="c1">//three 재할당은 가능하다.</span>
+
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span> <span class="c1">// red</span>
+
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span> 
+<span class="c1">// Uncaught SyntaxError: Identifier 'c' has already been declared</span>
+
+<span class="nx">c</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">blue</span><span class="dl">'</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> 
+<span class="c1">//Uncaught TypeError: Assignment to constant variable.</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="호이스팅hoisting">호이스팅(Hoisting)</h4>
+<ul>
+  <li>변수, 함수 선언을 모두 맨 위로 올려서 변수와 함수가 적용되게 하는 것 같은 현상</li>
+  <li>JS 엔진은 코드 실행 전 모든 선언을 스코프에 등록한다.(즉 모든 선언에는 호이스팅이 일어난다.)</li>
+  <li>var 변수, 함수 선언문에서만 호이스팅이 발생하는 것처럼 보인다.(할당은 적용되지 않는다.)</li>
+  <li>
+    <p>var 키워드는 선언과 함께 undefined로 초기화되어 메모리에 저장되고, let, const는 초기화없이 선언만 메모리에 저장된다.</p>
+  </li>
+  <li>변수 생성 단계: 선언(Declaration phase) - 초기화(Initialization phase) - 할당(Assignment phase)</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//undifined //선언, 초기화까지 진행, 할당은 진행되지 않았다.</span>
+ 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// ReferenceError //선언까지만 진행</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// ReferenceError //선언까지만 진행</span>
+
+<span class="nx">d</span><span class="p">();</span> <span class="c1">//Hello //함수선언문에서는 호이스팅 일어난다.</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span> <span class="c1">//undefined // 함수 표현식도 선언까지만 진행</span>
+
+<span class="kd">function</span> <span class="nx">d</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hi</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+<p><br /></p>
+<h4 id="if-switch-for-while">if, switch, for, while</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//if</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">condition1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">statement1</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span>  <span class="k">if</span><span class="p">(</span><span class="nx">condition2</span><span class="p">){</span>
+  <span class="nx">statement2</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">statement3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//switch</span>
+<span class="k">switch</span> <span class="p">(</span><span class="nx">expression</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="nx">label1</span><span class="p">:</span>
+    <span class="nx">statements1</span>
+    <span class="p">[</span><span class="k">break</span><span class="p">;]</span>
+  <span class="k">case</span> <span class="nx">label2</span><span class="p">:</span> <span class="c1">//콜론을 넣는다. </span>
+    <span class="nx">statements2</span>
+    <span class="p">[</span><span class="k">break</span><span class="p">;]</span>  <span class="c1">//case가 하나 선택되면 멈춘다. </span>
+    <span class="p">...</span>
+  <span class="k">default</span><span class="p">:</span> <span class="c1">//기본값</span>
+    <span class="nx">statements_def</span>
+    <span class="p">[</span><span class="k">break</span><span class="p">;]</span>
+<span class="p">}</span>
+
+<span class="c1">//for</span>
+<span class="k">for</span> <span class="p">([</span><span class="nx">initialization</span><span class="p">];</span> <span class="p">[</span><span class="nx">condition</span><span class="p">];</span> <span class="p">[</span><span class="nx">final</span><span class="o">-</span><span class="nx">expression</span><span class="p">]){</span>
+   <span class="nx">statement</span>
+<span class="p">}</span> <span class="c1">//초기값, 반복 조건, 반복 후 평가할 식</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+   
+<span class="p">}</span>
+
+<span class="c1">//while</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">condition</span><span class="p">){</span>
+      <span class="nx">statement</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">){</span> <span class="c1">//참일때 실행</span>
+  <span class="nx">n</span><span class="o">++</span><span class="p">;</span>
+  <span class="nx">x</span> <span class="o">+=</span> <span class="nx">n</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><a href="#target"> 자세한 내용, MDN 검색</a></p>
+
+<p><br /></p>
+
+<h4 id="논리-연산자">논리 연산자</h4>
+<ul>
+  <li>논리 AND , &amp;&amp; 연산자</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">a1</span> <span class="o">=</span> <span class="kc">true</span>  <span class="o">&amp;&amp;</span> <span class="kc">true</span>          <span class="c1">// t &amp;&amp; t returns true</span>
+<span class="nx">a2</span> <span class="o">=</span> <span class="kc">true</span>  <span class="o">&amp;&amp;</span> <span class="kc">false</span>         <span class="c1">// t &amp;&amp; f returns false</span>
+<span class="nx">a3</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="kc">true</span>          <span class="c1">// f &amp;&amp; t returns false</span>
+<span class="nx">a4</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>      <span class="c1">// f &amp;&amp; f returns false</span>
+<span class="nx">a5</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="dl">'</span><span class="s1">Dog</span><span class="dl">'</span>         <span class="c1">// t &amp;&amp; t returns "Dog"</span>
+<span class="nx">a6</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span>         <span class="c1">// f &amp;&amp; t returns false</span>
+<span class="nx">a7</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="kc">false</span>         <span class="c1">// t &amp;&amp; f returns false</span>
+<span class="nx">a8</span> <span class="o">=</span> <span class="dl">''</span>    <span class="o">&amp;&amp;</span> <span class="kc">false</span>         <span class="c1">// f &amp;&amp; f returns ""</span>
+<span class="nx">a9</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="dl">''</span>            <span class="c1">// f &amp;&amp; f returns false</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>논리 OR ,</td>
+          <td> </td>
+          <td>연산자</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">o1</span> <span class="o">=</span> <span class="kc">true</span>  <span class="o">||</span> <span class="kc">true</span>       <span class="c1">// t || t returns true</span>
+<span class="nx">o2</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">||</span> <span class="kc">true</span>       <span class="c1">// f || t returns true</span>
+<span class="nx">o3</span> <span class="o">=</span> <span class="kc">true</span>  <span class="o">||</span> <span class="kc">false</span>      <span class="c1">// t || f returns true</span>
+<span class="nx">o4</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">||</span> <span class="p">(</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>   <span class="c1">// f || f returns false</span>
+<span class="nx">o5</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">Dog</span><span class="dl">'</span>      <span class="c1">// t || t returns "Cat"</span>
+<span class="nx">o6</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span>      <span class="c1">// f || t returns "Cat"</span>
+<span class="nx">o7</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span> <span class="o">||</span> <span class="kc">false</span>      <span class="c1">// t || f returns "Cat"</span>
+<span class="nx">o8</span> <span class="o">=</span> <span class="dl">''</span>    <span class="o">||</span> <span class="kc">false</span>      <span class="c1">// f || f returns false</span>
+<span class="nx">o9</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">||</span> <span class="dl">''</span>         <span class="c1">// f || f returns ""</span>
+<span class="nx">o10</span> <span class="o">=</span> <span class="kc">false</span> <span class="o">||</span> <span class="nx">varObject</span> <span class="c1">// f || object returns varObject</span>
+</code></pre></div></div>
+
+<ul>
+  <li>논리 NOT, ! 연산자</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">n1</span> <span class="o">=</span> <span class="o">!</span><span class="kc">true</span>               <span class="c1">// !t returns false</span>
+<span class="nx">n2</span> <span class="o">=</span> <span class="o">!</span><span class="kc">false</span>              <span class="c1">// !f returns true</span>
+<span class="nx">n3</span> <span class="o">=</span> <span class="o">!</span><span class="dl">''</span>                 <span class="c1">// !f returns true</span>
+<span class="nx">n4</span> <span class="o">=</span> <span class="o">!</span><span class="dl">'</span><span class="s1">Cat</span><span class="dl">'</span>              <span class="c1">// !t returns false</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<h4 id="javascript-함수">JavaScript 함수</h4>
+<ul>
+  <li>함수 선언문</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">print</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+	<span class="kd">var</span> <span class="nx">lastname</span><span class="o">=</span><span class="dl">"</span><span class="s2">Lee</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">lastname</span><span class="o">+</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="o">+</span><span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>함수 표현식</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">print</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+	<span class="k">return</span> <span class="dl">'</span><span class="s1">hi</span><span class="dl">'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>선언과 호출 순서에 따라 정상적인 함수가 실행되지 않을 수 있다.</li>
+</ul>
+
+<h4 id="arguments-객체">arguments 객체</h4>
+<ul>
+  <li>함수 실행되면 그 안에 자동으로 arguments 지역변수가 생성된다.</li>
+  <li>arguments는 배열 타입은 아니지만 넘어온 인자를 배열에 접근하듯 하나씩 접근 가능하다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">a</span><span class="p">()</span> <span class="p">{</span>
+ <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>  <span class="c1">//[Arguments] { '0': 1, '1': 2, '2': 3 }</span>
+
+<span class="kd">function</span> <span class="nx">a</span><span class="p">()</span> <span class="p">{</span>
+ <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="nx">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span> <span class="c1">//3</span>
+
+<span class="c1">//arguments를 이용해 합 구하기</span>
+<span class="kd">function</span> <span class="nx">sum</span><span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">result</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">result</span><span class="o">+=</span><span class="nx">arguments</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span> <span class="c1">//15</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="함수-호출-스택">함수 호출 스택</h4>
+
+<pre><code class="language-JAVASCRIPT">function foo(b){
+    var a = 5;
+    return a * b + 10;
+} 
+
+function bar(x){
+    var y = 3;
+    return foo(x * y);
+}
+
+console.log(bar(6));  //100
+</code></pre>
+
+<ul>
+  <li>bar() 함수가 호출되고 bar()가 foo()를 호출하면서 bar()는 Call stack에 대기</li>
+  <li>foo()가 호출되고 실행이 끝난 뒤 return문이 실행되면 메모리공간에서 사라진다. Call stack에서 사라진다.</li>
+  <li>함수를 연속적으로 계속 호출하면 Call stack이 꽉 찰 수도 있다. Maximum call stack size exceeded가 발생할 수도 있다.</li>
+</ul>
+
+<p>Reference:<a id="target"> </a></p>
+
+<ul>
+  <li>웹 프로그래밍(풀스택)_부스트코스를 학습한 내용입니다.</li>
+  <li><a href="https://hanamon.kr/javascript-%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85%EC%9D%B4%EB%9E%80-hoisting">JS, 호스팅이란 _ HANAMON</a></li>
+  <li><a href="https://developer.mozilla.org/ko/">조건문, 제어문 참고, 논리 연산자(AND, OR, NOT) _ MDN Wed Docs</a></li>
+</ul>
+
+:ET
