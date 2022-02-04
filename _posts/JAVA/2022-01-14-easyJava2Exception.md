@@ -87,7 +87,7 @@ public class ExceptionApp {
 - e.printStackTrace()를 이용하면 자세한 예외 상황에 대한 정보를 알 수 있다. 
 - 하지만 이러한 정보는 코드의 내용과 구조를 공개할 수 있기 때문에 서버 측에서 로그 파일 등을 통해 관리자만 볼 수 있게 처리한다. 
 <br>
-###Checked, Unchecked Exception
+### Checked, Unchecked Exception
 
 ![checked, unchecked Exception](/img/posts/easyjava/Exception.png)
 
