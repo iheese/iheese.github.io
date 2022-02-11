@@ -313,7 +313,7 @@ ${v1} + ${v2} = ${result} <br><br>
 
 Reference:
 - 웹 프로그래밍(풀스택)_부스트코스를 학습한 내용입니다.
-- [리다이렉트란_빡통들을 위한 쉽게 재미있는 세상](https://webstone.tistory.com/65)
-- [302 Found_MDN_Docs](https://developer.mozilla.org/ko/docs/Web/HTTP/Status/302)
-- [forward(), redirect()_유-잇의 개발 일지](https://u-it.tistory.com/entry/%ED%8E%98%EC%9D%B4%EC%A7%80%EC%B6%9C%EB%A0%A5-%ED%8E%98%EC%9D%B4%EC%A7%80%EC%A0%84%ED%99%98-%EB%B0%8F-%ED%8A%B9%EC%A0%95-url%EB%A1%9C-%EC%9E%AC-%EC%9A%94%EC%B2%AD-%EC%9D%84-%ED%95%B4%EC%A3%BC%EB%8A%94-RequestDispatcher-%EC%9D%98-requestgetRequestDispatcherforward-HttpServletResponse%EC%9D%98-responsesendRedirect)
-- [서블릿 매핑시 url pattern 규칙_DOLOLAK](https://dololak.tistory.com/740?category=636501)
+- [리다이렉트란_빡통들을 위한 쉽게 재미있는 세상](https://webstone.tistory.com/65){:target="_blank"}
+- [302 Found_MDN_Docs](https://developer.mozilla.org/ko/docs/Web/HTTP/Status/302){:target="_blank"}
+- [forward(), redirect()_유-잇의 개발 일지](https://u-it.tistory.com/entry/%ED%8E%98%EC%9D%B4%EC%A7%80%EC%B6%9C%EB%A0%A5-%ED%8E%98%EC%9D%B4%EC%A7%80%EC%A0%84%ED%99%98-%EB%B0%8F-%ED%8A%B9%EC%A0%95-url%EB%A1%9C-%EC%9E%AC-%EC%9A%94%EC%B2%AD-%EC%9D%84-%ED%95%B4%EC%A3%BC%EB%8A%94-RequestDispatcher-%EC%9D%98-requestgetRequestDispatcherforward-HttpServletResponse%EC%9D%98-responsesendRedirect){:target="_blank"}
+- [서블릿 매핑시 url pattern 규칙_DOLOLAK](https://dololak.tistory.com/740?category=636501){:target="_blank"}
