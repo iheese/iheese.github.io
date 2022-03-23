@@ -1,0 +1,144 @@
+I"$<h2 id="dmldata-manipulation-language데이터-조작어">DML(Data Manipulation Language,데이터 조작어)</h2>
+<ul>
+  <li>SELECT : 검색
+    <blockquote>
+      <ul>
+        <li>기본문형 : <code class="language-plaintext highlighter-rouge">SELECT(DISTINCT) 컬럼명(ALIAS) FROM 테이블명;</code></li>
+        <li>SELECT : 검색하고자 하는 데이터(컬럼)을 나열한다.
+          <blockquote>
+            <ul>
+              <li>SELECT 뒤에 *를 넣어 전체 데이터를 검색할 수 있다.</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>DISTINCT : 중복행을 제거한다.</li>
+        <li>ALIAS : 나타날 컬럼에 다른 이름 부여한다.</li>
+        <li>FROM  : 선택한 컬럼이 있는 테이블 명시한다.</li>
+        <li>Ex)
+          <blockquote>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">select * from departmnet;</code>: departmnet 테이블의 모든 컬럼을  출력해주세요</li>
+              <li><code class="language-plaintext highlighter-rouge">select distinct deptno from employee;</code> : employee 테이블에서 부서번호를 중복되지 않게 출력해주세요</li>
+              <li><code class="language-plaintext highlighter-rouge">select empno as 사번, name as 이름, job as 직업 from employee;</code> : employee 테이블에서 empno(사번), name(이름), job(직업)을 각 별칭을 넣어 출력해주세요</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>CONCAT : 컬럼을 합성할 때 사용한다.</li>
+        <li>Ex)
+          <blockquote>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">select concat(empno,'-',deptno as '사번-부서번호' from employee;</code> : employee 테이블에서 사번과 부서번호를 ‘-‘로 합쳐 ‘사번-부서번호’ 라는 별칭으로 출력해주세요</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>ORDER BY 컬럼 (ASC; 기본값) : 컬럼을 기준으로 오름차순 정렬한다.</li>
+        <li>ORDER BY 컬럼 DESC : 컬럼을 기준으로 내림차순 정렬한다.</li>
+        <li>Ex)
+          <blockquote>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">select empno, name, job from employee order by name;</code> : employee 테이블에서 name 기준으로 오름차순 정렬하여 empno, name, job을 출력해주세요</li>
+              <li><code class="language-plaintext highlighter-rouge">select empno as 사번, name as 이름, job as 직업 from employee order by name desc;</code> : employee 테이블에서 name을 기준으로 내림차순 정렬해서 empno(사번), name(이름), job(직업)을 각 별칭으로 출력해주세요</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>WHERE : 컬럼 이름, 표현식의 상수, 연산자로 조건을 걸 수 있다.
+          <blockquote>
+            <ul>
+              <li>in (배열) : 다수의 조건을 선택할 때 사용
+                <blockquote>
+                  <ul>
+                    <li>Ex) in (1,2,3) » 1 or 2 or 3</li>
+                  </ul>
+                </blockquote>
+              </li>
+              <li>like ‘문자’ :  와일드 카드를 이용해 특정 문자를 포함한 값에 대한 조건을 처리
+                <blockquote>
+                  <ul>
+                    <li>%: 0부터 여러 개의 문자열</li>
+                    <li>_: 단 하나의 문자를 나타내는 와일드카드</li>
+                    <li>Ex) like ‘%S%’ » S가 들어간 데이터,</li>
+                    <li>like ‘_B%’ » B의 앞자리에 어떤 문자든 하나가 존재하는 데이터</li>
+                  </ul>
+                </blockquote>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>Ex)
+          <blockquote>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">select name as 이름, hiredate as 고용일 from employee where hiredate &lt; '1981-01-01';</code> :  employee 테이블에서 hiredate가 1981년 전인 name(이름), hiredate(고용일)을 각 별칭으로 출력해주세요</li>
+              <li><code class="language-plaintext highlighter-rouge">select name, deptno from employee where deptno = 30;</code> : employee 테이블에서 deptno 값이 30인 name, deptno를 출력해주세요</li>
+              <li><code class="language-plaintext highlighter-rouge">select name,deptno from employee where deptno in (10,30)</code> : employee 테이블에서 deptno 값이 10 또는 30인 name, deptno를 출력해주세요</li>
+              <li><code class="language-plaintext highlighter-rouge">select name, job, from employee where name like '%B%';</code> : employee 테이블에서 name에 B가 있는 name, job 데이터를 출력해주세요
+<br /></li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>그 외 함수들 :
+    <blockquote>
+      <ul>
+        <li>from 다음에 테이블이 없을 경우에 테이블에서 조회하는 것이 아니다.
+          <blockquote>
+            <ul>
+              <li>UCASE(‘문자열’), UPPER(‘문자열’) : 대문자로 바꿔주는 함수</li>
+              <li>LCASE(‘문자열’), LOWER(‘문자열’) : 소문자로 바꿔주는 함수</li>
+              <li>SUBSTRING(‘문자열’,N, M) : 문자열의 N번째 문자를 시작으로 M개를 출력하는 함수</li>
+              <li>LPAD(‘문자열’,N,’특수문자(예:<em>)’), RPAD(‘문자열’,N,’특수문자(예:</em>)’) : LPAD는 문자열을 N개로 늘려주고 나머지를 특수문자로 채워주는 함수이다. LPAD는 문자열 왼쪽, RPAD는 문자열 오른쪽에 채워준다.
+                <blockquote>
+                  <ul>
+                    <li>Ex) <code class="language-plaintext highlighter-rouge">select lpad('star',7, '*');</code> » <code class="language-plaintext highlighter-rouge">***star</code></li>
+                  </ul>
+                </blockquote>
+              </li>
+              <li>TRIM, LTRIM, RTRIM : 앞 뒤 공백을 제거해주는 함수, LTRIM은 문자열 시작 공백 제거, RTRIM은 문자열 끝 부분 공백 제거
+                <blockquote>
+                  <ul>
+                    <li>Ex) <code class="language-plaintext highlighter-rouge">select ltrim(' hi hi ');</code> » <code class="language-plaintext highlighter-rouge">hi hi</code></li>
+                    <li><code class="language-plaintext highlighter-rouge">select trim(BOTH 'x' FROM 'xxxhixxx');</code> » hi
+                      <blockquote>
+                        <ul>
+                          <li>BOTH: 양쪽,</li>
+                          <li>LEADING: 문자열 좌측,</li>
+                          <li>TRAILING: 문자열 우측</li>
+                          <li>뒤에 아무것도 안쓰면 공백 제거</li>
+                        </ul>
+                      </blockquote>
+                    </li>
+                  </ul>
+                </blockquote>
+              </li>
+              <li>ABS(N) : N의 절대값을 구하는 함수</li>
+              <li>MOD(N,M) (N%M): N을 M으로 나눈 나머지 값을 구하는 함수</li>
+              <li>FLOOR(x) : 내림 함수, BIGINT로 자동 변환</li>
+              <li>CEILING(x) : 올림 함수</li>
+              <li>ROUND(x) : 반올림 함수</li>
+              <li>POW(x,y) POWER(x,y) : x의 y 제곱 승 함수</li>
+              <li>GREATEST(x,y,…) : 가장 큰 값을 반환</li>
+              <li>LEAST(x,y,…) : 가장 작은 값을 반환</li>
+              <li>CURDATE(),CURRENT_DATE : 오늘 날짜를 YYYY-MM-DD나 YYYYMMDD 형식으로 반환</li>
+              <li>CURTIME(), CURRENT_TIME : 현재 시각을 HH:MM:SS나 HHMMSS 형식으로 반환</li>
+              <li>NOW(), SYSDATE() , CURRENT_TIMESTAMP : 오늘 현시각을 YYYY-MM-DD HH:MM:SS나 YYYYMMDDHHMMSS 형식으로 반환</li>
+              <li>DATE_FORMAT(date,format) : 입력된 date를 format 형식으로 반환합니다.</li>
+              <li>PERIOD_DIFF(p1,p2) : YYMM이나 YYYYMM으로 표기되는 p1과 p2의 차이 개월을 반환</li>
+              <li>CAST(expr AS type), CONVERT(expr,type) : 타입을 변환하는 함수
+                <blockquote>
+                  <ul>
+                    <li>type에 들어갈 수 있는 종류 : BINARY, CHAR, DATE, TIME,  DATETIME, SIGNED(INTEGER, 음수 가능), UNSIGNED(INTEGER, 양수만 가능 범위 2배 늘려줌)</li>
+                    <li>Ex) <code class="language-plaintext highlighter-rouge">select cast(now() as date)</code> : 현재 시간을 date 타입으로 출력해주세요 » 2003-09-25</li>
+                    <li><code class="language-plaintext highlighter-rouge">select cast(1-2 as unsigned);</code> »  18446744073709551615 (unsigned는 음수가 없음 대신 범위를 2배 늘려줌)
+<br /></li>
+                  </ul>
+                </blockquote>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+:ET

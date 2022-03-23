@@ -1,0 +1,21 @@
+I"E<h2 id="dmldata-manipulation-language데이터-조작어">DML(Data Manipulation Language,데이터 조작어)</h2>
+<ul>
+  <li>INSERT : 등록
+    <blockquote>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">INSERT INTO 테이블명(필드1, 필드2, ...) VALUES(필드1의 값, 필드2의 값, ...);</code></li>
+        <li><code class="language-plaintext highlighter-rouge">INSERT INTO 테이블명
+    VALUES ( 필드1의 값, 필드2의 값, ...);</code></li>
+        <li>Ex)
+          <blockquote>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">insert into role(role_id, description) values (200, 'CEO');</code> : role 테이블에 role_id는 200, description은 CEO로 데이터를 등록해주세요</li>
+              <li><code class="language-plaintext highlighter-rouge">insert into role values (500, 'analyst');</code> : role 테이블에 role_id는 500, description은 analyst로 데이터를 등록해주세요</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+:ET

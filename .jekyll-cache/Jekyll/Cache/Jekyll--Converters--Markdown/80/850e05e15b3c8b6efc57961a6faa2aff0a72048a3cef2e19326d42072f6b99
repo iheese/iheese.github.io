@@ -1,4 +1,4 @@
-I"+<p>*모든 과정은 window 기준입니다.</p>
+I"h<p>*모든 과정은 window 기준입니다.</p>
 
 <ol>
   <li><a href="https://www.mysql.com/downloads/">MySQL</a> 에서 MySQL 설치
@@ -98,9 +98,18 @@
 
 <h3 id="데이터베이스에-접속하기">데이터베이스에 접속하기</h3>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">mysql –h호스트명 –uDB계정명 –p 데이터베이스이름</code>
+  <li>root 계정 접속
     <blockquote>
       <ul>
+        <li><code class="language-plaintext highlighter-rouge">mysql -u root -p </code></li>
+        <li>Enter password: 패스워드 입력</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>데이터베이스 바로 접속(권한 존재 확인)
+    <blockquote>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">mysql –h호스트명 –uDB계정명 –p 데이터베이스이름</code></li>
         <li><code class="language-plaintext highlighter-rouge">mysql –h127.0.0.1 –uconnectuser –p connectdb</code></li>
         <li>Enter password: 계정의 비밀번호 입력(대소문자 구분)</li>
       </ul>
@@ -113,9 +122,62 @@
   <li><code class="language-plaintext highlighter-rouge">QUIT</code>, <code class="language-plaintext highlighter-rouge">exit</code></li>
   <li>Bye 라고 뜨면 연결 끊기 성공</li>
 </ul>
+
+<p><br /></p>
+<h4 id="mysql-특징">MySQL 특징</h4>
+<ul>
+  <li>SQL은 쿼리(query)라고 읽는다</li>
+  <li>모든 쿼리 마지막은 ;(세미콜론)으로 끝난다.</li>
+  <li>쿼리는 대소문자를 구별하지 않습니다.</li>
+  <li>계산식 결과도 구할 수 있다.
+    <blockquote>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">select 5+5;</code></li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>여러 문장을 한 줄에 연속으로 붙여서 실행가능하다.</li>
+  <li>세미콜론으로 구분해주면 된다.</li>
+  <li>아래는 MySQL 버전과 현재 시간, 현재 날짜를 보여주는 쿼리이다.
+    <blockquote>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">select version(); select now(); select current_date;</code></li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>여러 줄로 입력이 가능하다.
+    <blockquote>
+      <ul>
+        <li>mysql&gt; SELECT
+-&gt; USER()
+-&gt; ,
+-&gt; CURRENT_DATE;</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>SQL을 입력하는 도중 취소하기는 \c이다.</li>
+  <li><code class="language-plaintext highlighter-rouge">show databases;</code> : 서버 내 존재하는 데이터 베이스를 확인할 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">use connectdb(데이터베이스 이름);</code> : 사용 중인 데이터베이스 전환하기</li>
+</ul>
+
 <p><br /></p>
 
-<p>Reference:</p>
+<h4 id="sql-데이터베이스-내-테이블-생성-및-조회">SQL 데이터베이스 내 테이블 생성 및 조회</h4>
+
+<ol>
+  <li>sql 파일을 다운로드한다. (실습에서는 examples.sql 파일을 이용)</li>
+  <li>터미널에서 examples.sql이 존재하는 폴더로 이동( cd 파일주소 [엔터])</li>
+  <li><code class="language-plaintext highlighter-rouge">mysql   -uconnectuser  -p  connectdb   &lt;  examples.sql</code> 입력 후 암호 입력</li>
+  <li><code class="language-plaintext highlighter-rouge">mysql –uconnectuser -p  connectdb</code> connectdb  접속</li>
+</ol>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">show tables;</code> : 테이블 목록을 보는 쿼리문</li>
+  <li><code class="language-plaintext highlighter-rouge">desc employee;</code> : (desc 테이블이름;) 테이블 구조 확인</li>
+</ul>
+
+<p><br />
+Reference:</p>
 <ul>
   <li>웹 프로그래밍(풀스택)_부스트코스 과정을 학습한 내용입니다.</li>
   <li><a href="https://fruitdev.tistory.com/206">MySQL8.0 계정생성 및 DB 권한 주기_과일가게 개발자</a></li>
