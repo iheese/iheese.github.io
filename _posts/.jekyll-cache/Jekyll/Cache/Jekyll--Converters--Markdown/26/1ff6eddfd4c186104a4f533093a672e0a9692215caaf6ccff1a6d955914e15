@@ -1,0 +1,377 @@
+I"�k<h3 id="java의-작동-원리">JAVA의 작동 원리</h3>
+
+<ol>
+  <li>
+    <p>title.java (java source code; 우리가 친 코드)</p>
+
+    <ul>
+      <li>Compile: java코드를 기계어로 바꿔주는 과정</li>
+    </ul>
+  </li>
+  <li>
+    <p>title.class 변환 (java appilication; 컴퓨터가 이해할 수 있는 언어로 바꿈)</p>
+
+    <ul>
+      <li>Run :실행</li>
+    </ul>
+  </li>
+  <li>
+    <p>Java Virtual Machine(자바 가상 머신;  class 파일 읽음</p>
+
+    <ul>
+      <li>Run: 실행</li>
+    </ul>
+  </li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="java의-데이터-타입">JAVA의 데이터 타입</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Datatype</span><span class="o">{</span> <span class="c1">//파일명대로 설정해주어야한다. </span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+ <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">6</span><span class="o">);</span> <span class="c1">// Number</span>
+ <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"six"</span><span class="o">);</span> <span class="c1">// String</span>
+
+ <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"6"</span><span class="o">);</span> <span class="c1">// String 6</span>
+
+ <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">6</span><span class="o">+</span><span class="mi">6</span><span class="o">);</span> <span class="c1">// 12; 계산 가능</span>
+ <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"6"</span><span class="o">+</span><span class="s">"6"</span><span class="o">);</span> <span class="c1">// 66</span>
+
+ <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">6</span><span class="o">*</span><span class="mi">6</span><span class="o">);</span> <span class="c1">// 36</span>
+ <span class="c1">// System.out.println("6"*"6"); </span>
+<span class="c1">// 문자열끼리는 계산이 안된다. </span>
+
+ <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"1111"</span><span class="o">.</span><span class="na">length</span><span class="o">());</span> <span class="c1">// 4 문자열 길이 구하는 메소드</span>
+
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="java-기본-연산-math-클래스">JAVA 기본 연산, Math 클래스</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Number</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Operator</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">8</span> <span class="o">+</span> <span class="mi">2</span><span class="o">);</span> <span class="c1">// 10</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">8</span> <span class="o">-</span> <span class="mi">2</span><span class="o">);</span> <span class="c1">// 6</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">2</span><span class="o">);</span> <span class="c1">// 16</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">8</span> <span class="o">/</span> <span class="mi">2</span><span class="o">);</span> <span class="c1">// 4</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">);</span> <span class="c1">// 3.141592653589793</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">floor</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">));</span> <span class="c1">//4</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">));</span> <span class="c1">//3</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="mf">1.6</span><span class="o">));</span> <span class="c1">//2</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="java-문자열-연산">JAVA 문자열 연산</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StringOperation</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+   <span class="c1">// Character VS String </span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">);</span> <span class="c1">// String</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="sc">'H'</span><span class="o">);</span> <span class="c1">// Character 한개의 문자</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"H"</span><span class="o">);</span> 
+
+        <span class="c1">// new line</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello \nWorld"</span><span class="o">);</span> <span class="c1">//줄바꾸긱</span>
+
+        <span class="c1">// escape \"\" 이런 식으로 큰 따옴표 출력 가능</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello \"World\""</span><span class="o">);</span><span class="c1">// Hello "World" </span>
+
+        <span class="c1">//길이</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">.</span><span class="na">length</span><span class="o">());</span> <span class="c1">// 11</span>
+        <span class="c1">//대체하기</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello, [[[name]]] ... bye. "</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"[[[name]]]"</span><span class="o">,</span> <span class="s">"hs"</span><span class="o">));</span>
+        <span class="c1">// Hello, hs ... bye. </span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="java-casting데이터-타입-변환">JAVA Casting(데이터 타입 변환)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Casting</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="kt">double</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">1.1</span><span class="o">;</span> <span class="c1">//실수</span>
+        <span class="kt">double</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span> <span class="c1">//정수</span>
+        <span class="kt">double</span> <span class="n">b2</span><span class="o">=(</span><span class="kt">double</span><span class="o">)</span> <span class="mi">1</span><span class="o">;</span> <span class="c1">//상관없다.     </span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b2</span><span class="o">);</span> <span class="c1">//1</span>
+
+        <span class="c1">// int c = 1.1;</span>
+        <span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="mf">1.1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">e</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="mf">1.1</span><span class="o">;</span> <span class="c1">//버리는 값이 생기므로 정확히 명시해줘야 한다.</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span> <span class="c1">//1</span>
+
+        <span class="c1">// 1 to String </span>
+        <span class="nc">String</span> <span class="n">f</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">f</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span> <span class="c1">//string  </span>
+
+        <span class="c1">//String to double</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span><span class="s">"55"</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">str1</span> <span class="o">=</span> <span class="nc">Double</span><span class="o">.</span><span class="na">parseDouble</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str1</span><span class="o">);</span>
+
+<span class="err">        </span><span class="c1">//Double to string</span>
+        <span class="kt">double</span> <span class="n">num</span><span class="o">=</span><span class="mf">12.11</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">num1</span> <span class="o">=</span> <span class="nc">Double</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span><span class="c1">//class java.lang.String</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>정수에서 실수로 변경할 때는 버리는 값이 없어서 딱히 명시해줄 필요없다.</p>
+  </li>
+  <li>
+    <p>실수에서 정수로 변경할 때는 버리는 값이 생기므로 반드시 명시해줘야한다.</p>
+  </li>
+  <li>
+    <p>casting  하는 다양한 방법이 있다. (reference 참고)</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="java-클래스">JAVA 클래스</h3>
+
+<ul>
+  <li>
+    <p>정의하고자 하는 변수들과 메소드들의 묶음</p>
+  </li>
+  <li>
+    <p>클래스라는 팀이 있다면, 그 속의 다양한 역할을 맡은 팀원들이 메소드가 된다.</p>
+  </li>
+  <li>
+    <p>이클립스 상단의 Window - Show View - Outline 의 클래스의 포함된 변수와 메소드 확인 가능</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="java-메소드">JAVA 메소드</h3>
+
+<ul>
+  <li>
+    <p>클래스의 동작을 나타내는 함수</p>
+  </li>
+  <li>
+    <p>예를 들어 Math의 floor, ceil / PrintWriter의 write, close 등이 메소드</p>
+  </li>
+  <li>
+    <p>Refactor-Extract Method  (Alt+Shift+M) 로 메소드를 만들 수 있다.</p>
+  </li>
+  <li>
+    <p>Refactor - Convert Local Variable to Filed로 지역 변수(Filed)를 전역 변수로 변경해 메소드의 파라미터를 없앨 수 있다. 전역변수로 변경하고 main 메소드 안에서 값을 지정해주면 된다.</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="java-인스턴스">JAVA 인스턴스</h3>
+
+<ul>
+  <li>클래스를 컴퓨터 상에서 실체화한 것</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//클래스 </span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
+<span class="o">...</span>
+<span class="o">}</span>
+<span class="c1">//객체와 인스턴스 </span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Animal</span> <span class="n">cat</span><span class="o">,</span> <span class="n">dog</span><span class="o">;</span> <span class="c1">// '객체'</span>
+
+    <span class="c1">// 인스턴스화</span>
+    <span class="n">cat</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Animal</span><span class="o">();</span> <span class="c1">// cat은 Animal 클래스의 '인스턴스'(객체를 메모리에 할당)</span>
+    <span class="n">dog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Animal</span><span class="o">();</span> <span class="c1">// dog은 Animal 클래스의 '인스턴스'(객체를 메모리에 할당)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>인스턴스는 객체에 포함되는 개념이다.</p>
+  </li>
+  <li>
+    <p>인스턴스는 어떤 원본(추상적인 개념)으로부터 ‘생성된 복제본’을 의미한다.</p>
+  </li>
+  <li>
+    <p>다양한 값을 넣어 똑같은 클래스를 여러 번 사용하고 싶을 때 사용한다.</p>
+  </li>
+  <li>
+    <p>여러 번 사용할 클래스의 static 키워드를 제거해주어야 사용 가능하다.</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="java-조건문">JAVA 조건문</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="k">if</span><span class="o">(</span><span class="n">income</span> <span class="o">&gt;=</span> <span class="mf">10000.0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">dividend1</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="mf">0.6</span><span class="o">;</span>
+            <span class="n">dividend2</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="mf">0.3</span><span class="o">;</span>
+            <span class="n">dividend3</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="mf">0.1</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">income</span><span class="o">&gt;=</span><span class="mf">5000.0</span> <span class="o">&amp;&amp;</span> <span class="n">income</span><span class="o">&lt;</span><span class="mf">10000.0</span><span class="o">){</span>
+            <span class="n">dividend1</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="mf">0.5</span><span class="o">;</span>
+            <span class="n">dividend2</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="mf">0.3</span><span class="o">;</span>
+            <span class="n">dividend3</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="mf">0.2</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span><span class="o">{</span>
+            <span class="n">dividend1</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="mf">1.0</span><span class="o">;</span>
+            <span class="n">dividend2</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="n">dividend3</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>논리 연산자</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>and: &amp;&amp;</p>
+        </li>
+        <li>
+          <p>or: ||</p>
+        </li>
+        <li>
+          <p>not: !</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>비트 연산자(이진법)</p>
+
+    <blockquote>
+      <ul>
+        <li>
+          <p>&amp;: 같은 위치에 모두 1이 존재해야 1이 된다.(and 과 비슷)</p>
+        </li>
+        <li>
+          <p>ex) 1001 &amp; 0001 == 0001</p>
+        </li>
+        <li>
+          <p>|: 어떤 위치든 1이 있으면 1이된다. (or 과 비슷)</p>
+        </li>
+        <li>
+          <p>ex) 1000 | 0001 == 1001</p>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="java-배열">JAVA 배열</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccountingArrayApp</span> <span class="o">{</span>
+
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+       <span class="c1">// string 역시 배열이다.     </span>
+
+     <span class="c1">// ....     </span>
+
+         <span class="kt">double</span><span class="o">[]</span> <span class="n">dividendRates</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span> <span class="c1">// 배열 길이 </span>
+        <span class="n">dividendRates</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">;</span>
+        <span class="n">dividendRates</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">;</span>
+        <span class="n">dividendRates</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">;</span>
+
+        <span class="kt">double</span> <span class="n">dividend1</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span> <span class="c1">//인덱스 0부터 시작 </span>
+        <span class="kt">double</span> <span class="n">dividend2</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+        <span class="kt">double</span> <span class="n">dividend3</span> <span class="o">=</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span> 
+      <span class="c1">//인덱스로 접근 가능   </span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="java-while-문">JAVA while 문</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="kt">double</span><span class="o">[]</span> <span class="n">dividendRates</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+        <span class="n">dividendRates</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">;</span>
+        <span class="n">dividendRates</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">;</span>
+        <span class="n">dividendRates</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> 
+        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">dividendRates</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//조</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Dividend : "</span> <span class="o">+</span> <span class="n">income</span> <span class="o">*</span> <span class="n">dividendRates</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+<span class="c1">//        double dividend1 = income * dividendRates[0];</span>
+<span class="c1">//        double dividend2 = income * dividendRates[1];</span>
+<span class="c1">//        double dividend3 = income * dividendRates[2];</span>
+
+<span class="c1">//        System.out.println("Dividend 1 : " + dividend1);</span>
+<span class="c1">//        System.out.println("Dividend 2 : " + dividend2);</span>
+<span class="c1">//        System.out.println("Dividend 3 : " + dividend3);</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="java-접근-제한자">JAVA 접근 제한자</h3>
+
+<ul>
+  <li>
+    <p>public :  외부 클래스가 자유롭게 사용 가능</p>
+  </li>
+  <li>
+    <p>protected: 같은 패키지 또는 자식 클래스에서만 사용 가능</p>
+  </li>
+  <li>
+    <p>private: 개인적인 것이라 외부에서 사용 불가능</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="java-static-final-static-final">JAVA static, final, static final</h3>
+
+<ul>
+  <li>
+    <p>static: 객체마다 가질 필요가 없는 공용으로 사용하는 필드, 인스턴스 필드를 포함하지 않는 메소드</p>
+  </li>
+  <li>
+    <p>final: 한 번 값이 정해지면 바꿀 수 없는 필드</p>
+  </li>
+  <li>
+    <p>static final: 모든 영역에서 고정된 값으로 사용하는 상수</p>
+  </li>
+</ul>
+
+<p>Reference:</p>
+
+<ul>
+  <li>
+    <p>쉽게하는 자바1_생활코딩, 부스트코스 과정을 통해 공부한 내용입니다.</p>
+  </li>
+  <li>
+    <p><a href="[[java] double을 문자열로 변환 - 리뷰나라](http://daplus.net/java-double%EC%9D%84-%EB%AC%B8%EC%9E%90%EC%97%B4%EB%A1%9C-%EB%B3%80%ED%99%98/)">리뷰나라_casting</a></p>
+  </li>
+  <li>
+    <p><a href="[[Java] 클래스, 객체, 인스턴스의 차이 - Heee's Development Blog](https://gmlwjd9405.github.io/2018/09/17/class-object-instance.html)">클래스, 객체, 인스턴스의 개념</a></p>
+  </li>
+</ul>
+:ET

@@ -1,0 +1,128 @@
+I"3<p>*git for windows version 2.35.1.2에서 진행했습니다.
+<br /></p>
+<h2 id="shell-command">Shell Command</h2>
+<p>*git bash에서 학습하였습니다.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cd [폴더 이름]</code> : 폴더로 이동
+    <blockquote>
+      <ul>
+        <li>Ex) cd Documents/</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">cd ..</code> : 상위 폴더로 이동</li>
+  <li><code class="language-plaintext highlighter-rouge">mkdir [폴더 이름]</code> : 폴더  생성
+    <blockquote>
+      <ul>
+        <li>Ex) mkdir dev</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">pwd</code> : 현재 위치 표시</li>
+  <li><code class="language-plaintext highlighter-rouge">ls</code> : 현재 폴더에 있는 파일들 표시
+<br /></li>
+  <li><code class="language-plaintext highlighter-rouge">touch [파일 이름]</code> : 파일 생성
+    <blockquote>
+      <ul>
+        <li>Ex) touch readme.md</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mv [파일 이름] [옮길 위치]</code> : 파일 옮기기
+    <blockquote>
+      <ul>
+        <li>Ex) mv readme.md bin/</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">mv [파일 이름] [파일 이름]</code> : 파일 이름 변경
+    <blockquote>
+      <ul>
+        <li>Ex) mv readme.md  ./README.txt</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">cp [파일 이름] [복사할 위치]</code> : 파일 복사해서 넣기
+    <blockquote>
+      <ul>
+        <li>Ex) cp readme.md bin/</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">rm [파일 이름]</code> : 파일 제거
+    <blockquote>
+      <ul>
+        <li>Ex) rm README.txt</li>
+        <li>폴더는 강제로 지울 수 없음, 안의 모든 파일을 제거해야 제거 가능</li>
+        <li><code class="language-plaintext highlighter-rouge">rm -rf bin/</code> : 폴더와 그 안의 파일들 강제로 지우기</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">cat [파일이름]</code> : 파일 내용 나열
+    <blockquote>
+      <ul>
+        <li>Ex) cat readme.md</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">vi [파일이름]</code> : vim으로 파일 작성, 수정
+    <blockquote>
+      <ul>
+        <li>Ex) vi readme.md</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+<h2 id="vim-command">Vim command</h2>
+<ul>
+  <li>h j k l : left, down, up, right(키보드 화살표도 가능)</li>
+  <li>i : insert mode(내용 수정)</li>
+  <li>v : visual mode(칸 단위 선택)
+    <blockquote>
+      <ul>
+        <li>V(shift + v) : visual line mode(줄 단위 선택)</li>
+        <li>ctrl + v : visual block mode(블럭 단위 선택)</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>y : yank (복사)</li>
+  <li>yy : yank a line (한 줄 복사하기)</li>
+  <li>d : delete(삭제)</li>
+  <li>dd : delete a line(한 줄 삭제)</li>
+  <li>p :  paste (붙여넣기)</li>
+  <li>u :  undo (되돌리기)</li>
+  <li>a :  append (문서 사이에 글 넣기)</li>
+  <li>A (shift + a) : append from end of line(문장의 끝에 글 넣기)</li>
+  <li>o : open line (아래 줄에 끼워넣기, 글 넣기)</li>
+  <li>O (shift + o) : open line(윗 줄에 끼워넣기, 글 넣기)</li>
+  <li>H (shift + h) : move to the top of the screen(맨 위로 이동)</li>
+  <li>M (shift + m) : move to the middle of the screen(글의 중간으로 이동)</li>
+  <li>L (shift + l) : move to the bottom of the screen(맨 아래로 이동)</li>
+  <li>ctrl + b : move to previous page(이전 화면으로 이동)</li>
+  <li>ctrl + d : move to a half of page(화면의 반 이동)</li>
+  <li>ctrl + shif + f (ctrl + F) : move to next page(다음 화면으로 이동)</li>
+  <li>ESC : Normal mode로 돌아가기</li>
+  <li>commnd mode(:)
+    <blockquote>
+      <ul>
+        <li>:q : quit(나가기, 변경사항 있으면 물어봄)</li>
+        <li>:q! : quit discarding all changes(그냥 무조건 나가기)</li>
+        <li>:w : write (저장하기)</li>
+        <li>:wq : write and quit(저장하고 나가기)</li>
+        <li>:{number} : jump to {number}th line (number째 줄로 이동)</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li>핀테크 서비스 백엔드 개발자 양성 과정_패스트캠퍼스를 학습하고 정리한 내용입니다.</li>
+  <li><a href="https://jhnyang.tistory.com/54">vi 편집기 기본 사용법_양햄찌가 만드는 세상</a></li>
+  <li><a href="https://jhnyang.tistory.com/149">visual mode_양햄찌가 만드는 세상</a></li>
+</ul>
+:ET

@@ -1,0 +1,360 @@
+I" i<h3 id="jspjava-server-pages">JSP(Java Server Pages)</h3>
+<ul>
+  <li>HTML 문서 안에 Java 코드를 넣어 동적 웹페이지를 설정하는 웹 어플리케이션 도구이다.</li>
+  <li>JSP는 서블릿 기술로 변환되어 사용하한다.</li>
+</ul>
+
+<p><br /></p>
+<h4 id="jsp-lifecycle">JSP Lifecycle</h4>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">%@</span> <span class="na">page</span> <span class="na">language=</span><span class="s">"java"</span> <span class="na">contentType=</span><span class="s">"text/html; charset=UTF-8"</span>
+    <span class="na">pageEncoding=</span><span class="s">"UTF-8"</span><span class="err">%</span><span class="nt">&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+hello
+<span class="nt">&lt;</span><span class="err">%</span>
+	<span class="na">System.out.println</span><span class="err">("</span><span class="na">jspService</span><span class="err">()");</span>
+<span class="err">%</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="err">%!</span>
+<span class="na">public</span> <span class="na">void</span> <span class="na">jspInit</span><span class="err">()</span> <span class="err">{</span>
+	<span class="na">System.out.println</span><span class="err">("</span><span class="na">jspInit</span><span class="err">()!");</span>
+<span class="err">}</span>
+
+<span class="na">public</span> <span class="na">void</span> <span class="na">jspDestroy</span><span class="err">()</span> <span class="err">{</span>
+	<span class="na">System.out.println</span><span class="err">("</span><span class="na">jspDestroy</span><span class="err">()");</span>
+<span class="err">}</span>
+<span class="err">%</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>JSP 실행순서
+    <blockquote>
+      <ol>
+        <li>브라우저가 웹서버에 대한 JSP에 대한 요청 정보를 전달한다.</li>
+        <li>브라우저가 요청한 JSP가 최초일 경우만 JSP로 작성한 코드를 서블릿 코드로 변환한다.(java 파일 생성)</li>
+        <li>서블릿 코드를 컴파일한다. (class 파일 생성)</li>
+        <li>클래스 로딩하고 인스턴스 생성한다.</li>
+        <li>서블릿이 실행되어 요청을 처리하고 응답 정보를 생성한다.</li>
+      </ol>
+    </blockquote>
+  </li>
+  <li>servlet 라이프 사이클의 메소드
+    <blockquote>
+      <ul>
+        <li>init(),  service(), destroy()</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>JSP 라이프 사이클의 메소드 (jsp가 서블릿으로 변경된 파일에서 사용되는 메소드)
+    <blockquote>
+      <ul>
+        <li>_jspinit(),  _jspservice(), _jspdestroy()</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>두 라이프 사이클 모두 생성, init()은 처음에만 발생하며 그 후 메모리에 로딩되어 요청시 객체를 재활용하고 종료 혹은 변경시 destroy()가 한 번 발생하게 된다.</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="jsp-문법">JSP 문법</h4>
+
+<ul>
+  <li>선언문(DeClaration): &lt;%! %&gt; , 전역변수 선언 및 메소드 선언</li>
+  <li>스크립트릿(Scriptlet): &lt;% %&gt;, 프로그래밍 코드 기술</li>
+  <li>표현식(Experssion): &lt;%= %&gt;, 화면에 출력할 내용 기술</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">%@</span> <span class="na">page</span> <span class="na">language=</span><span class="s">"java"</span> <span class="na">contentType=</span><span class="s">"text/html; charset=UTF-8"</span>
+    <span class="na">pageEncoding=</span><span class="s">"UTF-8"</span><span class="err">%</span><span class="nt">&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;</span><span class="err">%</span> 
+<span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i=</span><span class="s">0;i&lt;5;i++){</span> 
+<span class="err">%</span><span class="nt">&gt;</span>   //프로그래밍 코드는 스크립트릿으로 감싸줘야 한다. 
+
+	id :<span class="nt">&lt;</span><span class="err">%=</span> <span class="na">getId</span><span class="err">()</span> <span class="err">+</span> <span class="na">i</span> <span class="err">%</span><span class="nt">&gt;&lt;br&gt;</span>  
+    //화면에 출력할 코드는 표현식에 감싸져  있어야 한다.
+
+<span class="nt">&lt;</span><span class="err">%</span>
+<span class="err">}</span>  <span class="err">//</span><span class="na">프로그래밍</span> <span class="na">코드는</span> <span class="na">스크립트릿으로</span> <span class="na">감싸줘야</span> <span class="na">한다.</span> 
+<span class="err">%</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+
+<span class="nt">&lt;</span><span class="err">%!</span>
+    <span class="na">String</span> <span class="na">id = </span><span class="s">"u00"</span><span class="err">;</span> <span class="err">//</span><span class="na">멤버변수</span><span class="err">(</span><span class="na">전역변수</span><span class="err">)</span> <span class="na">선언</span>
+    <span class="na">public</span> <span class="na">String</span> <span class="na">getId</span><span class="err">(</span> <span class="err">)</span> <span class="err">{</span> <span class="err">//</span><span class="na">메소드</span> <span class="na">선언</span>
+        <span class="na">return</span> <span class="na">id</span><span class="err">;</span>
+    <span class="err">}</span>
+<span class="err">%</span><span class="nt">&gt;</span> //전역변수, 메소드는 선언문에 감싸져 있어야 한다.
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="jsp-내장객체">JSP 내장객체</h4>
+
+<p><img src="/img/posts/jsp/implicit.png" alt="implicit" width="760" height="355" /></p>
+
+<ul>
+  <li>JSP에 입력한 코드는 대부분 _jspService() 메소드 안에 삽입되는 서블릿 코드로 생성된다. (선언문(&lt;%! %&gt;) 이외의 표현식(&lt;% %&gt;, &lt;%= %&gt;, &lt;%@ %&gt;)은 JSP가 서블릿으로 바뀌어질 때 public void _jspService 메서드 안에 코드가 작성된다.)</li>
+  <li>_jspService()의 윗부분에 미리 선언된 객체들이 있으며, 이는 jsp에서도 사용 가능하다.</li>
+  <li>response, request, application, session, out과 같은 변수를 내장객체라고 한다.</li>
+  <li>내장객체들은 _jspService() 메소드의 지역변수이므로 메소드를 벗어난 JSP 선언문에 사용될 수 없다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="redirect">redirect</h3>
+<ul>
+  <li>HTTP 프로토콜로 정해진 규칙</li>
+  <li>서버가 브라우저에게 받은 요청을 다시 지시하는 것을 말한다.</li>
+  <li>서버가 클라이언트의 요청에 대해 특정 URL로 이동을 요청하는 것을 말한다.</li>
+</ul>
+
+<blockquote>
+  <ol>
+    <li>브라우저는 서버에게 요청을 보낸다.</li>
+    <li>서버는 클라이언트에게 HTTP 상태코드 302로 응답하고 헤더에 Location 값이 URL을 추가하여 응답한다. (저 URL로 이동 부탁합니다.)</li>
+    <li>클라이언트는 서버로부터 받은 상태값이 302면 Location 헤더값으로 재요청을 보내고 브라우저의 URL로 바뀌게 된다.
+      <ul>
+        <li>상태코드 302: 클라이언트가 요청한 리소스가 Location 헤더의 주어진 URL로 일시적으로 이동했음을 가리킨다.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>
+    <p>서블릿이나 JSP는 리다이렉트하기 위해 HttpServletResponse 클래스의 sendRedirect() 메소드를 사용한다.</p>
+  </li>
+  <li>
+    <p>예시 : 게시판에서 글 작성 - 클라이언트&gt;서버(글 저장 요청) - 서버 글 저장 - 서버&gt;클라이언트(글 목록으로 이동 응답) - 자동으로 글 목록(서버에게 요청하여 응답받은) 출력</p>
+  </li>
+</ul>
+
+<p><img src="/img/posts/jsp/redirect.png" alt="redirect" width="760" height="416" /></p>
+
+<h5 id="redirect-실습">redirect 실습</h5>
+<ul>
+  <li>redirect01.jsp 파일</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">%@</span> <span class="na">page</span> <span class="na">language=</span><span class="s">"java"</span> <span class="na">contentType=</span><span class="s">"text/html; charset=UTF-8"</span>
+    <span class="na">pageEncoding=</span><span class="s">"UTF-8"</span><span class="err">%</span><span class="nt">&gt;</span>
+<span class="nt">&lt;</span><span class="err">%</span>
+    <span class="na">response.sendRedirect</span><span class="err">("</span><span class="na">redirect02.jsp</span><span class="err">");</span>
+<span class="err">%</span><span class="nt">&gt;</span>    
+</code></pre></div></div>
+<ul>
+  <li>redirect02.jsp 파일</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">%@</span> <span class="na">page</span> <span class="na">language=</span><span class="s">"java"</span> <span class="na">contentType=</span><span class="s">"text/html; charset=UTF-8"</span>
+    <span class="na">pageEncoding=</span><span class="s">"UTF-8"</span><span class="err">%</span><span class="nt">&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+redirect된 페이지 입니다.
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="forward">forward</h3>
+<ul>
+  <li>같은 웹 어플리케이션 내 JSP, 서블릿이 추가적인 처리를 위해 다른 JSP, 서블릿에게 위임하여 처리하는 방식
+    <blockquote>
+      <ol>
+        <li>브라우저에서 Servlet1에게 요청을 보냄</li>
+        <li>Servlet1은 요청 처리 후 HttpServletRequest에 저장</li>
+        <li>Servlet1은 결과가 저장된 HttpServletRequest와 응답을 위한 HttpServletResponse을 같은 웹 어플리케이션 안에 있는 Servlet2에게 전송</li>
+        <li>Servlet2는 Servlet1으로 부터 받은 HttpServletRequest와 HttpServletResponse를 이용하여 요청을 처리한 후 웹 브라우저에게 결과를 전송</li>
+      </ol>
+    </blockquote>
+  </li>
+  <li>RequestDispatcher 객체는 HttpServletRequest 객체의 getRequestDispatcher(이동할 주소) 메소드를 이용해 만든다.</li>
+  <li>RequestDispatcher의 forward() 메소드를 이용하여 요청과 응답을 넘긴다.</li>
+</ul>
+
+<p><img src="/img/posts/jsp/forward.png" alt="forward" width="760" height="416" /></p>
+
+<p><br /></p>
+<h5 id="forward-실습import-부분-생략">forward 실습(import 부분 생략)</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/front"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FrontServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+       
+    <span class="cm">/**
+     * @see HttpServlet#HttpServlet()
+     */</span>
+    <span class="kd">public</span> <span class="nf">FrontServlet</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+        <span class="c1">// TODO Auto-generated constructor stub</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+     */</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+            
+            <span class="kt">int</span> <span class="nc">Value</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="mi">100</span><span class="o">;</span> 
+            <span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"number"</span><span class="o">,</span> <span class="nc">Value</span><span class="o">);</span>
+            
+            <span class="nc">RequestDispatcher</span> <span class="n">requestDispatehcer</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="s">"/next"</span><span class="o">);</span>
+            <span class="n">requestDispatehcer</span><span class="o">.</span><span class="na">forward</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/next"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForwardServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+       
+    <span class="cm">/**
+     * @see HttpServlet#HttpServlet()
+     */</span>
+    <span class="kd">public</span> <span class="nf">ForwardServlet</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+        <span class="c1">// TODO Auto-generated constructor stub</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+     */</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html"</span><span class="o">);</span>
+        <span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;html&gt;"</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;head&gt;&lt;title&gt;form&lt;/title&gt;&lt;/head&gt;"</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;body&gt;"</span><span class="o">);</span>
+
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Integer</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"number"</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+        
+        <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;/body&gt;"</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;/html&gt;"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<h3 id="servlet--jsp-연동">Servlet &amp; JSP 연동</h3>
+<ul>
+  <li>Servlet은 java 파일, JSP는 Html 파일의 형태를 띄고 있다</li>
+  <li>Servlet은 로직을 구현하기 알맞고, JSP은 HTML을 출력하기 알맞다.</li>
+  <li>보통 브라우저에서 Servlet을 요청하고 서버 내에서 Servlet이 JSP에 forward하여 요청을 처리한다.</li>
+</ul>
+
+<p><img src="/img/posts/jsp/servletjsp
+.png" alt="servletjsp" width="760" height="416" />
+<br /></p>
+
+<h5 id="실습import-부분-생략">실습(import 부분 생략)</h5>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@WebServlet</span><span class="o">(</span><span class="s">"/LogicServlet"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LogicServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+       
+    <span class="cm">/**
+     * @see HttpServlet#HttpServlet()
+     */</span>
+    <span class="kd">public</span> <span class="nf">LogicServlet</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+        <span class="c1">// TODO Auto-generated constructor stub</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="mi">100</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">v2</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="mi">200</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span><span class="o">;</span>
+        
+        <span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"v1"</span><span class="o">,</span> <span class="n">v1</span><span class="o">);</span>
+        <span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"v2"</span><span class="o">,</span> <span class="n">v2</span><span class="o">);</span>
+        <span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"result"</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+        
+        <span class="nc">RequestDispatcher</span> <span class="n">requestDispatcher</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="s">"/result.jsp"</span><span class="o">);</span>
+        <span class="n">requestDispatcher</span><span class="o">.</span><span class="na">forward</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+<ul>
+  <li>result.jsp</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="err">%@</span> <span class="na">page</span> <span class="na">language=</span><span class="s">"java"</span> <span class="na">contentType=</span><span class="s">"text/html; charset=UTF-8"</span>
+    <span class="na">pageEncoding=</span><span class="s">"UTF-8"</span><span class="err">%</span><span class="nt">&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>title<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+EL표기법으로 출력합니다.<span class="nt">&lt;br&gt;</span>
+${v1} + ${v2} = ${result} <span class="nt">&lt;br&gt;&lt;br&gt;</span>
+
+스클립틀릿과 표현식을 이용해 출력합니다.<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;</span><span class="err">%</span>
+    <span class="na">int</span> <span class="na">v1 = </span><span class="s">(int)request.getAttribute("v1");</span>
+    <span class="na">int</span> <span class="na">v2 = </span><span class="s">(int)request.getAttribute("v2");</span>
+    <span class="na">int</span> <span class="na">result = </span><span class="s">(int)request.getAttribute("result");</span>
+<span class="err">%</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="err">%</span><span class="na">--</span> <span class="na">setAttribute로</span> <span class="na">담았던</span> <span class="na">변수를</span> <span class="na">가져온다.</span> <span class="na">--</span><span class="err">%</span><span class="nt">&gt;</span>
+<span class="c">&lt;!-- 이것도 주석 가능 --&gt;</span>
+
+<span class="nt">&lt;</span><span class="err">%=</span><span class="na">v1</span><span class="err">%</span><span class="nt">&gt;</span> + <span class="nt">&lt;</span><span class="err">%=</span><span class="na">v2</span> <span class="err">%</span><span class="nt">&gt;</span> = <span class="nt">&lt;</span><span class="err">%=</span><span class="na">result</span> <span class="err">%</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<ul>
+  <li>서블릿에서 여러 개의 URL을 처리할 수 있을까?
+    <blockquote>
+      <p>폴더 경로가 일치하는 경우: /folder1/folder2/*
+확장자 패턴이 일치하는 경우: *.html(확장자)</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li>웹 프로그래밍(풀스택)_부스트코스를 학습한 내용입니다.</li>
+  <li><a href="https://webstone.tistory.com/65" target="_blank">리다이렉트란_빡통들을 위한 쉽게 재미있는 세상</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Status/302" target="_blank">302 Found_MDN_Docs</a></li>
+  <li><a href="https://u-it.tistory.com/entry/%ED%8E%98%EC%9D%B4%EC%A7%80%EC%B6%9C%EB%A0%A5-%ED%8E%98%EC%9D%B4%EC%A7%80%EC%A0%84%ED%99%98-%EB%B0%8F-%ED%8A%B9%EC%A0%95-url%EB%A1%9C-%EC%9E%AC-%EC%9A%94%EC%B2%AD-%EC%9D%84-%ED%95%B4%EC%A3%BC%EB%8A%94-RequestDispatcher-%EC%9D%98-requestgetRequestDispatcherforward-HttpServletResponse%EC%9D%98-responsesendRedirect" target="_blank">forward(), redirect()_유-잇의 개발 일지</a></li>
+  <li><a href="https://dololak.tistory.com/740?category=636501" target="_blank">서블릿 매핑시 url pattern 규칙_DOLOLAK</a></li>
+</ul>
+:ET
