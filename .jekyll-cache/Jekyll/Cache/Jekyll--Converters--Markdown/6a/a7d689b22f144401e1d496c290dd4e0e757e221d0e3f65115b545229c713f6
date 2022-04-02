@@ -1,4 +1,4 @@
-I"3<p>*git for windows version 2.35.1.2에서 진행했습니다.
+I"�<p>*git for windows version 2.35.1.2에서 진행했습니다.
 <br /></p>
 <h2 id="shell-command">Shell Command</h2>
 <p>*git bash에서 학습하였습니다.</p>
@@ -49,12 +49,13 @@
       </ul>
     </blockquote>
   </li>
-  <li><code class="language-plaintext highlighter-rouge">rm [파일 이름]</code> : 파일 제거
+  <li><code class="language-plaintext highlighter-rouge">rm -r [파일 이름]</code> : 파일 제거
     <blockquote>
       <ul>
-        <li>Ex) rm README.txt</li>
+        <li>Ex) rm -r README.txt (recursive)</li>
         <li>폴더는 강제로 지울 수 없음, 안의 모든 파일을 제거해야 제거 가능</li>
-        <li><code class="language-plaintext highlighter-rouge">rm -rf bin/</code> : 폴더와 그 안의 파일들 강제로 지우기</li>
+        <li><code class="language-plaintext highlighter-rouge">rm -rf [파일 이름]</code> : 폴더와 그 안의 파일들 강제로 지우기</li>
+        <li><code class="language-plaintext highlighter-rouge">rm -ri [파일이름]</code> : 폴더 안의 내용을 하나씩 확인하면서 지우기</li>
       </ul>
     </blockquote>
   </li>

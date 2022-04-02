@@ -1,4 +1,4 @@
-I"�<h2 id="git-documents">Git Documents</h2>
+I"S<h2 id="git-documents">Git Documents</h2>
 <ul>
   <li>README.md : 프로젝트와 Repository를 설명하는 문서, 책 표지와 같은 역할을 하며 이 문서로 동료, 사용자들이 내용을 요약할 수 있어야 한다.</li>
   <li>.gitignore : git이 추적할 필요가 없는 파일을 작성하는 문서, 해당 문서에 작성된 리스트는 수정사항이 생겨도 git이 무시하게 된다. 특정 파일 확장자를 무시하거나 이름에 패턴이 존재하는 경우, 특정 디렉토리 아래의 모든 파일을 무시할 수 있다.</li>
@@ -102,5 +102,6 @@
   <li><a href="https://devconnected.com/how-to-switch-branch-on-git/">How to Switch Git Branch_devconnected</a></li>
   <li><a href="https://devlog-wjdrbs96.tistory.com/238">브랜치 병합&amp;충돌&amp;해결에 대하여_Gyun’s 개발일지</a></li>
   <li><a href="https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html">git-flow cheatsheet_Daniel Kummer</a><a id="target"></a></li>
+  <li><a href="https://dev.to/massii/git-flow-vs-github-flow-2iop">Git-Flow vs Github-flow_Massii</a></li>
 </ul>
 :ET

@@ -1,8 +1,8 @@
-I"C<h1 id="git-환경설정">git 환경설정</h1>
+I"�<h1 id="git-환경설정">git 환경설정</h1>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">git config --global user.name [당신의유저네임]</code></li>
-  <li>` git config –global user.email [당신의메일주소]`</li>
-  <li>` git config –global core.editor [vim]`</li>
+  <li><code class="language-plaintext highlighter-rouge">git config --global user.email [당신의메일주소]</code></li>
+  <li><code class="language-plaintext highlighter-rouge">git config --global core.editor [vim]</code></li>
   <li><code class="language-plaintext highlighter-rouge">git config --global core.pager [cat]</code></li>
   <li><code class="language-plaintext highlighter-rouge">git config --list</code> : 설정 확인</li>
 </ul>
