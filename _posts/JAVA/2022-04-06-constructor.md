@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "INSTANCE, CONSTRUCTOR IN JAVA"
-subtitle: "object, instance, heap, constructor"
+title: "CLASS, INSTANCE, CONSTRUCTOR IN JAVA"
+subtitle: "object, OOP, class, instance, constructor, overloading"
 date: 2022-04-06 12:00:00 +0900
 categories: "JAVA"
+background: /img/posts/javaetc/java.png
 ---
 
 ## Object (객체)
