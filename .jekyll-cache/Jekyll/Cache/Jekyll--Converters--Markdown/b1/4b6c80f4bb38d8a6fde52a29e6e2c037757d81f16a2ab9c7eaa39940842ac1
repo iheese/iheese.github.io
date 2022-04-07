@@ -1,14 +1,14 @@
-I"�<h2 id="rename">RENAME</h2>
+I"X#<h2 id="rename">RENAME</h2>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">mv [파일1] [파일2]</code> : 파일1에서 파일2로 제목 변경
     <blockquote>
       <ul>
         <li>git에서는 파일1이 삭제되고 파일2가 생겼다고 판단, commit할 때 살짝 복잡해진다.</li>
-        <li><code class="language-plaintext highlighter-rouge">git mv [파일1] [파일2] </code> : 파일1에서 파일2로 제목 변경, git에서도 rename 임을 알고 있게 된다.</li>
       </ul>
     </blockquote>
   </li>
+  <li><code class="language-plaintext highlighter-rouge">git mv [파일1] [파일2] </code> : 파일1에서 파일2로 제목 변경, git에서도 rename 임을 알고 있게 된다.</li>
 </ul>
 
 <p><br /></p>
@@ -64,8 +64,8 @@
 
 <h2 id="revert-커밋-기록-남기면서-삭제하기">REVERT, 커밋 기록 남기면서 삭제하기</h2>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">git revert [commit hash]</code> : 커밋해쉬에 해당하는 커밋의 내용이 삭제되며 commit log에 Revert “commit” 이 남게 된다.</li>
-  <li>‘git revert –no-commit [commit hash]’ :  커밋해쉬에 해당하는 커밋의 내용이 staging 상태로 유지되게 된다. (add까지 마친 상태, 새로 커밋하면 된다.)</li>
+  <li><code class="language-plaintext highlighter-rouge">git revert [commit hash]</code> : 커밋해쉬에 해당하는 커밋의 내용이 삭제되며 commit log에 “Revert commit” 이 남게 된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">git revert --no-commit [commit hash]</code> :  커밋 해쉬에 해당하는 커밋의 내용이 staging 상태로 유지되게 된다. (add까지 마친 상태, 새로 커밋하면 된다.)</li>
   <li><code class="language-plaintext highlighter-rouge">gir revert [commit hash1] [commit hash2]</code> : 여러 개의 커밋 해쉬 내용이 삭제되고 “Revert 1번 commit”, “Revert 2번 commit” 역시 commit log에 남게 된다.</li>
 </ul>
 
@@ -75,11 +75,54 @@
 </ul>
 
 <p><br /></p>
+<h2 id="merge-rebase-병합하기">MERGE, REBASE, 병합하기</h2>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git switch [branch 이름]</code> : 두 방법 모두 병합될 브랜치에서 명령문 실행</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">git merge main</code> : 현재 A 브랜치에서 main 브랜치의 내용과 비교하여 병합하는 방법, 그 과정에서 conflct가 발생하기도 하여 사용자가 직접 수정해야 한다.</li>
+  <li>base : 현재 A 브랜치가 만들어진 main 브랜치의 커밋 시작 위치</li>
+  <li><code class="language-plaintext highlighter-rouge">git rebase main</code> : 베이스부터 현재 A 브랜치의 커밋 진행 부분을 일시적으로 다른 곳(patch)에 저장하고, HEAD(최신상태) main 브랜치와 저장되어졌던 A 브랜치의 커밋들을 하나씩 병합하여 새로운 커밋을 생성한다.
+    <blockquote>
+      <ul>
+        <li>conflct가 없을 때
+          <ol>
+            <li><code class="language-plaintext highlighter-rouge">git switch A</code> : A 브랜치로 이동</li>
+            <li><code class="language-plaintext highlighter-rouge">git rebase main</code> : main 브랜치 rebase</li>
+            <li><code class="language-plaintext highlighter-rouge">git switch main </code>, <code class="language-plaintext highlighter-rouge">git merge A</code> : A 브랜치 안에 main이 포함되어 있으니 A가 더 큰 브랜치가 되므로 main 브랜치도 merge를 통해 똑같이 만들어준다.</li>
+          </ol>
+        </li>
+        <li>conflict가 있을 때
+          <ol>
+            <li><code class="language-plaintext highlighter-rouge">git switch A</code> : A 브랜치로 이동</li>
+            <li><code class="language-plaintext highlighter-rouge">git rebase main</code> : main 브랜치 rebase</li>
+            <li>conflict 발생</li>
+            <li>해당 파일을 열어 conflict 해결, staging (git add [파일 이름])</li>
+            <li><code class="language-plaintext highlighter-rouge">git rebase --continue</code> : 다음 과정 진행, merge된 파일과 새로운 commit patch의 merge 과정에서 conflict가 일어나는지 봐야한다.</li>
+            <li>3, 4, 5번 반복 후 마무리!</li>
+          </ol>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+<h4 id="tip">Tip!</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git log --decorate --all --graph --oneline</code> : 쉘에서 시각적으로 브랜치 모양을 볼 수 있는 명령어</li>
+  <li><code class="language-plaintext highlighter-rouge">git config --global alias.lg "log --color --graph --
+pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)
+%C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit"</code> : 명령어 <code class="language-plaintext highlighter-rouge">git lg</code> 로 요약된 git log를 볼 수 있는 설정 명령어</li>
+</ul>
+
+<p><br /></p>
 
 <p>Reference:</p>
 <ul>
   <li>핀테크 서비스 백엔드 개발자 양성 과정_패스트캠퍼스를 학습하고 정리한 내용입니다.</li>
   <li><a href="https://kyounghwan01.github.io/blog/etc/git/git-reset-revert/#%E1%84%8B%E1%85%B5-%E1%84%8C%E1%85%A1%E1%86%A8%E1%84%8B%E1%85%A5%E1%86%B8%E1%84%8B%E1%85%B3%E1%86%AF-%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB-%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%B2">git reset, revert로 이전 커밋으로 돌리기_기억보다 기록을</a></li>
   <li><a href="https://ko.wikipedia.org/wiki/%EA%B9%83_(%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4)">GIT_위키백과</a></li>
+  <li><a href="https://www.youtube.com/watch?v=VPb-MKwowHY">지옥에서 온 Git-Rebase_생활코딩 유튜브</a></li>
 </ul>
 :ET
