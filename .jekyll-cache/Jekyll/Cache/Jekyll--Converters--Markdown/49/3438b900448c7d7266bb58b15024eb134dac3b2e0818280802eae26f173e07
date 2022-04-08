@@ -1,4 +1,4 @@
-I"�I<h2 id="object-객체">Object (객체)</h2>
+I"<J<h2 id="object-객체">Object (객체)</h2>
 <ul>
   <li>구체적, 추상적 데이터의 단위, 의사나 행위가 미치는 대상</li>
 </ul>
@@ -256,5 +256,6 @@ Reference:</p>
   <li>백엔드 개발 필수_패스트캠퍼스를 학습하고 정리한 내용입니다.</li>
   <li><a href="https://colossus-java-practice.tistory.com/7">참조형 변수_거신cms</a></li>
   <li><a href="http://www.tcpschool.com/java/java_methodConstructor_constructor">생성자_TCP</a></li>
+  <li><a href="https://www.crebugs.com/product/view.php?idx=7382&amp;code=1412">java img_크레벅스</a></li>
 </ul>
 :ET
