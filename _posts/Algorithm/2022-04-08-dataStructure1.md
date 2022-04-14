@@ -1,7 +1,7 @@
 ---
 layout: post
-title: '자료 구조1 (Data Structure)'
-subtitle: '큐(Queue), 스택(Stack), 링크드 리스트(Linked list), 시간 복잡도(Time complexity) in JAVA'
+title: '[JAVA] 자료 구조1 (Data Structure)'
+subtitle: '큐(Queue), 스택(Stack), 링크드 리스트(Linked list), 시간 복잡도(Time complexity)'
 date: 2022-04-08 12:00:00 +0900
 categories: 'Algorithm'
 background: '/img/posts/etc/datastructure.jpg'
