@@ -1,0 +1,250 @@
+I"�I<h2 id="access-modifier">Access Modifier</h2>
+<ul>
+  <li>private : 같은 클래스 내부에서만 접근 가능, 외부 클래스, 상속 관계에서도 접근 불가하다.</li>
+  <li>default (아무것도 안쓴 것) : 같은 패키지  내부에서만 접근 가능하다. (상속관계라도 패키지 다르면 접근 불가하다.)</li>
+  <li>protected : 같은 패키지와 상속관계 클래스에서만 접근 가능하다.</li>
+  <li>public : 클래스의 외부, 내부 어디서든 접근 가능하다.</li>
+</ul>
+
+<p><br /></p>
+<h2 id="static-변수-클래스-변수-정적-변수">static 변수 (클래스 변수, 정적 변수)</h2>
+<ul>
+  <li>여러 인스턴스가 공유하는 변수가 필요할 때 사용한다.</li>
+  <li>인스턴스와 다르게 처음 프로그램이 메모리에 로딩될 때 할당된다. (static 남용은 메모리 낭비가 될 수 있다.)</li>
+  <li>인스턴스 생성과는 연관이 없기 때문에 <strong>클래스 이름</strong>으로 참조된다.</li>
+</ul>
+
+<h4 id="static-변수-사용-예제-학번-붙이기">static 변수 사용 예제, 학번 붙이기</h4>
+
+<p>Student.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">studentClass</span> <span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="c1">// 1로 공유되는 static 변수</span>
+    
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>StudentTest.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Student</span><span class="o">.</span><span class="na">studentClass</span><span class="o">);</span> <span class="c1">//1</span>
+        <span class="nc">Student</span><span class="o">.</span><span class="na">studentClass</span><span class="o">++;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Student</span><span class="o">.</span><span class="na">studentClass</span><span class="o">);</span> <span class="c1">//2</span>
+        
+        <span class="nc">Student</span> <span class="n">lee</span><span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lee</span><span class="o">.</span><span class="na">studentClass</span><span class="o">);</span> <span class="c1">//2 </span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>직접 클래스 이름으로 접근할 수 있으며 값을 변경하면 다른 공유되는 값도 변경된다.</li>
+  <li>또한 인스턴스도 공통적으로 사용하는 영역임을 알 수 있다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="static-메소드">static 메소드</h2>
+<ul>
+  <li>static 변수와 마찬가지로 클래스 이름 자체로 접근한다.</li>
+  <li>static 메소드 안에서는 멤버 변수를 사용할 수 없다. (인스턴스 생성 전에 호출될 수 있기 때문이다.)</li>
+  <li>객체를 생성하여 메소드를 호출하기 부담스러울 때 사용한다.</li>
+</ul>
+
+<p>Student.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">studentClass</span> <span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="c1">// 1로 공유되는 static 변수	</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="n">studentName</span><span class="o">;</span> <span class="c1">//멤버 변수 선언</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getStudentClass</span><span class="o">(){</span>
+    		<span class="k">return</span> <span class="n">studentClass</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setStudentClass</span><span class="o">(</span><span class="kt">int</span> <span class="n">studentClass</span><span class="o">){</span>
+    	<span class="c1">// studentName ="lee";//오류: 멤버변수 사용불가</span>
+    	<span class="nc">Student</span><span class="o">.</span><span class="na">studentClass</span><span class="o">=</span><span class="n">studentClass</span><span class="o">;</span> <span class="c1">//this도 사용불가</span>
+    <span class="o">}</span> <span class="c1">//클래스 이름 자체로 접근하고 있다. </span>
+    
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>StudentTest.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Student</span><span class="o">.</span><span class="na">getStudentClass</span><span class="o">());</span> <span class="c1">//1</span>
+        <span class="nc">Student</span><span class="o">.</span><span class="na">setStudentClass</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Student</span><span class="o">.</span><span class="na">getStudentClass</span><span class="o">());</span> <span class="c1">//100</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>지역 변수 :  함수 내부에서 선언되고, 내부에서만 사용됨, 스택 메모리에서 사용된</li>
+  <li>멤버 변수(인스턴스 변수) : 클래스 내부에서 사용되며, private이 아니면 다른 클래스에서도 사용 가능, 힙 메모리에 생성되고 가비지 컬렉터가 수거해감</li>
+  <li>static 변수(클래스 변수) : 클래스  내부에서 사용되며, private이 아니면 다른 ㅏ클래스에서 사용가능, 프로그램이 시작할 때 데이터 영역에 제일 먼저 저장되고 프로그램이 끝날 때 소멸됨
+    <blockquote>
+      <ul>
+        <li>static 블럭: <code class="language-plaintext highlighter-rouge">static {}</code> 을 이용하면 main 메소드 보다 먼저 실행되는 영역을 만들 수 있다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="싱글톤-패턴-singleton-pattern">싱글톤 패턴 (Singleton pattern)</h2>
+<ul>
+  <li>객체(인스턴스)가 하나만 생성되어야 하는 경우 사용한다.</li>
+  <li>Ex)
+    <blockquote>
+      <ul>
+        <li>학생 객체는 많이 필요하지만 학교 객체는 하나만 존재해야 한다.</li>
+        <li>직원 객체는 많이 필요하지만 회사 객체는 하나만 존재해야 한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="싱글톤-패턴-만들어보기school-싱글톤-패턴">싱글톤 패턴 만들어보기(School 싱글톤 패턴)</h4>
+
+<ol>
+  <li>School 클래스의 생성자를 private으로 만들어 접근할 수 없게 한다.</li>
+</ol>
+
+<p>School.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">School</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nf">School</span><span class="o">()</span> <span class="o">{}</span> <span class="c1">// private 생성자 생성</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>하나의 private static 인스턴스를 선언한다.</li>
+</ol>
+
+<p>School.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">School</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nf">School</span><span class="o">()</span> <span class="o">{}</span> <span class="c1">// private 생성자 생성</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">School</span> <span class="n">instance</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>3 . getInstance() 메소드를 만들어 하나의 객체만 존재하게 한다.</p>
+
+<p>School.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">School</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nf">School</span><span class="o">()</span> <span class="o">{}</span> <span class="c1">// private 생성자 생성</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">School</span> <span class="n">instance</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">School</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">instance</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">School</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>싱글톤 패턴이 잘 동작하는지 실행해본다.</li>
+</ol>
+
+<p>SchoolTest.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchoolTest</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">School</span> <span class="n">school1</span> <span class="o">=</span> <span class="nc">School</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+        <span class="nc">School</span> <span class="n">school2</span> <span class="o">=</span> <span class="nc">School</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">school1</span> <span class="o">==</span> <span class="n">school2</span><span class="o">);</span>  <span class="c1">// true</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위 코드 실행 결과 같은 객체가 생성된 것을 알 수 있다.</li>
+</ul>
+
+<p><br /></p>
+<h4 id="싱글톤-실습">싱글톤 실습</h4>
+<ul>
+  <li>Test 코드를 실행시키기</li>
+  <li>자동차 공장은 유일한 객체이다.</li>
+  <li>자동차는 고유 번호가 존재하고 생성될 때마다 1씩 번호가 증가한다.</li>
+</ul>
+
+<p>CarFactoryTest.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CarFactoryTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">CarFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="nc">CarFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+		<span class="nc">Car</span> <span class="n">mySonata</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">createCar</span><span class="o">();</span>
+		<span class="nc">Car</span> <span class="n">yourSonata</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">createCar</span><span class="o">();</span>
+		
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">mySonata</span><span class="o">.</span><span class="na">getCarNum</span><span class="o">());</span>     <span class="c1">//10001 출력</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">yourSonata</span><span class="o">.</span><span class="na">getCarNum</span><span class="o">());</span>   <span class="c1">//10002 출력</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>CarFactory, Car 클래스가 필요할 것 같다.</li>
+  <li>CarFactory는 getInstance, createCar 메소드가 필요하고 싱글톤 패턴으로 만들어야겠다.</li>
+  <li>Car 클래스에는 CarNum을 static으로 선언하고 getCarNum()은 호출할 때 마다 1씩 더해야겠다.</li>
+</ul>
+
+<p>CarFactory.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CarFactory</span> <span class="o">{</span>
+	
+    <span class="kd">private</span> <span class="nf">CarFactory</span><span class="o">()</span> <span class="o">{}</span> <span class="c1">// 생성자 private으로 생성</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">CarFactory</span> <span class="n">instance</span><span class="o">;</span>
+    <span class="c1">// private 인스턴스 선언</span>
+	
+	<span class="kd">public</span> <span class="kd">static</span> <span class="nc">CarFactory</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">instance</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">instance</span> <span class="o">=</span><span class="k">new</span> <span class="nc">CarFactory</span><span class="o">();</span>				
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="c1">//getInstance 메소드</span>
+    
+	<span class="kd">public</span> <span class="nc">Car</span> <span class="nf">createCar</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Car</span><span class="o">();</span>
+	<span class="o">}</span> <span class="c1">// Car 인스턴스 생성 메소드</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Car.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">firstCarNum</span><span class="o">=</span><span class="mi">10001</span><span class="o">;</span> <span class="c1">//인스턴트끼리 공유되어질 변수값 할당</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">carNum</span><span class="o">;</span> <span class="c1">//공유되지 않은 변수값을 생성한다. </span>
+
+    <span class="kd">public</span> <span class="nf">Car</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">carNum</span> <span class="o">=</span> <span class="n">firstCarNum</span><span class="o">;</span> 
+		<span class="n">firstCarNum</span><span class="o">++;</span> 
+	<span class="o">}</span>
+	<span class="c1">// 생성자가 생성될 때 첫 인스턴스는 10001 값을 가지고, static 변수값을 1 올린다. 그러면 다음 인스턴스는 10002 값을 가지게 됟다. </span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getCarNum</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">carNum</span><span class="o">;</span> <span class="c1">//차량은 순서대로 고유 번호를 가지게 된다.</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br />
+Reference:</p>
+<ul>
+  <li>백엔드 개발 필수_패스트캠퍼스를 학습하고 정리한 내용입니다.</li>
+  <li><a href="https://wikidocs.net/228">정적(static) 변수와 메소드_점프투자바</a></li>
+</ul>
+:ET

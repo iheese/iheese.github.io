@@ -1,0 +1,80 @@
+I""<p>##1000</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Scanner</span> <span class="n">sc</span> <span class="o">=</span><span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>  
+
+  <span class="kt">int</span> <span class="n">num1</span> <span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+  <span class="kt">int</span> <span class="n">num2</span> <span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+
+  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span><span class="o">+</span><span class="n">num2</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>sc.next() : 스트링 타입 입력값 받기</li>
+  <li>sc.nextInt() : 인트 타입 입력값 받기</li>
+  <li>sc.nextDouble() : 더블 타입 입력값 받기 (기본 구분자 띄어쓰기)</li>
+</ul>
+
+<h2 id="2588">2588</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Scanner</span> <span class="n">sc</span> <span class="o">=</span><span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>  
+    <span class="kt">int</span> <span class="n">num1</span><span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">num2</span><span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span> 
+      
+      
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span><span class="o">*(</span><span class="n">num2</span><span class="o">%</span><span class="mi">10</span><span class="o">));</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span><span class="o">*((</span><span class="n">num2</span><span class="o">-(</span><span class="n">num2</span><span class="o">%</span><span class="mi">10</span><span class="o">)-((</span><span class="n">num2</span><span class="o">/</span><span class="mi">100</span><span class="o">)*</span><span class="mi">100</span><span class="o">))/</span><span class="mi">10</span><span class="o">));</span>  <span class="c1">// num1 *((num2%100)/10) 쉬운 방법이 있었다..</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span><span class="o">*(</span><span class="n">num2</span><span class="o">/</span><span class="mi">100</span><span class="o">));</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((</span><span class="n">num1</span><span class="o">*</span><span class="n">num2</span><span class="o">));</span>    
+
+   <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위와 같이 값을 두 개 받을 때 띄어쓰기로 받아도 되고 엔터로 받아도 된다.</li>
+</ul>
+
+<h3 id="문자열을-이용한-다른-답">문자열을 이용한 다른 답</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+ 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+ 
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+ 
+		<span class="kt">int</span> <span class="no">A</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+		<span class="nc">String</span> <span class="no">B</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+        
+		<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+ 
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="no">A</span> <span class="o">*</span> <span class="o">(</span><span class="no">B</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="o">-</span> <span class="sc">'0'</span><span class="o">));</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="no">A</span> <span class="o">*</span> <span class="o">(</span><span class="no">B</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">-</span> <span class="sc">'0'</span><span class="o">));</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="no">A</span> <span class="o">*</span> <span class="o">(</span><span class="no">B</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">-</span> <span class="sc">'0'</span><span class="o">));</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="no">A</span> <span class="o">*</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="no">B</span><span class="o">));</span>
+ 
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>첫번째  값은 그냥 인트로 받고 두번째는 스트링으로 받는다</li>
+  <li>스트링의 문자를 각각 볼 수 있는 charAt을 이용하고 해당 문자의 아스키 코드에서 ‘0’ 의 아스키 코드값을 빼준다. 그럼있는 그대로 값을 얻게 된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Integer.parseInt</code> 은 문자를 인트로 바꿔주는 방법</li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:
+-<a href="https://st-lab.tistory.com/20">[백준] 2588번 : 곱셈 - JAVA [자바]_ Strong’s LAB</a></p>
+:ET
