@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JSP와 SERVLET"
+title: "[JAVA] JSP와 SERVLET"
 subtitle: "JSP, Servlet, redirect, forward"
 date: 2022-02-08 12:00:00 +0900
 categories: "JAVA"

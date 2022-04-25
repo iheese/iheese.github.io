@@ -1,0 +1,138 @@
+I"�&<ul>
+  <li>
+    <p>참고: <a href="https://ddungi.github.io/java/2022/04/13/upcasting/">상속과 묵시적 형변환에 관한 기본적인 내용</a></p>
+  </li>
+  <li>상속과 묵시적 형 변환을 배우면서 가장 헷갈렸던 부분은 멤버 변수와 메소드의 차이였다.</li>
+  <li>아래 예시를 보자</li>
+</ul>
+
+<p>Parent.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Parent</span><span class="o">{</span>
+	<span class="nc">String</span> <span class="n">name</span><span class="o">=</span><span class="s">"Parent"</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showInfo</span><span class="o">(){</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"부모 클래스 입니다."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Child.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Child</span> <span class="kd">extends</span> <span class="nc">Parent</span><span class="o">{</span>
+    <span class="nc">String</span> <span class="n">name</span><span class="o">=</span> <span class="s">"Child"</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showInfo</span><span class="o">(){</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"자식 클래스입니다."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>부모 클래스를 상속 받고 자식 클래스는 멤버변수, 메소드를 오버라이딩했다.</li>
+</ul>
+
+<p>Main.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+	<span class="nc">Parent</span> <span class="n">parent</span> <span class="o">=</span><span class="k">new</span> <span class="nc">Child</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">name</span><span class="o">);</span>
+		<span class="n">parent</span><span class="o">.</span><span class="na">showInfo</span><span class="o">();</span>
+		<span class="c1">//Parent</span>
+		<span class="c1">//자식 클래스입니다.</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>묵시적 형 변환을 통해 변수를 선언했을 때 오버라이딩된 메소드와 멤버 변수가 접근할 수 있는 범위가 달랐다.</li>
+  <li>묵시적 형 변환된 변수에서 오버라이딩된 멤버변수는 부모의 멤버 변수만 접근할 수 있었고 메소드는 자식의 메소드만 사용할 수 있었다.</li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+  <li>이에 대한 해답은 Variable Hiding 이라는 현상을 통해 이해할 수 있었다.</li>
+  <li>Variable Hiding : 자식의 변수와 부모의 변수가 같은 이름일 때 자식의 변수가 부모의 변수를 감추는 것을 의미한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Parent</span><span class="o">{</span>
+	<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"Parent"</span><span class="o">;</span>
+    
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Child</span> <span class="kd">extends</span> <span class="nc">Parent</span><span class="o">{</span>
+    <span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"Child"</span><span class="o">;</span>
+   
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+		 <span class="c1">//Variable Hiding</span>
+		<span class="nc">Child</span> <span class="n">child</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Child</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">child</span><span class="o">.</span><span class="na">name</span><span class="o">);</span> <span class="c1">//Child </span>
+		<span class="nc">Parent</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Parent</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">name</span><span class="o">);</span> <span class="c1">//Parent</span>
+		<span class="nc">Parent</span> <span class="n">parent2</span> <span class="o">=</span><span class="k">new</span> <span class="nc">Child</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">parent2</span><span class="o">.</span><span class="na">name</span><span class="o">);</span> <span class="c1">//Parent</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Variable Hiding 말고 나머지 예는 모두 부모 클래스의 값이 출력되었다.</li>
+  <li>묵시적 형 변환된 변수에는 오버라이딩이 적용되지 않는다.</li>
+</ul>
+
+<p><br /></p>
+<h3 id="java가-메소드와-변수에-이런-방식을-적용한-이유는-뭘까">java가 메소드와 변수에 이런 방식을 적용한 이유는 뭘까?</h3>
+<ul>
+  <li>Variable Hiding은 변수에만 적용되는 반면에 Overriding은 메소드에만 적용된다.</li>
+  <li>
+    <h5 id="변수-오버라이딩을-허용하게-되면-부모로부터-상속받은-메소드에-영향을-줄-수-있기-때문이다">변수 오버라이딩을 허용하게 되면 부모로부터 상속받은 메소드에 영향을 줄 수 있기 때문이다.</h5>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Parent</span><span class="o">{</span>
+	<span class="kt">int</span> <span class="kt">var</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">plus</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="o">++</span><span class="kt">var</span><span class="o">;</span>
+    <span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">multi</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kt">var</span><span class="o">=</span><span class="kt">var</span><span class="o">*</span><span class="kt">var</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span> 
+
+
+<span class="kd">class</span> <span class="nc">Child</span> <span class="kd">extends</span> <span class="nc">Parent</span> <span class="o">{</span>
+	<span class="nc">String</span> <span class="kt">var</span><span class="o">;</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>위 같은 예시에서 보면 변수를 오버라이딩하게 되면 타입이 바뀌게 되면서 메소드의 영역까지 모두 사용할 수 없게 된다.</li>
+  <li>컴파일 시 오버라이딩된 메소드는 호출될 때 가상 메소드에 새롭게 생성되어 부모 클래스의 메소드를 대체하게 된다. 이를 런타임 다형성이라 한다.</li>
+  <li>컴파일 시 변수는 위 같은 이유로 자식 클래스 변수로 대체되지 않고 기존의 변수를 유지하게 된다. 즉 런타임 다형성을 따르지 않게 된다.</li>
+</ul>
+
+<p><br /></p>
+<h3 id="결론">결론</h3>
+<ul>
+  <li>같은 이름으로 오버라이딩한 변수를 사용하여 혼란을 주지 말자.</li>
+  <li>필요할 때 변수 말고 메소드만 오버라이딩을 하자.</li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li><a href="https://www.crebugs.com/product/view.php?idx=7382&amp;code=1412">java img_크레벅스</a></li>
+  <li><a href="https://www.javacodegeeks.com/2018/11/instance-variable-class-overridden-class.html">Why Instance Variable Of Super Class Is Not Overridden In Sub Clas_ JavaCodeGeeks</a></li>
+  <li><a href="https://medium.com/@davidwang19426/what-is-variable-hiding-in-java-and-why-it-should-be-avoided-56f07cded6ca">What is Variable Hiding in Java? (and why it should be avoided)_ David Wang</a></li>
+  <li><a href="https://www.scaler.com/topics/java/variable-hiding-and-variable-shadowing-in-java/">Variable Hiding and Variable Shadowing in Java_SCALER Topics</a></li>
+</ul>
+:ET

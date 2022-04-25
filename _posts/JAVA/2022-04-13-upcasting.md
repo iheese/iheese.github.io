@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "INHERITANCE, OVERRIDING, FINAL, TYPE CONVERSION"
+title: "[JAVA] INHERITANCE, OVERRIDING, FINAL, TYPE CONVERSION"
 subtitle: "extends, super, this, final, Implicit Type Conversion(묵시적 형 변환), Explicit Type Conversion(명시적 형 변환) "
 date: 2022-04-13 12:00:00 +0900
 categories: "JAVA"

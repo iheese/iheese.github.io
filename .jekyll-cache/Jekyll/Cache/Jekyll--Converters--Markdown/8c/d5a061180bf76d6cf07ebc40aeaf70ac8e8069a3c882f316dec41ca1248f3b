@@ -1,0 +1,266 @@
+I"�N<h2 id="abstract">abstract</h2>
+
+<ul>
+  <li>abstract method (추상 메소드)
+    <blockquote>
+      <ul>
+        <li>선언부만 존재하고 구현부(바디 부분, {})는 존재하지 않는다.</li>
+        <li>자식 클래스에서 반드시 오버라이딩해야만 사용이 가능하다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>abstract class (추상 클래스)
+    <blockquote>
+      <ul>
+        <li>하나 이상의 추상 메소드를 포함한 클래스를 추상 클래스라 한다.</li>
+        <li>반드시 사용되어야 하는 메소드를 추상 클래스에 선언해놓으면 이 클래스를 상속받는 모든 클래스에서 반드시 추상 메소드를 재정의(overriding)해야한다.</li>
+        <li>추상 클래스는 스스로 객체 생성이 불가능하다.</li>
+        <li>생성자, 일반 멤버변수, 일반 메소드도 포함될 수 있다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>추상 클래스, 추상 메소드의 사용법 :</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">클래스</span> <span class="n">이름</span><span class="o">{</span> <span class="c1">//추상 클래스</span>
+ 	<span class="kd">abstract</span> <span class="n">반환타입</span> <span class="n">메소드이름</span><span class="o">();</span>  <span class="c1">//추상 메소드</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>예시 :</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Number</span><span class="o">{</span>
+ 	<span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">showNumber</span><span class="o">();</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Num1</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">{</span>
+ 	<span class="kt">void</span> <span class="nf">showNumber</span><span class="o">(){</span>
+ 	   <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"1"</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Num2</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">{</span>
+ 	<span class="kt">void</span> <span class="nf">showNumber</span><span class="o">(){</span>
+  	  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"2"</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span> 
+  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumTest</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    <span class="c1">//Number num = new Number(); 추상 클래스 인스턴스 생성 불가</span>
+    <span class="nc">Num1</span> <span class="n">num1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Num1</span><span class="o">();</span>
+    <span class="nc">Num2</span> <span class="n">num2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Num2</span><span class="o">();</span>
+    
+    <span class="n">num1</span><span class="o">.</span><span class="na">showNumber</span><span class="o">();</span>  <span class="c1">//1</span>
+    <span class="n">num2</span><span class="o">.</span><span class="na">showNumber</span><span class="o">();</span>  <span class="c1">//2</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="interface-인터페이스">interface (인터페이스)</h2>
+<ul>
+  <li>기능적으로는 추상 클래스와 같지만 상수와 추상 메소드만 포함한다.</li>
+  <li>JAVA8 이후에 default method, static method가 추가되었다.
+    <blockquote>
+      <ul>
+        <li>default method : 필수 구현은 아닌 선택 사항, 인터페이스를 구현한 클래스에서 구현할 필요는 없지만, 재정의도 가능하다.</li>
+        <li>static method : 인터페이스에서 직접 가져다 쓰는 메소드(static  메소드 사용법과 같다. )</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>일반적으로 java에서는 다중 상속이 불가되지만 인터페이스는 다중 상속이 가능하다.</li>
+  <li>인터페이스의 사용법</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">접근제어자</span> <span class="kd">interface</span> <span class="nc">인터페이스이름</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">타입</span> <span class="n">상수이름</span> <span class="o">=</span> <span class="n">값</span><span class="o">;</span>
+    <span class="c1">// 상수 이름은 대문자로 스네이크 문법을 이용한다(BIG_NUMBER)</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">메소드이름</span><span class="o">(</span><span class="n">매개변수</span><span class="o">);</span> <span class="c1">//추상메소드</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>위 제어자 부분은 인터페이스의 공통된 부분이라 컴파일 시 자바 컴파일러가 자동으로 추가해준다.</p>
+  </li>
+  <li>
+    <p>인터페이스를 구현하는 클래스</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">클래스이름</span> <span class="kd">implements</span> <span class="n">인터페이스이름</span><span class="o">{}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>예시</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Number</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">showNumber</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">num1</span> <span class="kd">implements</span> <span class="nc">Number</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">showNumber</span><span class="o">(){</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"1"</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">num2</span> <span class="kd">implements</span> <span class="nc">Number</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">showNumber</span><span class="o">(){</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"2"</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumTest</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    
+    <span class="nc">Num1</span> <span class="n">num1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Num1</span><span class="o">();</span>
+    <span class="nc">Num2</span> <span class="n">num2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Num2</span><span class="o">();</span>
+    
+    <span class="n">num1</span><span class="o">.</span><span class="na">showNumber</span><span class="o">();</span>  <span class="c1">//1</span>
+    <span class="n">num2</span><span class="o">.</span><span class="na">showNumber</span><span class="o">();</span>  <span class="c1">//2</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="exception예외">exception(예외)</h2>
+
+<p><img src="/img/posts/easyjava/Exception.png" alt="checked, unchecked Exception" /></p>
+
+<ul>
+  <li>error(오류) :  어떤 문제에 의해 프로그램이 종료되는 것, 개발자가 예측하여 처리할 수 없는 것, 처리 불가능</li>
+  <li>exception(예외) : 어떤 문제에 의해 프로그램이 종료되는 것, 발생하는 상황을 예측하여 처리할 수 있다.</li>
+  <li>try ~ catch문을 이용한 예외 처리(다중 catch문 가능)</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="o">{</span>
+	<span class="n">예외를</span> <span class="n">처리하길</span> <span class="n">원하는</span> <span class="n">실행</span> <span class="n">코드</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">예외</span> <span class="n">e</span><span class="o">){</span>
+	<span class="n">예외</span> <span class="n">발생</span> <span class="n">시</span> <span class="n">실행코드</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">예외</span> <span class="n">e</span><span class="o">){</span>
+	<span class="n">예외</span> <span class="n">발생</span> <span class="n">시</span> <span class="n">실행코드</span>
+<span class="o">}</span>
+
+<span class="k">finally</span><span class="o">{</span>
+  <span class="n">예외</span> <span class="n">발생</span> <span class="n">여부와</span> <span class="n">상관없이</span> <span class="n">실행되는</span> <span class="n">코드</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>예시</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionTest</span><span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">0</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"나눌 수 없습니다."</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+<h3 id="throws-throw">throws, throw</h3>
+
+<ul>
+  <li>throws : 예외가 발생했을 때 전가한다. 보통 호출한 메소드에서 처리하게 된다. (보통 main 메소드에서 호출한다. )</li>
+  <li>예시</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">divideNumbers</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">j</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((</span><span class="n">i</span><span class="o">/</span><span class="n">j</span><span class="o">));</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionTest</span><span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">divideNumbers</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"예외 발생! 나눌 수 없습니다."</span><span class="o">);</span>
+		<span class="o">}</span>
+		
+	<span class="o">}</span>
+
+<span class="c1">//예외 발생! 나눌 수 없습니다.</span>
+</code></pre></div></div>
+
+<ul>
+  <li>예외가 발생해서 divideNumbers 가 예외를 넘겼고, main 메소드가 처리하여 catch 문으로 넘겼다.</li>
+  <li>예시를 들기 위해 Exception을 이용했지만 catch에는 보통 예상되는 예외를 넣고 올바른 실행 코드를 입력하고 맨 마지막 catch에 최상위 클래스 예외인 Exception을 적어줘야 한다.</li>
+</ul>
+
+<h4 id="throw--예외를-객체로-생성해-발생시킨다">throw : 예외를 객체로 생성해 발생시킨다.</h4>
+<ul>
+  <li>예시1 :</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionTest</span><span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">makeException</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"호출된 메소드에서 예외가 처리되었습니다."</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">makeException</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main메소드에서 예외가 처리되었습니다."</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span><span class="c1">//호출된 메소드에서 예외가 처리되었습니다.</span>
+</code></pre></div></div>
+
+<ul>
+  <li>예시2</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">dd</span> <span class="o">{</span>
+	 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+	        <span class="nc">Scanner</span> <span class="n">sc</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+	        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+	        
+	        <span class="k">if</span><span class="o">(</span><span class="n">a</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">){</span>
+	        	<span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="o">(</span><span class="s">"양수 혹은 0입니다."</span><span class="o">);</span>
+	        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+	        	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
+	        <span class="o">}</span>
+	    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 양수를 넣으면 에러를 발생시키고</span>
+<span class="c1">// 음수를 넣으면 그대로 출력하는 실행문이다.</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위처럼 예외를 발생시켜서 프로그램을 종료할 수 있다.</li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li>백엔드 개발 필수_패스트캠퍼스를 학습하고 정리한 내용입니다.</li>
+  <li><a href="https://www.crebugs.com/product/view.php?idx=7382&amp;code=1412">java img_크레벅스</a></li>
+  <li><a href="http://www.tcpschool.com/java/java_polymorphism_abstract">추상클래스_TCP</a></li>
+  <li><a href="http://www.tcpschool.com/java/java_polymorphism_interface">인터페이스_TCP</a></li>
+  <li><a href="https://velog.io/@wusi_univ/Java-%EC%98%88%EC%99%B8-checked-vs-unchecked-exception">checked,unchecked Exception_ wusi_univ.log</a></li>
+  <li><a href="http://www.tcpschool.com/java/java_exception_class">예외클래스_TCP</a></li>
+</ul>
+:ET

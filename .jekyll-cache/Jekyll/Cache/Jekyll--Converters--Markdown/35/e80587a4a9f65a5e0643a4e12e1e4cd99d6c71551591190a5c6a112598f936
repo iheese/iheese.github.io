@@ -1,4 +1,4 @@
-I""<p>##1000</p>
+I","<h2 id="1000">1000</h2>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
 
@@ -20,6 +20,7 @@
   <li>sc.nextDouble() : 더블 타입 입력값 받기 (기본 구분자 띄어쓰기)</li>
 </ul>
 
+<p><br /></p>
 <h2 id="2588">2588</h2>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
@@ -44,6 +45,7 @@
   <li>위와 같이 값을 두 개 받을 때 띄어쓰기로 받아도 되고 엔터로 받아도 된다.</li>
 </ul>
 
+<p><br /></p>
 <h3 id="문자열을-이용한-다른-답">문자열을 이용한 다른 답</h3>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>

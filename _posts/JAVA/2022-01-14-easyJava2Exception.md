@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '쉽게 배우는 자바2'
+title: '[JAVA] 쉽게 배우는 자바2'
 subtitle: '예외 (Exception)'
 date: 2022-01-14 12:00:00 +0900
 categories: 'JAVA'
