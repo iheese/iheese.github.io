@@ -1,0 +1,266 @@
+I"U<ul>
+  <li>SQL
+    <blockquote>
+      <ul>
+        <li>DBMS를 관리하기 위해 사용되는 프로그래밍 언어</li>
+        <li>JDBC 실습에는 H2 데이터베이스를 이용할 예정이고 아래는 MySQL 사용법과 기본적인 SQL 문법 관련 포스팅이다.</li>
+        <li><a href="https://ddungi.github.io/datascience/2022/03/22/mysql1/">MySQL 시작, 특징과 SQL 개념</a></li>
+        <li><a href="https://ddungi.github.io/datascience/2022/03/22/mysql2/">MySQL SELECT 사용법 및 함수, 데이터 타입</a></li>
+        <li><a href="https://ddungi.github.io/datascience/2022/03/23/mysql3/">MySQL DML (INSERT, UPDATE, DELETE)</a></li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="jdbc-java-database-connectivity">JDBC (Java Database Connectivity)</h2>
+<ul>
+  <li>Java에서 DB 프로그래밍을 하기 위해 사용되는 Java API</li>
+</ul>
+
+<p><img src="/img/posts/javaetc/JDBCDriver.png" alt="JDBCDriver" /></p>
+
+<ul>
+  <li>JDBC API가 제공하는 인터페이스를 구현한 클래스를 JDBC 드라이버라고 한다.</li>
+  <li>각 DB에 맞는 JDBC 드라이버가 존재하고 각 DB에서 드라이버(jar 파일: class 파일의 압축파일)를 제공해주므로 DB가 변경되더라도 드라이버만 변경해주면 프로그램의 수정없이 교체할 수 있게 된다.</li>
+</ul>
+
+<p><br /></p>
+<h3 id="jdbc-프로그램-순서">JDBC 프로그램 순서</h3>
+<ol>
+  <li>JDBC 드라이버 객체 로드</li>
+  <li>DB 연결</li>
+  <li>SQL 전송 준비</li>
+  <li>SQL 전송</li>
+  <li>DB 연결 종료</li>
+</ol>
+
+<p><br /></p>
+<h3 id="jdbc-프로그램-실습">JDBC 프로그램 실습</h3>
+
+<p>1 . JDBC 드라이버 객체 로드</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">DriverManager</span><span class="o">.</span><span class="na">registerDriver</span><span class="o">(</span><span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">Driver</span><span class="o">());</span>				<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>h2 DB JDBC 드라이버 객체를 로드했다.</li>
+  <li>DriverManager 클래스의 registerDriver가 SQLException 예외 처리가 필요하므로 try~catch 문으로 처리해줬다.</li>
+  <li>registerDriver에 드라이버 클래스 객체를 생성해주었다.(DB 마다 다른 드라이버 클래스가 존재한다.)</li>
+</ul>
+
+<p><br />
+2 . DB 연결</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">DriverManager</span><span class="o">.</span><span class="na">registerDriver</span><span class="o">(</span><span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">Driver</span><span class="o">());</span>
+			
+            <span class="nc">String</span> <span class="n">jdbcUrl</span> <span class="o">=</span> <span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="o">;</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">,</span> <span class="s">"sa"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>                 <span class="c1">//JDBC Url, DB 아이디, DB 비밀번호</span>
+			
+            <span class="k">if</span><span class="o">(</span><span class="n">conn</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Conn 객체의 정보 : "</span> <span class="o">+</span> <span class="n">conn</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+		<span class="o">}</span>
+       <span class="c1">//Conn 객체의 정보 : conn0: url=jdbc:h2:tcp://localhost/~/test user=SA</span>
+
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>getConnection을 이용해 연결할 때는 JDBC URL, DB 아이디, DB 비밀번호를 입력해서 연결하고 conn 객체를 생성한다.</li>
+  <li>if문을 통해 객체가 잘 생성되었는지 정보를 출력해보았다.</li>
+</ul>
+
+<p><br />
+3 . SQL 전송 준비</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">PreparedStatement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">DriverManager</span><span class="o">.</span><span class="na">registerDriver</span><span class="o">(</span><span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">Driver</span><span class="o">());</span>
+			
+            <span class="nc">String</span> <span class="n">jdbcUrl</span> <span class="o">=</span> <span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="o">;</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">,</span> <span class="s">"sa"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+			
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into student values(?, ?, ?, ?)"</span><span class="o">;</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+
+			<span class="k">if</span><span class="o">(</span><span class="n">stmt</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"stmt 객체 정보: "</span> <span class="o">+</span> <span class="n">stmt</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+			<span class="o">}</span>    
+        <span class="c1">//stmt 객체 정보: prep0: insert into student values(?, ?, ?, ?)</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>conn 객체의 prepareStatement 메소드에 sql을 넣어 DB로 보낼 준비를 한다.</li>
+  <li>it문을 통해 stmt 객체에 sql이 잘 들어갔는지 확인했다.</li>
+  <li>(?, ?, ?, ?)는 데이터를 입력하는 파라미터이다. 추후에 <code class="language-plaintext highlighter-rouge">setString, setInt</code> 등의 메소드를 통해 값을 입력해준다.</li>
+</ul>
+
+<p><br />
+4 . SQL 전송</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">PreparedStatement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">DriverManager</span><span class="o">.</span><span class="na">registerDriver</span><span class="o">(</span><span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">Driver</span><span class="o">());</span>
+			
+            <span class="nc">String</span> <span class="n">jdbcUrl</span> <span class="o">=</span> <span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="o">;</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">,</span> <span class="s">"sa"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+			
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into student values(?, ?, ?, ?)"</span><span class="o">;</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"NUM1"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"Lee"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"Statistics"</span><span class="o">);</span>
+			
+			<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">stmt.setString</code> 을 이용해 파라미터에 값을 입력해주고 있다. (첫번째 물음표는 1부터 시작한다.)</li>
+  <li>각 컬럼의 맞는 데이터 타입을 확인하고 적절한 값을 넣어주어야 한다.
+    <blockquote>
+      <ul>
+        <li>DB 테이블의 칼럼이 UNIQUE, PRIMARY KEY 특성이 있는지 잘 확인하지 않으면 에러가 뜰 수 있다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>INSERT,  UPDATE, DELETE 문 : <code class="language-plaintext highlighter-rouge">stmt.executeUpdate()</code> 를 이용해 sql을 DB로 보내 삽입, 수정, 삭제 처리를 할 수 있다.</li>
+  <li>SELECT 문 : <code class="language-plaintext highlighter-rouge">stmt.executeQuery()</code> 를 이용해 sql을 DB로 보내 정보를 조회할 수 있다.</li>
+</ul>
+
+<p><br />
+5 . DB 연결 종료</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">PreparedStatement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">DriverManager</span><span class="o">.</span><span class="na">registerDriver</span><span class="o">(</span><span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">Driver</span><span class="o">());</span>
+			
+            <span class="nc">String</span> <span class="n">jdbcUrl</span> <span class="o">=</span> <span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="o">;</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">,</span> <span class="s">"sa"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+			
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into student values(?, ?, ?, ?)"</span><span class="o">;</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"NUM1"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"Lee"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"Statistics"</span><span class="o">);</span>
+			
+			<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+            
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">stmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>DB 프로그래밍이 끝나면 사용했던 객체를 close()로 닫아주어야 자원이 낭비되지 않는다.
+    <blockquote>
+      <ul>
+        <li>자원 누수로 인한 오류는 추후에 예상치 못한 오류를 발생할 수 있다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>닫을 때는 선언했던 순서의 반대로 닫아주면 된다. conn 위에서 stmt를 sql을 보냈으므로 stmt을 닫고, conn을 닫아준다.</li>
+  <li>finally을 통해 예외 발생과는 상관없이 실행되게 해준다.</li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+  <li>JDBC를 통해 SQL문을 보내 DB 프로그래밍을 처리하는 행위는 꽤 길고 복잡한 행위이다.</li>
+  <li>위 코드를 객체를 통해 더 쉽게 사용할 수 있다.</li>
+  <li><a href="https://ddungi.github.io/java/2022/04/27/JDBC2/"> [JAVA] JDBC2 (Java Database Connectivity)</a></li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li><a href="https://jenkov.com/tutorials/jdbc/resultset.html">JDBC img_JENKOV</a></li>
+  <li><a href="https://dyjung.tistory.com/50">JDBCDriver_개발일기</a></li>
+</ul>
+:ET
