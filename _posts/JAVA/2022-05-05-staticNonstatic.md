@@ -4,7 +4,7 @@ title: '[JAVA] 정적 메소드와 비정적 메소드의 저장 방식과 동�
 subtitle: 'JVM, Static , Non-static, Virtual Method'
 date: 2022-05-05 12:00:00 +0900
 categories: 'JAVA'
-backgraound : '/img/posts/javaetc/java.png'
+background : '/img/posts/javaetc/java.png'
 ---
 
 - 알고리즘 문제를 풀 때 한 클래스에서 함수를 만들어 호출하여 사용할 때 static 메소드를 사용하는 이유는 뭘까?
