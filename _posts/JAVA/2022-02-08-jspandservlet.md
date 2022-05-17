@@ -8,7 +8,7 @@ categories: "JAVA"
 
 ### JSP(Java Server Pages)
 - HTML 문서 안에 Java 코드를 넣어 동적 웹페이지를 설정하는 웹 어플리케이션 도구이다. 
-- JSP는 서블릿 기술로 변환되어 사용하한다.
+- JSP는 서블릿 기술로 변환되어 사용되어진다.
 
 <BR>
 #### JSP Lifecycle
