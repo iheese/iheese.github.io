@@ -1,0 +1,194 @@
+I"�><h2 id="thread">Thread</h2>
+<ul>
+  <li>하나의 프로세스(동작하고 있는 프로그램) 내부에서 독립적으로 실행되는 하나의 작업 단위</li>
+  <li>보통 한 개의 프로세스는 한 개의 작업을 하지만 쓰레드를 이용해 여러가지 일을 동시에 할 수 있다.(멀티쓰레딩)</li>
+  <li>JVM에 의해 하나의 프로세스가 발생하고 main() 안의 실행문이 하나의 쓰레드이다.</li>
+  <li>이외의 쓰레드를 만드려면 Thread 클래스 상속, Runnable 인터페이스를 구현하면 된다. (Runnable은 자바가 다중 상속을 허용치 않기 때문에 존재함)</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="thread-생성주기">Thread 생성주기</h2>
+
+<p><img src="/img/posts/javaetc/threadlifecycle.png" alt="thread" /></p>
+
+<ul>
+  <li>Runnable : 쓰레드 실행 준비
+    <blockquote>
+      <ul>
+        <li>CPU를 점유하고 있지 않은 상태</li>
+        <li>start() 메소드 호출하면 run() 메소드가 수행되도록 내부적으로 동작하고 해당 쓰레드가 Runnable 상태로 진입한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>Running : 스케줄러에 의해 선택된 쓰레드 실행
+    <blockquote>
+      <ul>
+        <li>CPU를 점유하고 실행하는 상태</li>
+        <li>run()은 JVM 만 호출 가능하며 스케줄러에 따라 Runnable의 쓰레드를 Running 상태로 진입한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>Blocked : 쓰레드 작업 중 멈추는 상태
+    <blockquote>
+      <ul>
+        <li>CPU 점유권 상실한 상태</li>
+        <li>sleep(시간) 메소드는 시간이 지난 후 Runnable 상태로 바뀐다.</li>
+        <li>wait() 메소드는 notify() 메소드가 호출되면 Runnable 상태로 바뀐다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>Dead : Running 상태 이후의 완료 상태</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="thread-실습">Thread 실습</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ThreadEx</span> <span class="kd">extends</span> <span class="nc">Thread</span><span class="o">{</span>
+		<span class="kd">public</span> <span class="kt">void</span>  <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>  <span class="c1">//run() 메소드를 재정의 해야한다.</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Thread Run"</span><span class="o">);</span>
+		<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">ThreadEx</span> <span class="n">threadEx</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ThreadEx</span><span class="o">();</span>
+		<span class="n">threadEx</span><span class="o">.</span><span class="na">start</span><span class="o">();</span> <span class="c1">//Thread Run</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>한 개의 쓰레드를 만들어서 실행해보았다.</li>
+  <li>여러 개의 쓰레드는 어떻게 움직이는지 실행해보면 좋을 것 같다.</li>
+</ul>
+
+<p><br /></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ThreadEx</span> <span class="kd">extends</span> <span class="nc">Thread</span><span class="o">{</span>
+		<span class="kt">int</span> <span class="n">num</span><span class="o">;</span>
+		<span class="kd">public</span> <span class="nf">ThreadEx</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">num</span><span class="o">=</span><span class="n">num</span><span class="o">;</span>
+		<span class="o">}</span>
+		
+		<span class="kd">public</span> <span class="kt">void</span>  <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>  <span class="c1">//run() 메소드를 재정의 해야한다.</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">num</span><span class="o">+</span><span class="s">" Thread Run"</span><span class="o">);</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span> <span class="c1">//2초 뒤 재실행</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">num</span><span class="o">+</span><span class="s">" Thread end"</span><span class="o">);</span>
+		<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="nc">ThreadEx</span> <span class="n">threadEx</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ThreadEx</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+			<span class="n">threadEx</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main end"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>10개의 쓰레드를 만들어 실행했고 종료했다. 중간에 main 메소드가 종료되었다.</li>
+  <li>쓰레드 실행과 종료가 무작위로 이루어졌다. 실행과 종료에는 순서가 정해져 있지 않다. 종료시 main도 해당되는 이야기이다.</li>
+</ul>
+
+<p><br /></p>
+<ul>
+  <li>모든 쓰레드가 실행되고 종료된 뒤 main 메서드를 종료하게 하려면 join 매소드를 이용하면 된다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">ThreadEx</span> <span class="kd">extends</span> <span class="nc">Thread</span><span class="o">{</span>
+		
+		<span class="kt">int</span> <span class="n">num</span><span class="o">;</span>
+		<span class="kd">public</span> <span class="nf">ThreadEx</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">num</span><span class="o">=</span><span class="n">num</span><span class="o">;</span>
+		<span class="o">}</span>
+		
+		 
+		<span class="kd">public</span> <span class="kt">void</span>  <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>  <span class="c1">//run() 메소드를 재정의 해야한다.</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">num</span><span class="o">+</span><span class="s">" Thread Run"</span><span class="o">);</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">num</span><span class="o">+</span><span class="s">" Thread end"</span><span class="o">);</span>
+		<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">ThreadEx</span><span class="o">&gt;</span> <span class="n">threads</span><span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="nc">ThreadEx</span> <span class="n">threadEx</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ThreadEx</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+			<span class="n">threadEx</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+			<span class="n">threads</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">threadEx</span><span class="o">);</span>
+		<span class="o">}</span>
+		
+		
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">threads</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="nc">ThreadEx</span> <span class="n">thread</span><span class="o">=</span> <span class="n">threads</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">);</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">thread</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main end"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<h2 id="runnable-인터페이스">Runnable 인터페이스</h2>
+
+<ul>
+  <li>클래스가 다른 클래스를 이미 상속한 경우 Runnable 인터페이스를 이용하자</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ThreadImple</span> <span class="kd">implements</span> <span class="nc">Runnable</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">void</span>  <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>  <span class="c1">//run() 메소드를 재정의 해야한다.</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Thread Run"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span> 	<span class="c1">//Runnable 인터페이스 구현</span>
+	<span class="c1">//Runnable을 구현한 객체는 run() 메소드에만 접근할 수 있다. </span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadTest2</span> <span class="o">{</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">ThreadImple</span> <span class="n">threadEx</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ThreadImple</span><span class="o">();</span>
+		<span class="nc">Thread</span> <span class="n">threadImple</span><span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="n">threadEx</span><span class="o">);</span> 
+        <span class="c1">//Thread 생성자에 넣어 사용</span>
+		<span class="n">threadImple</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+		
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Runnable을 구현한 객체를 Thread 생성자로 넘겨 사용한다.
+    <blockquote>
+      <ul>
+        <li>물론 Thread를 상속받는 방법이 조금 더 간단하지만 다중상속이 불가한  자바에서 Runnable 인터페이스을 구현한 객체를 이용하는 방법이 더 선호된다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br />
+Reference:</p>
+<ul>
+  <li><a href="https://coding-factory.tistory.com/279">[Java] 자바 Thread(스레드) 사용법 &amp; 예제, img_코딩팩토리</a></li>
+  <li><a href="https://www.daleseo.com/java-thread-runnable/">자바: Thread 클래스와 Runnable 인터페이스_ DaleSeo</a></li>
+  <li><a href="https://wikidocs.net/230">07-05 쓰레드(Thread)_점프투자바</a></li>
+</ul>
+:ET

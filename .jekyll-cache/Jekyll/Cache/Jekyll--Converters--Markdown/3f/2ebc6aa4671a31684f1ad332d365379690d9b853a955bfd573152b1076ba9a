@@ -1,0 +1,6 @@
+I"�<h2 id="servlet">Servlet</h2>
+<ul>
+  <li>기존의 존재하던 웹 서버(Web Server)는 정적 페이지만 처리하였다.</li>
+  <li>동적인 페이지를 처리하기 위해 나온 것이 Java의 Servlet이다.</li>
+</ul>
+:ET

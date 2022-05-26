@@ -1,4 +1,4 @@
-I"�U<ul>
+I"f<ul>
   <li>SQL
     <blockquote>
       <ul>
@@ -116,13 +116,13 @@
             <span class="nc">String</span> <span class="n">jdbcUrl</span> <span class="o">=</span> <span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="o">;</span>
 			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">,</span> <span class="s">"sa"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
 			
-			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into student values(?, ?, ?, ?)"</span><span class="o">;</span>
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into animal values(?, ?, ?, ?)"</span><span class="o">;</span>
 			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
 
 			<span class="k">if</span><span class="o">(</span><span class="n">stmt</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"stmt 객체 정보: "</span> <span class="o">+</span> <span class="n">stmt</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 			<span class="o">}</span>    
-        <span class="c1">//stmt 객체 정보: prep0: insert into student values(?, ?, ?, ?)</span>
+        <span class="c1">//stmt 객체 정보: prep0: insert into animal values(?, ?, ?, ?)</span>
 		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 		<span class="o">}</span>
@@ -157,13 +157,13 @@
             <span class="nc">String</span> <span class="n">jdbcUrl</span> <span class="o">=</span> <span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="o">;</span>
 			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">,</span> <span class="s">"sa"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
 			
-			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into student values(?, ?, ?, ?)"</span><span class="o">;</span>
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into animal values(?, ?, ?, ?)"</span><span class="o">;</span>
 			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
 
 			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"NUM1"</span><span class="o">);</span>
-			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"Lee"</span><span class="o">);</span>
-			<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
-			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"Statistics"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"Tory"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"Dog"</span><span class="o">);</span>
 			
 			<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
 		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
@@ -182,8 +182,51 @@
       </ul>
     </blockquote>
   </li>
-  <li>INSERT,  UPDATE, DELETE 문 : <code class="language-plaintext highlighter-rouge">stmt.executeUpdate()</code> 를 이용해 sql을 DB로 보내 삽입, 수정, 삭제 처리를 할 수 있다.</li>
+  <li>INSERT,  UPDATE, DELETE 문 : <code class="language-plaintext highlighter-rouge">stmt.executeUpdate()</code> 를 이용해 sql을 DB로 보내 삽입, 수정, 삭제 처리를 할 수 있다.
+    <blockquote>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">stmt.executeUpdate()</code> 을 int 타입 변수로 받아 출력하면 데이터가 처리된 횟수를 알 수 있다.</li>
+      </ul>
+    </blockquote>
+  </li>
   <li>SELECT 문 : <code class="language-plaintext highlighter-rouge">stmt.executeQuery()</code> 를 이용해 sql을 DB로 보내 정보를 조회할 수 있다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// ResultSet 초기화</span>
+<span class="o">(...)</span>
+<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"select * from table"</span><span class="o">;</span>
+<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">)</span>
+<span class="n">rs</span><span class="o">=</span><span class="n">stmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span> <span class="c1">//ResultSet에 sql을 통해 데이터를 받아올 수 있다.</span>
+<span class="k">while</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span> 
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"COLUMN1"</span><span class="o">)+</span> <span class="s">", "</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"COLUMN2"</span><span class="o">)+</span> <span class="s">", "</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"COLUMN3"</span><span class="o">)+</span> <span class="s">", "</span><span class="o">);</span>
+	<span class="o">}</span>
+		<span class="o">(...)</span>
+<span class="k">finally</span><span class="o">{</span>
+	<span class="k">try</span> <span class="o">{</span>
+			<span class="n">rs</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="o">(...)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/javaetc/ResultSet.png" alt="ResultSet" /></p>
+
+<ul>
+  <li>ResultSet의 구조
+    <blockquote>
+      <ul>
+        <li>rs.next()는 다음 행의 값이 존재하면 true, 존재하지 않으면 false를 반환한다.</li>
+        <li>ResultSet은 데이터가 있는 테이블 맨 위(beforeFirst)와 맨 아래(afterLast)에 빈 영역이 존재하는데 ResultSet이 생성될 때 beforeFirst에 위치하게 된다. (그림상의 컬럼명과 데이터테이블 사이)</li>
+        <li>ResultSet의 커서(cursor)는 각 행을 가리키고 next()가 true일 때마다 커서가 한 행씩 내려간다.</li>
+        <li>getString, getInt를 통해 해당 데이터를 받아온다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>ResultSet도 마지막에 close()해주어야 한다. (마찬가지로 사용한 역순으로 닫아준다.)</li>
 </ul>
 
 <p><br />
@@ -207,13 +250,13 @@
             <span class="nc">String</span> <span class="n">jdbcUrl</span> <span class="o">=</span> <span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="o">;</span>
 			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">,</span> <span class="s">"sa"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
 			
-			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into student values(?, ?, ?, ?)"</span><span class="o">;</span>
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into animal values(?, ?, ?, ?)"</span><span class="o">;</span>
 			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
 
 			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"NUM1"</span><span class="o">);</span>
-			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"Lee"</span><span class="o">);</span>
-			<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">50</span><span class="o">);</span>
-			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"Statistics"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"Tory"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"Dog"</span><span class="o">);</span>
 			
 			<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
             
@@ -251,7 +294,7 @@
 <p><br /></p>
 
 <ul>
-  <li>JDBC를 통해 SQL문을 보내 DB 프로그래밍을 처리하는 행위는 꽤 길고 복잡한 행위이다.</li>
+  <li>JDBC를 통해 SQL문을 보내 DB 프로그래밍을 처리하는 행위는 꽤 길고 복잡한 행위이다. 이 긴 과정을 반복하면 오류가 발생하기 쉬워진다.</li>
   <li>위에서 사용했던 코드를 객체를 통해 더 쉽게 사용할 수 있다.</li>
   <li><a href="https://ddungi.github.io/java/2022/04/27/JDBC2/"> [JAVA] JDBC2 (Java Database Connectivity)</a></li>
 </ul>
@@ -264,5 +307,6 @@
   <li><a href="https://dyjung.tistory.com/50">JDBCDriver_개발일기</a></li>
   <li>JDBC란?_부스트코스</li>
   <li><a href="https://ko.wikipedia.org/wiki/JDBC">JDBC_위키백과</a></li>
+  <li><a href="https://doublesprogramming.tistory.com/58">ResultSet img_더블에스님</a></li>
 </ul>
 :ET

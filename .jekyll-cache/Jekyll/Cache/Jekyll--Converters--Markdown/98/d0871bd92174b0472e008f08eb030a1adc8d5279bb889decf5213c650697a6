@@ -1,0 +1,595 @@
+I"��<h4 id="jdbc-연결-sql-처리-db-연결-해제까지">JDBC 연결, SQL 처리, DB 연결 해제까지</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">PreparedStatement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		
+		<span class="k">try</span> <span class="o">{</span>
+        	<span class="c1">//1. 드라이버 객체 생성(로드)</span>
+			<span class="nc">DriverManager</span><span class="o">.</span><span class="na">registerDriver</span><span class="o">(</span><span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">Driver</span><span class="o">());</span>
+			
+            <span class="c1">//2. DB 연결(Connection 객체 생성)</span>
+            <span class="nc">String</span> <span class="n">jdbcUrl</span> <span class="o">=</span> <span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="o">;</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">,</span> <span class="s">"sa"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+			<span class="c1">//3. SQL  전송 준비</span>
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into animal values(?, ?, ?, ?)"</span><span class="o">;</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+			
+            <span class="c1">//4. SQL 전송</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"NUM1"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"Tory"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"Dog"</span><span class="o">);</span>
+			
+			<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+            
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            
+            <span class="c1">//5. DB 연결 종료</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">stmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>JDBC를 사용하는 과정은 길고 복잡하여 객체를 통해 쉽게 만들 수 있다.</li>
+</ul>
+
+<p><br /></p>
+<h2 id="jdbc-utility">JDBC Utility</h2>
+<ul>
+  <li>JDBC Utility는 JDBC 과정의 공통된 부분을 클래스로 만들어 과정을 쉽고 단순하게 만들 수 있다.</li>
+  <li>SQL 관련 부분(3, 4단계)은 매번 달라질 수 있으니 나머지 과정을 클래스로 만들면 된다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCUtility</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="nc">Connection</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+        	<span class="c1">//1. 드라이버 객체 생성(로드)</span>
+			<span class="nc">DriverManager</span><span class="o">.</span><span class="na">registerDriver</span><span class="o">(</span><span class="k">new</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">Driver</span><span class="o">());</span>
+			
+            <span class="c1">//2. DB 연결(Connection 객체 생성)</span>
+            <span class="nc">String</span> <span class="n">jdbcUrl</span> <span class="o">=</span> <span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="o">;</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">jdbcUrl</span><span class="o">,</span> <span class="s">"sa"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">conn</span><span class="o">;</span>
+	<span class="o">}</span>
+    
+	<span class="c1">//5. DB 연결 종료</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">close</span><span class="o">(</span><span class="nc">PreparedStatement</span> <span class="n">stmt</span><span class="o">,</span> <span class="nc">Connection</span> <span class="n">conn</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+<ul>
+  <li>JDBCUtility를 이용해서 첫번째 코드를 재작성해보자</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">PreparedStatement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="c1">// 1,2단계</span>
+            <span class="n">conn</span><span class="o">=</span><span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+			
+			<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"insert into animal values(?, ?, ?, ?)"</span><span class="o">;</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"NUM1"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"Tory"</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"Dog"</span><span class="o">);</span>
+			
+			<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+			
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			
+        <span class="c1">//5단계 </span>
+		<span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">stmt</span><span class="o">,</span> <span class="n">conn</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>드라이버를 로드하고 DB에 연결하여 Connection을 리턴하는 부분과 DB 연결 종료 부분을 JDBCUtility 메소드로 대체했다.</p>
+  </li>
+  <li>
+    <p>SELECT문을 사용하고 연결을 해제할 때는 ResultSet도 닫아줘야 하므로 JDBCUtility의 close 메소드에 <code class="language-plaintext highlighter-rouge">rs.close()</code> 를 추가해줘야 한다.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(...)</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">close</span><span class="o">(</span><span class="nc">ResultSet</span> <span class="n">rs</span><span class="o">,</span> <span class="nc">PreparedStatement</span> <span class="n">stmt</span><span class="o">,</span> <span class="nc">Connection</span> <span class="n">conn</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">rs</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="daodata-access-object-패턴">DAO(Data Access Object) 패턴</h2>
+<ul>
+  <li>JDBCUtility는 DB 연결과 해제만 구현했기 때문에 SQL 관련 부분을 제외하고 이용할 수 있다.</li>
+  <li>DAO는 DB의 각 테이블 별로 클래스 내 SQL 부분(SELECT, INSERT, UPDATE, DELETE  메소드)을 구현하여 JDBC 과정을 더 쉽게 이용할 수 있다.</li>
+</ul>
+
+<p><br /></p>
+<ul>
+  <li>DAO의 SELECT 부분 실습</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnimalDAO</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">PreparedStatement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	
+	<span class="kd">private</span> <span class="nc">String</span> <span class="no">ANIMAL_LIST</span> <span class="o">=</span> <span class="s">"select * from animal"</span><span class="o">;</span> <span class="c1">//SQL문</span>
+	
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">getAnimalList</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="no">ANIMAL_LIST</span><span class="o">);</span>
+			<span class="n">rs</span> <span class="o">=</span> <span class="n">stmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+            
+			<span class="k">while</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"ANIMAL_NO"</span><span class="o">)</span> <span class="o">+</span> <span class="s">", "</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"NAME"</span><span class="o">)</span> <span class="o">+</span> <span class="s">", "</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"AGE"</span><span class="o">)</span> <span class="o">+</span> <span class="s">", "</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"SPECIES"</span><span class="o">));</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">rs</span><span class="o">,</span> <span class="n">stmt</span><span class="o">,</span> <span class="n">conn</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>DB 연결, 해제 부분은 JDBCUtility를 이용했다.</li>
+</ul>
+
+<p><br /></p>
+<ul>
+  <li>DAO의 INSERT 부분 실습</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(...)</span>
+
+<span class="kd">private</span> <span class="nc">String</span> <span class="no">ANIMAL_INSERT</span> <span class="o">=</span> <span class="s">"insert into animal values(?, ?, ?, ?)"</span><span class="o">;</span> <span class="c1">//SQL문</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertAnimal</span><span class="o">(</span><span class="nc">String</span> <span class="n">animalNo</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="nc">String</span> <span class="n">species</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">try</span> <span class="o">{</span>
+		<span class="n">conn</span> <span class="o">=</span> <span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+		<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="no">ANIMAL_INSERT</span><span class="o">);</span>
+        
+		<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">animalNo</span><span class="o">);</span>
+		<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
+		<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span>
+		<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="n">species</span><span class="o">);</span>
+        
+		<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+	<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+		<span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">stmt</span><span class="o">,</span> <span class="n">conn</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="o">(...)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<ul>
+  <li>DAO의 UPDATE 부분 실습</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(...)</span>
+
+<span class="kd">private</span> <span class="nc">String</span> <span class="no">ANIMAL_UPDATE</span> <span class="o">=</span> <span class="s">"update animal set name = ?, age = ? where animal_no = ?"</span><span class="o">;</span> <span class="c1">//SQL문</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateAnimal</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="nc">String</span> <span class="n">animalNo</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">try</span> <span class="o">{</span>
+		<span class="n">conn</span> <span class="o">=</span> <span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+		<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="no">ANIMAL_UPDATE</span><span class="o">);</span>
+        
+        <span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
+        <span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span>
+		<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">animalNo</span><span class="o">);</span>
+
+		<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+	<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+		<span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">stmt</span><span class="o">,</span> <span class="n">conn</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="o">(...)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<ul>
+  <li>DAO의 DELETE 부분 실습</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(...)</span>
+
+<span class="kd">private</span> <span class="nc">String</span> <span class="no">ANIMAL_DELETE</span> <span class="o">=</span> <span class="s">"delete animal where animal_no = ?"</span><span class="o">;</span> <span class="c1">//SQL문</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteAnimal</span><span class="o">(</span><span class="nc">String</span> <span class="n">animalNo</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">try</span> <span class="o">{</span>
+		<span class="n">conn</span> <span class="o">=</span> <span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+		<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="no">ANIMAL_DELETE</span><span class="o">);</span>
+        
+		<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">animalNo</span><span class="o">);</span>
+		<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+        
+	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+	<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+		<span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">stmt</span><span class="o">,</span> <span class="n">conn</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+<ul>
+  <li>DAO 객체, 메소드 실습</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DaoTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    
+		<span class="nc">AnimalDAO</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnimalDAO</span><span class="o">();</span> <span class="c1">//DAO 객체 생성</span>
+		
+        <span class="n">dao</span><span class="o">.</span><span class="na">getAnimalList</span><span class="o">();</span> <span class="c1">// 데이터 조회</span>
+        <span class="n">dao</span><span class="o">.</span><span class="na">insertAnimal</span><span class="o">(</span><span class="s">"NUM5"</span> <span class="o">,</span> <span class="s">"Nabong"</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="s">"Cat"</span><span class="o">);</span> <span class="c1">// 데이터 입력</span>
+        <span class="n">dao</span><span class="o">.</span><span class="na">updateAnimal</span><span class="o">(</span><span class="s">"Nabi"</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="s">"NUM5"</span><span class="o">);</span> <span class="c1">//데이터 수정</span>
+        <span class="n">dao</span><span class="o">.</span><span class="na">deleteAnimaml</span><span class="o">(</span><span class="s">"NUM5"</span><span class="o">)</span> <span class="c1">// 데이터 삭제</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="vovalue-object-패턴">VO(Value Object) 패턴</h3>
+<ul>
+  <li>입력 값을 그 자체를 표현하는 객체이며, read-only 의 성격을 가진다.</li>
+  <li>getter 외의 로직을 포함할 수 있으며, 불변성(객체의 정보가 변경되지 않음)을 보장한다.</li>
+  <li>서로 다른 이름의 객체라도 모든 속성 값이 같다면 두 인스턴스는 같은 객체라 할 수 있다.
+    <blockquote>
+      <ul>
+        <li>equals(), hashcode()을 오버라이딩을 해야한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>setter 메소드를 가지면 안되고, 생성자를 통해서만 값을 초기화 해야 한다.</li>
+  <li>DTO와 비슷한 부분이 있지만 차이가 있다.</li>
+</ul>
+
+<h3 id="dtodata-transfer-object">DTO(Data Transfer Object)</h3>
+<blockquote>
+  <ul>
+    <li>계층 간의 데이터 교환을 위해 사용되는 객체이다. (오직 이 목적만 가진다.)</li>
+    <li>로직을 가지지 않고, getter,setter 메소드만 가진다.
+      <blockquote>
+        <ul>
+          <li>안정성을 위해 의도적으로 setter를 없애고 생성자로 값을 넣고 불변하게 사용하기도 한다.</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<p><br /></p>
+
+<h3 id="vo-dao-이용한-실습">VO, DAO 이용한 실습</h3>
+
+<ul>
+  <li>AnimalVO 를 만들어 입력 값 그 자체를 표현하는 객체를 만들어준다.</li>
+  <li>생성자로만 값을 받고 getter만 구현하여 불변성을 보장하는 객체를 만들었다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnimalVO</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">animalNo</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">species</span><span class="o">;</span>
+	
+		
+	<span class="c1">// SELECT, INSERT용 생성자</span>
+	<span class="kd">public</span> <span class="nf">AnimalVO</span><span class="o">(</span><span class="nc">String</span> <span class="n">animalNo</span><span class="o">,</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span><span class="kt">int</span> <span class="n">age</span><span class="o">,</span><span class="nc">String</span> <span class="n">species</span><span class="o">){</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">animalNo</span><span class="o">=</span><span class="n">animalNo</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">=</span><span class="n">name</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span><span class="o">=</span><span class="n">age</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">species</span><span class="o">=</span><span class="n">species</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="c1">//UPDATE용 생성자</span>
+	<span class="kd">public</span> <span class="nf">AnimalVO</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span><span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="nc">String</span> <span class="n">animalNo</span><span class="o">){</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">animalNo</span><span class="o">=</span><span class="n">animalNo</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">=</span><span class="n">name</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span><span class="o">=</span><span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="c1">//DELETE용 생성자</span>
+	<span class="kd">public</span> <span class="nf">AnimalVO</span><span class="o">(</span><span class="nc">String</span> <span class="n">animalNo</span><span class="o">){</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">animalNo</span><span class="o">=</span><span class="n">animalNo</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAnimalNo</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">animalNo</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getSpecies</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">species</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<ul>
+  <li>VO 패턴 적용을 위한 DAO의 SELECT 부분 변경</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.SQLException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnimalDAO</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">PreparedStatement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	
+	<span class="kd">private</span> <span class="nc">String</span> <span class="no">ANIMAL_LIST</span> <span class="o">=</span> <span class="s">"select * from animal"</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">AnimalVO</span><span class="o">&gt;</span> <span class="nf">getAnimalList</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">AnimalVO</span><span class="o">&gt;</span> <span class="n">animalList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">AnimalVO</span><span class="o">&gt;();</span>
+       
+      	<span class="k">try</span> <span class="o">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="no">ANIMAL_LIST</span><span class="o">);</span>
+			<span class="n">rs</span> <span class="o">=</span> <span class="n">stmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+
+			<span class="k">while</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+				<span class="nc">String</span> <span class="n">animalNo</span><span class="o">=</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"ANIMAL_NO"</span><span class="o">);</span>
+				<span class="nc">String</span> <span class="n">animalName</span><span class="o">=</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"NAME"</span><span class="o">);</span>
+				<span class="kt">int</span> <span class="n">animalAge</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"AGE"</span><span class="o">);</span>
+				<span class="nc">String</span> <span class="n">animalSpecies</span><span class="o">=</span><span class="n">rs</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">"SPECIES"</span><span class="o">);</span>
+				<span class="nc">AnimalVO</span> <span class="n">animal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnimalVO</span><span class="o">(</span><span class="n">animalNo</span><span class="o">,</span> <span class="n">animalName</span><span class="o">,</span> <span class="n">animalAge</span><span class="o">,</span> <span class="n">animalSpecies</span><span class="o">);</span>
+            	<span class="n">animalList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">animal</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+			<span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">rs</span><span class="o">,</span> <span class="n">stmt</span><span class="o">,</span> <span class="n">conn</span><span class="o">);</span>
+		<span class="o">}</span>
+        <span class="k">return</span> <span class="n">animalList</span><span class="o">;</span>
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>SQL로 받아온 한 행을 하나의 객체로 생성했다.</li>
+  <li>그 객체를 리스트에 넣은 뒤 리턴해주었다.</li>
+</ul>
+
+<p><br /></p>
+<ul>
+  <li>VO 패턴 적용을 위한 DAO의 INSERT 부분 변경</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(...)</span>
+
+	<span class="kd">private</span> <span class="nc">String</span> <span class="no">ANIMAL_INSERT</span> <span class="o">=</span> <span class="s">"insert into animal values(?, ?, ?, ?)"</span><span class="o">;</span> 
+    
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertAnimal</span><span class="o">(</span><span class="nc">AnimalVO</span> <span class="n">vo</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="no">ANIMAL_INSERT</span><span class="o">);</span>
+	        
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getAnimalNo</span><span class="o">());</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getAge</span><span class="o">());</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getSpecies</span><span class="o">());</span>
+	        
+			<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">stmt</span><span class="o">,</span> <span class="n">conn</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+    
+<span class="o">(...)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<ul>
+  <li>VO 패턴 적용을 위한 DAO의 UPDATE 부분 변경</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(...)</span>
+
+	<span class="kd">private</span> <span class="nc">String</span> <span class="no">ANIMAL_UPDATE</span> <span class="o">=</span> <span class="s">"update animal set name = ?, age = ? where animal_no = ?"</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateAnimal</span><span class="o">(</span><span class="nc">AnimalVO</span> <span class="n">vo</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="no">ANIMAL_UPDATE</span><span class="o">);</span>
+	        
+	        <span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+	        <span class="n">stmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="n">vo</span><span class="o">.</span><span class="na">getAge</span><span class="o">());</span>
+			<span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getAnimalNo</span><span class="o">());</span>
+
+			<span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+			<span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">stmt</span><span class="o">,</span> <span class="n">conn</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+    
+<span class="o">(...)</span>    
+</code></pre></div></div>
+
+<p><br /></p>
+<ul>
+  <li>VO 패턴 적용을 위한 DAO의 DELETE 부분 변경</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(...)</span>
+
+	<span class="kd">private</span> <span class="nc">String</span> <span class="no">ANIMAL_DELETE</span> <span class="o">=</span> <span class="s">"delete animal where animal_no = ?"</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteAnimal</span><span class="o">(</span><span class="nc">AnimalVO</span> <span class="n">vo</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">getConnection</span><span class="o">();</span>
+			<span class="n">stmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="no">ANIMAL_DELETE</span><span class="o">);</span>
+
+            <span class="n">stmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">vo</span><span class="o">.</span><span class="na">getAnimalNo</span><span class="o">());</span>
+            <span class="n">stmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="nc">JDBCUtility</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">stmt</span><span class="o">,</span> <span class="n">conn</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>INSERT, UPDATE, DELETE 모두 메소드에 VO 객체를 넣어주었다.</li>
+  <li>각 메소드에 맞는 생성자를 이용해 객체를 생성하고 입력해주면 getter 메소드를 통해 ? 파라미터에 입력값이 입력된다.</li>
+</ul>
+
+<p><br /></p>
+<ul>
+  <li>VO 패턴이 적용된 DAO 실습</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AniTest</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">AnimalDAO</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnimalDAO</span><span class="o">();</span>
+		
+		<span class="c1">//SELECT</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">AnimalVO</span><span class="o">&gt;</span> <span class="n">animalList</span> <span class="o">=</span><span class="n">dao</span><span class="o">.</span><span class="na">getAnimalList</span><span class="o">();</span>
+		
+		<span class="k">for</span><span class="o">(</span><span class="nc">AnimalVO</span> <span class="n">animal</span> <span class="o">:</span> <span class="n">animalList</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">animal</span><span class="o">.</span><span class="na">getAnimalNo</span><span class="o">()+</span><span class="s">", "</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">animal</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">", "</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">animal</span><span class="o">.</span><span class="na">getAge</span><span class="o">()+</span><span class="s">", "</span><span class="o">);</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">animal</span><span class="o">.</span><span class="na">getSpecies</span><span class="o">());</span>
+		<span class="o">}</span>
+		
+		<span class="c1">//INSERT</span>
+		<span class="nc">AnimalVO</span> <span class="n">vo1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnimalVO</span><span class="o">(</span><span class="s">"NUM5"</span><span class="o">,</span><span class="s">"Bongi"</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="s">"Cat"</span><span class="o">);</span>
+		<span class="n">dao</span><span class="o">.</span><span class="na">insertAnimal</span><span class="o">(</span><span class="n">vo1</span><span class="o">);</span>
+		
+		<span class="c1">//UPDATE</span>
+		<span class="nc">AnimalVO</span> <span class="n">vo2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnimalVO</span><span class="o">(</span><span class="s">"Bongsuni"</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="s">"NUM5"</span><span class="o">);</span>
+		<span class="n">dao</span><span class="o">.</span><span class="na">updateAnimal</span><span class="o">(</span><span class="n">vo2</span><span class="o">);</span>
+		
+		<span class="c1">//DELETE</span>
+		<span class="nc">AnimalVO</span> <span class="n">vo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnimalVO</span><span class="o">(</span><span class="s">"NUM5"</span><span class="o">);</span>
+		<span class="n">dao</span><span class="o">.</span><span class="na">deleteAnimal</span><span class="o">(</span><span class="n">vo3</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li><a href="https://jenkov.com/tutorials/jdbc/resultset.html">JDBC img_JENKOV</a></li>
+  <li><a href="https://dyjung.tistory.com/50">JDBCDriver_개발일기</a></li>
+  <li><a href="https://youngjinmo.github.io/2021/04/dto-vo-entity/">DTO와 VO 그리고 Entity의 차이_DevAndy</a></li>
+  <li><a href="https://velog.io/@jybin96/Controller-Service-Repository-%EA%B0%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C">Controller, Service, Repository 가 무엇일까?_코딩하는 어린콩</a></li>
+  <li><a href="https://mosei.tistory.com/entry/DTO-vs-VO">DTO vs VO_씹어먹는 블로그</a></li>
+</ul>
+:ET
