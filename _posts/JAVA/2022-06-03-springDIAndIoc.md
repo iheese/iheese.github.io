@@ -61,6 +61,8 @@ public class BC implements B{
 }
 ```
 
+<br>
+
 - Constructor(생성자)를 이용한 방법
 
 package.A
