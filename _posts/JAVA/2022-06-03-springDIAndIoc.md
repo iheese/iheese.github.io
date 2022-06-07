@@ -1,7 +1,7 @@
 ---
 layout: post
 title: '[JAVA, SPRING] DI(Dependeny Injection), IoC (Inversion of Control)'
-subtitle: '의존성 주입, 제어의 역전, xml파일, bean, Annotation'
+subtitle: '의존성 주입, 제어의 역전, xml파일, Bean, Annotation'
 date: 2022-06-03 12:00:00 +0900
 categories: 'JAVA'
 background: '/img/posts/etc/spring.jpg'
@@ -60,8 +60,6 @@ public class BC implements B{
     }
 }
 ```
-
-<br>
 
 - Constructor(생성자)를 이용한 방법
 
@@ -132,6 +130,7 @@ public class Main {
 - Constructor 방법을  사용하면 객체 주입없이 의존적인 객체를 생성할 수 없고 null값을 넣지 않는 이상 NullPointerException이 발생하지 않는다.
 -  Constructor 방법은 의존관계를 직관적으로 볼 수 있어 좋다.
 - 또한 Constructor 방법은 주입객체(B)를 final(선언되면서 초기화되어야 함)로 선언하여 주입받는 객체 내부 변경을 막을 수 있다. 
+- 하지만 Constructor 방법은 생성자가 매개변수를 가지고 있을 때는 모든 경우의 수를 고려해 생성자를 만들어야 하기 때문에 코드의 길이가 늘어나는 단점이 있다. 
 
 <br>
 
@@ -241,7 +240,7 @@ GenericXmlApplicationContext container=
 ### IoC (Inversion of Control, 제어의 역전)
 
 - IoC는 객체의 흐름, Lifecycle 등의 제어를 제 3자에게 위임하는 프로그래밍 모델이다. (템플릿 메소드 패턴에서도 찾을 수 있다.)
-- 위의 예시에서는 Spring container가 xml 파일을  통해 어플리케이션 운용에 필요한 객체의 생성과 의존 관계를 처리하는 것을 IOC라 한다.
+- 위의 예시에서는 Spring container가 xml 파일을  통해 어플리케이션 운용에 필요한 객체의 생성과 의존 관계를 처리하는 것을 IoC라 한다.
 - 모든 객체를 xml 파일로 관리하는 것은 xml 파일의 복잡도를 높여 유지 보수에 좋지 않다. 
 
 <br>
