@@ -1,0 +1,188 @@
+I"H <h3 id="aopaspect-oriented-programming-관점-지향-프로그래밍">AOP(Aspect Oriented Programming, 관점 지향 프로그래밍)</h3>
+
+<ul>
+  <li>AOP는 어디에 관점을 두는가? 로 시작한다.</li>
+  <li>쉽게 말하면 로직을 공통된 로직과 핵심 로직을 나누어 사용하겠다는 것이다.</li>
+  <li>중요한 것은 관심 분리(Separation of Concerns)이다.
+    <blockquote>
+      <ul>
+        <li>
+          <dl>
+            <dt>횡단 관심 (Crosscutting Concerns)</dt>
+            <dd>모든 메소드에 들어있는 공통된 로직을 의미한다.</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>핵심 관심 (Core Concerns)</dt>
+            <dd>각 메소드에만 들어 있는 핵심 관심 코드을 의미한다.</dd>
+          </dl>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/img/posts/javaetc/aop.png" alt="aop" /></p>
+
+<ul>
+  <li>위 그림에서 Class A, Class B, Class C가 핵심 관심이다.</li>
+  <li>주황색, 파란색, 빨간색 블럭이 횡단 관심이다.
+    <blockquote>
+      <ul>
+        <li>반복되는 횡단 관심을 모듈화를 통해 분리하고 재사용하는 것이다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+<h4 id="aop가-왜-필요할까">AOP가 왜 필요할까?</h4>
+<ul>
+  <li>첫 번째 상황 : 비즈니스 메소드 속에는 모든 메소드가 가지고 있는 공통된 코드들과 각각의 메소드만 가지고 있는 핵심 코드가 있다. 공통된 로직을 매 메소드마다 반복하는 것은 유지 보수에 좋지 않다.</li>
+  <li>두 번째 상황 : 모든 비즈니스 메소드의 실행 시간을 확인하거나, 모든 메소드 실행시 매번 log를 콘솔에 출력해야 한다면 모든 메소드에 일일히 해당 코드를 추가 작성하는 일은 어려우며 유지 보수에도 쉽지 않다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="aop-상세-용어-정리">AOP 상세 용어 정리</h3>
+<ul>
+  <li>JointPoint : Advice가 일어날 수 있는 모든 비즈니스 메소드의 시점을 의미한다.</li>
+  <li>Aspect(Advisor)  : Pointcut + Advice
+    <blockquote>
+      <ul>
+        <li>Aspect(Advisor) :  Pointcut과 Advice의 결합(모듈화), Pointcut의 시점에 Advice가 실행되는 것을 의미한다.</li>
+        <li>Pointcut : 횡단 관심(Advice)이 일어나는 시점을 의미한다. (필터링된 JointPoint)</li>
+        <li>Advice : 횡단 관심에 해당하는 실행될 공통 기능의 코드를 의미한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="aop-사용-방법">AOP 사용 방법</h3>
+<ul>
+  <li>.xml 파일-Namespaces-<code class="language-plaintext highlighter-rouge">aop</code> 사용 체크 (Eclipse 기준)</li>
+  <li>.xml 작성</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;beans&gt;</span> <span class="c">&lt;!--세부 내용 생략 --&gt;</span>
+
+<span class="c">&lt;!--횡단 관심에 해당하는 Advice 클래스 빈 등록--&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"id"</span> <span class="na">class=</span><span class="s">"클래스 패키지 주소"</span><span class="nt">&gt;&lt;/bean&gt;</span>
+
+<span class="c">&lt;!--AOP 설정 --&gt;</span>
+	<span class="nt">&lt;aop:config&gt;</span>
+		<span class="nt">&lt;aop:pointcut</span> <span class="na">id=</span><span class="s">"allPointcut"</span> <span class="na">expression=</span><span class="s">"execution(* com.naver.biz..*Service.*(..))"</span><span class="nt">/&gt;</span>
+		
+		<span class="nt">&lt;aop:aspect</span> <span class="na">ref=</span><span class="s">"id"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;aop:after</span> <span class="na">pointcut-ref=</span><span class="s">"allPointcut"</span> <span class="na">method=</span><span class="s">"beanMethod"</span><span class="nt">/&gt;</span>
+		<span class="nt">&lt;/aop:aspect&gt;</span>
+		
+	<span class="nt">&lt;/aop:config&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>aspect에서 pointcut-ref= “allPointcut” 은 포인트 컷이 expression 필터링된 시점이다.</li>
+  <li>allPointcut이 실행될 때 ref=”id” 인 bean 클래스의 beanMethod가 Advice로 실행된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;aop:after ...&gt;</code> 는 동작 시점을 의미하며 before, after, after-returning, after-throwing, around 속성을 사용할 수 있다. (아래에서 더 설명)</li>
+</ul>
+
+<p><br /></p>
+
+<h5 id="pointcut-expression-작성법">pointcut expression 작성법</h5>
+<ul>
+  <li>Advice가 실행되는 시점을 작성하는 것이다.</li>
+  <li>excution() 명시자 내부에 작성한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">[리턴타입] [패키지 경로][클래스 이름].[메소드 이름 및 매개변수]</code></li>
+  <li>리턴 타입 : 리턴 타입 뒤에 띄어쓰기
+    <blockquote>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">*</code> : 모든 리턴을 허용한다.</li>
+        <li>void :  리턴 타입이 void인 메소드 필터링한다.</li>
+        <li>!void : 리턴 타입이 void가 아닌 메소드 필터링한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>패키지 경로
+    <blockquote>
+      <ul>
+        <li>com.naver.biz.users : 정확한 패키지명으로 필터링한다.</li>
+        <li>com.naver.biz..  : com.naver.biz로 시작하는 모든 패키지를 필터링한다.</li>
+        <li>com.naver..users : com.naver로 시작하는 패키지 중 패키지 마지막이 user인 패키지를 필터링한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>클래스 이름 : 클래스 이름 뒤에 .
+    <blockquote>
+      <ul>
+        <li>UserService : UserService 클래스를 필터링한다.</li>
+        <li>*Service : 클래스 이름이 Service로 끝나는 클래스를 필터링한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>메소드 이름
+    <blockquote>
+      <ul>
+        <li>insertUser : insertUser 메소드를 필터링한다.</li>
+        <li>insert* : insert로 시작하는 모든 메소드를 필터링한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>매개 변수
+    <blockquote>
+      <ul>
+        <li>(..) : 모든 경우의 매개변수의 갯수와 타입 허용한다.</li>
+        <li>(*) :  매개변수를 1개 받는 메소드를 필터링한다.</li>
+        <li>(int, String) : int형, String형을 매개변수로 받는 메소드를 필터링한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>예시
+    <blockquote>
+      <ul>
+        <li>
+          <dl>
+            <dt><code class="language-plaintext highlighter-rouge">expression="execution(void com.naver..*Impl.get*(..))"</code></dt>
+            <dd>리턴 타입이 void, com.naver.. 아래 모든 클래스 중 클래스 이름이 Impl로, 메소드 이름이 get으로 시작하는 모든 메소드를 필터링한다.</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt><code class="language-plaintext highlighter-rouge">expression="execution(* com.kakao.biz.*.*user(*,*))"</code></dt>
+            <dd>com.kakao.biz 아래 모든 클래스, user로 끝나는 메소드이며 매개변수를 2개 받는 메소드를 필터링한다.</dd>
+          </dl>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="aop-동작-시점">AOP 동작 시점</h3>
+<ul>
+  <li>before : 비즈니스 메소드 실행 전 동작한다.</li>
+  <li>after : 비즈니스 메소드 실행 후 동작한다.
+    <blockquote>
+      <ul>
+        <li>after-returning :</li>
+        <li>after-throwing :</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>around :</li>
+</ul>
+
+<p><br />
+Reference:</p>
+<ul>
+  <li><a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC_renew">inflean_img</a></li>
+  <li><a href="https://engkimbs.tistory.com/746">AOP img_새로비</a></li>
+  <li><a href="https://icarus8050.tistory.com/8">Spring AOP PointCut 표현식 정리_ Icarus</a></li>
+</ul>
+
+:ET
