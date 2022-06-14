@@ -11,7 +11,7 @@ background: '/img/posts/etc/spring.jpg'
 
 ### Spring JDBC
 
-![springjdbc](img/posts/spring/springjdbc.png)
+![springjdbc](/img/posts/spring/springjdbc.png)
 
 
 - 기존의 Plain JDBC의 기능을 Spring JDBC가 모두 제공해준다. 
