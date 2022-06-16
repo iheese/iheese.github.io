@@ -16,7 +16,7 @@ background: '/img/posts/etc/spring.jpg'
 
 ### Servlet Container와 Spring Container
 
-![springcontainer](/img/posts/spring/springcontainer.png){width="1000" height="500"}
+![springcontainer](/img/posts/spring/springcontainer.png){: width="1000" height="500"}
 
 1 . (실습에는 Tomcat) 서버가 실행되면 web.xml 파일에 의해 Servlet Container가 생성된다.
 > - Servlet은 기본적으로 lazy-loading이므로 요청이 들어올 때 Servlet 객체가 생성된다.
