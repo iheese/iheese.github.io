@@ -38,15 +38,20 @@ background: '/img/posts/etc/spring.jpg'
 ![servlet](/img/posts/javaetc/mvc.png)
 
 1 .  클라이언트로부터 요청이 들어온다. 
+
 2 .  생성된 DispatcherServlet이 Spring container를 생성하면서 bean 객체와 HandlerMapping, Controller, ViewResolver이 같이 생성된다.
+
 3 .  들어온 요청에 맞는 Handler Mappping를 통해 핸들러(컨트롤러)를 조회하고 선택된 컨트롤러가 로직을 실행한다.
 
 > - Handler Mappping을 통해  핸들러를 조회하고 Hadler Adapter를 통해 컨트롤러 로직을 실행한다.
 > - Handler와 Controller가 같은 의미로 이해하면 되고 Handler가 조금 더 넓을 의미를 가지고 있다. 
 
 4 . Controller는 DAO, DB 관련 로직을 처리한다.
+
 5 . Controller는 DispatcherServlet에게 ModelAndView 객체(처리된 데이터(Model), 이동할 화면(View))를 리턴한다.
+
 6 . DispatcherServlet는 ViewResolver에 ModelAndView를 전달한다.
+
 7 . ViewResolver는 View를 생성하거나 화면 전환하여 클라이언트에게 응답한다. 
 
 <br>
