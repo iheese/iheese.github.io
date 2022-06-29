@@ -1,7 +1,7 @@
 ---
 layout: post
-title: '[JAVA, SPRING] MYBATIS'
-subtitle: 'SqlSessionTemplate'
+title: '[JAVA, SPRING] SPRING MYBATIS'
+subtitle: 'SqlSessionTemplate, MapperFactoryBean'
 date: 2022-06-29 12:00:00 +0900
 categories: 'JAVA'
 background: '/img/posts/etc/spring.jpg'
