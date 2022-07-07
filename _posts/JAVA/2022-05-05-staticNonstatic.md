@@ -1,7 +1,7 @@
 ---
 layout: post
 title: '[JAVA] 정적 메소드와 비정적 메소드의 저장 방식과 동작 방식, JVM 메모리와 운영체제 메모리'
-subtitle: 'JVM, Static , Non-static, Virtual Method'
+subtitle: 'JVM, Static , Non-static, Virtual Method, Process Memory Structure'
 date: 2022-07-07 12:00:00 +0900
 categories: 'JAVA'
 background : '/img/posts/javaetc/java.png'
