@@ -1,4 +1,4 @@
-I"�<h1 id="git-환경설정">git 환경설정</h1>
+I"�<h1 id="git-환경설정">git 환경설정</h1>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">git config --global user.name [당신의유저네임]</code></li>
   <li><code class="language-plaintext highlighter-rouge">git config --global user.email [당신의메일주소]</code></li>
@@ -28,10 +28,40 @@
         <li>git bash에서 연결할 워킹 디텍토리로 들어간다.</li>
         <li><code class="language-plaintext highlighter-rouge">git  init</code> : 디렉토리가 git 관리에 들어간다.</li>
         <li><code class="language-plaintext highlighter-rouge">git remote add [origin(원격저장소 별칭)] [주소]</code></li>
-        <li>git push할 때 <code class="language-plaintext highlighter-rouge">git push -u [origin(원격저장소 별칭)] [main(메인 브랜치 이름)] </code></li>
+        <li>git push할 때 <code class="language-plaintext highlighter-rouge">git push -u [origin(원격저장소 별칭)] [main(메인 브랜치 이름)] </code>
+          <blockquote>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">git push -f </code> 를 붙이면 강제로 푸시할 수 있다. 새로 생성한 레포일 경우 강제로 보내고 readme를 생성해도 된다. pull 후 푸시해도 된다.</li>
+            </ul>
+          </blockquote>
+        </li>
       </ol>
     </blockquote>
   </li>
+</ul>
+
+<p><br /></p>
+
+<h1 id="git-pull-fetch">git pull, fetch</h1>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git fetch</code> : 원격 저장소의 최신 이력을 로컬 저장소로 가져온다.
+    <blockquote>
+      <ul>
+        <li>‘FETCH_HEAD’ 브랜치로 switch (checkout) 하여 확인할 수 있다.</li>
+        <li>메인 브랜치와 합치고 싶다면 pull하거나 merge하면 된다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">git pull</code> : fetch + merge  과정을 의미한다, 충동이 있을 경우 하나씩 처리해주어야 한다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="추가적인-명령어">추가적인 명령어</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git branch -m main</code> : 메인 브랜치 이름을 main으로 바꿉니다.</li>
 </ul>
 
 <p><br /></p>
@@ -75,5 +105,6 @@
 <p>Reference:</p>
 <ul>
   <li>핀테크 서비스 백엔드 개발자 양성 과정_패스트캠퍼스를 학습하고 정리한 내용입니다.</li>
+  <li><a href="https://backlog.com/git-tutorial/kr/stepup/stepup3_1.html">pull, fetch _ backlog</a></li>
 </ul>
 :ET
