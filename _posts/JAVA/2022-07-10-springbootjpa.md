@@ -1,7 +1,7 @@
 ---
 layout: post
 title: '[JAVA, SPRINGBOOT] JPA(Java Persistence API)'
-subtitle: 'ORM, @Table, @Entity, @Id, @Repository'
+subtitle: 'ORM, @Table, @Entity, @Id, @Repository, Query Method'
 date: 2022-07-12 12:00:00 +0900
 categories: 'JAVA'
 background: '/img/posts/etc/spring.jpg'
@@ -17,7 +17,9 @@ background: '/img/posts/etc/spring.jpg'
 
 ### JPA(Java Persistence API)
 
-![jpa](/img/posts/spring/jpa.png)
+
+![jpa](/img/posts/spring/jpa.png){: width="900"}
+
 
 - Java의 ORM의 기술 표준을 JPA라 한다. 
 - 인터페이스로 구성되어 있으며, 인터페이스의 구현체가 Hibernate, EcipseLink, DataNucleus이다. 
