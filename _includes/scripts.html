@@ -1,4 +1,3 @@
-<!-- 
 {% if page.url contains 'contact' %}
   <!-- Form Validation -->
   <script src="{{"/assets/vendor/startbootstrap-clean-blog/js/jqBootstrapValidation.js" | relative_url }}"></script>
@@ -26,11 +25,11 @@
           $this = $("#sendMessageButton");
           $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
           $.ajax({
-            url: "//formspree.io/{{ site.email }}",
+            url: "https://formspree.io/f/xgedgnzr",
             type: "POST",
             data: {
               name: name,
-              phone: phone,
+              phone: phone,6
               email: email,
               message: message
             },
@@ -76,11 +75,5 @@
       $('#success').html('');
     });
   </script>
-{% endif %} -->
+{% endif %} 
 
-{% if page.mathjax %}
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" defer
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
-{% endif %}
