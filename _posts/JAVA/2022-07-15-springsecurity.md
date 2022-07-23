@@ -51,7 +51,7 @@ implementation 'org.springframework.security:spring-security-test'
 
 ### Spring Security 순서
 
-![springsecurity](/img/posts/spring/springsecurity.png)
+![springsecurity](/img/posts/spring/springsecurity.png){: width="800"}
 
 - Http 요청이 들어오면 AuthenticationFilter를 거쳐 UsernamePasswordToken을 발급해준다.
 - AuthenticationManager는 UsernamePasswordToken 인증을 처리할 AuthenticationProvider 여러 개를 가지고 있다.
@@ -62,9 +62,9 @@ implementation 'org.springframework.security:spring-security-test'
 -  LoginSuccessHandler는 SecurityContextHolder에 저장하면 인증 과정이 끝난다.
 > - 로그인 성공 후 세션을 이용해 로그인 반복을 줄인다. 
 
-### Spring Security 커스텀하기
-
 <br>
+
+### Spring Security 커스텀하기
 
 - Spring Security에 집중된 실습을 위해 Repository, Service 단은 고려하지 않았고 일반적으로 Controller - Service - Repository - DB 로 연결되어 있다고 이해해주시면 됩니다. 
 > - 각자 JPA, MyBatis, JDBC 등을 이용하여 구현하면 됩니다.

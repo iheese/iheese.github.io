@@ -1,0 +1,201 @@
+I"I><h3 id="에러-상황">에러 상황</h3>
+
+<p><img src="/img/posts/error/comment.png" alt="commenterror" width="1000" /></p>
+
+<ul>
+  <li>JPA를 이용한 게시판 댓글 삭제 기능 구현 중 에러가 발생했다.</li>
+  <li>포스트 아래 댓글이 달리게 해놨고 댓글 작성자일 경우 삭제 버튼이 보이게 구현했다.</li>
+  <li>근데 맨 위(1번) 위치에 있는 삭제 버튼만 작동했고 2번의 삭제 버튼을 누르면 아무 일도 일어나지 않았다. 1번 댓글 삭제하고 2번이 맨 위로 가면 2번만 삭제가 되었다.</li>
+  <li>view 파일은 jsp이고 부트스트랩을 이용했으며, jsp - Ajax(JavaScript, JQuery) - Controller - …로 연결되는 구현이었다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="수정-전-코드">수정 전 코드</h3>
+
+<p>.jsp 파일</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;c:forEach</span> <span class="na">var=</span><span class="s">"reply"</span> <span class="na">items=</span><span class="s">"${replyList}"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;tr&gt;</span>
+	<span class="nt">&lt;td</span> <span class="na">width=</span><span class="s">"80%"</span><span class="nt">&gt;</span>${reply.content }<span class="nt">&lt;/td&gt;</span>
+	<span class="nt">&lt;td</span> <span class="na">align=</span><span class="s">"center"</span><span class="nt">&gt;</span>${reply.user.username}<span class="nt">&lt;/td&gt;</span>
+	<span class="nt">&lt;td</span> <span class="na">align=</span><span class="s">"center"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;c:if</span> <span class="na">test=</span><span class="s">"${principal.getUsername() eq reply.user.username}"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;form&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">id=</span><span class="s">"id"</span> <span class="na">value=</span><span class="s">"${post.id}"</span> <span class="nt">/&gt;</span>
+    		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">id=</span><span class="s">"seq"</span> <span class="na">value=</span><span class="s">"${reply.seq}"</span> <span class="nt">/&gt;</span>
+    		<span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-secondary"</span> <span class="na">id=</span><span class="s">"btn-deleteReply"</span> <span class="na">value =</span><span class="s">"${reply.seq}"</span> <span class="nt">&gt;</span>삭제<span class="nt">&lt;/button&gt;</span>
+		<span class="nt">&lt;/form&gt;</span>
+		<span class="nt">&lt;/c:if&gt;</span>
+	<span class="nt">&lt;/td&gt;</span>
+ 	<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/c:forEach&gt;</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>Ajax.js 파일</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">deleteReply</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">init</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">let</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#btn-deleteReply</span><span class="dl">"</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">_this</span><span class="p">.</span><span class="nx">deleteReply</span><span class="p">();</span>
+		<span class="p">});</span>
+	<span class="p">},</span>
+	<span class="na">deleteReply</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">seq</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span>  <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#id</span><span class="dl">"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">seq</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#seq</span><span class="dl">"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+		<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+			<span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span> 
+			<span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/reply/</span><span class="dl">"</span><span class="o">+</span><span class="nx">seq</span>
+		<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+			<span class="nx">location</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/posts/</span><span class="dl">"</span><span class="o">+</span><span class="nx">id</span><span class="p">;</span>
+		<span class="p">});</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">deleteReply</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="원인">원인</h3>
+
+<ul>
+  <li>form에 input 태그의 type = “hidden” 속성을 통해서 댓글의 id값(seq)를 담아 Ajax.js 파일을 통해 Controller에 보내 로직을 처리하려 했다.</li>
+  <li>원인은 jsp 파일에서 id = “seq” 을 통해 js 파일에 접근하게 해서 그런 것이었다.</li>
+</ul>
+
+<p><br /></p>
+<ul>
+  <li>주된 첫 번째 문제 : 태그 속성 중에서 name, class로 전달해주면 중복이 가능해서 <code class="language-plaintext highlighter-rouge">&lt;c:forEach&gt;</code> 에서 각각 값을 전달해줄 수 있는데 id는 중복을 허용하지 않기 때문에 첫 번째 버튼에만 값이 할당되었던 것이었다.
+    <blockquote>
+      <ul>
+        <li>부트스트랩을 사용하고 있기 때문에 class를 이용해서 값을 전달해줄 수는 없으니 name 속성을 이용해야 할 것 같다. (부트스트랩은 class 속성으로 css 처리를 한다.)</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>주된 두 번째 문제 : 그렇다고 name, class를 통해 값을 전달하는 것은 안되었다. 왜냐하면 Ajax.js 파일에서 댓글의 id값에 얻기 위해 name, class에 접근해도 몇 번째 취소 버튼인지 몰라서 다른 버튼을 눌러도 맨 위의 댓글이 삭제되었다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="수정-후-코드">수정 후 코드</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;c:forEach</span> <span class="na">var=</span><span class="s">"reply"</span> <span class="na">items=</span><span class="s">"${replyList}"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;tr&gt;</span>
+	<span class="nt">&lt;td</span> <span class="na">width=</span><span class="s">"80%"</span><span class="nt">&gt;</span>${reply.content }<span class="nt">&lt;/td&gt;</span>
+	<span class="nt">&lt;td</span> <span class="na">align=</span><span class="s">"center"</span><span class="nt">&gt;</span>${reply.user.username}<span class="nt">&lt;/td&gt;</span>
+	<span class="nt">&lt;td</span> <span class="na">align=</span><span class="s">"center"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;c:if</span> <span class="na">test=</span><span class="s">"${principal.getUsername() eq reply.user.username}"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;form&gt;</span>
+			<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">id=</span><span class="s">"id"</span> <span class="na">value=</span><span class="s">"${post.id}"</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-secondary"</span> <span class="na">name=</span><span class="s">"btn-deleteReply"</span> <span class="na">value=</span><span class="s">"${reply.seq}"</span><span class="nt">&gt;</span>삭제<span class="nt">&lt;/button&gt;</span>
+		<span class="nt">&lt;/form&gt;</span> <span class="c">&lt;!--변경부분--&gt;</span>
+		<span class="nt">&lt;/c:if&gt;</span>
+   	<span class="nt">&lt;/td&gt;</span>
+	<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/c:forEach&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>input 태그의 type = “hidden” 을 통해 값을 전달하는 방법은 <code class="language-plaintext highlighter-rouge">&lt;c:forEach&gt;</code> 아래에서 큰 힘을 발휘하긴 어려운 것 같다. 모든 값이 같은 값을 가지게 되어 js 파일에서 구분하여 접근하는 것이 어려운 것 같다.</li>
+  <li>그래서 button 태그 자체에 value 값을 주어 바로 접근하게 하였다.</li>
+</ul>
+
+<p><br /></p>
+
+<p>Ajax.js파일</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">deleteReply</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">init</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">let</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">button[name=btn-deleteReply]</span><span class="dl">"</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>   		 <span class="c1">//변경부분</span>
+			<span class="nx">_this</span><span class="p">.</span><span class="nx">deleteReply</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span> <span class="c1">//변경부분</span>
+		<span class="p">});</span>
+	<span class="p">},</span>
+	<span class="na">deleteReply</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">seq</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span>  <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#id</span><span class="dl">"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span> <span class="c1">//화면 변경을 위한 post id</span>
+		<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span> 
+			<span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span> 
+			<span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/reply/</span><span class="dl">"</span><span class="o">+</span><span class="nx">seq</span>
+		<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+			<span class="nx">location</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/posts/</span><span class="dl">"</span><span class="o">+</span><span class="nx">id</span><span class="p">;</span>
+		<span class="p">});</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">deleteReply</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+</code></pre></div></div>
+
+<ul>
+  <li>button이 클릭되면 해당 button의 value가 넘어가면서 댓글 삭제 Ajax가 호출된다.</li>
+  <li>
+    <p>this는 button을 의미하며 this.value를 통해 자기 자신의 값을 가져온다.</p>
+  </li>
+  <li>JQuery 값 불러오기
+    <blockquote>
+      <ul>
+        <li>id : <code class="language-plaintext highlighter-rouge">var a = $("#ID변수이름").val();</code>
+          <blockquote>
+            <ul>
+              <li>val(): value값을 의미</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>name :  <code class="language-plaintext highlighter-rouge">var b = $("button[name=NAME변수이름]")val();</code>
+          <blockquote>
+            <ul>
+              <li>button 위치에 태그명</li>
+              <li><code class="language-plaintext highlighter-rouge">var b = $("button[name=NAME변수이름]").eq("0").val();</code> : 첫 번째 값 가져온다.</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>class : <code class="language-plaintext highlighter-rouge">var c = $(".CLASS변수이름").val();</code>
+          <blockquote>
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">var c = $(".CLASS변수이름").eq("1").val();</code> : 두 번째 값 가져온다.
+                <blockquote>
+                  <ul>
+                    <li>name, class 모두 중복이 가능하여 인덱스로 접근 가능</li>
+                  </ul>
+                </blockquote>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li><code class="language-plaintext highlighter-rouge">''</code> (작은 따옴표)도 가능</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="마무리">마무리</h4>
+
+<ul>
+  <li>포스트 적고 보니 생각보다 간단한 문제였는데 꽤 오래 삽질했다.</li>
+  <li>개인적으로 예외나 IDE에 에러가 뜨면 오히려 수정하기가 좋은 것 같은데, 작동은 하는데 내 마음대로 안될 때가 제일 어려운 것 같다.
+    <blockquote>
+      <ul>
+        <li>프론트 단(HTML, JS)에 대한 이해가 많이 부족한 것 같다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>Ajax를 이용하지 않고 <code class="language-plaintext highlighter-rouge">&lt;a href="/" class="btn"&gt;버튼&lt;/a&gt;</code> 를 이용하는 방법도 있을 것 같다. (다만 REST하지는 않은 방법이라 생각했다.)</li>
+  <li>input 태그의 type=”hidden”의 값에 구분하여 접근하는 방법이 있을 것 같은데 정말 모르겠다.</li>
+  <li>배울 점이 많이 있으니 댓글로 부족한 점이나 더 좋은 방법을 알려주시면 좋을 것 같습니다.</li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li><a href="https://velog.io/@dev-redo/NextJS-Image-Tag-Error-Invalid-src-prop">error img _ fgStudy</a></li>
+  <li><a href="https://haddoddo.tistory.com/entry/javascriptjQuery-id-name-class-%EA%B0%92-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0">id, name, class 값 가져오기_haddoddo</a></li>
+  <li><a href="https://suhyeokeee.tistory.com/87">댓글 삭제 구현중_suhyeokeee</a></li>
+</ul>
+:ET
