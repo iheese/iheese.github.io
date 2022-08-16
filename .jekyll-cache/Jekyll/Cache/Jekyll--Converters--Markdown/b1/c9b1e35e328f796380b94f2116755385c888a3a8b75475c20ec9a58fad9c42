@@ -1,0 +1,13 @@
+I"�<ul>
+  <li>우리가 작성한 코드를 시험하는 방법은 여러 가지가 있다.
+    <blockquote>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">System.out.println</code> 으로 콘솔에 찍어보기, 로그 찍어보기, 실제로 서버를 돌려 구현한 것을 실행해보기 등</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>위의 방법은 오류를 찾기 힘들며, 시간이 많이 걸리는 단점이 있다.</li>
+  <li>필자 역시 지금까지 서버를 매번 구동시키거나, println을 이용해 오류를 찾아가며 기능을 구현했다.</li>
+  <li>더 의미있고 효과적인 방법이 필요하다. Test Code? !!</li>
+</ul>
+:ET

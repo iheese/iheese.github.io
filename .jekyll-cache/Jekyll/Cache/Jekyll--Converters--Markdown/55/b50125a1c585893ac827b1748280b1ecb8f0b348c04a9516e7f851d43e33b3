@@ -1,0 +1,106 @@
+I"/<ul>
+  <li>우리가 작성한 코드를 시험하는 방법은 여러 가지가 있다.
+    <blockquote>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">System.out.println</code> 으로 콘솔에 찍어보기, 로그 찍어보기, 실제로 서버를 돌려 구현한 것을 실행해보기 등</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>위의 방법은 오류를 찾기 힘들며, 시간이 많이 걸리는 단점이 있다.</li>
+  <li>필자 역시 지금까지 서버를 매번 구동시키거나, println을 이용해 오류를 찾아가며 기능을 구현했다.</li>
+  <li>더 의미있고 효과적인 방법이 필요하다. Test Code? !!</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="test-code는-왜-작성할까">Test Code는 왜 작성할까?</h3>
+<ul>
+  <li>궁극적인 목표는 <code class="language-plaintext highlighter-rouge">작동하는 깔끔한 코드</code>를 도모할 수 있다는 것에 있다.
+    <blockquote>
+      <ul>
+        <li>TDD(Test Driven Development)의 목표이며 필자는 같은 이유라고 생각한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">테스트 코드 작성 -&gt; "작동하는" "깔끔한" 코드</code> 를 의미하는 이유
+    <blockquote>
+      <ol>
+        <li>클래스의 한 메소드에 대한 테스트 코드를 작성하여 초록 막대(테스트 성공)를 확인하는 것은 그 메소드의 기능을 확실하게 해준다.</li>
+        <li>테스트 코드로 수많은 기능을 확실하는 것은 잘 <code class="language-plaintext highlighter-rouge">작동하는</code> 에 해당된다.</li>
+        <li>테스트 코드를 통해 실제 코드를 복기하고 리팩토링 과정을 거치면서 <code class="language-plaintext highlighter-rouge">깔끔한</code> 코드가 되게 된다.
+          <blockquote>
+            <ul>
+              <li>리팩토링 : 결과의 변경없이 코드의 구조를 재조정하는 행위, 가독성을 높이고 유지보수를 편하게 한다.</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ol>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="tdd-test-driven-development-테스트-주도-개발">TDD (Test Driven Development, 테스트 주도 개발)</h3>
+<ul>
+  <li>실제 코드 작성 전에 테스트 코드를 작성하는 방법을 의미한다.</li>
+  <li>TDD의 단순한 두 가지 규칙
+    <blockquote>
+      <ol>
+        <li>오직 자동화된 테스트가 실패할 경우에만 새로운 코드를 작성한다.</li>
+        <li>중복을 제거한다.</li>
+      </ol>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="tdd의-프로그래밍-순서">TDD의 프로그래밍 순서</h3>
+
+<p><img src="/img/posts/test/tdd.png" alt="tdd" width="600" /></p>
+
+<ol>
+  <li>빨강 : 실패하는 작은 테스트를 작성한다.</li>
+  <li>초록 : 어떤 방식으로든 빨리 테스트를 통과하게끔 만든다.</li>
+  <li>리팩토링 : 일단 테스트를 통과하게끔 만들면서 생긴 중복을 제거한다.</li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="test-code의-추가적인-장점">Test Code의 추가적인 장점</h3>
+<ul>
+  <li>Test Code를 잘 작성해놓으면 문서로서의 역할이 가능해진다. 다른 개발자들이 테스트 코드를 통해 실제 코드의 동작, 의도를 이해하고 파악하는데 도움을 준다.
+    <blockquote>
+      <ul>
+        <li>또한 실제 코드 작성자인 경우에도 코드 변경이 일어났을 때 변경된 부분과 영향을 주고 받는 부분을 확실하게 알 수 있고 실수도 줄여줄 수 있다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>시간 절약(서버 실행, DB 뒷처리 등)이 가능해진다.</li>
+</ul>
+
+<p><br /></p>
+
+<h5 id="마무리">마무리</h5>
+<ul>
+  <li>추천! <a href="https://www.youtube.com/watch?v=mNPpfB8JSIU">[마틴 파울러] 리팩토링의 중요성 feat.테스트 코드를 짜는 이유(한글 자막)_데브원영</a>
+    <blockquote>
+      <ul>
+        <li>테스트 코드를 짜야하는 이유에 대해 더 알 수 있다. 정말 좋은 영상 감사합니다!</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>TDD의 목적이 객체 지향의 프로그래밍이 추구하는 바와 같은 방향이기 때문에 효과적인 방법이라는 생각이 들었다.</li>
+  <li>또한 알아볼수록 TDD의 안전성을 느끼게 되었고 TDD에 대한 학습의 필요성과 Test Code에 대해 더 공부해야겠다.</li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li><a href="https://www.slideshare.net/genycho/ss-64153730">테스터가 말하는 테스트코드 작성 팁과 사례_Sangin Choung</a></li>
+  <li>테스트 주도 개발 _ 켄트백</li>
+  <li><a href="https://www.icterra.com/tdd-is-not-about-testing-but-the-design/">TDD is not about testing but the design_icterra img</a></li>
+</ul>
+:ET
