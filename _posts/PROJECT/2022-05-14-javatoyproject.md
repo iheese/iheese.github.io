@@ -10,7 +10,7 @@ background: "/img/posts/javaetc/JDBC.jpg"
 
 ### Java를 이용한 회원 관리 프로그램입니다.
 
-- ##### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/ddungi/JavaToyProject)
+- ##### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/JavaToyProject)
 
 <br>
 ## 수정할 점

@@ -9,7 +9,7 @@ background: '/img/posts/project/project.jpg'
 
 ### JSP를 이용한 게시판 프로젝트입니다.
 
-- #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/ddungi/MyJSPBoard)
+- #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/MyJSPBoard)
 
 <br>
 

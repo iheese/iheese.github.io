@@ -9,7 +9,7 @@ background: '/img/posts/project/project.jpg'
 
 ### JPA와 Spring Security를 이용한 게시판 프로젝트입니다.
 
-- #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/ddungi/JPABoardProject)
+- #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/JPABoardProject)
 
 <br>
 
@@ -77,7 +77,7 @@ background: '/img/posts/project/project.jpg'
 #### Spring Security
 - 일단 앞에서도 말했듯이 Controller 단 단위 테스트에서 Spring Security가 합쳐지면서 어려워졌다.
 - 일반적으로 커스텀한 Spring Security를 사용하는데 Spring Security가 제공하는 로직은 복잡했다. 관련하여 포스팅을 남기기도 했다.
-> - [[JAVA, SPRINGBOOT] SPRING SECURITY 훑어보고 커스텀하기](https://ddungi.github.io/java/2022/07/27/springsecurity/)
+> - [[JAVA, SPRINGBOOT] SPRING SECURITY 훑어보고 커스텀하기](https://iheese.github.io/java/2022/07/27/springsecurity/)
 
 - 정말 제대로 알고 필요한 부분을 가져와 사용하려면 더 학습이 필요할 것 같다고 생각이 들었다. 
 - 그래도 학습하고 사용하면 할수록 정말 좋은 라이브러리라는 생각이 많이 들었다.

@@ -9,7 +9,7 @@ background: '/img/posts/project/project.jpg'
 
 ### Spring과 MyBatis를 이용한 계좌 이체 프로젝트입니다.
 
-- #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/ddungi/AccountTransferToyProject)
+- #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/AccountTransferToyProject)
 
 <br>
 

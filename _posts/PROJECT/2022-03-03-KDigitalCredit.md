@@ -25,7 +25,7 @@ categories: "PROJECT"
 <br>
 
 ### 자세한 프로젝트 과정(Github)
-[KDC projects_fastcampus](https://github.com/ddungi/K-Digital-Credit)
+[KDC projects_fastcampus](https://github.com/iheese/K-Digital-Credit)
 
 - 학습 기록과 자료들 입니다. 
 
