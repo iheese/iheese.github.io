@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '[JAVA] DTO, ENTITY와 DTO 변환'
+title: '[JAVA] DTO, ENTITY와 변환 방법'
 subtitle: 'DTO, Entity, 생성자, 메소드, ModelMapper, MapStruct'
 date: 2022-08-23 12:00:00 +0900
 categories: 'JAVA'
@@ -150,7 +150,7 @@ public class MemberService {
 
 maven 이용 시 의존성 추가
 
-```pom
+```xml
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
@@ -223,7 +223,7 @@ public class MemberService {
 
 maven 이용 시 의존성 추가
 
-```pom
+```xml
 <properties>
   <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
   <org.projectlombok.version>1.18.24</org.projectlombok.version>
@@ -244,7 +244,7 @@ maven 이용 시 의존성 추가
 ```
 
 
-```pom
+```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-compiler-plugin</artifactId>
