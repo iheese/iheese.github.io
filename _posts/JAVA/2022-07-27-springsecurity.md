@@ -54,16 +54,22 @@ implementation 'org.springframework.security:spring-security-test'
 ![springsecurity](/img/posts/spring/springsecurity.png){: width="800"}
 
 1, 2 . 로그인 요청이 들어오면 AuthenticationFilter에서 입력된 아이디와 비밀번호는 UsernamePasswordToken으로 바꾸어 전달된다. 
+
 3 . AuthenticationManager(구현체는 ProviderManager)는 UsernamePasswordToken 인증을 처리할 AuthenticationProvider를 가지고 있다. (여러 개 존재할 수 있다.)
+
 4 . AuthenticationManager는 토큰을 전달하여 AuthenticationProvider의 구현체들을 통해 인증을 요구한다.
+
 5 . AuthenticationProvider는 UserDetailsService를 통해 사용자 정보를 조회한다.
+
 6, 7 . UserDetailsService은 UserDetails를 리턴해주는 하나의 메소드(loadUserByUsername)를 구현해야 한다. 일반적으로 UserRepository를 주입받아 UserDetails를 리턴한다.
 
 - UserDetails는 인가 권한이 추가된 User 객체이다.
 > - UserDetails는 인터페이스고 먼저 만든 UserVO 객체가 있다면 주입해줘도 되고, 인터페이스 자체를 구현해도 된다.
 
 8 . AuthenticationProvider가 인증에 성공하면 성공한 UsernameAuthenticationToken을 생성하여 AuthenticaionManager에게 전달한다.
+
 9 . 그리고 AuthenticaionManager는 AuthenticationFilter에게 토큰을 전달한다.
+
 10 . 토큰은 LoginSuccessHandler로 전달되고 SecurityContextHolder에 저장된다. 
 - SecurityContextHolder은 인증한 내용을 가지고 있다.
 > - SecurityContextHolder은 SecurityContext를 thread와 연결해주고 있다.
