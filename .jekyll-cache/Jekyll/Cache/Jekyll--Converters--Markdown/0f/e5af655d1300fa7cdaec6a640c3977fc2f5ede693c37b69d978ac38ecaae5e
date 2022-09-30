@@ -1,4 +1,4 @@
-I"wK<ul>
+I"�K<ul>
   <li>모든 실습은 Eclipse Spring Tool Suite 4 에서 진행되었습니다.</li>
 </ul>
 
@@ -62,11 +62,15 @@
 
 <p><img src="/img/posts/spring/springsecurity.png" alt="springsecurity" width="800" /></p>
 
-<p>1, 2 . 로그인 요청이 들어오면 AuthenticationFilter에서 입력된 아이디와 비밀번호는 UsernamePasswordToken으로 바꾸어 전달된다. 
-3 . AuthenticationManager(구현체는 ProviderManager)는 UsernamePasswordToken 인증을 처리할 AuthenticationProvider를 가지고 있다. (여러 개 존재할 수 있다.)
-4 . AuthenticationManager는 토큰을 전달하여 AuthenticationProvider의 구현체들을 통해 인증을 요구한다.
-5 . AuthenticationProvider는 UserDetailsService를 통해 사용자 정보를 조회한다.
-6, 7 . UserDetailsService은 UserDetails를 리턴해주는 하나의 메소드(loadUserByUsername)를 구현해야 한다. 일반적으로 UserRepository를 주입받아 UserDetails를 리턴한다.</p>
+<p>1, 2 . 로그인 요청이 들어오면 AuthenticationFilter에서 입력된 아이디와 비밀번호는 UsernamePasswordToken으로 바꾸어 전달된다.</p>
+
+<p>3 . AuthenticationManager(구현체는 ProviderManager)는 UsernamePasswordToken 인증을 처리할 AuthenticationProvider를 가지고 있다. (여러 개 존재할 수 있다.)</p>
+
+<p>4 . AuthenticationManager는 토큰을 전달하여 AuthenticationProvider의 구현체들을 통해 인증을 요구한다.</p>
+
+<p>5 . AuthenticationProvider는 UserDetailsService를 통해 사용자 정보를 조회한다.</p>
+
+<p>6, 7 . UserDetailsService은 UserDetails를 리턴해주는 하나의 메소드(loadUserByUsername)를 구현해야 한다. 일반적으로 UserRepository를 주입받아 UserDetails를 리턴한다.</p>
 
 <ul>
   <li>UserDetails는 인가 권한이 추가된 User 객체이다.
@@ -78,9 +82,11 @@
   </li>
 </ul>
 
-<p>8 . AuthenticationProvider가 인증에 성공하면 성공한 UsernameAuthenticationToken을 생성하여 AuthenticaionManager에게 전달한다.
-9 . 그리고 AuthenticaionManager는 AuthenticationFilter에게 토큰을 전달한다.
-10 . 토큰은 LoginSuccessHandler로 전달되고 SecurityContextHolder에 저장된다.</p>
+<p>8 . AuthenticationProvider가 인증에 성공하면 성공한 UsernameAuthenticationToken을 생성하여 AuthenticaionManager에게 전달한다.</p>
+
+<p>9 . 그리고 AuthenticaionManager는 AuthenticationFilter에게 토큰을 전달한다.</p>
+
+<p>10 . 토큰은 LoginSuccessHandler로 전달되고 SecurityContextHolder에 저장된다.</p>
 <ul>
   <li>SecurityContextHolder은 인증한 내용을 가지고 있다.
     <blockquote>

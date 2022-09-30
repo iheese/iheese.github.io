@@ -2,7 +2,7 @@
 
 <ul>
   <li>
-    <h4 id="-어떤-프로젝트인지-자세한-내용--소스-코드-클릭-"><a href="https://github.com/ddungi/JPABoardProject"> 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! </a></h4>
+    <h4 id="-어떤-프로젝트인지-자세한-내용--소스-코드-클릭-"><a href="https://github.com/iheese/JPABoardProject"> 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! </a></h4>
   </li>
 </ul>
 
@@ -107,7 +107,7 @@
   <li>일반적으로 커스텀한 Spring Security를 사용하는데 Spring Security가 제공하는 로직은 복잡했다. 관련하여 포스팅을 남기기도 했다.
     <blockquote>
       <ul>
-        <li><a href="https://ddungi.github.io/java/2022/07/27/springsecurity/">[JAVA, SPRINGBOOT] SPRING SECURITY 훑어보고 커스텀하기</a></li>
+        <li><a href="https://iheese.github.io/java/2022/07/27/springsecurity/">[JAVA, SPRINGBOOT] SPRING SECURITY 훑어보고 커스텀하기</a></li>
       </ul>
     </blockquote>
   </li>

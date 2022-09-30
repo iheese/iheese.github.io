@@ -1,0 +1,204 @@
+I"�&<h3 id="jpa와-spring-boot를-이용한-블로그-프로젝트입니다">JPA와 Spring Boot를 이용한 블로그 프로젝트입니다.</h3>
+
+<ul>
+  <li>
+    <h4 id="-어떤-프로젝트인지-자세한-내용--소스-코드-클릭-"><a href="https://github.com/iheese/JPABlogProject"> 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! </a></h4>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="신경썼던-점">신경썼던 점</h2>
+
+<h4 id="jpa-매핑-말고-직접-매핑하기">JPA 매핑 말고 직접 매핑하기</h4>
+
+<ul>
+  <li>이번 프로젝트는 게시판 프로젝트에 이어 숙련도를 높이는 시간이었던 것 같다.</li>
+  <li>전 프로젝트에서 Entity 매핑 기능에 익숙해질 때쯤 이번 프로젝트에서는 JPA는 사용하되 매핑 기능을 사용하지 않았다.
+    <blockquote>
+      <ul>
+        <li>Join 기능을 사용하지 않았기 때문에 분명히 성능적으로 좋아지는 것을 체감할 수 있었다.</li>
+        <li>어떤 로직을 코드로 짤 때마다 연관된 것을 직접 매핑해줘야 했기에 확실히 신경 쓸 부분이 많았다.
+          <blockquote>
+            <ul>
+              <li>조회시 성능이 정말 중요한 로직에는 적용하면 좋을 것 같다는 생각을 했다.</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="commit-단위">Commit 단위</h4>
+<ul>
+  <li>전 프로젝트들은 프로젝트를 만들고 통으로 깃헙에 올리는 방식이었는데 이번에는 커밋을 하며 커밋 단위도 리뷰를 받아볼 수 있는 기회를 받았다.
+    <blockquote>
+      <ul>
+        <li>패캠 레포에 커밋을 하며 올렸고 개인 레포에는 통으로 올렸다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>수업 초반에 Commit Convention이라는 것을 알게 되고 나서 깃헙에 업로드할 때마다 나름 적용해보고자 하고 있었는데 코드 리뷰를 통해 Commit Convention의 종류가 다양하며 내가 잘못 사용하고 있었다는 것을 알았다.
+    <blockquote>
+      <ul>
+        <li>무엇인가를 수정할 때 <code class="language-plaintext highlighter-rouge">fix</code> 를 남발했는데 fix는 심각한 오류, 버그를 수정했을 경우 사용한다고 한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>개인 프로젝트할 때는 확실히 체감되지 않지만 다음에 있을 팀프로젝트에서는 커밋 단위, 커밋 컨벤션을 신경 써서 원활한 프로젝트를 진행하도록 해야겠다고 생각했다.</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="생성자-주입">생성자 주입</h4>
+<ul>
+  <li>이번 프로젝트에서는 <code class="language-plaintext highlighter-rouge">@Autowired</code> 를 사용하지 않고 테스트 코드에서만 사용하였다. 그리고 모두 생성자 주입을 이용했다.
+    <blockquote>
+      <ul>
+        <li>순환 참조를 막고, 객체 불변성을 높일 수 있다는 장점이 있다.</li>
+        <li>테스트 코드에서는 <code class="language-plaintext highlighter-rouge">@Autowired MockMvc mockMvc</code> 으로 사용했기 때문에 괜찮을 것이라고 생각했다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="두-번쨰-코드-리뷰-및-정리">두 번쨰 코드 리뷰 및 정리</h2>
+<ul>
+  <li>Test Code는 Public으로 열린 모든 메소드에 대해 작성하는 편이다. 또한 일정 수준 테스트 커버리지가 낮아지면 빌드도 안되고 배포도 되지 않게 구현되어 있다.</li>
+  <li>DTO 구현은 필수적이다.</li>
+  <li>Entity는 RequestBody, ModelAttribute 사용하지 말아야 한다.
+    <blockquote>
+      <ul>
+        <li>프로젝트 다른 것들에 신경 쓰다가 DTO를 신경 쓰지 못해 코드 리뷰를 받고 DTO를 추가했다.
+          <blockquote>
+            <ul>
+              <li>나중에 추가하는 것보다 처음부터 잘 설계하는 게 훨씬 시간 단축에 좋다.(내 생각)</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>Commit Convention 종류를 확인하고, 적절하게 사용해야 한다.</li>
+  <li>Builder 패턴은 내가 어떤 컬럼에 어떤 값을 넣는지 직관적으로 알 수 있지만 꼭 필요한 컬럼이 누락될 수 있는 가능성이 있다. 필요하다면 private 선언으로 builder 패턴을 강제하면 좋다.</li>
+  <li>Entity 컬럼명 명시 유무를 고민해야 한다.
+    <blockquote>
+      <ul>
+        <li>팀프로젝트에서 팀원들과 정해야 할 문제</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">@Table</code> 의 유니크 제약 조건에 대해 학습하기
+    <blockquote>
+      <ul>
+        <li>클래스에 <code class="language-plaintext highlighter-rouge">@Table(name="테이블이름", uniqueConstrains={@UniqueConstraint(name="제약조건이름", colummnNames={"컬럼명1","컬럼명2"})})</code></li>
+        <li>필드에 <code class="language-plaintext highlighter-rouge">@Column(name="컬럼명1")</code></li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>주석 남발을 지양, 메소드가 많아지면 가독성이 떨어진다. 메소드명 자체로 표현하는 것이 좋다.</li>
+  <li>Controller 단에서는 <code class="language-plaintext highlighter-rouge">@Transactional</code>이 적용되지 않는다.
+    <blockquote>
+      <ul>
+        <li>Spring AOP는 기본적으로 JDK 프록시 기법으로 움직인다. 이 기법이 적용되려면 인터페이스가 존재해야 하는데 Controller는 일반적으로 인터페이스를 구현하지 않는다. (Service 인터페이스를 만들어서 사용했던 것이 이 이유 때문이었다.)</li>
+        <li>JDK 프록시는 리플렉션을 이용하며 Target의 상위 인터페이스를 상속받아 프록시를 만든다.
+          <blockquote>
+            <ul>
+              <li>리플렉션은 클래스 타입을 알지 못해도 클래스에 접근할 수 있게 해주는 API이다.
+                <blockquote>
+                  <ul>
+                    <li>비용이 높아 사용을 지양해야 한다.</li>
+                  </ul>
+                </blockquote>
+              </li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>Spring Boot AOP 는 기본적으로 CGLib을 적용하여 <code class="language-plaintext highlighter-rouge">@Transactional</code>를 적용한다.
+          <blockquote>
+            <ul>
+              <li>CGLib(Code Generator Library) : 클래스 기반 바이트 코드 조작하고 Target 클래스를 상속 받아 프록시를 만든다, private 적용하면 사용할 수 없다.</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<hr />
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@BeforeEach</code> 를 이용하여 테스트 코드를 작성해보는 것이 좋다. 각 단위 테스트의 독립성을 높이는 효과가 있다.
+    <blockquote>
+      <ul>
+        <li>전에는 그냥 테스트 메소드 밖에 객체를 생성하고 돌려 쓰는 방식이었는데 테스트 간에 연관성을 가지고 올 수 있겠구나 생각했다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">@DisplayName</code> 에 given/when/then 을 이용한 이름으로 적어보면 가독성이 좋아진다.</li>
+  <li>assertj 라이브러리도 테스트 코드 작성하는데 도움이 된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Autowired MockMvc mockMvc</code> 말고 MockMvcRequestBuilder를 이용해보기</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="어려웠던-점-아쉬웠던-점">어려웠던 점, 아쉬웠던 점</h2>
+
+<h4 id="test-code">Test Code</h4>
+<ul>
+  <li>테스트 코드는 항상 짤 때마다 이 로직이 맞는지, 이 코드가 테스트 코드가 잘 안짜지는데 깔끔한 코드가 아닌 것 같다는 생각이 많이 든다.</li>
+  <li>더 많이 작성해보고 공부해서 코드의 확실성을 더 높이고 싶다.</li>
+  <li>모든 메소드의 테스트 코드를 작성하지 못한 것은 아쉽다.</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="db">DB</h4>
+<ul>
+  <li>항상 프로젝트시 DB를 H2를 사용해왔는데 실습용으로는 너무 좋지만 이제 더 다양한 DB를 만나볼 시간이 된 것 같다. 전에 대략적으로 사용한 DB들이 있긴 한데 프로젝트 자체에 연결해본 적은 없어서 꼭 실습해봐야 할 것 같다.</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="차분하게-기초로">차분하게, 기초로</h4>
+<ul>
+  <li>프로그래밍을 학습하면서 전체를 보고 세세한 부분을 보면서 학습하는 게 맞다고는 생각하는데 정말 낯설고 어려운 부분이 많다는 생각을 했다.
+    <blockquote>
+      <ul>
+        <li>약간 우리가 사용하는 전자제품 사용은 너무 간편하지만 그 속의 정말 어려운 로직과 원리들을 파고드는 느낌이랄까?</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>기초로 돌아가서 차분히 하나 하나 해보자..!!</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="느낀-점">느낀 점</h2>
+<ul>
+  <li>앞으로 있는 팀프로젝트가 기대가 된다. 커밋이나 협업에 관한 부분을 많이 생각해서 좋은 결과를 꼭 내보고 싶다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="추가-학습할-키워드">추가 학습할 키워드</h2>
+<ul>
+  <li>DTO</li>
+  <li>JSON</li>
+  <li>Test Code 관련 정리</li>
+  <li>Optional 처리</li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li>백엔드 개발자 양성 과정 _ 패스트 캠퍼스, 채규태 강사님의 개인 프로젝트 회고록입니다.</li>
+</ul>
+:ET
