@@ -5,6 +5,7 @@ subtitle: 'AWS, EC2, Spring Boot, CyberDuck, Git Bash'
 date: 2022-09-05 12:00:00 +0900
 categories: 'DevOps'
 background: '/img/posts/etc/git.png'
+published: false
 ---
 
 - 시작하기 전 준비물
