@@ -1,4 +1,4 @@
-I"ba<h2 id="데이터-정제-전처리">데이터 정제, 전처리</h2>
+I"ca<h2 id="데이터-정제-전처리">데이터 정제, 전처리</h2>
 
 <p>: 훈련데이터에 에러, 이상치(outlier) 등이 있으면 기계학습 시스템이 내재된 패턴을 찾기 힘들기 때문에 적절한 작업이 필요</p>
 
@@ -122,7 +122,7 @@
 </ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fit_distribution</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">):</span>
-    <span class="c1">#정규분포의 평균과 표준편차를 추정 
+    <span class="c1">#정규분포의 평균과 표준편차를 추정 S
 </span>    <span class="n">mu</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">col_idx</span><span class="p">].</span><span class="n">mean</span><span class="p">()</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">col_idx</span><span class="p">].</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#pd.Series.std(ddof=0)은 표준편차/ 
 </span>    								 <span class="c1">#pd.Series.std(ddof=1)은 표본표준편차(default)    

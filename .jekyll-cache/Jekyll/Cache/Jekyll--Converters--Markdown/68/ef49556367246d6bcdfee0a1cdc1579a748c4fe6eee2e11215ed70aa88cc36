@@ -1,4 +1,4 @@
-I"J<h2 id="결정트리-decision-tree">결정트리 (Decision Tree)</h2>
+I"�J<h2 id="결정트리-decision-tree">결정트리 (Decision Tree)</h2>
 
 <ul>
   <li>
@@ -25,7 +25,9 @@
 <blockquote>
   <ul>
     <li>훈련데이터셋 $D={(\mathbf x_i,y_i)|1\le i \le m}$의 특성벡터 $\mathbf x_i\, (1\le i \le m)$를 포함하는 특성공간 $\mathcal X$를 어떤 분할규칙(splitting rule)에 따라 겹치지 않는 작은 영역 $\mathcal R_i$로
-\(\mathcal X = \mathcal R_1 \cup \mathcal R_2 \cup \cdots \cup \mathcal R_N\)</li>
+$
+\mathcal X = \mathcal R_1 \cup \mathcal R_2 \cup \cdots \cup \mathcal R_N
+$</li>
   </ul>
 
   <p>과 같이 나누고,</p>
@@ -36,7 +38,9 @@
     </li>
     <li>
       <p>회귀의 경우: 샘플 $\mathbf x$가 속하는 작은 영역 $\mathcal R_i$에 대해, 이 영역에 속하는 훈련샘플 $\mathbf x_j$의 $y_j$값의 평균으로 예측 
-\(\hat y = \dfrac 1 {r_i} \sum_{\mathbf x_j \in \mathcal R_i}y_j, \quad (r_i=\bigl|\{(\mathbf x_j,y_j)\in D|\mathbf x_j\in \mathcal R_i\}\bigr|)\)</p>
+$
+\hat y = \dfrac 1 {r_i} \sum_{\mathbf x_j \in \mathcal R_i}y_j, \quad (r_i=\bigl|{(\mathbf x_j,y_j)\in D|\mathbf x_j\in \mathcal R_i}\bigr|)
+$</p>
     </li>
     <li>
       <p>분류의 경우: 샘플 $\mathbf x$가 속하는 작은 영역 $\mathcal R_i$에 대해, $\mathcal R_i$에 속하는 훈련샘플에 대한 레이블 중 가장 많이 나타나는 레이블</p>
@@ -58,7 +62,9 @@
     </li>
     <li>
       <p>예를 들어, 그림에서 리프노드 2에 대응되는 영역을 $\mathcal R_1$, 리프노드 5에 대응되는 영역을 $\mathcal R_2$라 하면 
-\(\mathcal R_1=\{(x_1,x_2)\,\in \, \mathcal X\, |\, x_2 \le 0.8\},\quad \mathcal R_2=\{(x_1,x_2)\, \in \, \mathcal X\,|\, 0.8&lt;x_2 \le 1.75,\, x_1\le 4.95\}\)
+$
+\mathcal R_1={(x_1,x_2)\,\in \, \mathcal X\, |\, x_2 \le 0.8},\quad \mathcal R_2={(x_1,x_2)\, \in \, \mathcal X\,|\, 0.8&lt;x_2 \le 1.75,\, x_1\le 4.95}
+$
 이고, $\mathcal R_2$에 속하는 훈련샘플 중 레이블이 setosa인 것은 $0$개, versicolor인 것은 $47$개, viginica인 것은 $1$개이므로 $\mathcal R_2$ 영역에 속하는 샘플에 대해서는 레이블이 versicolor인 것으로 예측</p>
     </li>
   </ul>
@@ -91,23 +97,29 @@
         <li>
           <p>지시함수(indicator function) $\mathbf 1_{\mathcal A}$를 다음과 같이 정의</p>
 
-\[\mathbf 1_{\mathcal A}(\mathbf x)=\begin{cases} 1 &amp; \ \text{if } \mathbf x\in \mathcal A\\ 0 &amp;\ \text{if }\mathbf x \notin \mathcal A\end{cases}\]
+          <p>$
+\mathbf 1_{\mathcal A}(\mathbf x)=\begin{cases} 1 &amp; \ \text{if } \mathbf x\in \mathcal A\ 0 &amp;\ \text{if }\mathbf x \notin \mathcal A\end{cases}
+$</p>
         </li>
         <li>
           <p>회귀문제의 경우, 집합 $\mathcal A$에서 정의된 상수함수 $g^{\mathcal A}$를 다음과 같이 정의</p>
 
-\[g^{\mathcal A}(\mathbf x) =   \dfrac 1 {n_{\mathcal A}} \sum_{i=1}^m y_i\mathbf 1_{\mathcal A}(\mathbf x_i) ,\ (\mathbf x\in \mathcal A)\]
+          <p>$
+g^{\mathcal A}(\mathbf x) =   \dfrac 1 {n_{\mathcal A}} \sum_{i=1}^m y_i\mathbf 1_{\mathcal A}(\mathbf x_i) ,\ (\mathbf x\in \mathcal A)
+$</p>
         </li>
         <li>
           <p>레이블이 ${1,2,\cdots,K}$인 분류문제의 경우, 집합 $\mathcal A$에 속하는 훈련 샘플의 레이블 중 레이블이 $k$인 것의 비율을 $p_k^{\mathcal A}$ 즉,</p>
+
+\[p_k^{\mathcal A} = \dfrac 1 {n_{\mathcal A}} \sum_{i=1}^m \mathbf 1_{\{k\}}(y_i)\mathbf 1_{\mathcal A}(\mathbf x_i)\]
         </li>
       </ul>
 
-\[p_k^{\mathcal A}= \dfrac 1 {n_{\mathcal A}} \sum_{i=1}^m \mathbf 1_{\{k\}}(y_i)\mathbf 1_{\mathcal A}(\mathbf x_i)\]
-
       <p>라 할 때, $\mathcal A$에서 정의된 상수함수 $g^{\mathcal A}$를 다음과 같이 정의</p>
 
-\[g^{\mathcal A}(\mathbf x)=  \text{argmax}_{\substack{k\in \{1,\cdots,K\}}}p_k^{\mathcal A}, \ (\mathbf x\in \mathcal A)\]
+      <p>$
+g^{\mathcal A}(\mathbf x)=  \text{argmax}_{\substack{k\in {1,\cdots,K}}}p_k^{\mathcal A}, \ (\mathbf x\in \mathcal A)
+$</p>
 
       <ul>
         <li>
@@ -117,7 +129,9 @@
 
           <p>과 같이 분할되었다면, 이 <strong>결정트리에 대한 예측함수</strong> $g$는 앞에서 정의한 상수함수들을 이용하여 다음과 같이 정의</p>
 
-\[g(\mathbf x) = \sum_{i=1}^N g^{\mathcal R_i}(\mathbf x) \mathbf 1_{\mathcal R_i}(\mathbf x)\]
+          <p>$
+g(\mathbf x) = \sum_{i=1}^N g^{\mathcal R_i}(\mathbf x) \mathbf 1_{\mathcal R_i}(\mathbf x)
+$</p>
         </li>
       </ul>
     </blockquote>
@@ -146,7 +160,9 @@
         </li>
       </ul>
 
-\[s_i^{\xi}(\mathbf x)=s_i^{\xi}((x_1,x_2,\cdots,x_n))=\begin{cases} \text{True} &amp; \ \text{if }x_i\le \xi\\ \text{False} &amp; \ \text{if } x_i &gt; \xi\end{cases}\]
+      <p>$
+s_i^{\xi}(\mathbf x)=s_i^{\xi}((x_1,x_2,\cdots,x_n))=\begin{cases} \text{True} &amp; \ \text{if }x_i\le \xi\ \text{False} &amp; \ \text{if } x_i &gt; \xi\end{cases}
+$</p>
     </blockquote>
   </li>
 </ul>
@@ -171,7 +187,9 @@
     </li>
     <li>
       <p>문제에 맞는 손실함수 $\text{Loss}$를 정의하고, 앞에서 설명한 예측함수 $g$의 훈련 데이터셋에 대한 손실값 
-\(\ell(g)=\dfrac 1 m \sum_{i=1}^m \text{Loss}\bigl(y_i, g(\mathbf x_i)\bigr)\)
+$
+\ell(g)=\dfrac 1 m \sum_{i=1}^m \text{Loss}\bigl(y_i, g(\mathbf x_i)\bigr)
+$
 이 작아지도록 특성공간을 반복하여 분할해가는 과정이 학습 알고리즘.</p>
 
       <blockquote>
@@ -193,7 +211,7 @@
       <p>일반적으로 $\mathcal X$의 부분집합 $\mathcal A$를 분할규칙 $s$를 이용하여 $\mathcal A=\mathcal A_{T}\cup \mathcal A_{F}$로 분할할 때, 다음이 성립</p>
 
 \[\begin{aligned}
-&amp;\dfrac 1 m \sum_{i=1}^m \mathbf 1_{\mathcal A}(\mathbf x_i)\text{Loss}\bigl(y_i, g^{\mathcal A}(\mathbf x_i)\bigr)\\ 
+&amp;\dfrac 1 m \sum_{i=1}^m \mathbf 1_{\mathcal A}(\mathbf x_i)\text{Loss}\bigl(y_i, g^{\mathcal A}(\mathbf x_i)\bigr)\\
 \ge&amp;\dfrac 1 m \sum_{i=1}^m \mathbf 1_{\mathcal A_{T}}(\mathbf x_i)\text{Loss}\bigl(y_i, g^{\mathcal A_{T}}(\mathbf x_i)\bigr) +\dfrac 1 m \sum_{i=1}^m \mathbf 1_{\mathcal A_{F}}(\mathbf x_i)\text{Loss}\bigl(y_i, g^{\mathcal A_{F}}(\mathbf x_i)\bigr)
 \end{aligned}\]
     </li>
@@ -205,9 +223,11 @@
           <li>
             <p>고려하는 영역이 $\mathcal A$라 할 때,</p>
 
-            <p>훈련 데이터셋의 각 특성벡터 $\mathbf x_i\ (1\le i \le m)$의 특성 $x_{ij}\ (1\le j\le n)$에 대한 분할규칙 $s_{j}^{x_{ij}}$에 따라 $\mathcal A$의 분할 $\mathcal A_T$, $\mathcal A_F$를 구하고, 다음 손실값 
-\(\dfrac 1 m \sum_{i=1}^m \mathbf 1_{\mathcal A_{T}}(\mathbf x_i)\text{Loss}\bigl(y_i, g^{\mathcal A_{T}}(\mathbf x_i)\bigr) +\dfrac 1 m \sum_{i=1}^m \mathbf 1_{\mathcal A_{F}}(\mathbf x_i)\text{Loss}\bigl(y_i, g^{\mathcal A_{F}}(\mathbf x_i)\bigr)\)
- 이 최소가 되는 $s_{j}^{x_{ij}}$를 이용하여 분할</p>
+            <p>훈련 데이터셋의 각 특성벡터 $\mathbf x_i\ (1\le i \le m)$의 특성 $x_{ij}\ (1\le j\le n)$에 대한 분할규칙 $s_{j}^{x_{ij}}$에 따라 $\mathcal A$의 분할 $\mathcal A_T$, $\mathcal A_F$를 구하고,  다음 손실값</p>
+
+\[\dfrac 1 m \sum_{i=1}^m \mathbf 1_{\mathcal A_{T}}(\mathbf x_i)\text{Loss}\bigl(y_i, g^{\mathcal A_{T}}(\mathbf x_i)\bigr) +\dfrac 1 m \sum_{i=1}^m \mathbf 1_{\mathcal A_{F}}(\mathbf x_i)\text{Loss}\bigl(y_i, g^{\mathcal A_{F}}(\mathbf x_i)\bigr)\]
+
+            <p>이 최소가 되는 $s_{j}^{x_{ij}}$를 이용하여 분할</p>
           </li>
           <li>
             <p>분할을 계속하면 손실값은 계속 작아지지만, 훈련 데이터셋에 과대적합되어 일반화 성능은 떨어질 수 있음</p>
@@ -254,7 +274,7 @@
   
 =&amp;\sum_{j=1}^N \dfrac 1 m \sum_{\mathbf x_i\in \mathcal R_j} \text{Loss}\bigl(y_i,g^{\mathcal R_j}(\mathbf x_i)\bigr)\\
   
-=&amp;\sum_{j=1}^N \dfrac {n_j} m \left(\dfrac 1 {n_j}\sum_{\mathbf x_i\in \mathcal R_j} \text{Loss}\bigl(y_i,g^{\mathcal R_j}(\mathbf x_i)\bigr)\right) \ (\text{단, $n_j$는 $R_j$에 속하는 샘플 수})\\
+=&amp;\sum_{j=1}^N \dfrac {n_j} m \left(\dfrac 1 {n_j}\sum_{\mathbf x_i\in \mathcal R_j} \text{Loss}\bigl(y_i,g^{\mathcal R_j}(\mathbf x_i)\bigr)\right) \ (\text{단, $n_j$는 $R_j$에 속하는 샘플 수})
   
 =&amp;\sum_{j=1}^N \dfrac {n_j} m\, \text{IP}(\mathcal R_j)
   
@@ -288,14 +308,18 @@
       <li>
         <p>엔트로피 불순도(Entropy Impurity)</p>
 
-\[\text{IP}(\mathcal R_j)=-\sum_{k=1}^K p_k \log_2(p_k)\]
+        <p>$
+\text{IP}(\mathcal R_j)=-\sum_{k=1}^K p_k \log_2(p_k)
+$</p>
       </li>
       <li>
         <p>지니 불순도(Gini Impurity)</p>
       </li>
     </ul>
 
-\[\text{IP}(\mathcal R_j)=1-\sum_{k=1}^K p_k^2\]
+    <p>$
+\text{IP}(\mathcal R_j)=1-\sum_{k=1}^K p_k^2
+$</p>
   </blockquote>
 
   <ul>

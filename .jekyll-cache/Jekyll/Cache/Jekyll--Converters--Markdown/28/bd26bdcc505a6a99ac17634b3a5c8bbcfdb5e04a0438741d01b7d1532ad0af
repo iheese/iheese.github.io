@@ -1,4 +1,4 @@
-I"$	<h2 id="과대적합을-감소시키는-방법-규제regularization">과대적합을 감소시키는 방법: 규제(Regularization)</h2>
+I"&	<h2 id="과대적합을-감소시키는-방법-규제regularization">과대적합을 감소시키는 방법: 규제(Regularization)</h2>
 
 <ul>
   <li>
@@ -66,9 +66,10 @@
     <p>릿지 회귀를 학습하기 위해 정규방정식을 이용할 수도 있고 경사하강법을 이용할 수도 있음</p>
   </li>
   <li>
-    <p>릿지회귀에 대한 정규방정식
-\(J(\theta)= RSS(\theta)+\alpha(||\mathbf w||_2)^2 (\alpha &gt;0)
-=\text{RSS}(\theta ) + \alpha\ \sum_{i=1}^n |\theta_i|^2\)</p>
+    <p>릿지회귀에 대한 정규방정식</p>
+
+\[J(\theta)= RSS(\theta)+\alpha(||\mathbf w||_2)^2 (\alpha &gt;0)
+=\text{RSS}(\theta ) + \alpha\ \sum_{i=1}^n |\theta_i|^2\]
 
     <blockquote>
       <ul>
@@ -309,8 +310,9 @@
 \[\text{예를 들어} f(\theta)=||\theta||_1=\sum_{i=1}^n|\theta_i|\text{에 대해} (\text{sign}(\theta_1),\cdots,\text{sign}(\theta_n))^{\rm T}\text{는  서브그래디언트 벡터 중 하나가 된다}\]
         </li>
         <li>
-          <p>단,
-\(\text{sign}(\theta_i)=\begin{cases} 1 &amp;\text{ if }\theta_i&gt;0 \\ 0 &amp;\text{ if }\theta_i=0\\ -1 &amp; \text{ if }\theta_i&lt;0\end{cases}\)</p>
+          <p>단,</p>
+
+\[\text{sign}(\theta_i)=\begin{cases} 1 &amp;\text{ if }\theta_i&gt;0 \\ 0 &amp;\text{ if }\theta_i=0\\ -1 &amp; \text{ if }\theta_i&lt;0\end{cases}\]
         </li>
         <li>
           <p>미분가능한 점에서의 서브그래디언트 벡터는 그래디언트 벡터 뿐이다.</p>
@@ -353,12 +355,13 @@ f_n(t)=f(a_1,\cdots,&amp;a_{n-1},t)
     <p>위 (3)의 상황에서 다음과 같이 반복적으로 각 좌표축을 따라 움직이며 함수의 최솟값을 찾는 최적화 알고리즘을 <strong>좌표별하강법</strong>이라고 함</p>
   </li>
   <li>
-    <p>$\theta^{(0)}$를 임의로 선택한 후 다음과 같이 $\theta^{(k)}$로부터 $\theta^{(k+1)}$로 업데이트 
-\(\begin{align}
+    <p>$\theta^{(0)}$를 임의로 선택한 후 다음과 같이 $\theta^{(k)}$로부터 $\theta^{(k+1)}$로 업데이트</p>
+
+\[\begin{align}
 \theta_1^{(k+1)} \in\ \text{argmin}_t &amp;f(t,\theta_2^{(k)},\theta_3^{(k)}\cdots,\theta_n^{(k)}) \\   \theta_2^{(k+1)} \in\ \text{argmin}_t &amp;f(\theta_1^{(k+1)},t,\theta_3^{(k)},\cdots,\theta_n^{(k)}) \\   
 \vdots \\   
 \theta_n^{(k+1)} \in\ \text{argmin}_t &amp;f(\theta_1^{(k+1)},\cdots,\theta_{n-1}^{(k+1)},t)
-\end{align}\)</p>
+\end{align}\]
   </li>
   <li>
     <p>위의 반복과정에서 각 좌표축 별로 최소가 되는 θi를 구할 때, (서브그래디언트를 이용한) 경사하강법을 적용할 수 있음</p>

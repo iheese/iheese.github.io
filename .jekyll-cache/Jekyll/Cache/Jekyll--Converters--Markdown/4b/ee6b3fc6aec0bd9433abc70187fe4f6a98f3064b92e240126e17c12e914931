@@ -1,4 +1,4 @@
-I"��<h2 id="로지스틱-회귀logistic-regression-의-학습-모델">로지스틱 회귀(Logistic Regression) 의 학습 모델</h2>
+I"�<h2 id="로지스틱-회귀logistic-regression-의-학습-모델">로지스틱 회귀(Logistic Regression) 의 학습 모델</h2>
 
 <ul>
   <li>
@@ -28,13 +28,15 @@
 
     <blockquote>
       <ul>
-        <li>샘플 $\mathbf x$가 양성 클래스(y=1)에 속할 확률 $\hat p(\mathbf x)=h_{\theta}(\mathbf x)$를 추정한 후 다음과 같이 예측 $\hat y$를 구함 
-\(\hat y = \begin{cases} 0 &amp; \text{ if  }&amp; \hat p(\mathbf x)&lt;0.5\\ 1 &amp;\text{ if }&amp; \hat p(\mathbf x)\ge0.5
-\end{cases}\)</li>
+        <li>
+          <p>샘플 $\mathbf x$가 양성 클래스(y=1)에 속할 확률 $\hat p(\mathbf x)=h_{\theta}(\mathbf x)$를 추정한 후 다음과 같이 예측 $\hat y$를 구함</p>
+
+\[\hat y = \begin{cases} 0 &amp; \text{ if  }&amp; \hat p(\mathbf x)&lt;0.5\\ 1 &amp;\text{ if }&amp; \hat p(\mathbf x)\ge0.5
+\end{cases}\]
+        </li>
       </ul>
     </blockquote>
   </li>
-  <li></li>
 </ul>
 
 <h3 id="시그모이드-함수-그려보기">시그모이드 함수 그려보기</h3>
@@ -67,10 +69,11 @@
 
 <ul>
   <li>
-    <p>훈련 데이터셋 ${(\mathbf x_i,y_i) \mid1\le i \le m}$이 주어질 때, 다음과 같이 정의되는 로지스틱 회귀의 비용함수(로그손실 함수) 
-\(J(\theta) = -\dfrac 1 m \sum_{i=1}^m
+    <p>훈련 데이터셋 ${(\mathbf x_i,y_i) \mid1\le i \le m}$이 주어질 때, 다음과 같이 정의되는 로지스틱 회귀의 비용함수(로그손실 함수)</p>
+
+\[J(\theta) = -\dfrac 1 m \sum_{i=1}^m
 (y_i \ln p_i + (1-y_i)\ln (1-p_i)) \\
-(단, p_i= \sigma({\theta}^{\rm T}\mathbf x_i)) \cdots (2)\)</p>
+(단, p_i= \sigma({\theta}^{\rm T}\mathbf x_i)) \cdots (2)\]
 
     <p>가 최소가 되는 모델 파라미터 $\theta$를 구하는 것</p>
 
@@ -95,9 +98,10 @@ J(\theta)=&amp;  -\dfrac 1 m \ln\left(\prod_{i=1}^m p_i^{y_i} (1-p_i)^{(1-y_i)}\
           <p>경사하강법 또는 다른 최적화 알고리즘을 이용하여 해의 근삿값을 구함 (<code class="language-plaintext highlighter-rouge">sklearn.linear_model</code> 모듈의 <code class="language-plaintext highlighter-rouge">LogisticRegression</code>의 <code class="language-plaintext highlighter-rouge">solver</code>참고)</p>
         </li>
         <li>
-          <p>배치 경사하강법을 적용할 때 비용함수에 대한 그래디언트 벡터 $\nabla_{\theta}J(\theta)$ : 각 $i$ ($1\le i\le m)$에 대해  $\nabla_\theta J(\theta)$의 $j$번째 성분은 
-\(\dfrac{\partial}{\partial \theta_j} J(\theta)= \dfrac 1 m \sum_{i=1}^m 
-(\sigma({\theta}^{\rm T}\mathbf x_i)-y_i)x_{ij},\\ \mathbf x_i=(1,x_{i1},\cdots,x_{in})\)</p>
+          <p>배치 경사하강법을 적용할 때 비용함수에 대한 그래디언트 벡터 $\nabla_{\theta}J(\theta)$ : 각 $i$ ($1\le i\le m)$에 대해  $\nabla_\theta J(\theta)$의 $j$번째 성분은</p>
+
+\[\dfrac{\partial}{\partial \theta_j} J(\theta)= \dfrac 1 m \sum_{i=1}^m 
+(\sigma({\theta}^{\rm T}\mathbf x_i)-y_i)x_{ij},\\ \mathbf x_i=(1,x_{i1},\cdots,x_{in})\]
         </li>
       </ul>
     </blockquote>
@@ -367,8 +371,11 @@ J(\theta)=&amp;  -\dfrac 1 m \ln\left(\prod_{i=1}^m p_i^{y_i} (1-p_i)^{(1-y_i)}\
 
           <blockquote>
             <ul>
-              <li>(4) 샘플 $\mathbf x$에 대한 레이블의 예측은 추정확률 $\hat{p}_k$가 최대가 되는 $k$로 예측 즉,
-\(\hat y = \text{argmax}_k \hat{p}_k=\text{argmax}_k \sigma(\mathbf s(\mathbf x))_k=\text{argmax}_k s_k(\mathbf x) = \text{argmax}_k \theta_k^{\rm T}\mathbf x, \ (1\le k\le K)\)</li>
+              <li>
+                <p>(4) 샘플 $\mathbf x$에 대한 레이블의 예측은 추정확률 $\hat{p}_k$가 최대가 되는 $k$로 예측 즉,</p>
+
+\[\hat y = \text{argmax}_k \hat{p}_k=\text{argmax}_k \sigma(\mathbf s(\mathbf x))_k=\text{argmax}_k s_k(\mathbf x) = \text{argmax}_k \theta_k^{\rm T}\mathbf x, \ (1\le k\le K)\]
+              </li>
             </ul>
           </blockquote>
 
@@ -395,8 +402,11 @@ J(\theta)=&amp;  -\dfrac 1 m \ln\left(\prod_{i=1}^m p_i^{y_i} (1-p_i)^{(1-y_i)}\
 
     <blockquote>
       <ul>
-        <li>$i$번째 샘플에 대한 레이블 $y_i\in {1,\cdots,K}$를 <strong>원-핫(one hot)</strong>인코딩으로 표현하여 레이블 값에 해당하는 한 성분만 $1$이고 나머지 성분은 모두 $0$인 벡터 $(y_{i1},\cdots,y_{iK})^{\rm T}$로 생각하면 (즉, $K=4$이고 $y_i=2$인 경우 $y_i$의 원-핫 인코딩은 $(0,1,0,0)^{\rm T}$)
-\(\text{P}(Y=y_i|X=\mathbf x_i:\mathbf \Theta)=\prod_{k=1}^K \hat{p}_k(\mathbf x_i)^{y_{ik}}=\prod_{k=1}^K (\sigma(\mathbf \Theta\mathbf x_i)_k)^{y_{ik}}=\prod_{k=1}^K \left(\dfrac{\exp(\theta_k^{\rm T}\mathbf x_i)}{\sum_{k=1}^K \exp(\theta_k^{\rm T}\mathbf x_i)} \right)^{y_{ik}}\)</li>
+        <li>
+          <p>$i$번째 샘플에 대한 레이블 $y_i\in {1,\cdots,K}$를 <strong>원-핫(one hot)</strong>인코딩으로 표현하여 레이블 값에 해당하는 한 성분만 $1$이고 나머지 성분은 모두 $0$인 벡터 $(y_{i1},\cdots,y_{iK})^{\rm T}$로 생각하면 (즉, $K=4$이고 $y_i=2$인 경우 $y_i$의 원-핫 인코딩은 $(0,1,0,0)^{\rm T}$)</p>
+
+\[\text{P}(Y=y_i|X=\mathbf x_i:\mathbf \Theta)=\prod_{k=1}^K \hat{p}_k(\mathbf x_i)^{y_{ik}}=\prod_{k=1}^K (\sigma(\mathbf \Theta\mathbf x_i)_k)^{y_{ik}}=\prod_{k=1}^K \left(\dfrac{\exp(\theta_k^{\rm T}\mathbf x_i)}{\sum_{k=1}^K \exp(\theta_k^{\rm T}\mathbf x_i)} \right)^{y_{ik}}\]
+        </li>
       </ul>
     </blockquote>
 

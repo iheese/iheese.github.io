@@ -1,4 +1,4 @@
-I"�E<h2 id="서포트-벡터-머신support-vector-machine">서포트 벡터 머신(Support Vector Machine)</h2>
+I"�E<h2 id="서포트-벡터-머신support-vector-machine">서포트 벡터 머신(Support Vector Machine)</h2>
 
 <ul>
   <li>
@@ -71,12 +71,14 @@
 \(y_i(\langle \mathbf w,\mathbf x_i\rangle +b)\ge r,\ (1\le i \le m)\, (단, ||\mathbf w||=1)\)</p>
             </li>
             <li>
-              <p>따라서, 하드마진 서포트벡터머신의 학습 알고리즘은 다음 최적화 문제로 바뀜
-\(\begin{aligned}
+              <p>따라서, 하드마진 서포트벡터머신의 학습 알고리즘은 다음 최적화 문제로 바뀜</p>
+
+\[\begin{aligned}
 &amp;\quad \max_{\mathbf w, b, r} r\\
 &amp;\text{s.t }\ y_i(\langle \mathbf w,\mathbf x_i\rangle +b)\ge r,\ (1\le i\le m),\ ||\mathbf w||=1,\ r&gt;0
-\end{aligned}\)
-<br /></p>
+\end{aligned}\]
+
+              <p><br /></p>
 
               <p><img src="/img/posts/ML/ML11/svm_c1.png" alt="SVM" /></p>
             </li>
@@ -108,13 +110,15 @@
 <h3 id="하드마진-선형-svm-분류의-학습-알고리즘-선형분리가능인-경우">하드마진 선형 SVM 분류의 학습 알고리즘 (선형분리가능인 경우)</h3>
 
 <ul>
-  <li>
-    <p>설명에 의해 서포트벡터 $\mathbf x$가 $\langle \mathbf w,\mathbf x\rangle+b=1$을 만족시키는 것을 가정할 때, 선형 SVM 분류기에 대한 학습 알고리즘은 다음 최적화 문제의 해를 구하는 것으로 변형됨 
-  \(\begin{aligned}
+  <li>설명에 의해 서포트벡터 $\mathbf x$가 $\langle \mathbf w,\mathbf x\rangle+b=1$을 만족시키는 것을 가정할 때, 선형 SVM 분류기에 대한 학습 알고리즘은 다음 최적화 문제의 해를 구하는 것으로 변형됨</li>
+</ul>
+
+\[\begin{aligned}
   &amp;\quad \min_{\mathbf w,b} \dfrac 1 2 ||\mathbf w||^2\\
   &amp;\text{s.t }\ y_i(\langle \mathbf w,\mathbf x_i\rangle +b)\ge 1 \ (1\le i \le m)
-  \end{aligned} \quad \cdots (1)\)</p>
-  </li>
+  \end{aligned} \quad \cdots (1)\]
+
+<ul>
   <li>
     <p>원래 최적화 문제에서 $r=1/||\mathbf w||$의 최댓값을 구하는 것은 $||\mathbf w||$의 최솟값을 구하는 것과 같고, 다시 $||\mathbf w||^2/2$의 최솟값을 구하는 것과 같음</p>
   </li>
@@ -168,12 +172,13 @@
     <p>마진을 크게 하는 것과 마진오류를 줄이는 것 사이의 균형을 잡기 위해 다음과 같은 최적화 문제(QP 문제)를 통해 초평면(즉, $\mathbf w,\, b$)를 구하는 것을 <strong>소프트마진 선형 SVM 분류기</strong>라고 함</p>
   </li>
   <li>
-    <p>원초문제
-\(\begin{aligned}
+    <p>원초문제</p>
+
+\[\begin{aligned}
 &amp;\quad \min_{\mathbf w,b,\xi} \dfrac 1 2 ||\mathbf w||^2+C \sum_{i=1}^m \xi_i\\
 &amp;\text{s.t }\ y_i(\langle \mathbf w,\mathbf x_i\rangle +b)\ge 1-\xi_i,\qquad (1\le i \le m)\\
 &amp;\quad \ \xi_i\ge 0,\qquad (1\le i \le m)
-\end{aligned} \quad \cdots (2)\)</p>
+\end{aligned} \quad \cdots (2)\]
   </li>
 </ul>
 
@@ -239,8 +244,9 @@
 
       <ul>
         <li>
-          <p>이때, 쌍대문제의 목적함수는 $g(\alpha,\gamma)$는 다음과 같음 
-\(g(\alpha,\gamma)= -\dfrac 1 2 \sum_{i=1}^m\sum_{j=1}^m y_iy_j\langle \mathbf x_i,\mathbf x_j\rangle \alpha_i\alpha_j +\sum_{i=1}^m \alpha_i\)</p>
+          <p>이때, 쌍대문제의 목적함수는 $g(\alpha,\gamma)$는 다음과 같음</p>
+
+\[g(\alpha,\gamma)= -\dfrac 1 2 \sum_{i=1}^m\sum_{j=1}^m y_iy_j\langle \mathbf x_i,\mathbf x_j\rangle \alpha_i\alpha_j +\sum_{i=1}^m \alpha_i\]
         </li>
         <li>
           <p>따라서, 소프트마진 SVM 최적화 문제에 대한 쌍대문제는 다음과 같음</p>
