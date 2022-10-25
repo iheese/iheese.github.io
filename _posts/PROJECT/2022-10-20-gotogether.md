@@ -13,7 +13,7 @@ background: '/img/posts/project/project.jpg'
 
 <br>
 
-### 이번 프로젝트에서나의 역할
+### 이번 프로젝트에서 나의 역할
 - 사용자 파트
 - 큐레이션(상품 추천 데이터 저장)
 - 관리자 기능
