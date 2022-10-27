@@ -1,0 +1,311 @@
+I"�^<ul>
+  <li>모든 실습은 IntellJ 에서 진행되었습니다.</li>
+  <li>진행했던 프로젝트의 코드를 기반으로 예시를 작성하여 다를 수 있습니다.</li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+  <li>프로젝트를 진행하면서 테이블을 만들 때 많이 고민했던 부분이 필드의 타입이었다. 연관된 상수들, 즉 어떤 집합 중 하나에 속하는 경우가 굉장히 많았다.(예시: 나이대(10대, 20대, 30대, …), 직업(공무원, 학생, 무직, …))</li>
+  <li>String 타입으로 받게 되면 정해진 값이 아닌 다른 값이 들어와도 모르는 단점이 있고, 프론트엔드와 백엔드가 협업할 때 바뀌는 값을 정확하게 매번 업데이트해주지 않으면 문제가 생길 수 있다.
+    <blockquote>
+      <ul>
+        <li>정해진 값으로 DB에 넣어줘야 조회할 때도 정해진 값으로 조회가 될텐데 값이 달라지면 조회가 안되게 된다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>고정된 상수의 열거형인 Enum으로 만들어 정해진 값으로 받으면 문제가 해결될 수 있고 IDE의 도움도 받을 수 있게 된다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="enum">ENUM</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">JobStatus</span> <span class="n">jobStatus</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">JobStatus</span> <span class="o">{</span>
+        <span class="no">STUDENT</span><span class="o">,</span>
+        <span class="no">EMPLOYED</span><span class="o">,</span>
+        <span class="no">NOTEMPLOYED</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>Entity 클래스 안에 Enum 클래스를 만들 수도 있고, 따로 클래스로 빼서 만들기도 한다.</li>
+  <li>STUDENT, EMPLOYED, NOTEMPLOYED 직업 상태에 대한 상수의 열거형이며 타입으로 선언할 수 있다.</li>
+</ul>
+
+<p><br /></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">JobStatus</span> <span class="o">{</span>
+        <span class="no">STUDENT</span><span class="o">(</span><span class="s">"학생"</span><span class="o">,</span> <span class="s">"student"</span><span class="o">),</span>
+        <span class="no">EMPLOYED</span><span class="o">(</span><span class="s">"취업성공"</span><span class="o">,</span> <span class="s">"employed"</span><span class="o">),</span>
+        <span class="no">NOTEMPLOYED</span><span class="o">(</span><span class="s">"취업준비"</span><span class="o">,</span> <span class="s">"notemployed"</span><span class="o">);</span>
+
+        <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">koreanName</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">lowerCase</span><span class="o">;</span>
+
+      <span class="c1">//JobStatus(String koreanName, String lowerCase){</span>
+      <span class="c1">//      this.koreanName=koreanName;</span>
+      <span class="c1">//	  this.lowerCase=lowerCase;</span>
+      <span class="c1">//} 생략가능!</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>필드를 추가해 상수와 관련된 값들을 묶을 수 있으며, 필드 선언 순서에 따라 해당 필드값을 가리킨다. (“학생” -&gt; koreanName, “lowerCase” -&gt; “student”)</li>
+  <li>필드를 추가하면 생성자를 생성해주어야 하며, lombok의 @RequiredArgsConstructor를 이용하면 생략이 가능하다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="jsonformat-jsonvalue">@JsonFormat, @JsonValue</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@JsonFormat</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">JobStatus</span> <span class="o">{</span>
+        <span class="no">STUDENT</span><span class="o">(</span><span class="s">"학생"</span><span class="o">),</span>
+        <span class="no">EMPLOYED</span><span class="o">(</span><span class="s">"취업성공"</span><span class="o">),</span>
+        <span class="no">NOTEMPLOYED</span><span class="o">(</span><span class="s">"취업준비"</span><span class="o">);</span>
+
+		<span class="nd">@JsonValue</span>
+        <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">koreanName</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>@JsonFormat은 속성값을 직렬화하는 방법에 대한 세부 정보를 구성하는 데 사용되는 범용 주석이다.</li>
+  <li>직렬화하는 것에 대한 타입을 정할 수 있다. 아래 말고도 많은 타입을 정해줄 수 있다.
+    <blockquote>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">shape = JsonFormat.Shape.OBJECT</code></li>
+        <li><code class="language-plaintext highlighter-rouge">shape = JsonFormat.Shape.STRING</code></li>
+        <li><code class="language-plaintext highlighter-rouge">shape = JsonFormat.Shape.NUMBER</code></li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>원래 아무 표시도 해주지 않으면 enum의 직렬화 결과는 상수의 이름이지만 @JsonFormat, @JsonValue으로 정해주면 @JsonValue로 정해준 필드로 직렬화가 된다.</li>
+  <li>예시: 위처럼 Enum을 만들면 입력받을 때도 “학생” 으로 받게 되고, 출력될 때도 “학생”으로 출력되게 된다. 그러나 DB 상에는 상수값인 STUDENT 로 저장된다.</li>
+  <li>@JsonFormat의 Enum의 파트의 설명을 보면 String, Number, Json Objects로 직렬화가 가능하지만 역직렬화는 지원하지 않는다고 한다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="enum에-메소드-추가">ENUM에 메소드 추가</h3>
+
+<ul>
+  <li>위 방법은 편리하지만 치명적인 단점이 있다. 상수값으로 ENUM을 조회하면 직렬화되기 때문에 찾지 못한다. (koreanName 값으로 조회해야 한다.) 그 대안으로 사용했던 방법을 기록한다.</li>
+</ul>
+
+<pre><code class="language-JAVA">@Getter
+@JsonFormat
+@RequiredArgsConstructor
+public enum JobStatus {
+        STUDENT("학생"),
+        EMPLOYED("취업성공"),
+        NOTEMPLOYED("취업준비");
+        EMPTY("빈값");
+
+		@JsonValue
+        private final String koreanName;
+        
+        public static JobStatus findByJobStatus(String input){
+        	return
+                Arrays.stream(JobStatus.values())
+                        .filter(jobStatus -&gt; jobStatus.getKoreanName().equals(input))
+                        .findAny()
+                        .orElse(EMPTY);
+    }
+}
+</code></pre>
+
+<ul>
+  <li>ENUM의 values() 메소드는 Enum 상수들을 선언한 순서대로 Array 배열로 리턴해준다.</li>
+  <li>상수의 한국말과 입력 받은 input 값을 비교해 일치하면 해당 상수를 리턴하고 없으면 EMPTY 상수를 리턴한다.</li>
+  <li>DB에는 상수로 저장되어 있으므로 위 메소드를 통해 조회하여 해당 객체를 조회할 수 있다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="enum-데이터-그룹-관리">Enum 데이터 그룹 관리</h2>
+
+<ul>
+  <li>우아한 형제셨던 이동욱님(현 인프런CTO님)의 Enum 활용기를 참고하여 작성하였다.</li>
+  <li>어떤 데이터가 들어왔을 때 어떤 Enum의 목록에 속하는지 확인하고 해당 Enum의 상수를 리턴하거나 분류하는 방법이다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">JobStatus</span> <span class="o">{</span>
+    <span class="no">STUDENT</span><span class="o">(</span><span class="s">"학생"</span><span class="o">,</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"HIGH_SCHOOL"</span><span class="o">,</span> <span class="s">"UNIVERSITY"</span><span class="o">)),</span>
+    <span class="no">EMPLOYED</span><span class="o">(</span><span class="s">"취업성공"</span><span class="o">,</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"SALARY_MAN"</span><span class="o">,</span> <span class="s">"SELF_EMPLOYED"</span><span class="o">,</span> <span class="s">"ETC"</span><span class="o">)),</span>
+    <span class="no">NOTEMPLOYED</span><span class="o">(</span><span class="s">"취업준비"</span><span class="o">,</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"CHALLENGING"</span><span class="o">,</span> <span class="s">"STUDYING"</span><span class="o">,</span> <span class="s">"GIVING_UP"</span><span class="o">)),</span>
+    <span class="no">EMPTY</span><span class="o">(</span><span class="s">"빈값"</span><span class="o">,</span> <span class="nc">Collections</span><span class="o">.</span><span class="na">EMPTY_LIST</span><span class="o">);</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">koreanName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">detailList</span><span class="o">;</span>
+
+	<span class="c1">//String으로 들어온 값을 확인하고 해당 상수를 리턴한다. </span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">JobStatus</span> <span class="nf">findByDetail</span><span class="o">(</span><span class="nc">String</span> <span class="n">input</span><span class="o">){</span>
+        <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="nc">JobStatus</span><span class="o">.</span><span class="na">values</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">detail</span> <span class="o">-&gt;</span> <span class="n">detail</span><span class="o">.</span><span class="na">hasDetailList</span><span class="o">(</span><span class="n">input</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">findAny</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="no">EMPTY</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasDetailList</span><span class="o">(</span><span class="nc">String</span> <span class="n">input</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">detailList</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">anyMatch</span><span class="o">(</span><span class="n">detail</span> <span class="o">-&gt;</span> <span class="n">detail</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">input</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>한 Enum 상수 안의 필드로 List를 넣어 해당 List에 속하는지 해당 Enum에게 물어보게 하는 메소드이다.</li>
+</ul>
+
+<p><br /></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JobStatusTest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="nf">selectedDetail</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="s">"HIGH_SCHOOL"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">jobStatusTest</span><span class="o">(){</span>
+        <span class="c1">//given</span>
+        <span class="nc">String</span> <span class="n">detail</span> <span class="o">=</span> <span class="n">selectedDetail</span><span class="o">();</span>
+
+        <span class="c1">//when</span>
+        <span class="nc">JobStatus</span> <span class="n">jobStatus</span> <span class="o">=</span> <span class="nc">JobStatus</span><span class="o">.</span><span class="na">findByDetail</span><span class="o">(</span><span class="n">detail</span><span class="o">);</span>
+
+        <span class="c1">//then</span>
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">jobStatus</span><span class="o">.</span><span class="na">name</span><span class="o">(),</span> <span class="s">"STUDENT"</span><span class="o">);</span>
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">jobStatus</span><span class="o">.</span><span class="na">getKoreanName</span><span class="o">(),</span> <span class="s">"학생"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위처럼 상수들에 속한 List의 String 값 중 어떤 JobStatus에 속하는지 알 수 있게 된다.</li>
+  <li>List의 String 값들을 Enum 타입으로 강제 하는 방법도 있다.</li>
+</ul>
+
+<p><br /></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">Detail</span> <span class="o">{</span>
+
+    <span class="no">HIGH_SCHOOL</span><span class="o">(</span><span class="s">"고등학생"</span><span class="o">),</span>
+    <span class="no">UNIVERSITY</span><span class="o">(</span><span class="s">"대학생"</span><span class="o">),</span>
+    <span class="no">SALARY_MAN</span><span class="o">(</span><span class="s">"직장인"</span><span class="o">),</span>
+    <span class="no">SELF_EMPLOYED</span><span class="o">(</span><span class="s">"자영업자"</span><span class="o">),</span>
+    <span class="no">ETC</span><span class="o">(</span><span class="s">"기타"</span><span class="o">),</span>
+    <span class="no">CHALLENGING</span><span class="o">(</span><span class="s">"취업도전중"</span><span class="o">),</span>
+    <span class="no">STUDYING</span><span class="o">(</span><span class="s">"취업공부중"</span><span class="o">),</span>
+    <span class="no">GIVING_UP</span><span class="o">(</span><span class="s">"포기상태"</span><span class="o">);</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">koreanName</span><span class="o">;</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">JobStatus</span> <span class="o">{</span>
+    <span class="no">STUDENT</span><span class="o">(</span><span class="s">"학생"</span><span class="o">,</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="nc">Detail</span><span class="o">.</span><span class="na">HIGH_SCHOOL</span><span class="o">,</span> <span class="nc">Detail</span><span class="o">.</span><span class="na">UNIVERSITY</span><span class="o">)),</span>
+    <span class="no">EMPLOYED</span><span class="o">(</span><span class="s">"취업성공"</span><span class="o">,</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="nc">Detail</span><span class="o">.</span><span class="na">SALARY_MAN</span><span class="o">,</span> <span class="nc">Detail</span><span class="o">.</span><span class="na">SELF_EMPLOYED</span><span class="o">,</span> <span class="nc">Detail</span><span class="o">.</span><span class="na">ETC</span><span class="o">)),</span>
+    <span class="no">NOTEMPLOYED</span><span class="o">(</span><span class="s">"취업준비"</span><span class="o">,</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="nc">Detail</span><span class="o">.</span><span class="na">CHALLENGING</span><span class="o">,</span> <span class="nc">Detail</span><span class="o">.</span><span class="na">STUDYING</span><span class="o">,</span> <span class="nc">Detail</span><span class="o">.</span><span class="na">GIVING_UP</span><span class="o">)),</span>
+    <span class="no">EMPTY</span><span class="o">(</span><span class="s">"빈값"</span><span class="o">,</span> <span class="nc">Collections</span><span class="o">.</span><span class="na">EMPTY_LIST</span><span class="o">);</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">koreanName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Detail</span><span class="o">&gt;</span> <span class="n">detailList</span><span class="o">;</span>
+
+	<span class="c1">//타입을 변경해 타입 안정성을 확보한다. </span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">JobStatus</span> <span class="nf">findByDetail</span><span class="o">(</span><span class="nc">Detail</span> <span class="n">inputDetail</span><span class="o">){</span>
+        <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="nc">JobStatus</span><span class="o">.</span><span class="na">values</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">detail</span> <span class="o">-&gt;</span> <span class="n">detail</span><span class="o">.</span><span class="na">hasDetailList</span><span class="o">(</span><span class="n">inputDetail</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">findAny</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="no">EMPTY</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasDetailList</span><span class="o">(</span><span class="nc">Detail</span> <span class="n">inputDetail</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">detailList</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">anyMatch</span><span class="o">(</span><span class="n">detail</span> <span class="o">-&gt;</span> <span class="n">detail</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">inputDetail</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JobStatusTest</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">Detail</span> <span class="nf">selectedDetail2</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="nc">Detail</span><span class="o">.</span><span class="na">STUDYING</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">jobStatusTest2</span><span class="o">(){</span>
+        <span class="c1">//given</span>
+        <span class="nc">Detail</span> <span class="n">detail</span> <span class="o">=</span> <span class="n">selectedDetail2</span><span class="o">();</span>
+
+        <span class="c1">//when</span>
+        <span class="nc">JobStatus</span> <span class="n">jobStatus</span> <span class="o">=</span> <span class="nc">JobStatus</span><span class="o">.</span><span class="na">findByDetail</span><span class="o">(</span><span class="n">detail</span><span class="o">);</span>
+
+        <span class="c1">//then</span>
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">jobStatus</span><span class="o">.</span><span class="na">name</span><span class="o">(),</span> <span class="s">"NOTEMPLOYED"</span><span class="o">);</span>
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">jobStatus</span><span class="o">.</span><span class="na">getKoreanName</span><span class="o">(),</span> <span class="s">"취업준비"</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>앞선 코드와 거의 비슷한 내용이지만 클라이언트에서 전달될 값을 고정시킬 수 있다는 점이 타입 안정성을 확보할 수 있게 된다.</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="나중에-사용할-것-같아서-정리하는-enum-활용기">나중에 사용할 것 같아서 정리하는 Enum 활용기</h4>
+<ul>
+  <li>
+    <p>아래 Reference에 자세한 코드와 설명을 참고해주세요.</p>
+  </li>
+  <li>Enum을 Value 클래스로 리턴하기
+    <blockquote>
+      <ul>
+        <li>일관된 타입을 받기 위해 Interface를 생성하고 해당 Interface를 VO객체를 생성자 인자로 받아 인스턴스를 만든다.</li>
+        <li>Enum 역시 해당 Interface를 구현한다.</li>
+        <li>그리고 Enum을 Value 클래스로 변환하여 Enum의 상수값과 상수의 필드값을 JSON 리스트 형태로 리턴한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>Enum.values 반복하는 과정 줄이기
+    <blockquote>
+      <ul>
+        <li>LinkedHashMap  기반의 Enum을 담을 팩토리 클래스를 만든다.</li>
+        <li>팩토리 클래스를 Bean 등록하고 Enum을 저장한다.</li>
+        <li>View Layer 같이 필요한 곳에서 꺼내어 사용한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference:</p>
+
+<ul>
+  <li><a href="https://techblog.woowahan.com/2527/">Java Enum 활용기 _ 이동욱, 우아한 형제들 기술블로그</a> 감사합니다~!</li>
+</ul>
+:ET
