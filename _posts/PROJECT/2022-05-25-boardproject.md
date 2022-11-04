@@ -7,8 +7,9 @@ categories: 'PROJECT'
 background: '/img/posts/project/project.jpg'
 ---
 
-### JSP를 이용한 게시판 프로젝트입니다.
-
+### 프로젝트 설명
+- JSP를 이용한 게시판 프로젝트입니다.
+- 개인 프로젝트로 진행하였으며, 추가로 관리자 개념을 넣어 구현해보았습니다. 
 - #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/MyJSPBoard)
 
 <br>

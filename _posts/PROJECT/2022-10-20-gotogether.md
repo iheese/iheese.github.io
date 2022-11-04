@@ -7,9 +7,13 @@ categories: 'PROJECT'
 background: '/img/posts/project/project.jpg'
 ---
 
-### UX/UI팀, 프론트엔드팀, 백엔드팀이 협업한 기업 연계 프로젝트입니다.
+### 프로젝트 설명
 
-- #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/gotogether-s-BE)
+- #### 시니어를 타겟으로 한 여행 상품 추천 플랫폼입니다.
+- UX/UI팀, 프론트엔드팀, 백엔드팀이 협업하여 만들었으며, 기업 연계 프로젝트로 실제 기업의 데이터를 이용하였습니다.
+- 현재 지속적으로 유지보수를 진행하고 기한 내에 구현하지 못한 부분을 완성 중에 있습니다.
+
+- #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/gotogether-BE)
 
 <br>
 

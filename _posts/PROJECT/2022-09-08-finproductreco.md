@@ -7,8 +7,10 @@ categories: 'PROJECT'
 background: '/img/posts/project/project.jpg'
 ---
 
-### 프론트엔드팀과 백엔드팀이 협업한 대출 상품 사이트 미니 프로젝트입니다. 
+### 프로젝트 설명
 
+- 프론트엔드팀과 백엔드팀이 협업한 대출 상품 사이트 미니 프로젝트입니다.
+- 나이와 직업을 바탕으로 대출 상품을 추천해주는 프로그램입니다.  
 - #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/FinProductReco)
 
 <br>

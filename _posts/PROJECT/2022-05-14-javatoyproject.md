@@ -7,9 +7,10 @@ categories: "PROJECT"
 background: "/img/posts/javaetc/JDBC.jpg"
 ---
 
+### 프로젝트 설명
 
-### Java를 이용한 회원 관리 프로그램입니다.
-
+- Java를 이용한 회원 관리 프로그램입니다.
+- 개인 프로젝트로 진행하였습니다. 쿼리를 직접 작성하고 JDBC를 직접 구현해보았습니다. 
 - ##### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/JavaToyProject)
 
 <br>

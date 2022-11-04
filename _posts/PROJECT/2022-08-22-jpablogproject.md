@@ -7,8 +7,10 @@ categories: 'PROJECT'
 background: '/img/posts/project/project.jpg'
 ---
 
-### JPA와 Spring Boot를 이용한 블로그 프로젝트입니다.
+### 프로젝트 설명
 
+- JPA와 Spring Boot를 이용한 블로그 프로젝트입니다. 
+- 개인 프로젝트로 진행하였으며, 기능의 완성도를 높이기 위해 지속적으로 유지보수하였습니다. 
 - #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/JPABlogProject)
 
 <br>

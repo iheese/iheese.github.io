@@ -7,8 +7,11 @@ categories: 'PROJECT'
 background: '/img/posts/project/project.jpg'
 ---
 
-### JPA와 Spring Security를 이용한 게시판 프로젝트입니다.
+### 프로젝트 설명
 
+- JPA와 Spring Security를 이용한 게시판 프로젝트입니다.
+- 개인 프로젝트로 진행하였습니다.
+- 필수 요구 조건을 만족시키고 추가로 회원 개인 페이지를 구현하였습니다.
 - #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/JPABoardProject)
 
 <br>

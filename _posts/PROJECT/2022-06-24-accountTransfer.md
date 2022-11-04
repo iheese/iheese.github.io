@@ -7,8 +7,10 @@ categories: 'PROJECT'
 background: '/img/posts/project/project.jpg'
 ---
 
-### Spring과 MyBatis를 이용한 계좌 이체 프로젝트입니다.
-
+### 프로젝트 설명
+- Spring과 MyBatis를 이용한 계좌 이체 프로젝트입니다.
+- 개인 프로젝트이며, 계좌 이체 로직 후 확인 페이지를 구현했습니다.
+- 추가로  AOP를 이용하여 Transaction 로직을 구현해보았습니다.  
 - #### [ 어떤 프로젝트인지 자세한 내용 + 소스 코드 클릭!! ](https://github.com/iheese/AccountTransferToyProject)
 
 <br>
