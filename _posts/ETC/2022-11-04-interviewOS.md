@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '운영체제 기술 면접 대비'
+title: '운영체제 Interview 대비'
 subtitle: '운영체제, Operating System'
 date: 2022-11-04 12:00:00 +0900
 categories: 'ETC'
