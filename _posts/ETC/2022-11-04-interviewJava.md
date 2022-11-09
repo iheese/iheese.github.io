@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Java Interview 대비'
-subtitle: 'Java'
+subtitle: 'Java, 자바'
 date: 2022-11-04 12:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
@@ -66,6 +66,20 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
+#### API란?
+- Application Progamming Interface의 줄임말, 컴퓨터와 컴퓨터 프로그램 사이의 연결
+- 애플리케이션 소프트웨어를 빌드하고 통합하기 위한 정의 및 프로토콜 세트
+- 당사자들 간 계약을 나타내는 문서를 갖춘 계약으로 비유되기도 한다. 한쪽 당사자가 특정한 방식으로 구성된 원격 요청을 보내면 다른 쪽 당사자의 소프트웨어가 이에 응답하는 방식이기 때문이다. 
+
+<br>
+
+#### JDBC API이란
+-  Java DataBase Connectivity의 줄임말, 자바 프로그램  내에서 DB 상관없이 DB와 관련된 작업을 처리해주는 API이다.
+
+
+
+<br>
+
 #### 추가 질문
 
 컬렉션 프레임워크에 대해서 설명해주세요.
@@ -73,7 +87,6 @@ background: '/img/posts/etc/git.png'
 제네릭에 대해서 설명해주세요.
 
 애노테이션에 대해서 설명해주세요.
-
 
 인터페이스와 추상클래스의 차이점에 대해 설명해주세요.
 
@@ -96,8 +109,6 @@ String, StringBuilder, StringBuffer 각각의 차이에 대해 설명해주세�
 Checked Exception과 Unchecked Exception에 대해 설명해주세요. 스프링 트랜잭션 추상화에서 rollback 대상은 무엇일까요?
 
 Java8에서 추가된 기능에 대해서 설명해주세요.
-
-
 
 강한 결합과 느슨한 결합이 무엇인지 설명해주세요.
 
