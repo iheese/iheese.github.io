@@ -1,7 +1,7 @@
 ---
 layout: post
 title: '운영체제 Interview 대비'
-subtitle: '운영체제, Operating System'
+subtitle: '프로세스, 스레드, 컨텍스트 스위칭, 동기/비동기, 세마포어, 뮤텍스'
 date: 2022-11-04 12:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
