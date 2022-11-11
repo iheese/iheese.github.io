@@ -53,7 +53,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### IoC 컨테이너의 역할은 무엇이 있을까요?0
+#### IoC 컨테이너의 역할은 무엇이 있을까요?
 - 어플리케이션 실행이 진행되면서 빈을 인스턴스화하여 DI해주는 역할입니다. 
 
 <br>
@@ -64,6 +64,52 @@ background: '/img/posts/etc/git.png'
 <br>
 
 #### Spring Web MVC의 Dispatcher Servlet의 동작 원리에 대해서 간단히 설명해주세요.
+- 디스패처서블릿이 초기화되면서 스프링 컨테이너도 생성됩니다.  
+1. 클라이언트의 요청을 디스패처서블릿이 받습니다.
+2. 요청 정보를 통해 요청을 위임할 컨트롤러를 찾습니다.
+3. 요청을 컨트롤러로 위임할 핸들러 어댑터를 찾아서 전달합니다.
+4. 핸들러 어댑터가 컨트롤러로 요청을 위임합니다.
+5. 비즈니스 로직을 처리합니다.
+6. 컨트롤러가 반환값을 리턴합니다.
+7. 핸들러 어댑터가 반환값을 처리합니다.
+8. 서버의 응답을 클라이언트에게 리턴합니다. 
+
+<br>
+
+#### Spring Web MVC에서 요청 마다 Thread가 생성되어 Controller를 통해 요청을 수행할텐데, 어떻게 1개의 Controller만 생성될 수 있을까요?
+- Controller 클래스의 정보는 JVM Runtime Data Area의 메소드 영역에 저장이 되기 때문에 모든 스레드가 공유할 수 있게 됩니다. 그러므로 블록될  일도 없게 됩니다. 공유된 메소드 영역의 클래스 정보를 가져와서 객체를 생성하면 힙에서 사용하고 GC에 의해 삭제되게 됩니다. 
+> - 새로운 요청은 새로운 스레드를 만들어낸다. 
+> - 톰캣의 스레드 기본 갯수는 200개
+> - 메소드 영역, 힙 영역 스레드 공유가 가능하다.  
+
+<br>
+
+#### @Transactional 움직이는 방식?
+- Spring AOP은 JDK Proxy, Spring Boot는 CGLib Proxy를 기본으로 한다.
+- JDK Proxy는 타겟의 상위 인터페이스를 상속 받아 프록시를 만든다. 인터페이스를 구현한 클래스가 아니면 의존할 수 없다. 
+> - JDK Proxy는 내부적으로 Reflection을 사용하여 추가적인 비용이 든다.(Reflection : 클래스 타입을 몰라도 클래스에 접근하게 해주는 API)
+> - 그래서 서비스 인터페이스를 만들고 Impl로 구현하는 관습이 있다.
+- CGLib Proxy는 타겟 클래스를 상속 받아 프록시를 만든다. 바이트 코드 조작을 통해 프록시 객체를 생성한다. 
+
+- @Transactional 은 프록시 형태로 동작한다. 어떤 객체에 직접적으로가 아닌 프록시 객체(대행 객체)를 통해 접근한다.
+> -  private method에 적용이 불가하고, 무조건 진입점의 Transaction 기준으로 동작한다. 
+
+<br>
+
+#### 프론트 컨트롤러 패턴이란 무엇인가요?
+- 맨 앞에 하나의 서블릿을 두어 각각의 컨트롤러가 해야했던 공통 영역을 처리하고 알맞는 컨트롤러에 분배해주는 패턴입니다. 
+- Spring MVC의 디스패처서블릿이 예입니다. 
+
+<br>
+
+#### Servlet Filter와 Spring Interceptor의 차이는 무엇인가요?
+- 필터는 Servlet filter 이며  javax.servlet 스펙에 포함되는 클래스입니다. 디스패처 서블릿에 요청이 전달되기 전/후 URL 패턴에 맞는 모든 요청을 처리할 수 있는 기능을 제공합니다. 즉 스프링 컨텍스트 범위 밖에서 일어난다. 
+> - init(), doFilter(), destroy()
+> - DelegatingFilterProxy의 등장으로 인해 스프링 빈으로 등록 가능
+> > - [[Spring] 필터(Filter)가 스프링 빈 등록과 주입이 가능한 이유(DelegatingFilterProxy의 등장) - (2) _ 망나니개발자](https://mangkyu.tistory.com/221)
+- 인터셉터는 SpringMVC 스펙에 포함되어 있습니다. 디스패처 서블릿이 컨트롤러를 호출하기 전/후에 요청과 응답을 참조하거나 가공할 수 있는 기능을 제공합니다. 즉 인터셉서틑 스프링 컨텍스트 범위 내에서 동작합니다. 
+> - preHandle(), postHandle(), afterCompletion()
+
 
 <br>
 
@@ -92,18 +138,6 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### @Transactional 움직이는 방식?
-- Spring AOP은 JDK Proxy, Spring Boot는 CGLib Proxy를 기본으로 한다.
-- JDK Proxy는 타겟의 상위 인터페이스를 상속 받아 프록시를 만든다. 인터페이스를 구현한 클래스가 아니면 의존할 수 없다. 
-> - JDK Proxy는 내부적으로 Reflection을 사용하여 추가적인 비용이 든다.(Reflection : 클래스 타입을 몰라도 클래스에 접근하게 해주는 API)
-> - 그래서 서비스 인터페이스를 만들고 Impl로 구현하는 관습이 있다.
-- CGLib Proxy는 타겟 클래스를 상속 받아 프록시를 만든다. 바이트 코드 조작을 통해 프록시 객체를 생성한다. 
-
-- @Transactional 은 프록시 형태로 동작한다. 어떤 객체에 직접적으로가 아닌 프록시 객체(대행 객체)를 통해 접근한다.
-> -  private method에 적용이 불가하고, 무조건 진입점의 Transaction 기준으로 동작한다. 
-
-<br>
-
 #### JPA Propagation 전파단계를 설명해주세요.
 - JPA Propagation은 트랜잭션 동작 도중 다른 트랜잭션을 호출하는 상황에 선택할 수 있는 옵션입니다. 
 - Default 값은 REQUIRED이며 부모 트랜잭션 안에서 실행되며 부모 트랜잭션이 없을 경우 새로운 트랜잭션을 생성합니다.
@@ -126,9 +160,6 @@ background: '/img/posts/etc/git.png'
 
 #### 더 학습할 내용
 
-프론트 컨트롤러 패턴이란 무엇인가요?
-
-Servlet Filter와 Spring Interceptor의 차이는 무엇인가요?
 
 Spring에서 CORS 에러를 해결하기 위한 방법을 설명해주세요.
 
@@ -136,7 +167,6 @@ Bean/Component 어노테이션에 대해서 설명해주시고, 둘의 차이점
 
 POJO란 무엇인가요? Spring Framework에서 POJO는 무엇이 될 수 있을까요?
 
-Spring Web MVC에서 요청 마다 Thread가 생성되어 Controller를 통해 요청을 수행할텐데, 어떻게 1개의 Controller만 생성될 수 있을까요?
 
 Filter는 Servlet의 스펙이고, Interceptor는 Spring MVC의 스펙입니다. Spring Application에서 Filter와 Interceptor를 통해 예외를 처리할 경우 어떻게 해야 할까요?
 
