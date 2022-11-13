@@ -1,6 +1,6 @@
 ---
 layout: category
-category: DataScience
+category: DataScience 
 background: '/img/category/datascience.jpg'
 ---
 S

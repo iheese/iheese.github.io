@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JAVA TOY PROJECT 회고"
+title: "JAVA TOY PROJECT 회고록"
 subtitle: "JDBC, DAO, SQL, H2"
 date: 2022-05-14 11:00:00 +0900
 categories: "PROJECT"

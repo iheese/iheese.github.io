@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'ACCOUNT TRANSFER TOY PROJECT with SPRING, MYBATIS  회고 '
+title: 'ACCOUNT TRANSFER TOY PROJECT with SPRING, MYBATIS  회고록 '
 subtitle: 'Spring, MVC, H2, MyBatis, Transaction'
 date: 2022-06-27 12:00:00 +0900
 categories: 'PROJECT'

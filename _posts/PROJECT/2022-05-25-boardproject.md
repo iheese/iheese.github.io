@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'JSP BOARD PROJECT 회고'
+title: 'JSP BOARD PROJECT 회고록'
 subtitle: 'JSP, Servlet, JDBC, H2, MVC, EL, JSTL, Session '
 date: 2022-05-26 12:00:00 +0900
 categories: 'PROJECT'
