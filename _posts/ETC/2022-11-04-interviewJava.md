@@ -14,10 +14,10 @@ background: '/img/posts/etc/git.png'
 > - 덕분에 운영체제에 구애받지 않고 프로그램을 실행할 수 있다.
 
 - 실행방식
-1 . 자바 컴파일러(javac)에 의해 자바 소스 파일(.java)이 바이트 코드(.class)로 변환된다.
-2 . Class Loader를 통해 class 파일들을 JVM으로 로딩한다.
-3 . 로딩된 class 파일들을 Excution engine을 통해 해석됩니다.
-4 . 해석된 바이트 코드는 Runtime Data Areas에 배치되어 실질적인 수행이 이뤄집니다. 
+1. 자바 컴파일러(javac)에 의해 자바 소스 파일(.java)이 바이트 코드(.class)로 변환된다.
+2. Class Loader를 통해 class 파일들을 JVM으로 로딩한다.
+3. 로딩된 class 파일들을 Excution engine을 통해 해석됩니다.
+4. 해석된 바이트 코드는 Runtime Data Areas에 배치되어 실질적인 수행이 이뤄집니다. 
 
 - 구조 :
 > - Class Loader : JVM 내로 클래스 파일을 로드, 링크를 통해 배치하는 작업을 수행하는 모듈, 런타임 시 동적으로 로드한다.
