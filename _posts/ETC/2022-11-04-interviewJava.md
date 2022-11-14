@@ -176,29 +176,63 @@ background: '/img/posts/etc/git.png'
 - 동일성은 참조하는 객체가 같은 것을 의미하고 동등성은 객체의 값이 같은 것을 의미합니다. 
 - 기본적으로 equals()는 동일성 비교를 합니다. 따라서 원한다면 메소드를 오버라이딩해서 동등성을 판단할 때 사용하면 됩니다. 
 
+<br>
+
+#### 원시타입과 참조타입의 차이에 대해 설명해주세요.
+- 원시타입은 정수, 실수, 논리를 직접 저장하는 8개의 타입을 말한다. 변수마다 사용할 수 있는 값의 범위가 있고 기본값이 존재한다. 원시타입은 스택에 저장이 된다. 
+> - 범위를 넘어가면 오버플로우 발생
+- 참조타입은 원시타입을 제외한 모두를 일컫는다. 번지를 통해 객체를 참조한다는 뜻이다. Object 클래스를 상속하거나, Object 클래스입니다. 참조 타입은 힙 영역에 저장이 된다.
 
 <br>
 
-#### 추가 학습할 것들
+#### Checked Exception과 Unchecked Exception에 대해 설명해주세요. 스프링 트랜잭션 추상화에서 rollback 대상은 무엇일까요?
+- 둘의 차이는 RuntimeException을  상속하는가의 여부에 따라 다릅니다. RuntimeException을 상속하면 UncheckedException입니다. 
+- 스프링 트랜잭션 추상화 rollback 대상은 UncheckedException입니다.
+- CheckedException은 컴파일 실행이 안되기 때문에 예외 처리를 꼭 해줘야 한다. 
 
-원시타입과 참조타입의 차이에 대해 설명해주세요.
+<br>
+#### 자바에서 null을 안전하게 다루는 방법에 대해 설명해주세요.
+- Spring Assert를 이용해 null 방어하는 방법
+- 자바8부터 추가된 Optional 객체로 감싸는 방법 
+- 롬복의 @NonNull을 사용하는 방법 
+- 엔티티 필드를 검증하기 위해  @NotNull을 사용하는 방법
+> - @Column(nullable = false)은 JPA가 만든 엔티티 필드 값이 Null로 채워져서 정상적으로 처리되다가 DB에 도착한 순간 NOT NULL 옵션이 발생하여 예외처리가 된다.
+> - @NotNull은 필드값이 Null로 채워지는 순간 예외가 처리된다. @NotNull이 더 빠른 단계에서 예외를 검출한다. 
+> - [@NotNull vs @Column(nullable = false)_현구막](https://hyeon9mak.github.io/not-null-vs-column-nullable-false/)
+- 예외 처리를 다른 곳에서 한다면 @NotNull(message="~~") 를 이용하여 null값이 오면 메세지로 리턴해주는 방법
 
-String, StringBuilder, StringBuffer 각각의 차이에 대해 설명해주세요.
+<br>
 
-Checked Exception과 Unchecked Exception에 대해 설명해주세요. 스프링 트랜잭션 추상화에서 rollback 대상은 무엇일까요?
+#### String, StringBuilder, StringBuffer 각각의 차이에 대해 설명해주세요.
+- String은 불변입니다. 그래서 StringBuilder, StringBuffer를 사용하는 가변 타입입니다. 
+- StringBuilder는 Thread-safe하지 않습니다. 따라서 멀티 스레드 환경일 때는 StringBuffer를 사용합니다. 
 
+<br>
 
-강한 결합과 느슨한 결합이 무엇인지 설명해주세요.
+#### 강한 결합과 느슨한 결합이 무엇인지 설명해주세요.
+- 결합도는 의존성의 정도를 나타냅니다. 다른 모듈에 대해 얼마나 많은 정보를 알고 있는지에 대한 척도입니다.
+- 어떤 모듈이 다른 모듈에 대해 필요한 정보(인터페이스로 추상화된 고수준의 정책)만 알고 있다면 두 모듈은 낮은 결합도를 가진다고 합니다.
+- 객체지향 관점에서 결합도는 객체 또는 클래스가 협력에 필요한 적절한 수준의 관계를 유지하고 있는지를 나타냅니다. 그러므로 강한 결합도는 지양해야 하고 적절한 결합도를 유지할 수 있도록 고민하고 설계해야 합니다. 
+
+<br>
+
+#### Mutable 객체와 Immutable 객체의 차이점에 대해 설명해주세요.
+- Mutable 객체는 가변 객체입니다. class의 인스턴스가 생성된 이후 내부 상태가 변경 가능한 객체입니다.
+> - 멀티 스레드 환경에서 사용하려면 별도의 동기화 처리가 필요합니다.
+> - 대표적으로 ArrayList, HashMap, StringBuilder, StringBuffe 등이 있습니다.
+> - 이 외에도 개발자가 커스텀한 객체가 내부 상태가 변화가 가능하다면 그것도 가변 객체이다.
+- Immutable 객체는 불변 객체입니다. class의 인스턴스가 생성된 이후 내부 상태를 변경할 수 없는 객체입니다. 
+> - 멀티 스레드 환경에서 안전하게 사용할 수 있다는 신뢰성이 보장됩니다.
+> - 대표적인 불변 객체는 String이 있습니다.
+> - 이 외에도 개발자가 커스텀 객체를 내부 상태가 변하지 않게 만든다면 그것도 불변 객체이다.
+
+<br>
+
+#### 추가 학습할 것들   
 
 직렬화와 역직렬화에 대해서 설명해주세요.
 
 자바의 동시성 이슈(공유자원 접근)에 대해 설명해주세요.
-
-Mutable 객체와 Immutable 객체의 차이점에 대해 설명해주세요.
-
-자바에서 null을 안전하게 다루는 방법에 대해 설명해주세요.
-
-
 
 <br>
 
