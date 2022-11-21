@@ -7,6 +7,8 @@ categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
 
+
+
 #### HTTP 프로토콜이란 무엇인가요?
 - HTTP(Hyper Text Transfer Protocol)이란 데이터를 주고 받기 위한 프로콜이며 서버,클라이너트 모델을 따릅니다. 상태정보를 저장하지 않는 Stateless, 클라이언트의 요청에 맞는 응답을 보낸 후 연결을 끊는 Connectionless의 특징을 가지고 있습니다.
 - 장점
@@ -14,6 +16,19 @@ background: '/img/posts/etc/git.png'
 > - 각각의 HTTP 요청에 독립적으로 응답한다.
 - 단점
 > - 이전 통신의 정보를 모르기 때문에 매번 인증이 필요하고 이를 해결하기 위해 세션과 쿠키를 이용한다. 
+
+<BR>
+
+#### HTTP1 vS HTTP2 차이는 어떻게 되나요?
+- HTTP1은 기본적으로 연결당 하나의 요청과 응답을 처리하기 때문에 동시 전송 문제와 다수의 리소스를 처리하기에 속도와 성능 이슈를 가지고 있습니다. 
+> - HOL(Head Of Line) Blocking - 특정 응답 지연
+> - RTT(Round Trip Time) 증가
+> - 헤비한 Header 구조
+- HTTP2는 성능 뿐만 아니라 속도면에서 월등합니다.
+> - Multiplexed Streams : 한 커넥션에 여러 개의 메세지를 동시에 주고 받을 수 있습니다.
+> - Stream Prioritization : 요청 리소스 간의 의존 관계를 설정
+> - Server Push : HTML 문서 상에 필요한 리소스를 클라이언트 요청없이 보내줄 수 있습니다.
+> - Header Compression : Header 정보를 HPACK 압충 방식을 이용해 압축 전송합니다.
 
 <BR> 
 
@@ -141,7 +156,12 @@ background: '/img/posts/etc/git.png'
 
 
 <br>
+#### 추가  학습할 것
 
+ HTTP1 vs HTTP2의 차이를 아시나요?
+ [HTTP1.1 vs 2](https://seo-tory.tistory.com/82)
+
+<br>
 
 Reference:
 - [Backend-Interview-Question_ ksundong](https://github.com/ksundong/backend-interview-question)

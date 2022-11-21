@@ -174,7 +174,9 @@ background: '/img/posts/etc/git.png'
 <br>
 
 #### 추가 학습할 것들
+
 MongoDB에 대해서 간단히 설명해주세요.
+
 CAP 이론과, Eventual Consistency에 대해서 설명해주세요.
 
 
