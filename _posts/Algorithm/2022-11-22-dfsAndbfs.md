@@ -5,6 +5,7 @@ subtitle: 'Depth First Search, Breadth First Search'
 date: 2022-11-22 12:00:00 +0900
 categories: 'Algorithm'
 background: '/img/posts/etc/algorithm.jpg'
+use_math: true
 ---
 
 ![dfs,bfs](/img/posts/algorithm/dfsbfs.png)
@@ -41,13 +42,13 @@ background: '/img/posts/etc/algorithm.jpg'
 class DFS {
 	boolean[] visited;
     public static void main(String[] args) {
-    	int[][] array = {{1,2}, {0,3,4}, {0,5,6}, {1}, {1}, {2}, {2}};
+    	int[][] array = { {1,2}, {0,3,4}, {0,5,6}, {1}, {1}, {2}, {2} };
    	 visited = new boolean[array.length]
 		dfs(0);
 	}
 	public void dfs(int start){
     	visited[start] = true; //방문처리
-   	 System.out.println(start); //방문했으면 값 출력
+    	System.out.println(start); //방문했으면 값 출력
      
 		for(int next : array[start]){ //
 			if(!visited[next]){ //반복하지 않은 노드에서 재귀 호출
@@ -68,21 +69,23 @@ class DFS {
 class DFS {
 	boolean[] visited;
     public static void main(String[] args) {
-    	int[][] array = {{1,2}, {0,3,4}, {0,5,6}, {1}, {1}, {2}, {2}};
+    	int[][] array = { {1,2}, {0,3,4}, {0,5,6}, {1}, {1}, {2}, {2} };
    	 visited = new boolean[array.length]
 		dfs(0);
 	}
 	public void dfs(int start){
-   	 Stack<Integer> stack = new Stack<Integer>(); //스택 생성
-   	 stack.push(start); //스택에 첫 번째 인덱스 삽입
-   	 while (!stack.isEmpty()){ //스택에 뭔가 있다면
-        int now = stack.pop(); //꺼내고 
-        if (!visited[now]){ //방문하지 않았다면
-            visited[now] = true; //방문 처리
-            System.out.println(now); //방문했으면 값 출력
-            for (int i = 0; i < array[now].length; i++){
-                int next = array[now][i];  //해당 리스트를 순회하며
-                	if (!visited[next]){ 
+   	 	Stack<Integer> stack = new Stack<Integer>(); //스택 생성
+   	 	stack.push(start); //스택에 첫 번째 인덱스 삽입
+        
+   		 while (!stack.isEmpty()){ //스택에 뭔가 있다면
+            int now = stack.pop(); //꺼내고 
+            
+        	if (!visited[now]){ //방문하지 않았다면
+       		    visited[now] = true; //방문 처리
+        	       System.out.println(now); //방문했으면 값 출력
+        	  	  for (int i = 0; i < array[now].length; i++){
+              		  int next = array[now][i];  //해당 리스트를 순회하며
+                		if (!visited[next]){ 
                    	 stack.push(next); //방문하지 않은 값을 스택에 넣는다. 
             		}
            	 }
@@ -101,25 +104,25 @@ class DFS {
 class BFS{
 	boolean[] visited;
 	public static void main(String[] args) {
-    	int[][] array = {{1,2}, {0,3,4}, {0,5,6}, {1}, {1}, {2}, {2}};
-   	 visited = new boolean[array.length]
+    	int[][] array = { {1,2}, {0,3,4}, {0,5,6}, {1}, {1}, {2}, {2} };
+   	 	visited = new boolean[array.length]
 		bfs(0);
 	}
 
 	public void bfs(int start){
-	Queue<Integer> queue = new LinkedList<>(); // 큐 생성
+		Queue<Integer> queue = new LinkedList<>(); // 큐 생성
 	
-	queue.add(start); //시작 값을 넣는다.
-	visited[start]=true; //방문 처리
+		queue.add(start); //시작 값을 넣는다.
+		visited[start]=true; //방문 처리
 	
-	while(!queue.isEmpty()){ //큐에 뭔가 있다면
-		int now = queue.poll(); //큐에서 값을 빼고
-		System.out.println(now); //방문 출력
+		while(!queue.isEmpty()){ //큐에 뭔가 있다면
+			int now = queue.poll(); //큐에서 값을 빼고
+			System.out.println(now); //방문 출력
 		
-		for(int next :array[now]){   해당 방문 리스트 순회
-			if(!visited[next]){ 	
-				queue.add(next); //방문하지 않으면 큐에 삽입
-				visited[next]=true; //방문 처리
+			for(int next :array[now]){   해당 방문 리스트 순회
+				if(!visited[next]){ 	
+					queue.add(next); //방문하지 않으면 큐에 삽입
+					visited[next]=true; //방문 처리
 			}
 		}
 	}
