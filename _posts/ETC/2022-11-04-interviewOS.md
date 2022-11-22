@@ -126,8 +126,6 @@ background: '/img/posts/etc/git.png'
 캐시의 지역성에 대해 설명해보세요.
 
 
-
-
 <br>
 
 Reference:

@@ -28,7 +28,7 @@ background: '/img/posts/etc/git.png'
 > - Multiplexed Streams : 한 커넥션에 여러 개의 메세지를 동시에 주고 받을 수 있습니다.
 > - Stream Prioritization : 요청 리소스 간의 의존 관계를 설정
 > - Server Push : HTML 문서 상에 필요한 리소스를 클라이언트 요청없이 보내줄 수 있습니다.
-> - Header Compression : Header 정보를 HPACK 압충 방식을 이용해 압축 전송합니다.
+> - Header Compression : Header 정보를 HPACK 압축 방식을 이용해 압축 전송합니다.
 
 <BR> 
 
