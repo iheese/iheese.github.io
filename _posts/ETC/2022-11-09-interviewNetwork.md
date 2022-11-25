@@ -2,7 +2,7 @@
 layout: post
 title: '네트워크 Interview 대비'
 subtitle: 'HTTP, HTTPS, SSL, Handshake, REST, DNS, TCP, UDP, OSI7, TCP/IP'
-date: 2022-11-09 12:00:00 +0900
+date: 2022-11-25 12:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
@@ -29,6 +29,7 @@ background: '/img/posts/etc/git.png'
 > - Stream Prioritization : 요청 리소스 간의 의존 관계를 설정
 > - Server Push : HTML 문서 상에 필요한 리소스를 클라이언트 요청없이 보내줄 수 있습니다.
 > - Header Compression : Header 정보를 HPACK 압축 방식을 이용해 압축 전송합니다.
+- [HTTP1.1 vs 2](https://seo-tory.tistory.com/82)
 
 <BR> 
 
@@ -158,8 +159,6 @@ background: '/img/posts/etc/git.png'
 <br>
 #### 추가  학습할 것
 
- HTTP1 vs HTTP2의 차이를 아시나요?
- [HTTP1.1 vs 2](https://seo-tory.tistory.com/82)
 
 <br>
 
