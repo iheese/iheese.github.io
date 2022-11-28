@@ -186,7 +186,10 @@ background: '/img/posts/etc/git.png'
 <br>
 
 #### Java8에서 추가된 기능에 대해서 설명해주세요.
-- Java8부터 Lambda식, Stream API, Optional, 날짜 시간 API, StringJoiner 등이 추가되었습니다. 또한 Static 저장하는 공간이 Permanent Generation `->` Metaspace로 바뀌었습니다. 
+- Java8부터 Lambda식, Stream API, Optional, 날짜 시간 API, StringJoiner 등이 추가되었습니다. 또한 Permanent Generation이 사라지고 Metaspace 영역(Native 메모리 영역에 속함)이 생겼습니다.
+> - Permanent Generation은 Class, Method Code가 저장되는 영역이며 힙 영역에 속했다.
+> - Classloader가 현재까지 로드한  Class의 Metadata가 저장되는 공간이며 Native 메모리 영역에 속한다. 또한 크기 제한이 없다. 
+> > - Metadata : 데이터에 대한 데이터를 의미한다. 다른 데이터를 설명하기 위한 데이터를 말하고 구조화된 정보를 분석, 분류하고 정보를 추가하기 위해 그 데이터에 뒤를 따라 가는 정보를 말한다. 
 
 #### Java11에서 추가된 기능에 대해서 설명해주세요.
 - Java11부터 String 클래스의 메소드, 컬렉션 인터페이스에서 toArray()  메소드를 오버로딩하는 메소드, javac 컴파일 없이 바로 실행 가능, GC 버전 G1 GC로 변경되었습니다. 

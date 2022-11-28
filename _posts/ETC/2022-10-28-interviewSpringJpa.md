@@ -2,7 +2,7 @@
 layout: post
 title: 'Spring, JPA Interview 대비'
 subtitle: 'Spring DI, IOC, AOP, JPA'
-date: 2022-11-08 12:00:00 +0900
+date: 2022-11-28 12:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
@@ -153,7 +153,39 @@ background: '/img/posts/etc/git.png'
 - 즉시 로딩에서 발생하는 이유는 JPQL을 사용하는 경우 전체 조회를 했을 때  해당 연관 관계인 하위 엔티티들을 추가 조회하기 때문이다. 
 - 지연 로딩에서 발생하는 이유는 지연 로딩 전략을 사용한 하위 엔티티를 로드할 때 JPA에서 프록시 엔티티를 unproxy할때 해당 엔티티를 조회하기 위한 추가적인 쿼리가 발생한다. (하위 엔티티에 접근할 때)
 - 해결방법
-> - 지연 로딩을 주로 사용하고, JPQL의 JOIN FETCH, @EntityGraph, @Fetch(FetchMode.SUBSELECT), @BatchSize 조절하는 방법이 있다. 
+> - JPQL의 JOIN FETCH, @EntityGraph, @Fetch(FetchMode.SUBSELECT), @BatchSize 조절하는 방법이 있다. 
+
+<br>
+
+#### Spring에서 CORS 에러를 해결하기 위한 방법을 설명해주세요.
+- Spring Filter를 사용하여 커스텀한 CORS 설정 방법,  WebMvcConfiguer를 구현한 Configuration 클래스를 만들어 addCorsMappings()을 재정의 방법, Spring Security에서 CorsConfigurationSource를 Bean으로 등록하여 config에 추가하여 해결하는 방법이 있다. 
+
+<br>
+
+#### Bean/Component 어노테이션에 대해서 설명해주시고, 둘의 차이점에 대해 설명해주세요.
+- 두 어노테이션 모두 IoC 컨테이너에 Bean을 등록하기 위해 사용합니다.
+- @Component : 개발자가 작성한 class를 기반으로 실행시점에 1회 생성합니다.(싱글톤)
+> - @Controller, @Service, @Repository는 모두 @Component이며 자동으로 의존성을 주입합니다. 
+- @Bean : 개발자가 작성한 method를 기반으로 메서등에서 반환하는 객체를 인스턴스 객체로 1회 생성합니다.(싱글톤)
+
+<br>
+
+#### POJO란 무엇인가요? Spring Framework에서 POJO는 무엇이 될 수 있을까요?
+- POJO(Plain Old Java Object)는 프레임워크 인터페이스, 클래스를 구현하거나 확장하지 않은 단순한 클래스로 Java에서 제공하는 API 외에 종속되지 않습니다.
+- 특정 환경에 종속되지 않아 코드가 간결하고 테스트 자동화에 유리합니다.
+- 스프링에서는 도메인, 비즈니스 로직을 수행하는 대상이 POJO가 될 수 있습니다. 
+
+<br>
+
+#### Filter는 Servlet의 스펙이고, Interceptor는 Spring MVC의 스펙입니다. Spring Application에서 Filter와 Interceptor를 통해 예외를 처리할 경우 어떻게 해야 할까요?
+- Filter는 DispatcherServlet 전달되기 전에 실행되기 때문에 Web Application에서 처리해야 합니다. 
+- Interceptor는 Spring Context 내부에서 동작하기 때문에 @ControllerAdvice에서 @ExceptionHandler를 적용해서 처리할 수 있습니다. 
+
+<br>
+
+#### 의존성과 설정값을 생성자 인자로 주입해야 하는 이유에 대해 설명해주세요.
+- 모든 의존성을 생성자를 통해 주입하면, 인스턴스 생성 시 즉시 어떠한 동작을 실행할 수 있습니다. 추가적인 설정이 필요하지 않으며 의존성, 설정값을 빠뜨리는 일이 발생하지 않고 테스트에 용이합니다. 
+> - 스프링 컨테이너의 도움없이 테스트 코드 작성이 용이해진다. 만약 필드 주입, 수정자 주입으로 빈이 주입되어 있다면 Mockito를 이용해 목킹한 후 테스트를 진행해야 하지만  생성자 주입은 단순히 원하는 객체를 new 연산으로 생성하고 생성자에 넣어주면 됩니다. 
 
 
 <br>
@@ -161,21 +193,9 @@ background: '/img/posts/etc/git.png'
 #### 더 학습할 내용
 
 
-Spring에서 CORS 에러를 해결하기 위한 방법을 설명해주세요.
-
-Bean/Component 어노테이션에 대해서 설명해주시고, 둘의 차이점에 대해 설명해주세요.
-
-POJO란 무엇인가요? Spring Framework에서 POJO는 무엇이 될 수 있을까요?
-
-
-Filter는 Servlet의 스펙이고, Interceptor는 Spring MVC의 스펙입니다. Spring Application에서 Filter와 Interceptor를 통해 예외를 처리할 경우 어떻게 해야 할까요?
-
 Spring Application을 구동할 때 메서드를 실행시키는 방법에 대해 설명해주세요.
-
-의존성과 설정값을 생성자 인자로 주입해야 하는 이유에 대해 설명해주세요.
-
-
 
 
 Reference:
 - [Backend-Interview-Question_ ksundong](https://github.com/ksundong/backend-interview-question)
+- [ 생성자 주입 선택 시 테스트 코드 작성의 장점?_인프런](https://www.inflearn.com/questions/515588)
