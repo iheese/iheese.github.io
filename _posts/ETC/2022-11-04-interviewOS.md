@@ -2,7 +2,7 @@
 layout: post
 title: '운영체제 Interview 대비'
 subtitle: '프로세스, 스레드, 컨텍스트 스위칭, 동기/비동기, 세마포어, 뮤텍스'
-date: 2022-11-04 12:00:00 +0900
+date: 2022-11-29 09:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
@@ -112,18 +112,27 @@ background: '/img/posts/etc/git.png'
 <br>
 
 #### 페이지 교체 알고리즘이란?
+- 운영체제는 주기억장치(RAM)보다 더 큰 용량의 프로그램을 실행하기 위해 프로그램의 일부만 주기억장치에 적재하여 사용하는 것을 가상 메모리 기법이라 한다.
 - 페이징 기법으로 메모리를 관리하는 운영체제에서 필요한 페이지가 주기억 장치에 적재되지 않았을 시(페이징 부재시) 어떤 페이지 프레임을 선택해 교체할 것인지 결정하는 방법을 페이지 교체 알고리즘이라 합니다.
 - LRU(Least Recently Used) 
 > - 가장 오래 사용되지 않은 페이지를 교체하는 알고리즘입니다.
 > - OPT(최적 페이지 교체)와 비슷한 효과를 낼 수 있으며, OPT보다 페이지 교체 횟수가 높지만 FIFO(First In First Out) 알고리즘 보다 효율적입니다. 
-- 그 외에도 FIFO(first in first out), 최적(Optimal) 페이지 교체, LFU(least-frequently-used), MFU(most-frequently-used) 등이 있습니다. (추후 학습)
+- FIFO(First In First Out) : 첫번째로 들어간 것이 첫번째로 나오는 교체 방식
+- 최적(Optimal) 페이지 교체 : 앞으로 가장 오랫동안 사용되지 않을 페이지 교체
+- LFU(Least-Frequently-Used) : 참조 횟수가 가장 작은 페이지 교체
+- MFU(Most-Frequently-Used) : 참조 횟수가 가장 많은 페이지 교체
+- NUR(Not Used Recently) : 최근에 사용하지 않은 페이지 교체
 
 <br>
 
-#### 추가 부분
+#### 캐시의 지역성에 대해 설명해보세요.
+- 시간 지역성과 공간 지역성으로 나눌 수 있습니다.
+- 시간 지역성 : 최근에 접근한 데이터에 다시 접근하는 경향을 의미합니다.
+- 공간 지역성 : 최근에 접근한 데이터의 주변 공간에 다시 접근하는 경향을 의미합니다. 
 
+<br>
 
-캐시의 지역성에 대해 설명해보세요.
+#### 추가 학습할 부분
 
 
 <br>
