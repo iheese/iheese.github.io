@@ -53,7 +53,7 @@ published : true
 
 <br>
 
-#### [다양한 디자인 패펀에 대한 설명_GURU](https://refactoring.guru/ko)
+#### [다양한 디자인 패턴에 대한 설명_GURU](https://refactoring.guru/ko)
 
 <br>
 
