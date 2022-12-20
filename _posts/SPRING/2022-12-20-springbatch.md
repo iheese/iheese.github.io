@@ -1,8 +1,8 @@
 ---
 layout: post
-title: '[JAVA, SPRING BATCH] SPRING BATCH ? '
+title: '[JAVA, SPRING BATCH] SPRING BATCH 란? '
 subtitle: '스프링 배치, Job, Step, Chunk, Tasklet, JobRepository'
-date: 2022-07-27 12:00:00 +0900
+date: 2022-12-20 12:00:00 +0900
 categories: 'SPRING'
 background: '/img/posts/etc/spring.jpg'
 ---
@@ -10,12 +10,12 @@ background: '/img/posts/etc/spring.jpg'
 ## Spring batch
 
 - 배치 작업(일괄 처리 작업)을 위해 만들어진 스프링 프레임워크입니다.
-> - 정해진 시간에 자동으로 진행되는 것들을 배치 작업이라 할 수 있습니다.
+> - 큰 데이터를 정해진 시간에 자동으로 처리하는 것들을 배치 작업이라 할 수 있습니다.
 - 가볍고, 빠르고, 실행 중 오류가 생기면 그 시점부터 다시 시작할 수 있다는(Restartability) 장점이 있습니다. 
 ￼
 <br>
 
-### 구성 요소
+### Spring batch의 구성
 
 ![spring batch 구성](https://user-images.githubusercontent.com/88040158/208605222-2460da08-61e3-4a27-acda-6c516f732971.png)
 
@@ -28,7 +28,7 @@ background: '/img/posts/etc/spring.jpg'
 
 #### Step 
 - 실질적인 배치 로직, 하나의 트랜잭션으로 이해하면 됩니다.
-> - Chunk Processing, Tasklet 중 하나로 구성됩니다. 
+> - `Chunk Processing, Tasklet` 중 하나로 구성됩니다. 
 
 <br>
 
@@ -50,12 +50,11 @@ background: '/img/posts/etc/spring.jpg'
 - chunk (reader + processor + writer) 가 아닌 다른 로직을 처리할 때 사용되고 딱 한 번만 실행됩니다. 
 > - Tasklet 인터에이스를 구현하여 사용하면 되고 해당 step이 실행되면 execute 메소드가 한 번 실행되고 끝납니다.
 
-
-![jobrepository 메타데이터](https://user-images.githubusercontent.com/88040158/208605386-fa9a7dac-2358-4dd6-b1ce-330505b29d61.png)
-
 <br>
 
-- JobRepository 
+#### JobRepository 
+
+![jobrepository 메타데이터](https://user-images.githubusercontent.com/88040158/208605386-fa9a7dac-2358-4dd6-b1ce-330505b29d61.png)
 
 - 6개의 메타데이터 테이블을 통해 배치에 관한 것들을 RDB에 모두 기록한다.
 
