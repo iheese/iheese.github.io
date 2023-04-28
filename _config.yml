@@ -49,7 +49,7 @@ defaults:
     values:
       layout: "default"
       mathjax: true
-      
+
 tipue_search:
   include:
     pages: false
