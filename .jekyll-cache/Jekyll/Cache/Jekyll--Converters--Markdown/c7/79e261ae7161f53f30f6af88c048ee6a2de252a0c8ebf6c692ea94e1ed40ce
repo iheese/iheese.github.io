@@ -1,4 +1,4 @@
-I"-Y<h2 id="확률-기초-복습_-네이버-링크-모음">확률 기초 복습_ 네이버 링크 모음</h2>
+I"Y<h2 id="확률-기초-복습_-네이버-링크-모음">확률 기초 복습_ 네이버 링크 모음</h2>
 
 <ul>
   <li>
@@ -122,7 +122,7 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 이항분포의 CDF: dist1.cdf
 </span>
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s">번 이하 성공할 확률:</span><span class="si">{</span><span class="n">dist1</span><span class="p">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="mf">0.3</span><span class="n">f</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s">번 이하 성공할 확률:</span><span class="si">{</span><span class="n">dist1</span><span class="p">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">:</span><span class="mf">0.3</span><span class="n">f</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># m:mean (평균), v:variance(분산), s:skewness(왜도), k:kurtosis(첨도)
@@ -162,7 +162,7 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 정규분포의 CDF 
 </span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'P(40&lt;=X&lt;=60)=</span><span class="si">{</span><span class="n">dist2</span><span class="p">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span><span class="o">-</span><span class="n">dist2</span><span class="p">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span><span class="si">:</span><span class="mf">5.2</span><span class="n">f</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'P(40&lt;=X&lt;=60)=</span><span class="si">{</span><span class="n">dist2</span><span class="p">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span><span class="o">-</span><span class="n">dist2</span><span class="p">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">40</span><span class="p">):</span><span class="mf">5.2</span><span class="n">f</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># m:mean (평균), v:variance(분산), s:skewness(왜도), k:kurtosis(첨도)

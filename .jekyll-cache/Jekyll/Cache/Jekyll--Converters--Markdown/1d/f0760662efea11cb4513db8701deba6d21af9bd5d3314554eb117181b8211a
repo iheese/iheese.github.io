@@ -1,0 +1,202 @@
+I"'"<h2 id="elasticsearch">Elasticsearch</h2>
+
+<p><img src="https://user-images.githubusercontent.com/88040158/208857206-9f85a6fc-d1e3-4185-a591-7f5964b3c9b4.png" alt="스크린샷 2022-12-21 오후 12 01 46" /></p>
+
+<ul>
+  <li>Apache Lucene 기반의 Java 오픈 소스 분산 검색 엔진</li>
+  <li>방대한 양의 데이터를 신속하게 저장, 검색, 분석할 수 있다.</li>
+  <li>검색을 위해 단독으로 사용할 수 있으며 ELK 스택으로 사용되기도 한다,
+    <blockquote>
+      <ul>
+        <li>Elasticsearch : Logstash로부터 받은 데이터를 검색 및 집계하여 필요한 정보를 획득한다.</li>
+        <li>Logstash : 다양한 소스 (DB, csv 파일 등) 의 로그 또는 트랜잭션 데이터를 수집, 집계, 파싱하여 Elasticsearch 전달</li>
+        <li>kibana :  Elasticsearch의 빠른 검색을 통해 데이터를 시각화 및 모니터링</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="elasticsearch-의-구조">Elasticsearch 의 구조</h2>
+
+<p><img src="https://user-images.githubusercontent.com/88040158/208857242-40087762-93fc-41b8-8b76-0a7acd1f493d.png" alt="ElasticSearch Cluster" /></p>
+
+<h4 id="클러스터cluster">클러스터(Cluster)</h4>
+
+<ul>
+  <li>Elasticsearch 에서 가장 큰 시스템 단위, 최소 하나 이상의 노드로 이루어진 노드의 집합을 말한다.</li>
+  <li>서로 다른 클러스터는 데이터의 접근, 교환이 불가능한 독립적인 시스템으로 유지된다.</li>
+  <li>여러 대의 서버가 하나의 클러스터를 구성할 수 있고, 한 서버에 여러개의 클러스터가 존재할 수 있다.</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="노드node">노드(Node)</h4>
+
+<ul>
+  <li>클러스터에 포함된 단일 서버로서 데이터를 저장하고 클러스터의 색인화 및 검색 기능에 참여한다. 노드는 역할에 따라 Master-eligible, Data, Ingest, Tribe 노드로 구분할 수 있다.
+    <blockquote>
+      <ul>
+        <li>Master-eligible Node : 클러스터를 제어할 수 있는 마스터 노드이다.
+          <blockquote>
+            <ul>
+              <li>인덱스 생성, 삭제</li>
+              <li>클러스터 노드의 추적, 관리</li>
+              <li>데이터 입력 시 할당할 사드 선택</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>Data Node : 데이터가 저장되는 노드이며 데이터가 분산 저장되는 물리적 공간인 사드가 배치되는 노드이다.
+          <blockquote>
+            <ul>
+              <li>CRUD, 색인, 통계 등 데이터 작업 처리</li>
+              <li>모니터링 작업, 마스터 노드와 분리 필요</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>Ingest Node : 데이터를 변환하는 등 사전 처리 파이프라인을 실행하는 역할을 한다.</li>
+        <li>Coordination Only Node :  사용자의 요청을 받고 라운드 로빈 방식으로 분산하는 노드이다. 로드밸런싱 역할을 한다.
+          <blockquote>
+            <ul>
+              <li>클러스터에 관한 것은 마스터 노드로 넘기고, 데이터와 관련된 것은 데이터 노드로 넘긴다.</li>
+              <li>라운드 로빈 방식 : 우선순위를 두지 않고 순서대로 시간 단위로 자원을 할당한다.</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="인덱스index">인덱스(Index)</h4>
+
+<ul>
+  <li>RDBMS 에서 데이터베이스와 대응되는 개념이다.</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="사드shard">사드(Shard)</h4>
+
+<ul>
+  <li>인덱스 내부에는 색인된 데이터가 존재한다.</li>
+  <li>스케일 아웃을 위해 하나의 인덱스를 여러 샤드로 쪼개서 구성되어 있다.
+    <blockquote>
+      <ul>
+        <li>프라이머리 샤드(Primary Shard)
+          <blockquote>
+            <ul>
+              <li>데이터의 원본, Elassticsearch에서 데이터 업데이트 요청을 날리면 반드시 프라이머리 샤드에 요청하게 되면서 레플리카 샤드에 복제된다.</li>
+            </ul>
+          </blockquote>
+        </li>
+        <li>레플리카 샤드(Replica Shard)
+          <blockquote>
+            <ul>
+              <li>프라이머리 샤드의 복제본, 기존 원본 데이터가 무너졌을 때 그 대신 사용하면서 장애를 극복한다. 기본적으로 프라이어머리와 동일한 노드에 배정하지 않는다.</li>
+            </ul>
+          </blockquote>
+        </li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="세그먼트segment">세그먼트(Segment)</h4>
+
+<ul>
+  <li>문서의 빠른 검색을 위해 설계된 자료 구조이며 샤드의 데이터를 가지고 있는 물리적인 파일이다.</li>
+  <li>각 샤드는 다수의 세그먼트로 구성되어 있으므로 검색 요청을 분산처리하여 훨씬 효율적인 검색이 가능하다.</li>
+  <li>샤드에서 검색 시  각 세그먼트를 검색하여 결과를 조합한 후 해당 샤드의 결과로 반환한다. 세그먼트는 내부에 역색인 구조로 저장되어 있다.(키워드를 통해 문서를 찾아내는 방식)
+    <blockquote>
+      <ul>
+        <li>매 요청마다 새로운 세그먼트를 만들면 엄청난 용량이 필요하게 될 것이다. 이 때문에 인메모리 버퍼를 사용한다.</li>
+        <li>인메모리 버퍼는 일정 시간이 지나거나 버퍼가 가득차면 flush를 취하고 flush 작업이 수행되면서 시스템 캐시에 세그먼트가 저장된다. 이 시점부터 검색이 가능하다.</li>
+        <li>이후에 일정 시간이 지나면 commit을 통해서 물리적인 디스크에 세그먼트를 저장해주고 저장된 세그먼트는 하나로 병합된다. 병합을 통해 세그먼트가 줄어들기 때문에 검색 성능은 향상된다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="elasticsearch-vs-rdbms">Elasticsearch VS RDBMS</h2>
+
+<p><img src="https://user-images.githubusercontent.com/88040158/208857268-7eafec29-4a59-4620-9a86-ff3b9d0db080.png" alt="Database" /></p>
+
+<ul>
+  <li>6.x 버전부터 ES의 인덱스에 하나당 하나의 타입을 가진다.
+    <blockquote>
+      <ul>
+        <li>RDBMS의 데이터베이스에 하나의 테이블만을 가진다고 생각하면 된다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="elasticsearch-특징-정리">Elasticsearch 특징 정리</h3>
+
+<ul>
+  <li>확장성 :  샤드를 이용한 수평적 규모 확장이 가능하다.</li>
+  <li>고가용성 : 레플리카 샤드(Replica Shard)를 통해 데이터의 안정성을 보장한다.</li>
+  <li>Schema free :  json 문서 구조로 된 데이터를 사용한다.</li>
+  <li>RESTful : HTTP의 RESTful  API를 통해 데이터 CRUD 작업
+    <blockquote>
+      <ul>
+        <li>RESTful  API를 사용한다는 것은 다양한 플랫폼에서 응용이 가능해진다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>Multi-tenancy : 서로 다른 인덱스에서 필드명이 같을 경우 한 번에 조회 가능</li>
+  <li>불변성
+    <blockquote>
+      <ul>
+        <li>수정이 불가하며 Update 시 데이터를 삭제하고 다시 생성한다.</li>
+        <li>다중 스레드 환경에서 동시성 문제 회피(수정이 불가하므로 lock 필요없음)</li>
+        <li>높은 시스템 캐시 활용도(수정할 경우 시스템 캐시 삭제 및 재생성이 필요)</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="elasticsearch-단점">ElasticSearch 단점</h3>
+<ul>
+  <li>실시간 처리가 불가능하다.
+    <blockquote>
+      <ul>
+        <li>ES는 인메모리 버퍼를 사용하므로 쓰기와 읽기를 동시에 작업할 경우 세그먼트가 생성되기 전까지 해당 데이터를 검색할 수 없다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>트랜잭션을 지원하지 않는다.
+    <blockquote>
+      <ul>
+        <li>분산 시스템 구성의 특징 때문에 시스템 비용 소모가 큰 트랜잭션, 롤백을 지원하지 않는다.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>진정한 의미의 업데이트를 지원하지 않는다.
+    <blockquote>
+      <ul>
+        <li>세그먼트에서 데이터가 업데이트하면 soft-delete를 하고 수정된 데이터를 새로운 세그먼트로 생성한다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<p>Reference :</p>
+<ul>
+  <li><a href="https://steady-coding.tistory.com/573">[데이터베이스] Elasticsearch란?_제이온</a></li>
+</ul>
+:ET

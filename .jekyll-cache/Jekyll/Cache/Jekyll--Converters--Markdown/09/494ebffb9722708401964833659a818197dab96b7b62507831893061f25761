@@ -1,0 +1,247 @@
+I"�m<p><img src="/img/posts/algorithm/dfsbfs.png" alt="dfs,bfs" /></p>
+
+<p><br /></p>
+
+<h2 id="dfsdepth-first-search">DFS(Depth First Search)</h2>
+
+<ul>
+  <li>루트 노드(최상단 혹은 다른 임의의 노드)에서 최대한 깊이 내려간 뒤 더 이상 깊이 갈 곳이 없을 경우 옆으로 이동하는 탐색 방법입니다.</li>
+</ul>
+
+<ol>
+  <li>모든 노드를 방문하고자 하는 경우 선택(완전 탐색)한다.</li>
+  <li>비교적 간단하나 검색 속도 자체는 너비 우선 탐색에 비해 느리다.</li>
+</ol>
+
+<ul>
+  <li>
+    <p>스택 또는 재귀 함수로 구현한다.</p>
+  </li>
+  <li>
+    <p>예시 :  DFS는 게임에서 적을 상대할 때 한 부분만 다 때리고 다른 부분으로 넘어가 타격하는 느낌이다.</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="bfsbreadth-first-search">BFS(Breadth First Search)</h2>
+
+<ul>
+  <li>루트 노드(최상단 혹은 다른 임의의 노드)에서 가까운 노드부터 방문하고 멀리 떨어져 있는 정점을 나중에 순차적으로 방문하는 탐색 방법입니다.</li>
+  <li>주로 노드 사이의 최단 경로를 찾고 싶을 때 이 방법을 사용한다.</li>
+  <li>큐를 이용해서 구현한다.</li>
+  <li>예시 :  BFS는 게임에서 적을 상대할 때 여러 군데를 골고루 때리며  조금씩 쓰러뜨리는 느낌이다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="java-구현">Java 구현</h2>
+
+<h3 id="dfs-재귀">DFS 재귀</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">DFS</span> <span class="o">{</span>
+	<span class="kt">boolean</span><span class="o">[]</span> <span class="n">visited</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="kt">int</span><span class="o">[][]</span> <span class="n">array</span> <span class="o">=</span> <span class="o">{</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">},</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">},</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">},</span> <span class="o">{</span><span class="mi">1</span><span class="o">},</span> <span class="o">{</span><span class="mi">1</span><span class="o">},</span> <span class="o">{</span><span class="mi">2</span><span class="o">},</span> <span class="o">{</span><span class="mi">2</span><span class="o">}</span> <span class="o">};</span>
+   	 <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">]</span>
+		<span class="nf">dfs</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="kt">int</span> <span class="n">start</span><span class="o">){</span>
+    	<span class="n">visited</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//방문처리</span>
+    	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">start</span><span class="o">);</span> <span class="c1">//방문했으면 값 출력</span>
+     
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">next</span> <span class="o">:</span> <span class="n">array</span><span class="o">[</span><span class="n">start</span><span class="o">]){</span> <span class="c1">//</span>
+			<span class="k">if</span><span class="o">(!</span><span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]){</span> <span class="c1">//반복하지 않은 노드에서 재귀 호출</span>
+				<span class="n">dfs</span><span class="o">(</span><span class="n">next</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위 list는 위 그림에서 해당 인덱스에 연결된 노드를 정렬한 것이다.
+    <blockquote>
+      <ul>
+        <li>0은 1, 2 노드와 연결되어  있다.</li>
+      </ul>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="dfs-스택">DFS 스택</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">DFS</span> <span class="o">{</span>
+	<span class="kt">boolean</span><span class="o">[]</span> <span class="n">visited</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="kt">int</span><span class="o">[][]</span> <span class="n">array</span> <span class="o">=</span> <span class="o">{</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">},</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">},</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">},</span> <span class="o">{</span><span class="mi">1</span><span class="o">},</span> <span class="o">{</span><span class="mi">1</span><span class="o">},</span> <span class="o">{</span><span class="mi">2</span><span class="o">},</span> <span class="o">{</span><span class="mi">2</span><span class="o">}</span> <span class="o">};</span>
+   	 <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">]</span>
+		<span class="nf">dfs</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="kt">int</span> <span class="n">start</span><span class="o">){</span>
+   	 	<span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span> <span class="c1">//스택 생성</span>
+   	 	<span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">start</span><span class="o">);</span> <span class="c1">//스택에 첫 번째 인덱스 삽입</span>
+        
+   		 <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span> <span class="c1">//스택에 뭔가 있다면</span>
+            <span class="kt">int</span> <span class="n">now</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span> <span class="c1">//꺼내고 </span>
+            
+        	<span class="k">if</span> <span class="o">(!</span><span class="n">visited</span><span class="o">[</span><span class="n">now</span><span class="o">]){</span> <span class="c1">//방문하지 않았다면</span>
+       		    <span class="n">visited</span><span class="o">[</span><span class="n">now</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//방문 처리</span>
+        	       <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">now</span><span class="o">);</span> <span class="c1">//방문했으면 값 출력</span>
+        	  	  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">[</span><span class="n">now</span><span class="o">].</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+              		  <span class="kt">int</span> <span class="n">next</span> <span class="o">=</span> <span class="n">array</span><span class="o">[</span><span class="n">now</span><span class="o">][</span><span class="n">i</span><span class="o">];</span>  <span class="c1">//해당 리스트를 순회하며</span>
+                		<span class="k">if</span> <span class="o">(!</span><span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]){</span> 
+                   	 <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">next</span><span class="o">);</span> <span class="c1">//방문하지 않은 값을 스택에 넣는다. </span>
+            		<span class="o">}</span>
+           	 <span class="o">}</span>
+       	 <span class="o">}</span>
+    	<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="bfs">BFS</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">BFS</span><span class="o">{</span>
+	<span class="kt">boolean</span><span class="o">[]</span> <span class="n">visited</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    	<span class="kt">int</span><span class="o">[][]</span> <span class="n">array</span> <span class="o">=</span> <span class="o">{</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">},</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">},</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">},</span> <span class="o">{</span><span class="mi">1</span><span class="o">},</span> <span class="o">{</span><span class="mi">1</span><span class="o">},</span> <span class="o">{</span><span class="mi">2</span><span class="o">},</span> <span class="o">{</span><span class="mi">2</span><span class="o">}</span> <span class="o">};</span>
+   	 	<span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">array</span><span class="o">.</span><span class="na">length</span><span class="o">]</span>
+		<span class="nf">bfs</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">bfs</span><span class="o">(</span><span class="kt">int</span> <span class="n">start</span><span class="o">){</span>
+		<span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 큐 생성</span>
+	
+		<span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">start</span><span class="o">);</span> <span class="c1">//시작 값을 넣는다.</span>
+		<span class="n">visited</span><span class="o">[</span><span class="n">start</span><span class="o">]=</span><span class="kc">true</span><span class="o">;</span> <span class="c1">//방문 처리</span>
+	
+		<span class="k">while</span><span class="o">(!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span> <span class="c1">//큐에 뭔가 있다면</span>
+			<span class="kt">int</span> <span class="n">now</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">//큐에서 값을 빼고</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">now</span><span class="o">);</span> <span class="c1">//방문 출력</span>
+		
+			<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">next</span> <span class="o">:</span><span class="n">array</span><span class="o">[</span><span class="n">now</span><span class="o">]){</span>   <span class="n">해당</span> <span class="n">방문</span> <span class="n">리스트</span> <span class="n">순회</span>
+				<span class="k">if</span><span class="o">(!</span><span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]){</span> 	
+					<span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">next</span><span class="o">);</span> <span class="c1">//방문하지 않으면 큐에 삽입</span>
+					<span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]=</span><span class="kc">true</span><span class="o">;</span> <span class="c1">//방문 처리</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="dfs-bfs를-활용한-문제-유형">DFS, BFS를 활용한 문제 유형</h3>
+
+<ol>
+  <li>그래프의 모든 정점을 방문하는 것이 중요할 때는 둘 중에 편한 것을 사용한다.</li>
+  <li>경로의 특성이 저장해야 할 때는 DFS, BFS는 경로의 특성을 가지지 못한다.</li>
+  <li>최단 거리를 구할 때는 BFS를 사용한다. 노드에서 가까운 곳부터 찾기 때문에 경로 탐색시 먼저 찾아지는 것이 최단 거리이다.</li>
+</ol>
+
+<p><br /></p>
+
+<h2 id="실전-프로그래머스-문제-예시">실전 프로그래머스 문제 예시</h2>
+
+<h3 id="dfs">DFS</h3>
+<ul>
+  <li>피로도_프로그래머스</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+		<span class="kt">boolean</span><span class="o">[]</span> <span class="n">visited</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">max</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+		<span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">dungeons</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">dungeons</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+			<span class="n">dfs</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">dungeons</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+			<span class="k">return</span> <span class="n">max</span><span class="o">;</span>
+		<span class="o">}</span>
+        <span class="c1">//dfs 함수 생성</span>
+		<span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="kt">int</span> <span class="n">tired</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">dungeons</span><span class="o">,</span> <span class="kt">int</span> <span class="n">count</span><span class="o">){</span>
+            <span class="c1">//던전을 돌면서</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span> <span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">dungeons</span><span class="o">.</span><span class="na">length</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+                <span class="c1">//방문하지 않았거나 피로도보다 작다면</span>
+                <span class="k">if</span><span class="o">(!</span><span class="n">visited</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">dungeons</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">]&lt;=</span><span class="n">tired</span><span class="o">){</span>
+                    <span class="n">visited</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="kc">true</span><span class="o">;</span> <span class="c1">//방문 처리</span>
+                    <span class="n">dfs</span><span class="o">(</span><span class="n">tired</span><span class="o">-</span><span class="n">dungeons</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">],</span> <span class="n">dungeons</span><span class="o">,</span> <span class="n">count</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span> <span class="c1">//count 올리고 재귀</span>
+                    <span class="n">visited</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="kc">false</span><span class="o">;</span> <span class="c1">//다음을 위해 재초기화</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="n">max</span><span class="o">=</span><span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">count</span><span class="o">,</span> <span class="n">max</span><span class="o">);</span> <span class="c1">//최대값을 구한다.</span>
+        <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="bfs-1">BFS</h3>
+
+<ul>
+  <li>전력망 둘로 나누기_프로그래머스</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;[]</span> <span class="n">list</span><span class="o">;</span>
+		<span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">wires</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span>
+
+			<span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">List</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span>  <span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+				<span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+			<span class="o">}</span>
+
+			<span class="k">for</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">wire</span> <span class="o">:</span> <span class="n">wires</span><span class="o">){</span>
+				<span class="n">list</span><span class="o">[</span><span class="n">wire</span><span class="o">[</span><span class="mi">0</span><span class="o">]].</span><span class="na">add</span><span class="o">(</span><span class="n">wire</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+				<span class="n">list</span><span class="o">[</span><span class="n">wire</span><span class="o">[</span><span class="mi">1</span><span class="o">]].</span><span class="na">add</span><span class="o">(</span><span class="n">wire</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+			<span class="o">}</span>
+
+			<span class="k">for</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">wire</span> <span class="o">:</span> <span class="n">wires</span><span class="o">){</span>
+				<span class="kt">int</span> <span class="n">n1</span> <span class="o">=</span> <span class="n">bfs</span><span class="o">(</span><span class="n">wire</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">wire</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">n</span><span class="o">);</span> <span class="c1">//한쪽 방향</span>
+				<span class="kt">int</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">bfs</span><span class="o">(</span><span class="n">wire</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">wire</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">n</span><span class="o">);</span> <span class="c1">//반대편 방향</span>
+
+				<span class="n">answer</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">answer</span><span class="o">,</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">n1</span><span class="o">-</span><span class="n">n2</span><span class="o">));</span>
+			<span class="o">}</span>
+
+			<span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="c1">//bfs</span>
+		<span class="kd">public</span> <span class="kt">int</span> <span class="nf">bfs</span><span class="o">(</span><span class="kt">int</span> <span class="n">v1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">v2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">){</span>
+			<span class="c1">//큐 생성</span>
+			<span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+			<span class="kt">boolean</span><span class="o">[]</span> <span class="n">visited</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+			<span class="kt">int</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+
+			<span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">v1</span><span class="o">);</span> <span class="c1">//큐에 시작 노드 넣어줌</span>
+			<span class="n">visited</span><span class="o">[</span><span class="n">v1</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//방문확인</span>
+
+			<span class="c1">//큐가 빌 때까지 반복</span>
+			<span class="k">while</span><span class="o">(!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span>
+				<span class="kt">int</span> <span class="n">now</span> <span class="o">=</span>  <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">//하나를 꺼내고</span>
+				<span class="n">count</span><span class="o">++;</span> <span class="c1">//횟수를 더한다.</span>
+
+				<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">next</span> <span class="o">:</span> <span class="n">list</span><span class="o">[</span><span class="n">now</span><span class="o">]){</span> <span class="c1">//시작점의 리스트를 순회하면서</span>
+					<span class="k">if</span><span class="o">(</span><span class="n">next</span> <span class="o">!=</span> <span class="n">v2</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]){</span> <span class="c1">//방문하지 않았거나, 간선을 끊어서 처리</span>
+						<span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">next</span><span class="o">);</span>
+						<span class="n">visited</span><span class="o">[</span><span class="n">next</span><span class="o">]=</span><span class="kc">true</span><span class="o">;</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="k">return</span> <span class="n">count</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>Reference:</p>
+<ul>
+  <li><a href="https://notefolio.net/dexloper/130105">Algorithm -알고리즘 그래픽 디자인 img_최형주</a></li>
+  <li><a href="https://seing.tistory.com/29">그래프 탐색 알고리즘 [DFS, BFS] _ 망나</a></li>
+  <li><a href="https://devuna.tistory.com/32">깊이 우선 탐색(DFS) 과 너비 우선 탐색(BFS) _ 튜나의 개발일기</a></li>
+  <li>피로도, 전력망 둘로 나누기_프로그래머스</li>
+</ul>
+:ET
