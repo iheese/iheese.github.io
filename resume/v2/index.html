@@ -127,6 +127,7 @@ published : true
 		<section class="resume-section" id="skills">
 			<div class="resume-section-content">
 				<h2 class="mb-3">Tech Skills</h2>
+				<p class="h6">업무, 프로젝트 과정에서 사용했거나 사용 중인 기술, 툴입니다.</p>
 				<div class="subheading">
 					<h3>BackEnd</h3>
 				</div>
@@ -134,6 +135,8 @@ published : true
 					<li class="list-inline-item"><b>Java</b></li>
 					<li class="list-inline-item"><b>Junit4/5</b></li>
 					<li class="list-inline-item"><b>Mockito</b></li>
+					<li class="list-inline-item"><b>Kotlin</b></li>
+					<li class="list-inline-item"><b>JavaScript</b></li>
 				</ul>
 				<ul class="list-inline">
 					<li class="list-inline-item"><b>Spring Boot</b></li>
@@ -161,6 +164,7 @@ published : true
 				<ul class="list-inline">
 					<li class="list-inline-item"><b>Docker</b></li>
 					<li class="list-inline-item"><b>AWS EC2, S3</b></li>
+					<li class="list-inline-item"><b>Jenkins</b></li>
 				</ul>
 				<ul class="list-inline">
 					<li class="list-inline-item"><b>Pinpoint</b></li>
@@ -179,10 +183,16 @@ published : true
 				<ul class="list-inline">
 					<li class="list-inline-item"><b>Git/Github</b></li>
 					<li class="list-inline-item"><b>BitBucket</b></li>
+					<li class="list-inline-item"><b>Sourcetree</b></li>
 				</ul>
 				<ul class="list-inline">
 					<li class="list-inline-item"><b>Jira</b></li>
 					<li class="list-inline-item"><b>Confluence</b></li>
+					<li class="list-inline-item"><b>Upsource</b></li>
+				</ul>
+				<ul class="list-inline">
+					<li class="list-inline-item"><b>Slack</b></li>
+					<li class="list-inline-item"><b>Teams</b></li>
 				</ul>
 			</div>
 		</div>
@@ -204,55 +214,14 @@ published : true
 						<p><i>상품 데이터 7억건, 하루 평균 상품 등록/수정 800만건의 이커머스 서비스</i></p>
 						<ul>
 							<li> 위메프 서비스개발실 상품개발팀</li>
-							<li> 대규모 트래픽과 상품 데이터를 처리하는 API, BATCH 개발 및 유지보수 </li>
+							<li> 대규모 트래픽과 상품 데이터를 처리하는 RESTful 기반 API 및 BATCH 개발 및 유지보수 </li>
 							<li> MD, PO, 파트너사를 위한 백오피스 추가 기능 개발 </li>
-							<li> 개발 환경을 위한 Docker 스크립트 유지보수</li>	
+							<li> MSA(Micro Service Architecture) 환경 내 개발 및 배포</li>	
 							<li> 스쿼드 조직을 통한 애자일한 협업 경험</li>
 						</ul>
 					</div>
 					<div class="flex-shrink-0">
 						<span class="text-primary">2022.12 - 2023.05</span>
-					</div>
-				</div>
-				<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-					<div class="flex-grow-1">
-						<h3 class="mb-0">
-							🌏고투게더(Go Together)
-						</h3>
-						<div class="subheading mb-3">	
-							👨‍💻백엔드 개발자
-						</div>
-						<p><i>시니어를 타겟으로 한 여행 상품 추천 플랫폼</i></p>
-						<ul>
-							<li> 실제 기업 연계 프로젝트 (8명)</li>
-							<li> 회원 데이터 기반의 여행 상품 추천 큐레이션 서비스 개발</li>
-							<li> Spring Security 기반의 회원 관리 로직 개발  </li>
-							<li> 여행 상품 데이터 저장을 위한 어드민 페이지 개발 </li>
-							<li> AWS 배포, AWS S3를 이용한 정적 파일 관리</li>
-						</ul>
-					</div>
-					<div class="flex-shrink-0">
-						<span class="text-primary">2022.09 - 2022.11</span>
-					</div>
-				</div>
-				<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-					<div class="flex-grow-1">
-						<h3 class="mb-0">
-							💸니드 머니(Need Money)
-						</h3>
-						<div class="subheading mb-3">	
-							🤑백엔드 개발자 팀장
-						</div>
-						<p><i>회원 정보 기반의 대출 상품 추천 어플리케이션</i></p>
-						<ul>
-							<li> 대출 상품 어플리케이션 프로젝트 (8명)</li>
-							<li> 나이, 직업 기반 대출 상품 추천 서비스 개발</li>
-							<li> Interceptor 기반의 회원 관리 로직 개발  </li>
-							<li> AWS 배포 및 Docker 개발환경 구축</li>
-						</ul>
-					</div>
-					<div class="flex-shrink-0">
-						<span class="text-primary">2022.08 - 2022.09</span>
 					</div>
 				</div>
 				<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -284,42 +253,94 @@ published : true
 		<section class="resume-section" id="projects">
 			<div class="resume-section-content">
 				<h2 class="mb-2">Projects</h2>
+				<div
+					class="d-flex flex-column flex-md-row justify-content-between mb-5">
+					<div class="flex-grow-1">
+						<h3 class="mb-0">🗓 상품 예약</h3>
+						<div class="subheading mb-2">위메프 특가스쿼드</div>
+						<p>- 특가/행사 진행시 판매가/재고 등의 예약 기능 부재로 인해 특가/행사 시간에 맞춰 상품 데이터 변경 수동 작업 필요  <br>
+						- 상기 사유로 인해 상품/딜 별도 생성 or 상품 복제 기능으로 인하여 리뷰 등 상품 데이터 단절  <br>
+						&#x25cf; 어드민 페이지 내 상품 예약 일괄 등록 프론트 화면 개발(JSP, JavaScript)<br>
+						&#x25cf; 상품 예약 엑셀 일괄 등록에 사용될 엑셀 양식 제작 및 DB 설계, 기능 개발<br>
+						&#x25cf; 상품 예약 변경 이력 조회 API 및 ElasticSearch 색인 개발<br>
+						&#x25cf; ElasticSearch 인덱스 생성 배치 및 슬랙 알람 배치 개발<br>
+						💬 기획자와 커뮤니케이션의 중요성을 다시 한 번 깨닫고 QA팀과 협업을 경험하였다.<br>
+						💬 무분별한 상품 복제 기능으로 인한 리뷰 데이터 누락을 막고 상품에 대한 리뷰 마이그레이션 기능 추가되면 좋을 것 같다. <br>
+						주요 기술 스택 : Spring Boot, Spring Batch, JSP, JavaScript, Redis Stream, ElasticSearch, MyBatis, MySQL, Jenkins, Excel, Slack </p>
+					</div>
+					<div class="flex-shrink-0">
+						<span class="text-info">2023.02 - 2023.05</span>
+					</div>
+				</div>
+				<div
+					class="d-flex flex-column flex-md-row justify-content-between mb-5">
+					<div class="flex-grow-1">
+						<h3 class="mb-0">🏷 스티커 전체 데이터 전처리 배치</h3>
+						<div class="subheading mb-2">위메프 상품개발팀</div>
+						<p> - 연간 1~2회 정도 DB 동기화 지연 영향으로 노출할 스티커 정보가 누락 <br>
+							- 프로모션, OO데이, 베스트 등 에서 스티커 정보가 누락되면 바로 운영 측에서 문의 및 수정 요청 <br>
+							- 상품 뿐만 아니라 투어, 컬쳐에서도 사용 확대되어 중요도가 더욱 높아짐 <br>
+							? 스티커 : 행사 상품이라는 것을 표시하기 위한 작은 문구
+						&#x25cf; 현재 사용되고 있거나 사용될 모든 스티커 데이터 kafka 내 producing하는 배치 개발 <br>
+						&#x25cf; 긴급 상황에 빠르게 대처하기 위해 수동 curl 명령어로 배치 실행할 수 있게 구현 <br>
+						💬 DB 동기화 지연 뿐만 아니라 다른 누락 상황에 대해 분석하여 자동으로 처리될 수 있는 로직 구현이 필요할 듯하다.<br>
+						주요 기술 스택 : Spring Boot, Spring Batch, Kafka, JPA, MySQL </p>
+					</div>
+					<div class="flex-shrink-0">
+						<span class="text-info">2023.03 - 2023.04</span>
+					</div>
+				</div>
+				<div
+					class="d-flex flex-column flex-md-row justify-content-between mb-5">
+					<div class="flex-grow-1">
+						<h3 class="mb-0">⏰ 팀즈 > 슬랙 알람 이관</h3>
+						<div class="subheading mb-2">위메프 상품개발팀</div>
+						<p>- 기존에 사용하던 팀즈 메신저에서 슬랙 메신저로 이관하면서 팀즈에 있는 알람들도 이관 <br>
+						&#x25cf; DEV, QA, STG / PROD 환경을 구분하여 환경별 명확한 모니터링을 위한 알람 전달<br>
+						&#x25cf; 배치 실패, 배치 오류, 엑셀 배치, 배치 활성화, ES 인덱스 생성, 전체 색인 알람 이관<br>
+						&#x25cf; 불필요한 Kafka consumer 배치 알람건 개선 및 방화벽 추가 요청을 통해 알람 수정 <br>
+						💬 운영 쪽 문제 발생시 알람을 통한 모니터링의 중요성을 깨달았다. <br>
+						주요 기술 스택 : Spring Boot, Teams, Slack, Postman </p>
+					</div>
+					<div class="flex-shrink-0">
+						<span class="text-info">2022.12 - 2023.02</span>
+					</div>
+				</div>
+
 				<div class="mb-4"> <h6>프로젝트 명을 클릭하시면 프로젝트 회고록, 프로젝트 코드에서 코드를 확인하실 수 있습니다.</h6></div>
-				<h3 class="mb-4">팀 프로젝트</h3>
 				<div
 					class="d-flex flex-column flex-md-row justify-content-between mb-4">
 					<a href="https://github.com/iheese/gotogether-BE" target="_blank">
-						<img src="../assets/gotogether.jpg" height="300" class="rounded float-start me-4" />
+						<img src="../assets/gotogether.jpg" height="250" class="rounded float-start me-4" />
 					</a>
 					<div class="flex-grow-1">
-						<h3 class="mb-0"><a href="https://iheese.github.io/project/2022/10/20/gotogether/" target="_blank">Go Together (여행 상품 추천 플랫폼)</a></h3>
+						<h3 class="mb-0"><a href="https://iheese.github.io/project/2022/10/20/gotogether/" target="_blank">🌏 Go Together (여행 상품 추천 플랫폼)</a></h3>
 						<div class="subheading mb-2"><a href="https://github.com/iheese/gotogether-BE" target="_blank">프로젝트 코드</a></div>
 						
-						<p>BackEnd팀, UX/UI팀, FrontEnd팀이 협업한 프로젝트이며, 실제 기업 연계 프로젝트입니다. <br>
+						<p>BackEnd팀, FrontEnd팀, UX/UI팀, 실제 기업 연계 프로젝트 <br>
 							<b>시니어를 타겟으로 한 여행 상품 추천 플랫폼입니다.  </b> <br>
-							공식적인 프로젝트 기간 이후 지속적으로 개발 및 유지보수를 진행 중입니다.<br>
-						JWT 토큰과 Spring Security을 이용한 회원 기능, 큐레이션(상품 추천 데이터), 관리자 기능, 정적 파일 관리 파트를 맡았습니다. <br>
+						JWT 토큰과 Spring Security을 이용한 회원 기능, 큐레이션(상품 추천 데이터), 어드민 기능, 정적 파일 관리 파트를 맡았습니다. <br>
 						&#x25cf; 실제 배포될 것을 고려해 보안에 대한 로직을 선택적이고 체계적으로 처리할 수 있다는 장점이 있는 Spring Security를 사용하였습니다. <br> 
-						&#x25cf; 로그아웃된 Access Token 처리, Refresh  Token을 이용한 빠른 토큰 재발행을 위해 Redis를 사용했습니다. <br>
+						&#x25cf; 로그아웃된 Access Token 처리, Refresh Token을 이용한 빠른 토큰 재발행을 위해 Redis를 사용했습니다. <br>
 						&#x25cf; 비회원의 상품 추천 데이터는 세션에 저장해 추천 상품을 제공하였고, 회원은 DB에 저장하여 추천 상품을 제공했습니다.<br>
 						&#x25cf; 정적 파일 관리는 URL을 통해 정적 파일에 어디서든 접근할 수 있게 해주는 AWS S3 버킷을 이용하였습니다. <br>
 						세부적인 내용은 프로젝트 코드의 README 파일에서 확인하실 수 있습니다.<br>
-						주요 기술 스택 : Spring Boot, JPA, Spring Security, MySQL, Redis, AWS, Docker, Jenkins </p>
+						주요 기술 스택 : Spring Boot, JPA, Spring Security, MySQL, Redis, AWS EC2, AWS S3, Docker, Jenkins </p>
 					</div>
 					<div class="flex-shrink-0">
-						<span class="text-info">2022.09 ~</span>
+						<span class="text-info">22022.09 - 2022.11</span>
 					</div>
 				</div>
 
 				<div
 					class="d-flex flex-column flex-md-row justify-content-between mb-5">
 					<a href="https://github.com/iheese/FinProductReco" target = "_blank">
-						<img src="../assets/needmoney.jpg" height="300"  class="rounded float-start me-4" />
+						<img src="../assets/needmoney.jpg" height="250"  class="rounded float-start me-4" />
 					</a>
 					<div class="flex-grow-1">
-						<h3 class="mb-0"><a href="https://iheese.github.io/project/2022/09/08/finproductreco/" target = "_blank">NEED MONEY (대출 상품 추천 앱)</a></h3>
+						<h3 class="mb-0"><a href="https://iheese.github.io/project/2022/09/08/finproductreco/" target = "_blank">💸 NEED MONEY (대출 상품 추천 앱)</a></h3>
 						<div class="subheading mb-2"><a href="https://github.com/iheese/FinProductReco" target = "_blank">프로젝트 코드</a></div>
-						<p>BackEnd팀과 FrontEnd팀이 협업한 프로젝트입니다.  <br>
+						<p>BackEnd팀, FrontEnd팀, 토이 프로젝트 <br>
 						<b>나이, 직업 기반 대출 상품 추천 앱입니다. </b> <br>
 						JWT 토큰과 Interceptor 기능을 이용한 회원 기능과 상품 추천, 배포 부분을 맡았습니다. <br>
 						&#x25cf; 라이브러리의 의존성을 줄이고 가벼운 로직이므로 Spring에서 제공하는 Interceptor를 이용하여 로그인 기능을 구현했습니다. <br>
@@ -328,7 +349,7 @@ published : true
 						주요 기술 스택 : Spring Boot, JPA, MySQL, AWS, Docker </p>
 					</div>
 					<div class="flex-shrink-0">
-						<span class="text-info">2022.09</span>
+						<span class="text-info">2022.08 - 2022.09</span>
 					</div>
 				</div>			
 			</div>
