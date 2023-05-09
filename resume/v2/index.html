@@ -49,7 +49,7 @@ published : true
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#experience">Experience</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#projects">Projects</a></li>
+					href="#projects">Projects & What I Did</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#education">Education</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
@@ -166,7 +166,7 @@ published : true
 				</ul>
 				<ul class="list-inline">
 					<li class="list-inline-item"><b>Pinpoint</b></li>
-					<li class="list-inline-item"><b>ELK Stack</b></li>
+					<li class="list-inline-item"><b>ELK Stack(ElasticSearch, Logstash, Kibana)</b></li>
 				</ul>
 				
 				<div class="subheading mt-5">
@@ -250,18 +250,18 @@ published : true
 		<!-- Projects -->
 		<section class="resume-section" id="projects">
 			<div class="resume-section-content">
-				<h2 class="mb-2">Projects</h2>
+				<h2 class="mb-2">Projects & What I Did</h2>
 				<div
 					class="d-flex flex-column flex-md-row justify-content-between mb-5">
 					<div class="flex-grow-1">
 						<h3 class="mb-0">🗓 상품 예약</h3>
 						<div class="subheading mb-2">위메프 특가스쿼드</div>
 						<p>- 특가/행사 진행시 판매가/재고 등의 예약 기능 부재로 인해 특가/행사 시간에 맞춰 상품 데이터 변경 수동 작업 필요  <br>
-						- 상기 사유로 인해 상품/딜 별도 생성 or 상품 복제 기능으로 인하여 리뷰 등 상품 데이터 단절  <br>
+						- 상기 사유로 인해 상품/딜(상품을 묶어놓은 단위) 별도 생성하거나 상품 복제 기능으로 인하여 리뷰, 판매수 등 상품 데이터 단절  <br>
 						&#x25cf; 어드민 페이지 내 상품 예약 일괄 등록 프론트 화면 개발(JSP, JavaScript)<br>
-						&#x25cf; 상품 예약 엑셀 일괄 등록에 사용될 엑셀 양식 제작 및 DB 설계, 기능 개발<br>
+						&#x25cf; 상품 예약 엑셀 일괄 등록에 사용될 엑셀 양식 제작 및 DB 설계, API, 배치 기능 개발<br>
 						&#x25cf; 상품 예약 변경 이력 조회 API 및 ElasticSearch 색인 개발<br>
-						&#x25cf; ElasticSearch 인덱스 생성 배치 및 슬랙 알람 배치 개발<br>
+						&#x25cf; ElasticSearch 인덱스 생성 배치 및 인덱스 생성 확인 슬랙 알람 배치 개발<br>
 						&#x25cf; 상품예약 기능을 통해 상품 리뷰, 판매수 데이터를 모으고 자동으로 특정 시기에 상품을 판매할 수 있게 되었다. <br>
 						💬 기획자와 커뮤니케이션의 중요성을 다시 한 번 깨닫고 QA팀과 협업을 경험하였다.<br>
 						💬 무분별한 상품 복제 기능으로 인한 리뷰 데이터 누락을 막고 상품에 대한 리뷰 마이그레이션 기능 추가되면 좋을 것 같다. <br>
@@ -293,10 +293,29 @@ published : true
 				<div
 					class="d-flex flex-column flex-md-row justify-content-between mb-5">
 					<div class="flex-grow-1">
+						<h3 class="mb-0">🖼 상품 상세설명 HTML 타입 iframe 태그 http 등록 방지</h3>
+						<div class="subheading mb-2">위메프 상품개발팀</div>
+						<p> - 상품 등록/수정 과정에서 상품 상세설명이 HTML 타입이고(현재 IMG, HTML 타입 두 가지가 있음)
+							iframe 태그가 들어갔을 때 src 속성값에 http로 <br>시작하는 이미지 주소가 들어가면 이미지가 출력되지 않는 문제가 발생 <br>
+							- '판매 중' 상태의 문제 상품은 25만개('판매 중' 전체 상품의 수 2억 3천만개), 모든 판매 상태의 문제 상품은 104만개(전체 상품의 수는 7억 5천만개) <br>
+							- 파트너사들과 MD님들에게도 공지를 통해 수정 및 확인 요청을 드렸지만 지속적으로 문의, 신고로 들어오는 고질병 같은 문제 <br>
+							- 또한 HTML 태그가 HTML Character Entity로 바뀌어  &amp;lt;(<), &amp;gt;(>)들어간 상황도 발견 <br>
+						&#x25cf; 기존 iframe 태그의 src 속성에 http로 들어간 데이터 추출, 해당 데이터 건에 대해 https 변환 마이그레이션 API 개발<br>
+						&#x25cf; 상품 백엔드 API에 유효성 검증 로직 추가, HTML Character Entity를 일반 태그로 변환하여 iframe 태그의 src 속성값의 prefix가 'https://' 인지 <br> 확인하는 로직 추가<br>
+						💬 상품 상세설명의 이미지가 출력되지 않는 것을 막아 소비자들이 상품 구매에 방해가 되지 않게 하였고, 관련 에러에 대해 지속적으로 들어오던 <br> 문의, 신고 수가 없앴다. <br>
+						주요 기술 스택 : Spring Boot, HTML, MySQL </p>
+					</div>
+					<div class="flex-shrink-0">
+						<span class="text-info">2023.03 - 2023.04</span>
+					</div>
+				</div>
+				<div
+					class="d-flex flex-column flex-md-row justify-content-between mb-5">
+					<div class="flex-grow-1">
 						<h3 class="mb-0">⏰ 팀즈 > 슬랙 알람 이관</h3>
 						<div class="subheading mb-2">위메프 상품개발팀</div>
-						<p>- 기존에 사용하던 팀즈 메신저에서 슬랙 메신저로 이관하면서 팀즈에 있는 알람들도 이관 <br>
-						&#x25cf; DEV, QA, STG / PROD 환경을 구분하여 환경별 명확한 모니터링을 위한 알람 전달<br>
+						<p>- 기존에 사용하던 Teams 메신저에서 Slack 메신저로 이관하면서 팀즈에 있는 알람들도 이관 <br>
+						&#x25cf; DEV, QA, STG / PROD 배포 환경을 구분하여 표시하여 환경별 명확한 모니터링을 위한 알람 전달<br>
 						&#x25cf; 배치 실패, 배치 오류, 엑셀 배치, 배치 활성화, ES 인덱스 생성, 전체 색인 알람 이관<br>
 						&#x25cf; 애매한 Kafka consumer 배치 알람건 개선 및 방화벽 추가 요청을 통해 알람 수정 <br>
 						&#x25cf; 불필요한 알람을 걷어내고 필요한 데이터만 슬랙을 통해 알람을 전달하여 모니터링 및 이슈 추적이 수월해졌다.<br>
@@ -367,7 +386,7 @@ published : true
 						<h3 class="mb-0">패스트캠퍼스</h3>
 						<div class="subheading mb-3">핀테크 서비스 백엔드 개발자 양성 과정</div>
 						<!-- <div>Computer Science - Web Development Track</div>-->
-						<p>CS 지식 및 Java, Spring, Spring Boot를 중심으로 학습했으며, 개인 프로젝트를 통해 개발 역량을 늘리고 좋은 코드에 대해 고민했습니다. <br>
+						<p>CS 지식 및 Java, Spring Boot를 중심으로 학습했으며, 개인 프로젝트를 통해 개발 역량을 늘리고 좋은 코드에 대해 고민했습니다. <br>
 							또한 팀프로젝트 경험을 통해 협업을 경험하고, 다양한 기술을 접목해 프로젝트를 만들어보며 기술적 해결력을 기를 수 있었습니다. <br>
 							더 얻은 것이 있다면 함께 공부해나갈 개발자 동료들을 많이 만나고 친해질 수 있는 기회였습니다.<br>
 							교육 수료 후 동료 수강생들과 매니저님들에게 좋은 평가를 받아 교육과 프로젝트 관련하여 인터뷰를 진행하기도 했습니다.<br>
