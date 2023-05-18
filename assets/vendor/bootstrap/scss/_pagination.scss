@@ -1,7 +1,48 @@
 .pagination {
-  display: flex;
-  @include list-unstyled();
-  @include border-radius();
+  clear: both;
+  float: left;
+  margin-top: 1em;
+  padding-top: 1em;
+  width: 100%;
+}
+
+.pagination ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-family: -apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕","Roboto","Segoe UI","Helvetica Neue","Lucida Grande",Arial,sans-serif;
+}
+
+.pagination li {
+  display: block;
+  float: left;
+  margin-left: -1px;
+}
+
+.pagination li a {
+  display: block;
+  margin-bottom: 0.25em;
+  padding: 0.5em 1em;
+  font-family: -apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕","Roboto","Segoe UI","Helvetica Neue","Lucida Grande",Arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  color: #646769;
+  border: 1px solid #b6b6b6;
+  border-radius: 0;
+}
+
+.pagination li a.current, .pagination li a.current.disabled {
+  color: #fff;
+  background: #6f777d;
+}
+
+.pagination li a.disabled {
+  color: rgba(100,103,105,0.5);
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .page-link {

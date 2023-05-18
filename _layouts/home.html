@@ -27,10 +27,8 @@ layout: default
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
 
-        {{ content }}
-
         <!-- Home Post List -->
-        {% for post in site.posts limit : 10 %}
+        {% for post in paginator.posts limit : 10 %}
 
         <article class="post-preview">
           <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
@@ -53,20 +51,22 @@ layout: default
         </article>
 
         <hr>
-
         {% endfor %}
-
+       
         <!-- Pager -->
-        <div class="clearfix">
+         <!-- <div class="clearfix">
           <a class="btn btn-primary float-right" href="{{"/posts" | relative_url }}">View All Posts &rarr;</a>
-        </div>
+        </div>  -->
+
+      {% include paginator.html %}
+
       </div>
       <div class="col-lg-4 col-md-2">
         <ul>
         {%for category in site.categories %}
           <li><a href= "/category/{{ category | first }}">{{ category | first }} ({{ category | last | size }})</a></li>
         {% endfor %}
-      </ul>
+        </ul>
       </div>
     </div>
   </div>
