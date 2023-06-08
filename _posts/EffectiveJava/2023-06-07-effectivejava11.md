@@ -1,13 +1,13 @@
 ---
 layout: post
-title: '[EFFECTIVE JAVA] ITEM 11. equals를 재정의하려거든 hashCode도 재정의하라'
+title: '[EFFECTIVE JAVA] ITEM 11, equals를 재정의하려거든 hashCode도 재정의하라'
 subtitle: ''
 date: 2023-06-07 16:00:00 +0900
 categories: 'EffectiveJava'
 background: '/img/posts/etc/datastructure.jpg'
 ---
 
-# ITEM 11. equals를 재정의하려거든 hashCode도 재정의하라
+# ITEM 11, equals를 재정의하려거든 hashCode도 재정의하라
 
 <br>
 
@@ -142,8 +142,3 @@ Reference:
 
 - [EFFECTIVE JAVA](https://front.wemakeprice.com/product/121854081?search_keyword=%25EC%259D%25B4%25ED%258E%2599%25ED%258B%25B0%25EB%25B8%258C%2520%25EC%259E%2590%25EB%25B0%2594&_service=5&_no=1)
 - [이펙티브 자바 3판 Github](https://github.com/WegraLee/effective-java-3e-source-code)
-- 2번에서 인터페이스를 사용했다면 입력 필드값을 가져올 때도 해당 인터페이스의 메소드를 사용해야 한다. 
-
-<br>
-
-## equals 메소
