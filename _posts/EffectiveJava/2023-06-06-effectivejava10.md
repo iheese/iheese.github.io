@@ -59,7 +59,7 @@ public boolean equals (Object o){
 - 이 부분집합을 동치류(equivalence class, 동치 클래스)라 한다.
 
 ### 특징
-- 반사성(reflexivity) : null이 아닌 모든 참조 값 x에 대해 x.equals(y)는 true이다.
+- 반사성(reflexivity) : null이 아닌 모든 참조 값 x에 대해 x.equals(x)는 true이다.
 > - 객체는 자기 자신과 같아야 한다. 
 
 <br>
