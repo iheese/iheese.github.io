@@ -154,11 +154,36 @@ background: '/img/posts/etc/git.png'
 - 1번 쿼리를 날렸을 때 의도치 않게 N개의 쿼리가 추가적으로 실행되는 것이다.
 - 원인
 > - JPA Repository로 find 실행시 첫 쿼리에서 하위 엔티티까지 한 번에 가져오지 않고, 하위 엔티티를 사용할 때 추가로 조회하기 때문이다.
-> - JPQL에서는 글로벌 페치 전략을 완전히 무시하고 SQL을 생성한다.
+> - JPQL에서는 연관관계 데이터를 무시하고 해당 엔티티 기준 쿼리를 조회하기 때문이다. 
 - 즉시 로딩에서 발생하는 이유는 JPQL을 사용하는 경우 전체 조회를 했을 때  해당 연관 관계인 하위 엔티티들을 추가 조회하기 때문이다. 
 - 지연 로딩에서 발생하는 이유는 지연 로딩 전략을 사용한 하위 엔티티를 로드할 때 JPA에서 프록시 엔티티를 unproxy할때 해당 엔티티를 조회하기 위한 추가적인 쿼리가 발생한다. (하위 엔티티에 접근할 때)
 - 해결방법
-> - JPQL의 JOIN FETCH, @EntityGraph, @Fetch(FetchMode.SUBSELECT), @BatchSize 조절하는 방법이 있다. 
+> - JPQL의 JOIN FETCH, 
+
+```java
+@Query("select o from Owner o join fetch o.cats")
+List<Owner> findAllJoinFetch();
+```
+
+- @EntityGraph
+
+```java
+@EntityGraph(attributePaths = "cats")
+@Query("select o from Owner o")
+List<Owner> findAllEntityGraph();
+```
+
+
+- 그 외에 @Fetch(FetchMode.SUBSELECT), @BatchSize 조절 , QueryBuilder를 사용하는 방법이 있다. 
+
+
+```java
+// QueryDSL로 구현한 예제
+return from(owner).leftJoin(owner.cats, cat)
+                   .fetchJoin()
+```
+
+- [N+1 문제_Incheol's TECH BLOG](https://incheol-jung.gitbook.io/docs/q-and-a/spring/n+1)
 
 <br>
 
