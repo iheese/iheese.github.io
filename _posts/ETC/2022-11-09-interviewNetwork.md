@@ -127,8 +127,8 @@ background: '/img/posts/etc/git.png'
 > - 7 Application Layer : 사용자에게 통신하기 위한 서비스 제공, 인터페이스 역할 (ex : HTTP)
 > - 6 Presentation Layer : 데이터의 형식을 정의하는 계층, 문자 코드, 압축, 암호화 등 데이터 변환 담당
 > - 5 Session Layer : 세션 체결, 통신 방식 등을 결정(ex : FTP)
-> - 4 Transport Layer : 최종 수신 프로세스로 데이터의 전송을 담당, 데이터 손실 확인, 포트로 식별을 담당 (단위 : Segment, ex : TCP, UDP)
-> - 3 Network Layer : 다른 네트워크와 통신을 위한 경로 설정, 논리 주소 결정 (단위 : Packet, ex : Router)
+> - 4 Transport Layer : 최종 수신 프로세스로 데이터의 전송을 담당, 데이터 손실 확인, 포트로 식별을 담당, 패킷생성 (단위 : Segment, ex : TCP, UDP)
+> - 3 Network Layer : 다른 네트워크와 통신을 위한 경로 설정, 논리 주소 결정(IP) (단위 : Packet, ex : Router)
 > - 2 DataLink Layer : 네트워크 기기간 데이터 송수신, 물리 주소 결정 (단위 : Frame, ex: 이더넷)
 > - 1 Physical Layer : 물리적 연결, 데이터를 전기 신호로 바꿔주는 계층 (단위 : bit, 장비 : 케이블, 리피터, 허브)
 
@@ -158,7 +158,8 @@ background: '/img/posts/etc/git.png'
 
 
 <br>
-#### 추가  학습할 것
+
+#### 추가 학습할 것
 
 
 <br>

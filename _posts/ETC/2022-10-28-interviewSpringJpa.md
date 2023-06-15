@@ -112,7 +112,7 @@ background: '/img/posts/etc/git.png'
 > - init(), doFilter(), destroy()
 > - DelegatingFilterProxy의 등장으로 인해 스프링 빈으로 등록 가능
 > > - [[Spring] 필터(Filter)가 스프링 빈 등록과 주입이 가능한 이유(DelegatingFilterProxy의 등장) - (2) _ 망나니개발자](https://mangkyu.tistory.com/221)
-- 인터셉터는 SpringMVC 스펙에 포함되어 있습니다. 디스패처 서블릿이 컨트롤러를 호출하기 전/후에 요청과 응답을 참조하거나 가공할 수 있는 기능을 제공합니다. 즉 인터셉서틑 스프링 컨텍스트 범위 내에서 동작합니다. 
+- 인터셉터는 SpringMVC 스펙에 포함되어 있습니다. 디스패처 서블릿이 컨트롤러를 호출하기 전/후에 요청과 응답을 참조하거나 가공할 수 있는 기능을 제공합니다. 즉 인터셉터는 스프링 컨텍스트 범위 내에서 동작합니다. 
 > - preHandle(), postHandle(), afterCompletion()
 
 
