@@ -2,7 +2,7 @@
 layout: post
 title: 'Database Interview 대비'
 subtitle: '인덱스, RDBMS, NoSQL, 정규화, Transaction, ACID, Elastic Search'
-date: 2022-11-11 12:00:00 +0900
+date: 2023-06-16 12:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
