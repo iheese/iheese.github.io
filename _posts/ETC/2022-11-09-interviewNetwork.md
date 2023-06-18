@@ -10,7 +10,7 @@ background: '/img/posts/etc/git.png'
 
 
 #### HTTP 프로토콜이란 무엇인가요?
-- HTTP(Hyper Text Transfer Protocol)이란 데이터를 주고 받기 위한 프로콜이며 서버,클라이너트 모델을 따릅니다. 상태정보를 저장하지 않는 Stateless, 클라이언트의 요청에 맞는 응답을 보낸 후 연결을 끊는 Connectionless의 특징을 가지고 있습니다.
+- HTTP(Hyper Text Transfer Protocol)이란 데이터를 주고 받기 위한 프로토콜이며 서버,클라이언트 모델을 따릅니다. 상태정보를 저장하지 않는 Stateless, 클라이언트의 요청에 맞는 응답을 보낸 후 연결을 끊는 Connectionless의 특징을 가지고 있습니다.
 - 장점
 > - 연결 상태 처리, 상태 정보를 관리할 필요가 없어 서버 디자인이 간단하다.
 > - 각각의 HTTP 요청에 독립적으로 응답한다.
@@ -71,6 +71,7 @@ background: '/img/posts/etc/git.png'
 - DELETE : 데이터 삭제
 
 <BR>
+
 #### 세션과 쿠키란 무엇인가요?
 - 쿠키 : 클라이언트에 저장되는 작은 기록 정보 파일이다. HTTP에서 클라이언트의 상태 정보를 저장했다가 필요시 참조하거나 재사용할 수 있다.
 > - text로 저장, 쿠키 저장시 만료 안되면 삭제 안됨, 세션보다 빠름, 보안에 취약
@@ -103,7 +104,6 @@ background: '/img/posts/etc/git.png'
 > > - 파일 교환, 문자 등
 - UDP(User Datagram Protocol), 데이터그램 방식을 사용하는 비연결형 서비스로 스트리밍, RTP(Real-time Transport Protocol)와 같이 실시간 연속성이 더 중요한 서비스에 사용된다. 비교적 속도가 빠르다.
 > - 순서 보장X, 1:1 or 1:N or N:N 통신, 수신 여부 확인X, 신뢰성 낮음, 속도 빠름
-
 
 <br>
 
