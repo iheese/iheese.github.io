@@ -2,7 +2,7 @@
 layout: post
 title: 'Database Interview 대비'
 subtitle: '인덱스, RDBMS, NoSQL, 정규화, Transaction, ACID, Elastic Search'
-date: 2023-06-16 12:00:00 +0900
+date: 2023-06-18 12:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
@@ -230,11 +230,12 @@ background: '/img/posts/etc/git.png'
 
 ![스크린샷 2023-06-16 오후 3 52 26](https://github.com/iheese/iheese.github.io/assets/88040158/8b7bc221-60dc-4b68-b7af-0ca1bc51076b)
 
-- READ UNCOMMITED : 아무런 락을 걸지 않음
-- READ COMMITED : 커밋하기 전 작업 중인 데이터의 값을 읽을 수 없다. 그래서 Dirty Read가 발생하지 않는다.
+- READ UNCOMMITED : 아무런 락을 걸지 않음, 즉 커밋되지 않은 데이터도 읽을 수 잇음
+- READ COMMITED : 커밋하기 전 작업 중인 데이터의 값을 읽을 수 없다. 그래서 Dirty Read가 발생하지 않는다. 즉 커밋되어 확정된 것까지는 읽을 수 있음
+> - Dirty Read : write 트랜잭션이 데이터를 업데이트만 하고 커밋은 안했는데 read 트랜잭션이 해당 값을 읽고 write 트랜잭션이 롤백한 상황, 이 상황에서 다시 read 트랜잭션이 re-read 할 때 생김
 > - 해당 격리 레벨부터 Spring에서 undo 영역을 이용한 MVCC(Multiversion Concurrency Control)를 사용하여 Consistence Read를 보장해줍니다. 
-- REPEATABLE READ : 커밋하기 전 작업 중인 데이터의 값을 읽을 수 없고, 읽기 트랜잭션이 끝나기 전까지 Undo 영역을 타 트랜잭션에서 쓰기 작업 후 커밋한 데이터로 덮어쓸 수 없다.
-- SERIALIZABLE : 트랜잭션을 다른 트랜잭션으로부터 완전히 분리시킨다. 특정 트랜잭션을 작업하는 동안 타 트랜잭션은 별로의 작업을 할 수 없다
+- REPEATABLE READ : 커밋하기 전 작업 중인 데이터의 값을 읽을 수 없고, 읽기 트랜잭션이 끝나기 전까지 Undo 영역을 타 트랜잭션에서 쓰기 작업 후 커밋한 데이터로 덮어쓸 수 없다. 즉 선행 트랜잭션이 읽은 데이터를 종료까지 갱신/삭제 안됨
+- SERIALIZABLE : 트랜잭션을 다른 트랜잭션으로부터 완전히 분리시킨다. 특정 트랜잭션을 작업하는 동안 타 트랜잭션은 별로의 작업을 할 수 없다, insert문까지 금지
 > - @Transactional 어노테이션만 붙여주면 jdbc 기본 isolation level을 따름
 > > - MYSQL : 2, ORACLE : 1, MariaDB : 2 
 
