@@ -109,12 +109,14 @@ background: '/img/posts/etc/git.png'
 
 #### TCP 3, 4 way handshake에 대해서 설명해보세요.
 - TCP 3 way handshake는 가상회선을 수립하는 단계입니다. 클라이언트는 서버에 요청을 전송할 수 있는지, 서버는 클라이언트에게 응답을 전송할 수 있는지 확인하는 과정입니다. 
+- SYN (Synchronization): 동기화, 연결 요청 플래그
+- ACK (Acknowledgement): 응답
 > - 접속 요청 : 클라이언트 SYN `->` 서버  
 > - 요청 수락 : 클라이언트 `<-` SYN + ACK 서버
 > - 연결 : 클라이언트 ACK `->` 서버 
-> > - SYN : synchronize sequence numbers의 약자
-> > - ACK : acknowledgment의 약자
+
 - TCP 4 way handshake는 TCP연결을 해제하는 단계입니다. 클라이언트는 서버에게 연결해제를 통지하고 서버가 이를 확인하고 클라이언트에게 이를 받았음을 전송하고 최종적으로 연결이 해제됩니다. 
+- FIN (finish): 연결 종료 요청
 > - 연결 종료 요청 : 클라이언트 FIN플래그 `->` 서버
 > - 요청 확인 : 클라이언트 `<-` ACK 서버
 > - 연결 종료 : 클라이언트 `<-` FIN플래그 서버
