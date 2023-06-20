@@ -113,9 +113,11 @@ background: '/img/posts/etc/git.png'
 > - init(), doFilter(), destroy()
 > - DelegatingFilterProxy의 등장으로 인해 스프링 빈으로 등록 가능
 > > - [[Spring] 필터(Filter)가 스프링 빈 등록과 주입이 가능한 이유(DelegatingFilterProxy의 등장) - (2) _ 망나니개발자](https://mangkyu.tistory.com/221)
+> - 공통된 보안, 인증, 인가 작업/ 모든 요청에 대한 로깅, 감사/ 이미지,데이터 압축 및 문자열 인코딩/ 스프링과 분리되어야 하는 기능, 
+> - Spring Security는 필터를 이용해 인증, 인가에 사용하고 Spring MVC에 종속적이지 않다는 것이 특징이다. 
 - 인터셉터는 SpringMVC 스펙에 포함되어 있습니다. 디스패처 서블릿이 컨트롤러를 호출하기 전/후에 요청과 응답을 참조하거나 가공할 수 있는 기능을 제공합니다. 즉 인터셉터는 스프링 컨텍스트 범위 내에서 동작합니다. 
 > - preHandle(), postHandle(), afterCompletion()
-
+> - 세부적인 보안 및 인증, 인가 작업/ API 호출에 대한 로깅, 감사/ 컨트롤러로 넘겨주는 데이터의 가공
 
 <br>
 
