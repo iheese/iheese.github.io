@@ -1,6 +1,6 @@
 ---
 layout: category
 category: EffectiveJava
-background: '/img/category/EffectiveJava.jpg'
+background: '/img/category/drop.jpeg'
 ---
 
