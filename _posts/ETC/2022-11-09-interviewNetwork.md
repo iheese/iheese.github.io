@@ -2,7 +2,7 @@
 layout: post
 title: '네트워크 Interview 대비'
 subtitle: 'HTTP, HTTPS, SSL, Handshake, REST, DNS, TCP, UDP, OSI7, TCP/IP'
-date: 2022-11-25 12:00:00 +0900
+date: 2023-07-03 12:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
@@ -77,6 +77,12 @@ background: '/img/posts/etc/git.png'
 > - text로 저장, 쿠키 저장시 만료 안되면 삭제 안됨, 세션보다 빠름, 보안에 취약
 - 세션 : 일정 시간 동안 같은 사용자로부터 들어오는 일련의 요구를 하나로 보고, 그 상태를 유지시키는 것이다.
 > - Object로 저장, 브라우저 종료시 삭제, 쿠키보다 느림, 보안에 비교적 좋음
+
+<br>
+
+#### `String user = httpSession.getAttribute("user");` 여기서 session의 값을 가져오는 key는 "user"입니다. 사용자 A가 접속해도 "user"로 값을 가져오고, 사용자 B가 접속해도 "user"로 가져오는데 어떻게 A와 B가 접속했을때 서로 다른 결과값을 받을수 있나요? 
+- 세션은 쿠키를 이용하기 때문에 다른 결과값을 받읋 수 있습니다. 웹 브라우저가 서버에 요청을 하면 서버는 세션을 생성하면서 세션아이디를 응답할 때 전달합니다. 웹 브라우저는 이 세션 아이디를 쿠키에 저장해두고 매 요청마다 세션 아이디와 함께 요청합니다.
+서버는 세션 아이디를 바탕으로 사용자를 식별하고 사용자의 데이터를 서버에 저장하여 관리합니다.  
 
 <br>
 
