@@ -2,7 +2,7 @@
 layout: post
 title: 'Spring, JPA Interview 대비'
 subtitle: 'Spring DI, IOC, AOP, JPA'
-date: 2023-06-15 09:00:00 +0900
+date: 2023-07-04 09:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
@@ -156,10 +156,14 @@ background: '/img/posts/etc/git.png'
 #### N + 1 쿼리 문제는 무엇이고 이것이 발생하는 이유와 이를 해결하는 방법을 설명해주세요.
 - 1번 쿼리를 날렸을 때 의도치 않게 N개의 쿼리가 추가적으로 실행되는 것이다.
 - 원인
-> - JPA Repository로 find 실행시 첫 쿼리에서 하위 엔티티까지 한 번에 가져오지 않고, 하위 엔티티를 사용할 때 추가로 조회하기 때문이다.
-> - JPQL에서는 연관관계 데이터를 무시하고 해당 엔티티 기준 쿼리를 조회하기 때문이다. 
-- 즉시 로딩에서 발생하는 이유는 JPQL을 사용하는 경우 전체 조회를 했을 때  해당 연관 관계인 하위 엔티티들을 추가 조회하기 때문이다. 
-- 지연 로딩에서 발생하는 이유는 지연 로딩 전략을 사용한 하위 엔티티를 로드할 때 JPA에서 프록시 엔티티를 unproxy할때 해당 엔티티를 조회하기 위한 추가적인 쿼리가 발생한다. (하위 엔티티에 접근할 때)
+1 . JPQL이 SQL을 생성할 때는 글로벌 Fetch 전략을 참고하지 않고 만들어진다. 
+> - EX) `select u from User u ;`
+2 . 이후 글로벌 페치 전략을 확인하고 연관된 엔티티를 조회하기 때문이다. 
+> - findById의 경우 jpa가 내부적으로 join문에 대한 쿼리를 만들어서 반환을 하기 때문에 n+1이 발생하지 않는다. (inner join)
+> - findBy~의 쿼리메소드 같은 경우에도 data jpa 내부에서 jpql이 만들어져서 나가고 findAll의 경우도 jpql이 만들어져서 나간다.
+- 즉시로딩은 1, 2번 후 하위 엔티티가 즉시 조회되는 N개의 쿼리가 처리된다. 
+- 지연 로딩은 1, 2번 후 지연 로딩 전략을 사용한 하위 엔티티를 프록시 처리해놓는다. 프록시인 하위 엔티티에 접근할 때 (unproxy하여 실제 객체에 접근한다) 해당 엔티티를 조회하기 위한 추가적인 N 쿼리가 발생한다.
+
 - 해결방법
 > - JPQL의 JOIN FETCH, 
 
@@ -187,6 +191,7 @@ return from(owner).leftJoin(owner.cats, cat)
 ```
 
 - [N+1 문제_Incheol's TECH BLOG](https://incheol-jung.gitbook.io/docs/q-and-a/spring/n+1)
+- [JPA-모든-N1-발생-케이스과-해결책 _ @jinyoungchoi95](https://velog.io/@jinyoungchoi95/JPA-%EB%AA%A8%EB%93%A0-N1-%EB%B0%9C%EC%83%9D-%EC%BC%80%EC%9D%B4%EC%8A%A4%EA%B3%BC-%ED%95%B4%EA%B2%B0%EC%B1%85)
 
 <br>
 
