@@ -1,14 +1,14 @@
 ---
 layout: post
 title: '[ETC] Monolithic vs SOA vs MSA'
-subtitle: '모놀리틱(Monolthic), SOA(Service Oriented Architecture), MSA(Micro Service Architecture)'
+subtitle: '모놀리틱(Monolithic), SOA(Service Oriented Architecture), MSA(Micro Service Architecture)'
 date: 2023-07-04 12:00:00 +0900
 categories: 'ETC'
 background: 'https://github.com/iheese/TIL/assets/88040158/1caf8cba-14fd-4c5c-8cea-4afc8ba8db45'
 published: true
 ---
 
-# Monolthic vs SOA vs MSA
+# Monolithic vs SOA vs MSA
 
 ![스크린샷 2023-07-04 오전 10 13 34](https://github.com/iheese/TIL/assets/88040158/a51bb78d-c4a5-49e8-a5f5-d5044956f6c5)
 
