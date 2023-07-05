@@ -230,7 +230,7 @@ background: '/img/posts/etc/git.png'
 
 ![스크린샷 2023-06-16 오후 3 52 26](https://github.com/iheese/iheese.github.io/assets/88040158/8b7bc221-60dc-4b68-b7af-0ca1bc51076b)
 
-- READ UNCOMMITED : 아무런 락을 걸지 않음, 즉 커밋되지 않은 데이터도 읽을 수 잇음
+- READ UNCOMMITED : 아무런 락을 걸지 않음, 즉 커밋되지 않은 데이터도 읽을 수 있음
 - READ COMMITED : 커밋하기 전 작업 중인 데이터의 값을 읽을 수 없다. 그래서 Dirty Read가 발생하지 않는다. 즉 커밋되어 확정된 것까지는 읽을 수 있음
 > - Dirty Read : write 트랜잭션이 데이터를 업데이트만 하고 커밋은 안했는데 read 트랜잭션이 해당 값을 읽고 write 트랜잭션이 롤백한 상황, 이 상황에서 다시 read 트랜잭션이 re-read 할 때 생김
 > - 해당 격리 레벨부터 Spring에서 undo 영역을 이용한 MVCC(Multiversion Concurrency Control)를 사용하여 Consistence Read를 보장해줍니다. 

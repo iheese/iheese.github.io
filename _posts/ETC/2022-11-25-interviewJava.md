@@ -66,6 +66,30 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
+#### GC의 종류와 차이점
+- Serial GC : GC를 싱글 스레드로 처리, stop-the-world 시간이 긴 편
+> - young 영역에서는 Mark-sweep, old 영역에서는 Mark and Sweep Compact 알고리즘 사용
+> - compact는 Heap 영역을 정리하기 위한 단계로 유효한 객체들이 연속되게 쌓이도록 힙의 앞부터 채우게 하는 것이다.
+
+- Parallel GC : java8의 default GC, Minor GC에서 멀티 스레드 동작, Serial GC과 기본적인 처리과정이 같다. 
+- Parallel Old GC : Major GC에서 멀티 스레드 동작, Minor GC는 Mark and Sweep Compact, Major GC는 Mark Summary Compact 알고리즘 사용
+> - Mark Summary Compact 알고리즘 : Summary 단계에서 살아있는 객체를 식별한다는 점에서 조금 더 복잡하다.
+
+- CMS (Concurrent Mark and Sweep)  GC : Mark and Sweep Compact 개선하여 멀티스레드로 사용하여 Stop the world 시간 개선, 다른 GC보다 CPU, 메모리 소모량이 커서 메모리 할당이 어려워지면 다른 방식보다 더 긴 Stop the world 발생
+> - java14 부터 사용 중지
+- G1(Garbage First) GC : java9부터 default GC, 힙 영역을 동일한 사이즈의 지역으로 나누고 Eden, Survior, Old, Available/Unused, Humongous는 역할을 수행합니다. Multi core CPU, 대용량 메모리 시스템을 위한 GC
+> - Eden : 다른 GC의 Eden 역할과 같은 역할, 새로 생긴 객체들이 할당.
+> - Survivor : 살아있는 객체들이 할당.
+> - Old : 오래 살아있는 객체들이 할당.
+> - Humongous : Region 크기의 50%가 넘는 큰 객체들을 할당.
+> - Available/Unused : 아직 사용되지 않는 영역.
+- Z GC : JDK 15버젼에서 바로 Production Ready, 조금 더 큰 메모리(8MB ~ 16TB) 에서 효율적으로 Garbage Collect 하기 위한 알고리즘
+
+- [Java GC Gargabe Collection 알짜만 빼먹기 / 알고리즘 / 종류 / 모니터링 VisualVM](https://aljjabaegi.tistory.com/636)
+- [VM과 Garbage Collection - G1GC vs ZGC](https://huisam.tistory.com/entry/jvmgc)
+
+<br>
+
 #### 오버라이딩과 오버로딩이 무엇이며 어떤 차이가 있을까요?
 - 오버라이딩 : 상위 클래스의 메소드를 재정의하는 것을 의미한다.(런타임 다형성)
 > - 이름, 매개변수, 리턴타입이 같고, 메소드 내용이 달라야 한다.
