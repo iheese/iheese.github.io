@@ -2,7 +2,7 @@
 layout: post
 title: '[EFFECTIVE JAVA] ITEM 22, 인터페이스는 타입을 정의하는 용도로만 사용하라'
 subtitle: ''
-date: 2023-07-10 12:30:00 +0900
+date: 2023-07-10 12:00:00 +0900
 categories: 'EffectiveJava'
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 ---
