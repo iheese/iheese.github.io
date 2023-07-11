@@ -2,7 +2,7 @@
 layout: post
 title: '[EFFECTIVE JAVA] ITEM 23, 태그 달린 클래스보다는 클래스 계층 구조를 활용하라'
 subtitle: ''
-date: 2023-07-11 12:30:00 +0900
+date: 2023-07-11 15:30:00 +0900
 categories: 'EffectiveJava'
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 ---
