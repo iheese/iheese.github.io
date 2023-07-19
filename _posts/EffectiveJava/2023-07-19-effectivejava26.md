@@ -2,10 +2,10 @@
 layout: post
 title: '[EFFECTIVE JAVA] ITEM 26, 로 타입은 사용하지 말라'
 subtitle: ''
-date: 2023-07-19 11:30:00 +0900
+date: 2023-07-19 12:30:00 +0900
 categories: 'EffectiveJava'
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
-published : false
+published : true
 ---
 
 # ITEM 26, 로 타입은 사용하지 말라
