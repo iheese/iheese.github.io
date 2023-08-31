@@ -132,23 +132,39 @@ background: '/img/posts/etc/git.png'
 
 #### OSI7계층과 그 존재 이유, TCP/IP 4계층에 대해 설명해보세요.
 - OSI7 계층은 네트워크 통신을 구성하는 요소들을 7개의 계층으로 표준화한 것입니다. 통신이 일어나는 과정을 단계별로 파악할 수 있다는 장점이 있습니다.
-> - 7 Application Layer : 사용자에게 통신하기 위한 서비스 제공, 인터페이스 역할 (ex : HTTP)
-> - 6 Presentation Layer : 데이터의 형식을 정의하는 계층, 문자 코드, 압축, 암호화 등 데이터 변환 담당
-> - 5 Session Layer : 세션 체결, 통신 방식 등을 결정(ex : FTP)
-> - 4 Transport Layer : 최종 수신 프로세스로 데이터의 전송을 담당, 데이터 손실 확인, 포트로 식별을 담당, 패킷생성 (단위 : Segment, ex : TCP, UDP)
-> - 3 Network Layer : 다른 네트워크와 통신을 위한 경로 설정, 논리 주소 결정(IP) (단위 : Packet, ex : Router)
-> - 2 DataLink Layer : 네트워크 기기간 데이터 송수신, 물리 주소 결정 (단위 : Frame, ex: 이더넷)
-> - 1 Physical Layer : 물리적 연결, 데이터를 전기 신호로 바꿔주는 계층 (단위 : bit, 장비 : 케이블, 리피터, 허브)
+
+##### OSI7 계층
+
+- 7 Application Layer : 사용자에게 통신하기 위한 서비스 제공, 인터페이스 역할 (ex : HTTP, FTP, SMTP, POP3, IMAP, Telnet)
+- 6 Presentation Layer : 데이터의 표현방식을 결정하는 계층 (문자 코드, 압축, 암호화, 데이터 변환 담당)
+- 5 Session Layer : 주 지점 간의 프로세스 및 통신하는 호스트 간의 연결 유지, TCP/IP 세션 체결, 포트번호 기반으로 통신 세션 구성 (ex : API, Socket)
+- 4 Transport Layer : 최종 수신 프로세스로 데이터의 전송을 담당, 데이터 손실 확인, 포트로 식별을 담당, 패킷생성, TCP,UDP 헤더 붙음 (단위 : Segment, ex : TCP, UDP)
+- 3 Network Layer : 다른 네트워크와 통신을 위한 경로 설정, 논리 주소 결정(IP), IP 헤더 붙음 (단위 : Packet, ex : Router)
+- 2 DataLink Layer : 물리계층을 통해 데이터 송수신하고 정보의 오류와 흐름을 관리, 물리 주소 결정 (단위 : Frame, ex: 이더넷, 브리지, 스위치)
+> - 물리적인 주소로 MAC을 사용
+- 1 Physical Layer : 물리적 연결, 데이터를 전기 신호로 바꿔 주고 받는 기능을 하는 계층 (단위 : bit, 장비 : 케이블, 리피터, 허브)
 
 - `아A 파P 서S 탈T 났N 다D 픽PHY`
 - 7 `->` 1 캡슐화(하나씩 쌓임), 1 `->` 7 역캡슐화 
-- 우리가 실제로 사용하는 네트워크는 TCP/IP입니다.
-> - 4 Application Layer : 세션, 프레젠테이션, 어플리케이션 계층에 해당한다.(5, 6, 7) (프로토콜 : HTTP, FTP, Telnet, DNS, SMTP)
-> - 3 Transport Layer : 전송 계층(4), 네트워크 양단의 송수신 호스트 사이에서 신뢰성 있는 전송 기능을 제공한다. (프로토콜 : TCP, UDP)
-> - 2 Internet Layer : 네트워크 계층(3), 상위 트랜스포트 계층으로부터 받은 데이터에 IP패킷 헤더를 붙여 IP 패킷을 만들어 전송하는 역할을 한다.(프로토콜 : IPv4, IPv6)
-> - 1 Network Layer : 물리, 데이터링크(1, 2) 계층에 해당한다. 하드웨어적인 요소, (프로토콜 : Ehternet(이더넷), Token Ring, PPP)
 
 <br>
+
+##### TCP/IP 4계층
+
+- 우리가 실제로 사용하는 네트워크는 TCP/IP입니다.
+
+- 4 Application Layer : 세션, 프레젠테이션, 어플리케이션 계층에 해당한다.(5, 6, 7) (프로토콜 : HTTP, FTP, Telnet, DNS, SMTP)
+> - 프로그램(브라우저)이 직접 상호작용하는 레이어, 어플리케이션이 데이터를 교환하기 위해 사용하는 프로토콜을 정의
+- 3 Transport Layer : 전송 계층(4), 네트워크 양단의 송수신 호스트 사이에서 신뢰성 있는 전송 기능을 제공한다. (프로토콜 : TCP, UDP)
+> - IP와 Port를 통해 프로세스와 통신, 어플리케이션 계층과 데이터그램 통신서비스 제공, 통신 노드 간의 연결 제어, 신뢰성 있는 데이터 전송 담당
+- 2 Internet Layer : 네트워크 계층(3), 상위 트랜스포트 계층으로부터 받은 데이터에 IP패킷 헤더를 붙여 IP 패킷을 만들어 전송하는 역할을 한다.(프로토콜 : IPv4, IPv6)
+> - 네트워크 상 최종 목적지까지 정확하게 연결되도록 연결성을 제공
+- 1 Network Layer : 물리, 데이터링크(1, 2) 계층에 해당한다. 하드웨어적인 요소, (프로토콜 : Ehternet(이더넷), Token Ring, PPP)
+> - TCP/IP 패킷을 네트워크 매체로 전달하는 것과 네트워크 매체에서 TCP/IP 패킷을 받아들이는 과정을 담당
+> - 물리적인 주소로 MAC을 사용
+
+<br>
+
 #### CORS란 무엇이며 이것에 대해서 설명해보세요.
 - Cross Origin Resource Sharing, 교차 출처 리소스 공유를 뜻합니다.
 - 대게 프론트엔드 개발시 로컬에서 API 서버에 요청을 보낼 때 흔하게 발생합니다.
@@ -161,6 +177,7 @@ background: '/img/posts/etc/git.png'
 - 웹 서버 소프트웨어는 7계층인 Application Layer에서 작동합니다. 웹 서버는 HTTP 프로토콜을 이용하여 서버와 정보를 주고 받습니다. 
 
 <br>
+
 #### 웹 서버 소프트웨어(Apache, Nginx)의 서버 간 라우팅 기능은 OSI 7계층 중 어디서 작동하는지 설명해보세요.
 - 서버 간 라우팅 기능은 3계층은 Network Layer에서 작동합니다. Packet을 통해 데이터를 전송합니다.
 
