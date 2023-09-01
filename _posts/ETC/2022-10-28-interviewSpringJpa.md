@@ -158,9 +158,10 @@ background: '/img/posts/etc/git.png'
 
 #### N + 1 쿼리 문제는 무엇이고 이것이 발생하는 이유와 이를 해결하는 방법을 설명해주세요.
 - 1번 쿼리를 날렸을 때 의도치 않게 N개의 쿼리가 추가적으로 실행되는 것이다.
-- 원인
 
- <BR>
+<BR>
+
+##### 원인
 
 1 . JPQL이 SQL을 생성할 때는 글로벌 Fetch 전략을 참고하지 않고 그대로 SQL 문으로 번역이 된다 
 > - EX) `select u from User u ;` <BR>
@@ -213,7 +214,7 @@ return from(owner).leftJoin(owner.cats, cat)
 - 두 어노테이션 모두 IoC 컨테이너에 Bean을 등록하기 위해 사용합니다.
 - @Component : 개발자가 작성한 class를 기반으로 실행시점에 1회 생성합니다.(싱글톤)
 > - @Controller, @Service, @Repository는 모두 @Component이며 자동으로 의존성을 주입합니다. 
-- @Bean : 개발자가 작성한 method를 기반으로 메서등에서 반환하는 객체를 인스턴스 객체로 1회 생성합니다.(싱글톤)
+- @Bean : 개발자가 작성한 method를 기반으로 메서드 등에서 반환하는 객체를 인스턴스 객체로 1회 생성합니다.(싱글톤)
 
 <br>
 
