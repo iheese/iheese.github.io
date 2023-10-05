@@ -77,12 +77,17 @@ background: '/img/posts/etc/git.png'
 
 - CMS (Concurrent Mark and Sweep)  GC : Mark and Sweep Compact 개선하여 멀티스레드로 사용하여 Stop the world 시간 개선, 다른 GC보다 CPU, 메모리 소모량이 커서 메모리 할당이 어려워지면 다른 방식보다 더 긴 Stop the world 발생
 > - java14 부터 사용 중지
+
 - G1(Garbage First) GC : java9부터 default GC, 힙 영역을 동일한 사이즈의 지역으로 나누고 Eden, Survior, Old, Available/Unused, Humongous는 역할을 수행합니다. Multi core CPU, 대용량 메모리 시스템을 위한 GC
 > - Eden : 다른 GC의 Eden 역할과 같은 역할, 새로 생긴 객체들이 할당.
 > - Survivor : 살아있는 객체들이 할당.
 > - Old : 오래 살아있는 객체들이 할당.
 > - Humongous : Region 크기의 50%가 넘는 큰 객체들을 할당.
 > - Available/Unused : 아직 사용되지 않는 영역.
+- Young-Only, Space Reclamation 이 반복되는 Cycle 구조
+> - Minor GC만 수행하다가 Old Generation 비율이 넘으면 Major GC 실행, 그리고 Young Only 끝날 때까지 함께 작동
+> - Space Reclamation 단계는 Mixed GC 방식 작동, Mixed GC 는 Minor GC 처럼 움직이고 Old 영역의 Garbage까지 수집한다.
+
 - Z GC : JDK 15버젼에서 바로 Production Ready, 조금 더 큰 메모리(8MB ~ 16TB) 에서 효율적으로 Garbage Collect 하기 위한 알고리즘
 
 - [Java GC Gargabe Collection 알짜만 빼먹기 / 알고리즘 / 종류 / 모니터링 VisualVM](https://aljjabaegi.tistory.com/636)
