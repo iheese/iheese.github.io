@@ -69,16 +69,17 @@ background: '/img/posts/etc/git.png'
 #### GC의 종류와 차이점
 - Serial GC : GC를 싱글 스레드로 처리, stop-the-world 시간이 긴 편
 > - young 영역에서는 Mark-sweep, old 영역에서는 Mark and Sweep Compact 알고리즘 사용
-> - compact는 Heap 영역을 정리하기 위한 단계로 유효한 객체들이 연속되게 쌓이도록 힙의 앞부터 채우게 하는 것이다.
+> > - compact는 Heap 영역을 정리하기 위한 단계로 유효한 객체들이 연속되게 쌓이도록 힙의 앞부터 채우게 하는 것이다.
 
 - Parallel GC : java8의 default GC, Minor GC에서 멀티 스레드 동작, Serial GC과 기본적인 처리과정이 같다. 
 - Parallel Old GC : Major GC에서 멀티 스레드 동작, Minor GC는 Mark and Sweep Compact, Major GC는 Mark Summary Compact 알고리즘 사용
 > - Mark Summary Compact 알고리즘 : Summary 단계에서 살아있는 객체를 식별한다는 점에서 조금 더 복잡하다.
 
-- CMS (Concurrent Mark and Sweep)  GC : Mark and Sweep Compact 개선하여 멀티스레드로 사용하여 Stop the world 시간 개선, 다른 GC보다 CPU, 메모리 소모량이 커서 메모리 할당이 어려워지면 다른 방식보다 더 긴 Stop the world 발생
+- CMS (Concurrent Mark and Sweep)  GC : Mark and Sweep Compact 개선하여 멀티스레드로 사용하여 Stop the world 시간 개선했으나, 다른 GC보다 CPU, 메모리 소모량이 커서 메모리 할당이 어려워지면 다른 방식보다 더 긴 Stop the world 발생
+> - GC와 프로세서의 리소스를 공유하기 때문이다. 어플리케이션 응답이 늦어질 수 있지만 GC에 의해 어플리케이션이 정지되지 않는다. 
 > - java14 부터 사용 중지
 
-- G1(Garbage First) GC : java9부터 default GC, 힙 영역을 동일한 사이즈의 지역으로 나누고 Eden, Survior, Old, Available/Unused, Humongous는 역할을 수행합니다. Multi core CPU, 대용량 메모리 시스템을 위한 GC
+- G1(Garbage First) GC : java 9부터 default GC, 힙 영역을 동일한 사이즈의 지역으로 나누고 Eden, Survior, Old, Available/Unused, Humongous는 역할을 수행합니다. Multi core CPU, 대용량 메모리 시스템을 위한 GC
 > - Eden : 다른 GC의 Eden 역할과 같은 역할, 새로 생긴 객체들이 할당.
 > - Survivor : 살아있는 객체들이 할당.
 > - Old : 오래 살아있는 객체들이 할당.
@@ -86,10 +87,13 @@ background: '/img/posts/etc/git.png'
 > - Available/Unused : 아직 사용되지 않는 영역.
 - Young-Only, Space Reclamation 이 반복되는 Cycle 구조
 > - Minor GC만 수행하다가 Old Generation 비율이 넘으면 Major GC 실행, 그리고 Young Only 끝날 때까지 함께 작동
-> - Space Reclamation 단계는 Mixed GC 방식 작동, Mixed GC 는 Minor GC 처럼 움직이고 Old 영역의 Garbage까지 수집한다.
+> - Space Reclamation 단계는 Mixed GC 방식 작동, Mixed GC 는 Minor GC 처럼 움직이고 Old 영역의 Garbage까지 수 집한다.
 
-- Z GC : JDK 15버젼에서 바로 Production Ready, 조금 더 큰 메모리(8MB ~ 16TB) 에서 효율적으로 Garbage Collect 하기 위한 알고리즘
+- Z GC : JDK 15버젼에서 바로 Production Ready, 조금 더 큰 메모리(8MB ~ 16TB) 에서 효율적으로 Garbage Collect 하기 위한 알고리즘, G1과 다르게 동일한 사이즈로 분할하지 않는 것이 다르다.
+> - Z GC 를 실행시키고 싶다면 `java -XX:+UseZGC -jar Application.java`
 
+- JDK 17 기준 CPU 1개면 Serial GC, CPU 2개 이상이몀 G1 GC 가 실행된다. (JDK 9 이후 동일, 기본 설정값)
+> - [JVM - GC 알고리즘 알아보기! (feat. JDK 버전 별 Default)](https://jaehoney.tistory.com/301) 
 - [Java GC Gargabe Collection 알짜만 빼먹기 / 알고리즘 / 종류 / 모니터링 VisualVM](https://aljjabaegi.tistory.com/636)
 - [VM과 Garbage Collection - G1GC vs ZGC](https://huisam.tistory.com/entry/jvmgc)
 
