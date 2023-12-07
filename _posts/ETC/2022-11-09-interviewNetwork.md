@@ -7,9 +7,7 @@ categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
 
-
-
-#### HTTP 프로토콜이란 무엇인가요?
+### HTTP 프로토콜이란 무엇인가요?
 - HTTP(Hyper Text Transfer Protocol)이란 데이터를 주고 받기 위한 프로토콜이며 서버,클라이언트 모델을 따릅니다.
 - 주요한 특징 :
 > - 비연결성(Connectionless) : 클라이언트가 요청하고 서버가 해당 요청에서 적합한 응답하고 바로 끊는 성질
@@ -22,7 +20,7 @@ background: '/img/posts/etc/git.png'
 
 <BR>
 
-#### HTTP1 vS HTTP2 차이는 어떻게 되나요?
+### HTTP1 vS HTTP2 차이는 어떻게 되나요?
 - HTTP1은 기본적으로 연결당 하나의 요청과 응답을 처리하기 때문에 동시 전송 문제와 다수의 리소스를 처리하기에 속도와 성능 이슈를 가지고 있습니다. 
 > - HOL(Head Of Line) Blocking - 특정 응답 지연
 > - RTT(Round Trip Time) 증가
@@ -36,14 +34,14 @@ background: '/img/posts/etc/git.png'
 
 <BR> 
 
-#### HTTP와 HTTPS의 차이점에 대해서 설명해보세요.
+### HTTP와 HTTPS의 차이점에 대해서 설명해보세요.
 - HTTP는 평문 데이터를 전송하는 프로토콜이므로 중간에 정보를 가로챌 수 있습니다. 이를 보완하기 위해 나온 것이 HTTPS입니다. 
 - HTTPS는 SSL(Secure Socket Layer, 인터넷을 통해 전달되는 정보를 보호하기 위해 개발한 통신 규약)으로 암호화한 HTTP를 의미합니다.
 > - TCP를 기반으로 만들어진 패킷이 HTTP이다. 
 
 <br>
 
-#### HTTPS에 대해서 설명하고 SSL Handshake에 대해서 설명해보세요.
+### HTTPS에 대해서 설명하고 SSL Handshake에 대해서 설명해보세요.
 - HTTP에 SSL 보안 계층을 추가한 것을 의미한다. HTTPS는 인증, 공개키 암호화, 비밀키 암호화를 사용한다. 
 - 공개키로 암호화되면 개인키로 복호화 가능, 개인키로 암호화되면 공개키로 복호화 가능하다. 
 - 대칭키(비밀키) 하나의 키로 암호화, 복호화 모두 처리한다. 
@@ -57,7 +55,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### GET과 POST의 차이점에 대해서 설명해보세요.
+### GET과 POST의 차이점에 대해서 설명해보세요.
 - GET 요청은 서버에 존재하는 정보를 요청합니다. 일반적으로 Body에 값을 입력하지 않고 헤더에 입력하는 것이 일반적이며, URL에 데이터가 노출되므로 보안이 중요한 데이터는 GET으로 요청하면 안된다.
 > - 캐싱 가능, 멱등성 보장
 - POST 요청은 서버에 정보를 생성하는 것을 요청합니다. 일반적으로 Body에 데이터를 추가하여 전송합니다. URL에 데이터가 노출되지 않아 비교적 안전합니다. 
@@ -66,7 +64,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### HTTP 메서드와 이것이 하는 역할에 대해서 설명해보세요.
+### HTTP 메서드와 이것이 하는 역할에 대해서 설명해보세요.
 - GET : 데이터 조회
 - POST : 데이터 등록
 - PUT : 데이터 변경, 존재하지 않으면 생성
@@ -75,7 +73,7 @@ background: '/img/posts/etc/git.png'
 
 <BR>
 
-#### 세션과 쿠키란 무엇인가요?
+### 세션과 쿠키란 무엇인가요?
 - 쿠키 : 클라이언트에 저장되는 작은 기록 정보 파일이다. HTTP에서 클라이언트의 상태 정보를 저장했다가 필요시 참조하거나 재사용할 수 있다.
 > - text로 저장, 쿠키 저장시 만료 안되면 삭제 안됨, 세션보다 빠름, 보안에 취약
 - 세션 : 일정 시간 동안 같은 사용자로부터 들어오는 일련의 요구를 하나로 보고, 그 상태를 유지시키는 것이다.
@@ -83,19 +81,19 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### `String user = httpSession.getAttribute("user");` 여기서 session의 값을 가져오는 key는 "user"입니다. 사용자 A가 접속해도 "user"로 값을 가져오고, 사용자 B가 접속해도 "user"로 가져오는데 어떻게 A와 B가 접속했을때 서로 다른 결과값을 받을수 있나요? 
+### `String user = httpSession.getAttribute("user");` 여기서 session의 값을 가져오는 key는 "user"입니다. 사용자 A가 접속해도 "user"로 값을 가져오고, 사용자 B가 접속해도 "user"로 가져오는데 어떻게 A와 B가 접속했을때 서로 다른 결과값을 받을수 있나요? 
 - 세션은 쿠키를 이용하기 때문에 다른 결과값을 받을 수 있습니다. 웹 브라우저가 서버에 요청을 하면 서버는 세션을 생성하면서 세션아이디를 응답할 때 전달합니다. 웹 브라우저는 이 세션 아이디를 쿠키에 저장해두고 매 요청마다 세션 아이디와 함께 요청합니다.
 서버는 세션 아이디를 바탕으로 사용자를 식별하고 사용자의 데이터를 서버에 저장하여 관리합니다.  
 
 <br>
 
-#### RESTful이란 무엇이며, 이것에 대해서 아는대로 설명해보세요.
+### RESTful이란 무엇이며, 이것에 대해서 아는대로 설명해보세요.
 - HTTP URI를 통해 자원을 표시하고, HTTP Method를 통해 자원에 대한 처리를 표현하며, 자원의 상태(정보) 전달한다.(JSON or XML)
 - REST(Representational State Transfer) 아키텍처 스타일을 모두 고수하는 것은 매우 어려운 일이다. (무상태, 계층화 시스템, 캐시 가능성, 온디맨드 코드), 분산 환경에 적합하지 않다, 표준이 존재하지 않는다.
 
 <br>
 
-#### 세션은 Stateless을 위반하는가?
+### 세션은 Stateless을 위반하는가?
 - 세션은 서버에 저장이 되므로 stateful 하게 된다. 
 - RESTful 제약 조건과 http의 장점인 Stateless 은 클라이언트에 의해서만 저장되어야 함을 나타낸다. 그러므로 위반한다 할 수 있다.
 > - 즉 클라이언트의 컨텍스트를 서버에 저장하지 않는다. 
@@ -128,7 +126,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### TCP 3, 4 way handshake에 대해서 설명해보세요.
+### TCP 3, 4 way handshake에 대해서 설명해보세요.
 - TCP 3 way handshake는 가상회선을 수립하는 단계입니다. 클라이언트는 서버에 요청을 전송할 수 있는지, 서버는 클라이언트에게 응답을 전송할 수 있는지 확인하는 과정입니다. 
 - SYN (Synchronization): 동기화, 연결 요청 플래그
 - ACK (Acknowledgement): 응답
@@ -145,10 +143,10 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### OSI7계층과 그 존재 이유, TCP/IP 4계층에 대해 설명해보세요.
+### OSI7계층과 그 존재 이유, TCP/IP 4계층에 대해 설명해보세요.
 - OSI7 계층은 네트워크 통신을 구성하는 요소들을 7개의 계층으로 표준화한 것입니다. 통신이 일어나는 과정을 단계별로 파악할 수 있다는 장점이 있습니다.
 
-##### OSI7 계층
+### OSI7 계층
 
 - 7 Application Layer : 사용자에게 통신하기 위한 서비스 제공, 인터페이스 역할 (ex : HTTP, FTP, SMTP, POP3, IMAP, Telnet)
 - 6 Presentation Layer : 데이터의 표현방식을 결정하는 계층 (문자 코드, 압축, 암호화, 데이터 변환 담당)
@@ -164,7 +162,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-##### TCP/IP 4계층
+### TCP/IP 4계층
 
 - 우리가 실제로 사용하는 네트워크는 TCP/IP입니다.
 
@@ -180,7 +178,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### CORS란 무엇이며 이것에 대해서 설명해보세요.
+### CORS란 무엇이며 이것에 대해서 설명해보세요.
 - Cross Origin Resource Sharing, 교차 출처 리소스 공유를 뜻합니다.
 - 대게 프론트엔드 개발시 로컬에서 API 서버에 요청을 보낼 때 흔하게 발생합니다.
 - 서로 다른 도메인 간에 자원을 공유하는 것을 뜻한다. 대부분 브라우저에서 이를 차단하며, 서버 측에서 헤더를 통해서 사용 가능한 자원을 알려줍니다.
@@ -188,19 +186,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### 웹 서버 소프트웨어(Apache, Nginx)는 OSI 7계층 중 어디서 작동하는지 설명해보세요. (설명 부족)
-- 웹 서버 소프트웨어는 7계층인 Application Layer에서 작동합니다. 웹 서버는 HTTP 프로토콜을 이용하여 서버와 정보를 주고 받습니다. 
-
-<br>
-
-#### 웹 서버 소프트웨어(Apache, Nginx)의 서버 간 라우팅 기능은 OSI 7계층 중 어디서 작동하는지 설명해보세요.
-- 서버 간 라우팅 기능은 3계층은 Network Layer에서 작동합니다. Packet을 통해 데이터를 전송합니다.
-
-
-<br>
-
 #### 추가 학습할 것
-
 
 <br>
 

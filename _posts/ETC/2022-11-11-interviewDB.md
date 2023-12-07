@@ -1,13 +1,13 @@
 ---
 layout: post
 title: 'Database Interview 대비'
-subtitle: '인덱스, RDBMS, NoSQL, 정규화, Transaction, ACID, Elastic Search'
-date: 2023-06-18 12:00:00 +0900
+subtitle: '인덱스, RDBMS, NoSQL, 정규화, Transaction, ACID, ElasticSearch'
+date: 2023-12-07 11:30:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
 
-#### 데이터베이스의 특징은 무엇인가요?
+### 데이터베이스의 특징은 무엇인가요?
 - 실시간 접근성 : 비정형적인 질의에 대하여 실시간 처리에 의한 응답이 가능해야 한다.
 - 지속적인 변화 : 데이터베이스의 상태는 동적이다. 새로운 데이터의 삽입, 삭제, 갱신으로 항상 최신의 데이터를 유지해야 한다.
 - 동시 공용 : 데이터베이스는 서로 다른 목적을 가진 여러 응용자들을 위한 것이므로 다수의 사용자가 동시에 같은 내용을 이용할 수 있어야 한다. 
@@ -15,21 +15,21 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### 데이터베이스에서 인덱스를 사용하는 이유 및 장단점에 대해 설명해주세요.
+### 데이터베이스에서 인덱스를 사용하는 이유 및 장단점에 대해 설명해주세요.
 - DB에서 인덱스를 사용하는 이유는 검색성능을 향상시키기 위해서 입니다. 
 - 인덱스는 항상 정렬된 상태를 유지하기 때문에 원하는 값을 검색하는데는 빠르지만, 새로운 값을 추가하거나, 삭제, 수정하는 쿼리문 실행 속도는 느립니다.
 - 저장 성능은 희생하고 그 대신 데이터의 검색 속도를  높이는 기능이라 할 수 있습니다.
 
 <br>
 
-#### 데이터베이스 언어(DDL, DML, DCL)에 대해 설명해주세요.
+### 데이터베이스 언어(DDL, DML, DCL)에 대해 설명해주세요.
 - DDL(정의어, Data Definition Language) : 데이터베이스 구조를 수정, 삭제하는 언어(alter, create, drop)
 - DML(조작어, Data Manipulation Language) : 데이터베이스 내의 자료 검색, 삽입, 갱신, 삭제를 위한 언어(select, insert, update, delete)
 - DCL(제어어, Data Control Language) : 데이터에 대해 무결성 유지, 병행 수행 제어, 보호와 관리를 위한 언어(commit, rollback, grant, revoke)
 
 <br>
 
-#### SELECT 쿼리 수행 순서를 알려주세요.
+### SELECT 쿼리 수행 순서를 알려주세요.
 1. FROM, ON, JOIN
 2. WHERE, GROUP BY, HAVING
 3. SELECT
@@ -39,8 +39,16 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
+### varchar 와 nvarchar 의 차이는 뭔가요?
+- [MYSQL 데이터 타입](https://www.incodom.kr/DB_-_%EB%8D%B0%EC%9D%B4%ED%84%B0_%ED%83%80%EC%9E%85/MYSQL#h_bd22bd92cae429ff1bef63863384c52b)
+- 둘은 모두 가변 문자열이라는 공통점이 있다.
+- varchar : 바이트 수를 기준으로 하는 가변 문자열/ 영어, 숫자: 1Byte, 한글,한자 : 2Byte
+- nvarchar : 글자 수를 기준으로하는 유니코드 지원 가변 문자열/ 모든 문자 일괄적으로 2Byte
+> - + CHAR : 고정형 문자열(n <= 255)
 
-#### DBMS(Database Management System)는 인덱스를 어떻게 관리하고 있나요?
+<br>
+
+### DBMS(Database Management System)는 인덱스를 어떻게 관리하고 있나요?
 - B+Tree 인덱스 자료구조
 > - 자식 노드가 2개 이상인 B-Tree를 개선시킨 자료구조입니다.
 > - B-Tree 리프노드들을 LinkedList로 연결하여 순차 검색을 용이하게 합니다. 해시테이블보다 나쁜 O(lon2N)의 시간 복잡도를 갖지만 일반적으로 사용되는 자료구조입니다.
@@ -69,7 +77,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### 정규화에 대해서 설명해주세요.
+### 정규화에 대해서 설명해주세요.
 - 하나의 릴레이션에 하나의 의미만 존재하도록 릴레이션을 분해하는 과정입니다.
 - 데이터의 일관성, 데이터 중복방지, 무결성, 유연성을 충족시키기 위해 데이터베이스를 설계하는 것을 의미합니다. 
 - 제 1정규형 : 테이블의 컬럼이 원자값(하나의 값)을 갖도록 분해합니다.
@@ -83,7 +91,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### 이상 현상의 종류에 대해 말해주세요.
+### 이상 현상의 종류에 대해 말해주세요.
 - 테이블 설계시 설계 오류로 인해 데이터를 삽입, 삭제, 수정할 때 생기는 논리적 오류를 말합니다.
 > - 삽입 이상 : 자료를 삽입할 때 특정 속성에 해당하는 값이 없어 NULL을 입력해야 하는 현상
 > - 갱신 이상 : 중복된 데이터 중 일부만 수정되어 데이터 모순이 일어나는 현상
@@ -92,7 +100,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### PK, FK 의 특징에 대해 말해주세요.
+### PK, FK 의 특징에 대해 말해주세요.
 - PK(Primary Key) 
 > - 엔티티를 식별하는 대표 key
 > - Null 값을 가질 수 없고 중복된 값을 가질 수 없다.
@@ -104,14 +112,14 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### 트랜잭션에 대해서 설명해주세요.
+### 트랜잭션에 대해서 설명해주세요.
 - 작업 완정성을 보장해줍니다.
 - 작업들이 모두 처리하거나 처리되지 못할 경우이전 상태로 복구하여 작업의 일부만 적용되는 현상을 막아줍니다.
 - 하나의 트랜잭션은 Commit 되거나 Rollback 됩니다.
 
 <br>
 
-#### 트랜잭션의 특성(ACID)에 대해 말해주세요.
+### 트랜잭션의 특성(ACID)에 대해 말해주세요.
 - 원자성(Atomicity) : 작업이 반영되거나 전혀 반영되지 않아야 한다.
 - 일관성(Consistency) : 실행이 완료되면 항상 일관성 있는 상태를 유지해야 한다.
 - 독립성(Isolation) : 둘 이상의 트랜잭션이 동시에 실행될 경우 서로의 연산에 끼어들 수 없다.
@@ -119,23 +127,17 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### 트랜잭션 격리 수준(Transaction Isolation Levels)에 대해서 설명해주세요.
-- 트랜잭션 격리수준은 고립도와 성능의 트레이드 오프를 조절합니다.
-- READ UNCOMMITTED : 다른 트랜잭션에서 커밋되지 않은 내용도 참조할 수 있다.
-- READ COMMITTED : 다른 트랜잭션에서 커밋된 내용만 참조할 수 있다.
-- REPEATABLE READ : 트랜잭션에 진입하기 이전에 커밋된 내용만 참조할 수 있다.
-- SERIALIZABLE : 트랜잭션에 진입하면 락을 걸어 다른 트랜잭션이 접근하지 못하게 한다.(성능이 매우 떨어진다.)
 
 <br>
 
-#### JOIN에 대해서 설명해주세요.
+### JOIN에 대해서 설명해주세요.
 - 두 개 이상의 테이블을 연결해서 조회하는 방법을 말합니다.
 - inner join : 서로 연관된 내용만 검색하는 방법입니다. A, B에 대해 수행하는 것은 A, B의 교집합을 말합니다.
 - outer join : 한 쪽에 데이터가 있고 한 쪽에 데이터가 없는 경우, 있는 쪽의 내용을 전부  출력하는 방법을 말합니다. A, B에 대해 수행하는 것은 A, B의 합집합을 말합니다.
 
 <br>
 
-#### RDBMS vs NOSQL에 대해서 설명해주세요.
+### RDBMS vs NOSQL에 대해서 설명해주세요.
 - RDBMS(Relational DataBase Management System) : 모든 데이터를  2차원 테이블 형태로 표현합니다.
 > - 장점 : 스키마에 맞춰 데이터를 관리하기 때문에 데이터의 정합성을 보장할 수 있다.
 > - 단점 : 시스템이 커질 수록 쿼리가 복잡해지고 성능이 저하되며 Scale-out이 어렵다.(장비를 추가해서 확장) (Scale-Up만 가능 : 용량, 사양을 높이는 것)
@@ -149,19 +151,19 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### Redis에 대해서 간단히 설명해주세요.
+### Redis에 대해서 간단히 설명해주세요.
 - Key-value 타입의 인메모리 저장소이며 NoSQL입니다. 싱글 스레드로 동작하며 자료구조를 지원합니다. 문자열, 리스트, 해시, 셋, 정렬된 셋 형식의 데이터를 지원합니다. 
 - Redis의 영속성은 스냅샷(순간적으로 메모리에 있는 내용을 DISK에 전체를 옮겨 담는 방식), AOF 방식(Append On File, Redis의 모든 write, update 연산 자체를 모두 log 파일에 기록하는 형태)으로 지원합니다.
 
 <br>
 
-#### Redis와 Memcached의 차이에 대해서 설명해주세요.
+### Redis와 Memcached의 차이에 대해서 설명해주세요.
 - Redis : 싱글 스레드 기반, 다양한 자료구조
 - Memcached : 멀티 스레드 가능, 문자열 형태만 저장
 
 <br>
 
-#### Elastic Search에 대해서 간단히 설명해주세요.
+### Elastic Search에 대해서 간단히 설명해주세요.
 - 자바로 개발된 오픈 소스 검색 엔진입니다. ELK( Elasticsearch / Logstatsh / Kibana )스택으로 사용되기도 합니다.
 > - Logstash : 다양한 소스(DB, csv 파일 등)의 로그 또는 트랜잭션 데이터를 수집, 집계, 파싱하여 Elasticsearch에 전달
 > - Elasticsearch : Logstash로부터 받은 데이터를 검색 및 집계를 하여 필요한 관심 있는 정보를 획득
@@ -169,7 +171,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### Elastic Search의 인덱스구조와 RDBMS의 인덱스 구조의 차이에 대해 설명해주세요.
+### Elastic Search의 인덱스구조와 RDBMS의 인덱스 구조의 차이에 대해 설명해주세요.
 - Elastic Search는 역색인 구조로 데이터를 저장합니다. 특정 단어가 출현하는 doc을 저장하는 형태입니다.
 > - 역색인 구조(Inverted Index) : 특정 키워드를 포함하고 있는 문서들에 대한 Primary Key를 매핑하는 인덱스 테이블을 생성하고, 이 테이블을 이용해 빠른 문서 탐색을 가능하게 합니다. 
 > > - BTree(B-Tree를 개선시킨 자료구조), Trie(문자열 집합 트리 자료구조), Hash Table(해시함수 기반의 key-value 자료구조)로 주로 구현됨
@@ -177,13 +179,13 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### Elastic Search의 키워드 검색과 RDBMS의 LIKE 검색의 차이에 대해 설명해주세요.
+### Elastic Search의 키워드 검색과 RDBMS의 LIKE 검색의 차이에 대해 설명해주세요.
 - Elastic Search는 역색인 방식으로 저장되기 때문에 동의어나 유의어를 활용한 검색이 가능하며 비정형 데이터의 색인과 검색이 가능합니다.
 - RDBMS는 단순 텍스트 매칭에 대한 검색을 제공해 동의어, 유의어 같은 검색은 불가능합니다. 
 
 <br>
 
-#### MySQL 8.0 부터 달라진 점
+### MySQL 8.0 부터 달라진 점
 - I/O 바운드 읽기 전용 : 8.0부터 내림차순 인덱스를 지원함에 따라 읽기 성능에서 크게 개선되었습니다.
 - 읽기 쓰기 성능 증가
 - 이중 쓰기 버퍼, IO 바인딩 읽기 쓰기 성능 증가
@@ -191,9 +193,9 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### DB 다중화의 두 가지 예시
+## DB 다중화의 두 가지 예시
 
-#### DB Replication 
+### DB Replication 
 - 여러 개의 DB를 권한에 따라 수직적인 구조(Master- Slave)로 구축하는 방식
 - Master Node 는 쓰기 작업만, Slave Node 는 읽기 작업만 처리한다.
 - 리플리케이션은 비동기 방식으로 데이터를 동기화한다.
@@ -214,7 +216,7 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-#### DB Clustering
+### DB Clustering
 - 여러 개의 DB를 수평적인 구조로 구축하는 방식
 - 분산 환경을 구성하여 Single point of failure와 같은 문제를 해결할 수 있는 Fail Over(장애 대비 대응) 시스템을 구축하기 위해 사용한다.
 - 동기 방식으로 노드들 간의 데이터를 동기화한다. 
@@ -245,6 +247,7 @@ background: '/img/posts/etc/git.png'
 
 - 트랜잭션(데이터를 다루는 작업 단위)을 잘 관리해주어야 한다. 
 - Spring의 @Transactional 어노테이션을 통해 어느정도 해결할 수 있다. 
+- 트랜잭션 격리 수준
 
 ![스크린샷 2023-06-16 오후 3 52 26](https://github.com/iheese/iheese.github.io/assets/88040158/8b7bc221-60dc-4b68-b7af-0ca1bc51076b)
 
