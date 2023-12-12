@@ -5,6 +5,7 @@ subtitle: ' 주니어 백엔드 개발자 취업, 취업 과정, 느낀 점'
 date: 2023-01-12 12:00:00 +0900
 categories: 'MyLife'
 background: '/img/posts/MyLife/street.jpg'
+published: false
 ---
 
 # 취뽀
