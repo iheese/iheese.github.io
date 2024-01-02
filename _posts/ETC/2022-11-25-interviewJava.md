@@ -15,9 +15,8 @@ background: '/img/posts/etc/git.png'
 
 - 실행방식
 1. 자바 컴파일러(javac)에 의해 자바 소스 파일(.java)이 바이트 코드(.class)로 변환된다.
-2. Class Loader를 통해 class 파일들을 JVM으로 로딩한다.
-3. 로딩된 class 파일들을 Excution engine을 통해 실행하게 됩니다. 
-4. 해석된 바이트 코드는 Runtime Data Areas에 배치되어 실질적인 수행이 이뤄집니다. 
+2. Class Loader를 통해 class 파일들을 JVM 메모리의 메소드 영역으로 로딩한다.
+3. 로딩된 class 파일들은 Excution engine을 통해 실행된다. 
 
 - 구조 :
 > - Class Loader : JVM 내로 클래스 파일을 로드, 링크를 통해 배치하는 작업을 수행하는 모듈, 런타임 시 동적으로 로드한다.
@@ -51,6 +50,7 @@ background: '/img/posts/etc/git.png'
 
 - GC(Garbage Collection), 힙 영역에서 사용하지 않는 객체들을 제거하는 작업을 총징한다. 자바 언어는 개발자가 메모리를 직접 해제하는 언어가 아니기 때문이 이 작업은 꼭 필요하다. 
 - GC의 영역
+- 아래서 설명하는 GC의 구조와 동작 방식은 Serial GC 기준이다.
 > - Minor GC : young 영역, 새롭게 생성된 객체가 할당 되는 영역, 먾은 객체가 Young 영역에 생성되었다 사라집니다.
 > > - eden 1개, survivor 2개로 구성되어 있다. eden 영역이 가득차면 survivor로 넘어가면서 실행된다.
 > > - 크기가 작아서 GC 시간이 작다.
@@ -152,7 +152,7 @@ background: '/img/posts/etc/git.png'
 > - 코드 가독성 향상, 유지보수 용이, 다른 설계 원칙을 적용하는 기초
 > - 좋은 프로그램은 응집도를 높게, 결합도는 낮게
 > > - 응집도 : 한 프로그램 요소가 얼마나 뭉쳐있는가를 나타내는 척도, 결합도 : 프로그램 구성 요소들 사이가 얼마나 의존적인지를 나타내는 척도
-- OCP(Open Closed Principle, 개방 폐쇄 원칙) : 확장에는 열려 있어야 하나 변경에는 닫혀 있어야 합니다. 이를 적용하기 위핸 중요 메커니즘은 추상화와 다형성입니다. 
+- OCP(Open Closed Principle, 개방 폐쇄 원칙) : 확장에는 열려 있어야 하나 변경에는 닫혀 있어야 합니다. 이를 적용하기 위한 중요 메커니즘은 추상화와 다형성입니다. 
 > - 추상화 사용을 통한 관계 구축을 권장을 의미한다. 
 > - EX) OCP 원칙의 가장 잘 따르는 예시 : JAVA 데이터베이스 인터페이스인 JDBC이다.
 - LSP(Liskov Substitution Principle, 리스코프 치환 법칙) : 프로그램의 객체는 프로그램의 정확성을 깨뜨리지 않으면서 하위 타입의 인스턴스로 바꿀 수 있어야 합니다. 상위 타입을 상속해서 재정의했을 대 프로그램에 에러가 없어야 합니다.
