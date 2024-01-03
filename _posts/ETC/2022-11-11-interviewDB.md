@@ -252,13 +252,31 @@ background: '/img/posts/etc/git.png'
 ![스크린샷 2023-06-16 오후 3 52 26](https://github.com/iheese/iheese.github.io/assets/88040158/8b7bc221-60dc-4b68-b7af-0ca1bc51076b)
 
 - READ UNCOMMITED : 아무런 락을 걸지 않음, 즉 커밋되지 않은 데이터도 읽을 수 있음
+> - Dirdy Read 발생
+> - Dirty Read : write 트랜잭션이 데이터를 업데이트만 하고 커밋은 안했는데 read 트랜잭션이 해당 값을 읽고 write 트랜잭션이 롤백한 상황, 이 상황에서 다시 read 트랜잭션이 re-read 할 때 생김
+
+<img width="667" alt="1" src="https://github.com/iheese/iheese.github.io/assets/88040158/0b73da9a-313a-4f36-b1d8-e0e5d7c025c0">
+
 - READ COMMITED : 커밋하기 전 작업 중인 데이터의 값을 읽을 수 없다. 그래서 Dirty Read가 발생하지 않는다. 즉 커밋되어 확정된 것까지는 읽을 수 있음
 > - 커밋된 것은 Undo 공간에 있어서 다른 read 트랜잭션이 오면 백업된 것을 리턴해준다.  
-> - Dirty Read : write 트랜잭션이 데이터를 업데이트만 하고 커밋은 안했는데 read 트랜잭션이 해당 값을 읽고 write 트랜잭션이 롤백한 상황, 이 상황에서 다시 read 트랜잭션이 re-read 할 때 생김
 > - 해당 격리 레벨부터 Spring에서 undo 영역을 이용한 MVCC(Multiversion Concurrency Control)를 사용하여 Consistence Read를 보장해줍니다. 
+
+<img width="666" alt="22" src="https://github.com/iheese/iheese.github.io/assets/88040158/c5f24e19-06c0-49cc-a965-759cd461ff7e">
+
+<img width="651" alt="2" src="https://github.com/iheese/iheese.github.io/assets/88040158/ef4cb145-f961-4ef7-bb6c-ab3b97594814">
+
+- NON REPEATABLE READ 발생, REPEATABLE READ의 정합성에 문제가 생긴다.
+
+<img width="739" alt="3" src="https://github.com/iheese/iheese.github.io/assets/88040158/adf5ae5c-4be1-4c98-99b4-ba4bf965a02d">
+
 - REPEATABLE READ : 트랜잭션마다 트랜잭션ID가 존재하여 트랜잭션 ID보다 작은 트랜잭션 번호에서 변경한 것만 읽게 된다.  
 > - 커밋하기 전 작업 중인 데이터의 값을 읽을 수 없고, 읽기 트랜잭션이 끝나기 전까지 Undo 영역을 타 트랜잭션에서 쓰기 작업 후 커밋한 데이터로 덮어쓸 수 없다. 즉 선행 트랜잭션이 읽은 데이터를 종료까지 갱신/삭제 안됨
 > - Phantoom read 가능성 : 다른 트랜잭션에서 수행한 변경 작업에 의해 레코드가 보였다가 안보였다가 하는 현상 > 쓰기 잠금이 필요하다.
+
+<img width="739" alt="3" src="https://github.com/iheese/iheese.github.io/assets/88040158/a8d359cd-7312-4c02-b485-cf19e9c97d9b">
+
+- 위 그림에서는 리턴값이 달라지는 것에 집중하여 보자.
+
 - SERIALIZABLE : 트랜잭션을 다른 트랜잭션으로부터 완전히 분리시킨다. 특정 트랜잭션을 작업하는 동안 타 트랜잭션은 별로의 작업을 할 수 없다, insert문까지 금지
 > - @Transactional 어노테이션만 붙여주면 jdbc 기본 isolation level을 따름
 > > - MYSQL : 2, ORACLE : 1, MariaDB : 2 
@@ -292,3 +310,4 @@ Reference:
 - [신입 개발자 기술면접 질문 정리-데이터베이스_슬기로운 개발 생활](https://dev-coco.tistory.com/158)
 - [내가 받은 '백엔드 기술 면접 질문' 모음_wijoonwu](https://velog.io/@wijoonwu/%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8)
 - [MySQL성능 비교_화니의 블로그](https://hinweis.tistory.com/65?category=942059)
+- [트랜잭션의 격리 수준(isolation Level)이란?](https://nesoy.github.io/articles/2019-05/Database-Transaction-isolation)
