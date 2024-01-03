@@ -273,7 +273,7 @@ background: '/img/posts/etc/git.png'
 > - 커밋하기 전 작업 중인 데이터의 값을 읽을 수 없고, 읽기 트랜잭션이 끝나기 전까지 Undo 영역을 타 트랜잭션에서 쓰기 작업 후 커밋한 데이터로 덮어쓸 수 없다. 즉 선행 트랜잭션이 읽은 데이터를 종료까지 갱신/삭제 안됨
 > - Phantoom read 가능성 : 다른 트랜잭션에서 수행한 변경 작업에 의해 레코드가 보였다가 안보였다가 하는 현상 > 쓰기 잠금이 필요하다.
 
-<img width="739" alt="3" src="https://github.com/iheese/iheese.github.io/assets/88040158/a8d359cd-7312-4c02-b485-cf19e9c97d9b">
+<img width="746" alt="233" src="https://github.com/iheese/iheese.github.io/assets/88040158/f56e5bc4-cb48-4eeb-b636-e9aff162b133">
 
 - 위 그림에서는 리턴값이 달라지는 것에 집중하여 보자.
 
