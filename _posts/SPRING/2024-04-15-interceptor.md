@@ -129,7 +129,7 @@ public class CheckInterceptor extends HandlerInterceptorAdapter {
 - 웹 취약점을 고려하는 방어적인 코드를 작성해야겠다. 
 - 해당 기능을 통해 문자를 한번 성공적으로 보내고 다음에 반복적으로 요청하면 인터셉터를 통해 해당 요청을 걸러지게 되었다. 
 - 추후에 횟수 5번의 기회를 주는 방식을 제공하는 것도 좋을 것 같다. 
-
+  
 <br>
 
 Reference:
