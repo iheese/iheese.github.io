@@ -176,8 +176,10 @@ background: '/img/posts/etc/git.png'
 - 즉시로딩은 1, 2번 후 하위 엔티티가 즉시 조회되는 N개의 쿼리가 처리된다. 
 - 지연 로딩은 1, 2번 후 지연 로딩 전략을 사용한 하위 엔티티를 프록시 처리해놓는다. 프록시인 하위 엔티티에 접근할 때 (unproxy하여 실제 객체에 접근한다) 해당 엔티티를 조회하기 위한 추가적인 N 쿼리가 발생한다.
 
-- 해결방법
-> - JPQL의 JOIN FETCH, 
+#### 해결방법
+
+- JPQL의 JOIN FETCH, 
+> - join fetch 는 우선순위를 가지기 때문에 지연 로딩 설정해놔도 즉시로딩으로 동작한다. 
 
 ```java
 @Query("select o from Owner o join fetch o.cats")
@@ -185,6 +187,10 @@ List<Owner> findAllJoinFetch();
 ```
 
 - @EntityGraph
+> - 어노테이션으로 필드명을 지정하면 해당 필드가 지연 로딩이 아닌 즉시 로딩으로 조회한다.
+
+- Fetch join, EntityGraph는 JPQL을 사용하여 JOIN문을 호출함, 두 테이블 사이에 유효하지 않은 JOIN문이 들어갈 경우 카테시안 곱이 발생하여 중복 데이터가 발생할 수 있다.
+> - 이를 해결하기 위해서 dinstinct, 자료구조 Set을 이용할 수 있다.   
 
 ```java
 @EntityGraph(attributePaths = "cats")
