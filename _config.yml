@@ -21,7 +21,7 @@ markdown: kramdown
 #   input: GFM
 highlighter: rouge
 
-paginate:           5
+paginate:           10
 paginate_path:      "/page:num/" 
 plugins:
   - jekyll-feed
