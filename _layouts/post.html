@@ -29,12 +29,11 @@ layout: default
     </div>
   </header>
 
-  <div class="container">
+  <div class="container-md">
     <div class="row">
-      <div class="col-lg-10 col-md-10 col-xs-10 mx-auto">
+      <div class="col-8">
 
         {{ content }}
-
         <hr>
 
         <div class="clearfix">
@@ -58,6 +57,9 @@ layout: default
           crossorigin="anonymous"
           async>
         </script>
+      </div>
+      <div class="col-4 sticky-top toc">
+        {% include toc.html html=content %}
       </div>
     </div>
   </div>
