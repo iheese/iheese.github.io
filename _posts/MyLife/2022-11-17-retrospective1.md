@@ -5,7 +5,7 @@ subtitle: '교육, 취준, 하루'
 date: 2022-11-17 12:00:00 +0900
 categories: 'MyLife'
 background: '/img/posts/MyLife/street.jpg'
-published: false
+published: true
 ---
 
 # 졸업 후, 교육 끝
