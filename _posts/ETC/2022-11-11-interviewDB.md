@@ -2,7 +2,7 @@
 layout: post
 title: 'Database Interview 대비'
 subtitle: '인덱스, RDBMS, NoSQL, 정규화, Transaction, ACID, ElasticSearch'
-date: 2023-12-07 11:30:00 +0900
+date: 2024-11-27 11:30:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
@@ -282,11 +282,37 @@ background: '/img/posts/etc/git.png'
 > > - MYSQL : 2, ORACLE : 1, MariaDB : 2 
 
 #### DB Lock
-- 비관적 lock : 트랜잭션이 충돌할 것이라 가정하고 lock을 설정, 트랜잭션 하나가 처리되고 그 외에는 접근이 불가합니다. 그 후에 다음 트랜잭션이 처리된다.
-> - 격리 수준을 높여서 데이터 무결성을 보장하는 수준이 높지만, 다른 트랙잭션을 막아 성능상 좋지 않습니다.
-- 낙관적 lock : 트랜잭션이 처리되고 같은 부분에 트랜잭션 요청이 들어오면 동시성 문제가 발생한 것으로 인지하여 Exception을 발생시키고 롤백합니다.
+
+- java의 sysnchronized 를 통해 메소드에서 동시성을 보장할 수 있으나 하나의 프로세스 안에서만 보장이 된다. 여러 대의 서버가 동시에 DB에 접근하게 되면 사용하지 않았을 때와 동일하게 문제가 발생한다. 
+> - thread-safe 하긴 하지만 여러 개의 인스턴스가 있으니 의미가 없다. 이럴 때는 아래 DB 락을 고려해봐야한다. 
+
+- Pessimistic Lock(비관적 lock) : 트랜잭션이 충돌할 것이라 가정하고 lock을 설정, 트랜잭션 하나가 처리되고 그 외에는 접근이 불가합니다. 그 후에 다음 트랜잭션이 처리된다.
+> - exclusive lock을 걸어 다른 트랜잭션이 접근할 수 없게 한다.
+> - 격리 수준을 높여서 데이터 무결성을 보장하는 수준이 높지만, 다른 트랙잭션을 막아 성능상 좋지 않고, 데드락이 발생할 수 있다. 
+- Optimistic Lock(낙관적 lock) : 트랜잭션이 처리되고 같은 부분에 트랜잭션 요청이 들어오면 동시성 문제가 발생한 것으로 인지하여 Exception을 발생시키고 롤백합니다.
+> - 실제로는 lock을 사용하지 않고 버전을 이용해 데이터 정합성을 맞춘다. 
 > - 데이터 동시성 문제가 빈번하지 않다면 낙관적 lock이 성능이 좋습니다. 
 > - 잦은롤백 처리 > 성능 악화를 일으킬 수 있습니다. 
+
+```java
+ while (true) {
+            try {
+                optimisticStockService.decrease(id, quantity);
+                break;
+            } catch (Exception e) {
+                Thread.sleep(50);
+            }
+        }
+```
+
+- exception 을 try-catch로 잡아 재시도하게끔 하여 락을 얻어내기도 한다. 
+
+<br>
+
+- Named Lock(metadata locking) : 이름을 가진 메타데이터를 사용하는 방식, 이름을 가진 lock을 획득하고 해제할 때까지 다른 세션이 lock을 획득할 수 없게 한다. 
+> - 트랜잭션이 종료될 때 자동으로 락 해제가 안되서 별도의 락 해제 명령어를 사용하거나 선점 시간이 끝나야한다. 
+> -  Pessimistic lock과 비슷하지만, row, 테이블 단위가 아니라 metadata 단위로 락을 건다. 
+> + named lock이 같은 데이터 소스를 사용하면 커넥션 풀이 부족하는 현상이 발생할 수 있다. 실무에서는 데이터 소스를 분리해서 사용해야한다. 
 
 <br>
 
@@ -311,3 +337,4 @@ Reference:
 - [내가 받은 '백엔드 기술 면접 질문' 모음_wijoonwu](https://velog.io/@wijoonwu/%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8)
 - [MySQL성능 비교_화니의 블로그](https://hinweis.tistory.com/65?category=942059)
 - [트랜잭션의 격리 수준(isolation Level)이란?](https://nesoy.github.io/articles/2019-05/Database-Transaction-isolation)
+- [재고시스템으로 알아보는 동시성 이슈 해결(1)](https://dodop-blog.tistory.com/463)

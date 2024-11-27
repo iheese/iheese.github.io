@@ -2,7 +2,7 @@
 layout: post
 title: 'Spring, JPA Interview 대비'
 subtitle: 'Spring DI, IOC, AOP, JPA'
-date: 2023-07-04 09:00:00 +0900
+date: 2024-11-27 09:00:00 +0900
 categories: 'ETC'
 background: '/img/posts/etc/git.png'
 ---
@@ -95,12 +95,14 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-### @Transactional 움직이는 방식?
-- Spring AOP은 JDK Proxy, Spring Boot는 CGLib Proxy를 기본으로 한다.
+### @Transactional 움직이는 방식? + JDK Proxy, CGLib Proxy
+- Spring AOP는 JDK Proxy, CGLib Proxy를 이용한 두 가지 방법이 있다.
 - JDK Proxy는 타겟의 상위 인터페이스를 상속 받아 프록시를 만든다. 인터페이스를 구현한 클래스가 아니면 의존할 수 없다. 
 > - JDK Proxy는 내부적으로 Reflection을 사용하여 추가적인 비용이 든다.(Reflection : 클래스 타입을 몰라도 클래스에 접근하게 해주는 API)
 > - 그래서 서비스 인터페이스를 만들고 Impl로 구현하는 관습이 있다.
+
 - CGLib Proxy는 타겟 클래스를 상속 받아 프록시를 만든다. 바이트 코드 조작을 통해 프록시 객체를 생성한다. 
+> - Spring 2.0 부터는 CGLib 가 defalut가 되었다. 그 전 버전을 사용하면 인터페이스를 구체화하였는지 유무에 따라 Proxy 생성 방식이 결정된다. 
 
 - @Transactional 은 프록시 형태로 동작한다. 어떤 객체에 직접적으로가 아닌 프록시 객체(대행 객체)를 통해 접근한다.
 > -  private method에 적용이 불가하고, 무조건 진입점의 Transaction 기준으로 동작한다. 
