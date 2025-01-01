@@ -71,10 +71,9 @@ public class DispatcherServlet extends FrameworkServlet {
 					return;
 				}
 
-                // Object > HandlerAdapter
+                // Object > HandlerAdapter 리턴
 				HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
 
-				// Process last-modified header, if supported by the handler.
 				String method = request.getMethod();
 				boolean isGet = HttpMethod.GET.matches(method);
 				if (isGet || HttpMethod.HEAD.matches(method)) {
@@ -84,11 +83,13 @@ public class DispatcherServlet extends FrameworkServlet {
 					}
 				}
 
+                // 등록된 인터셉터가 있으면 순서대로 preHandle 메소드가 실행
+                // preHandle 메소드에서 false 나오면 triggerAfterCompletion가 실행된다.
 				if (!mappedHandler.applyPreHandle(processedRequest, response)) {
 					return;
 				}
 
-				// Actually invoke the handler.
+				// 핸들러 호출하여 컨트롤러 실행
 				mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
 
 				if (asyncManager.isConcurrentHandlingStarted()) {
@@ -96,6 +97,8 @@ public class DispatcherServlet extends FrameworkServlet {
 				}
 
 				applyDefaultViewName(processedRequest, mv);
+
+                // 인터셉터 postHandle 메소드 호출
 				mappedHandler.applyPostHandle(processedRequest, response, mv);
 			}
 			catch (Exception ex) {
@@ -106,8 +109,10 @@ public class DispatcherServlet extends FrameworkServlet {
 				// making them available for @ExceptionHandler methods and other scenarios.
 				dispatchException = new NestedServletException("Handler dispatch failed", err);
 			}
+            // 어떤 상황에서도 afterCompletion 호출
 			processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);
 		}
+        // 아래 예외들이 발생해도 afterCompletion 호출
 		catch (Exception ex) {
 			triggerAfterCompletion(processedRequest, response, mappedHandler, ex);
 		}
