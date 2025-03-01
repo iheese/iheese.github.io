@@ -2,7 +2,7 @@
 layout: post
 title: '[JAVA, SPRING] Spring Interceptor로 자동화 공격 막기'
 subtitle: 'Spring, AU, 웹취약점'
-date: 2024-04-15 14:33:00 +0900
+date: 2025-03-01 14:33:00 +0900
 categories: 'SPRING'
 background: '/img/posts/etc/spring.jpg'
 ---
@@ -101,6 +101,53 @@ public class CheckInterceptor extends HandlerInterceptorAdapter {
     }
 }
 ```
+
+<br>
+
+### + 추가: 자동화 공격을 요청 URI에 대해 시간과 횟수 제한으로 막기
+
+- 먼저 코드로 확인해보기!
+- Interceptor의 preHandle 메소드를 구현해준다.
+
+```java
+    @Override
+    boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        final int MAX_REQUEST_COUNT = 5; //최대 요청 제한 수
+        final long MAX_TIME = 6000 * 5; //최대 요청 보관 시간(60초 * 5)
+        final String sessionKey = "AU_" + request.getRequestURI(); // 고유한 세션키
+        final HttpSession session = request.getSession();
+
+        // 세션에서 타임스탬프를 모아둔 리스트를 확인한다.
+        List<Long> timeStamps = List<Long> session.getAttribute(sessionKey);
+        if(timeStamps == null) {
+            timeStamps = new ArrayList<>();
+            session.setAttribute(sessionKey, timeStamps);
+        }
+
+        // 현재 시간 추가
+        long curruntTime = System.currentTimeMillis();
+        timestamps,add(curruntTime);
+
+        // 보관 시간 넘은 시간은 삭제해주기
+       Iterator<Long> iterator = timestamps.iterator();
+        while (iterator.hasNext()) {
+            long timestamp = iterator.next();
+            if (currentTime - timestamp > MAX_TIME) {
+                iterator.remove();
+            }
+        }
+        
+        // 횟수 넘으면 예외처리, 에러 던지기 등 방어 처리
+        if(timestamps.size() > MAX_REQUESTS) {
+            //return false; 등등..
+            response.senError(403);
+            throw new Exception("자동화 공격 요청 횟수를 제한합니다.");
+        }
+        return true;
+    }
+```
+
+- 폼데이터 추가 안하고 서버단에서 처리해줄 수 있어 매우 좋다고 생각한다. 
 
 <br>
 
