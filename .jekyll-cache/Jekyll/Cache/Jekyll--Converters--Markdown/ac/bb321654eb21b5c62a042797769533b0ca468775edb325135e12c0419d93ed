@@ -7,13 +7,13 @@
         <li>예시: window.setTimeout() //window는 전역객체라 생략 가능</li>
       </ul>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">run</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">msg</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">hello codesquad</span><span class="dl">"</span><span class="p">;</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>  <span class="c1">//이 메시지는 즉시 실행되지 않습니다.</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>  <span class="c1">//이 메시지는 즉시 실행되지 않습니다.</span>
   <span class="p">},</span> <span class="mi">3000</span><span class="p">);</span> <span class="c1">//3초 뒤 실행된다. (지연실행)</span>
 <span class="p">}</span>
-<span class="nx">run</span><span class="p">();</span> <span class="c1">// 이처럼 늦게 실행되는 것을 비동기라 한다. </span>
+<span class="nf">run</span><span class="p">();</span> <span class="c1">// 이처럼 늦게 실행되는 것을 비동기라 한다. </span>
 </code></pre></div>      </div>
       <ul>
         <li>동기(synchronous): 동시에 일어난다. 요청을 하면 응답을 받아야지만 다음 동작이 일어난다. 직렬적으로 실행된다.</li>
@@ -37,26 +37,26 @@
         <li>getElementById() :  id정보를 통해 찾을 수 있다.</li>
       </ul>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">getElemntById</span><span class="p">(</span><span class="dl">"</span><span class="s2">idname</span><span class="dl">"</span><span class="p">);</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElemntById</span><span class="p">(</span><span class="dl">"</span><span class="s2">idname</span><span class="dl">"</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">block</span><span class="dl">"</span><span class="p">;</span>  <span class="c1">//display="block"으로 변경</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElemntById</span><span class="p">(</span><span class="dl">"</span><span class="s2">idname</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span><span class="o">=</span><span class="dl">"</span><span class="s2">HI</span><span class="dl">"</span><span class="p">;</span> <span class="c1">//innerText 변경</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nf">getElemntById</span><span class="p">(</span><span class="dl">"</span><span class="s2">idname</span><span class="dl">"</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nf">getElemntById</span><span class="p">(</span><span class="dl">"</span><span class="s2">idname</span><span class="dl">"</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">block</span><span class="dl">"</span><span class="p">;</span>  <span class="c1">//display="block"으로 변경</span>
+<span class="nb">document</span><span class="p">.</span><span class="nf">getElemntById</span><span class="p">(</span><span class="dl">"</span><span class="s2">idname</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span><span class="o">=</span><span class="dl">"</span><span class="s2">HI</span><span class="dl">"</span><span class="p">;</span> <span class="c1">//innerText 변경</span>
 </code></pre></div>      </div>
       <ul>
         <li>querySelector(): CSS 스타일을 결정할 때 사용하던 Selector 문법을 이용해 DOM에 접근</li>
       </ul>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#idname</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//id로 검색</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.classname</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//class로 검색</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">body .classname</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//body 안의 class 검색</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.classname1 &gt; .classname2</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//classname1의 자식요소인 classname2 검색</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#idname</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//id로 검색</span>
+<span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.classname</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//class로 검색</span>
+<span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">body .classname</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//body 안의 class 검색</span>
+<span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.classname1 &gt; .classname2</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//classname1의 자식요소인 classname2 검색</span>
 </code></pre></div>      </div>
       <ul>
         <li>querySelectorAll() : All 메소드 Nodelist로 검색한 결과를 반환한다.</li>
       </ul>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">divtag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//id, class도 위와 같이 검색 가능, div 태그 모두 반환한다. 리스트 형식으로 접근 가능하다. </span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">divtag</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">//첫번째 div 태그</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">divtag</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span> <span class="c1">//두번째 div 태그</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">divtag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelectorAll</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//id, class도 위와 같이 검색 가능, div 태그 모두 반환한다. 리스트 형식으로 접근 가능하다. </span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">divtag</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">//첫번째 div 태그</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">divtag</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span> <span class="c1">//두번째 div 태그</span>
 </code></pre></div>      </div>
     </blockquote>
   </li>
@@ -76,8 +76,8 @@
   <li>EventListener(EventHandler) 등록</li>
 </ul>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.classname</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.classname</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">el</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
 <span class="c1">//do something..  //el 변수에 저장한 값을 클릭하면 함수를 실행한다.</span>
 <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
 
@@ -88,10 +88,10 @@
   </li>
   <li>
     <p>Browser Object</p>
-    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">el</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">){</span>
- <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
- <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">);</span> <span class="c1">//el 변수에 저장된 값을 클릭하면 콘솔로그에 요소와 노드이름을 남기는 함수를 실행한다.  </span>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">el</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">){</span>
+ <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+ <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">);</span> <span class="c1">//el 변수에 저장된 값을 클릭하면 콘솔로그에 요소와 노드이름을 남기는 함수를 실행한다.  </span>
 <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
 </code></pre></div>    </div>
   </li>
@@ -109,13 +109,13 @@
   <li>Ajax 실행 코드 표준 방법</li>
 </ul>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">ajax</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
- <span class="kd">var</span> <span class="nx">oReq</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
- <span class="nx">oReq</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">ajax</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+ <span class="kd">var</span> <span class="nx">oReq</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">XMLHttpRequest</span><span class="p">();</span>
+ <span class="nx">oReq</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
  <span class="p">});</span>    
- <span class="nx">oReq</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">http://www.example.org/getData?data=data</span><span class="dl">"</span><span class="p">);</span><span class="c1">//parameter를 붙여서 보낼수있음. </span>
- <span class="nx">oReq</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+ <span class="nx">oReq</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">http://www.example.org/getData?data=data</span><span class="dl">"</span><span class="p">);</span><span class="c1">//parameter를 붙여서 보낼수있음. </span>
+ <span class="nx">oReq</span><span class="p">.</span><span class="nf">send</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div></div>
 <ul>
@@ -131,13 +131,13 @@
   <li>Ajax 실습</li>
 </ul>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oReq</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
-<span class="nx">oReq</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oReq</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">XMLHttpRequest</span><span class="p">();</span>
+<span class="nx">oReq</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
  <span class="p">});</span>    
 
- <span class="nx">oReq</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">./json.txt</span><span class="dl">"</span><span class="p">);</span>
- <span class="nx">oReq</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+ <span class="nx">oReq</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">./json.txt</span><span class="dl">"</span><span class="p">);</span>
+ <span class="nx">oReq</span><span class="p">.</span><span class="nf">send</span><span class="p">();</span>
 
 </code></pre></div></div>
 <ul>

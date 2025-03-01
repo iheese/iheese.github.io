@@ -39,23 +39,23 @@
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">deleteReply</span> <span class="o">=</span> <span class="p">{</span>
 	<span class="na">init</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 		<span class="kd">let</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-		<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#btn-deleteReply</span><span class="dl">"</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-			<span class="nx">_this</span><span class="p">.</span><span class="nx">deleteReply</span><span class="p">();</span>
+		<span class="nf">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#btn-deleteReply</span><span class="dl">"</span><span class="p">).</span><span class="nf">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">_this</span><span class="p">.</span><span class="nf">deleteReply</span><span class="p">();</span>
 		<span class="p">});</span>
 	<span class="p">},</span>
 	<span class="na">deleteReply</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">seq</span><span class="p">)</span> <span class="p">{</span>
-		<span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span>  <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#id</span><span class="dl">"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
-        <span class="kd">var</span> <span class="nx">seq</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#seq</span><span class="dl">"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
-		<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+		<span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span>  <span class="nf">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#id</span><span class="dl">"</span><span class="p">).</span><span class="nf">val</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">seq</span> <span class="o">=</span> <span class="nf">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#seq</span><span class="dl">"</span><span class="p">).</span><span class="nf">val</span><span class="p">();</span>
+		<span class="nx">$</span><span class="p">.</span><span class="nf">ajax</span><span class="p">({</span>
 			<span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span> 
 			<span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/reply/</span><span class="dl">"</span><span class="o">+</span><span class="nx">seq</span>
-		<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+		<span class="p">}).</span><span class="nf">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nf">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
 			<span class="nx">location</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/posts/</span><span class="dl">"</span><span class="o">+</span><span class="nx">id</span><span class="p">;</span>
 		<span class="p">});</span>
 	<span class="p">}</span>
 <span class="p">}</span>
-<span class="nx">deleteReply</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+<span class="nx">deleteReply</span><span class="p">.</span><span class="nf">init</span><span class="p">();</span>
 
 </code></pre></div></div>
 
@@ -112,22 +112,22 @@
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">deleteReply</span> <span class="o">=</span> <span class="p">{</span>
 	<span class="na">init</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 		<span class="kd">let</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-		<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">button[name=btn-deleteReply]</span><span class="dl">"</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>   		 <span class="c1">//변경부분</span>
-			<span class="nx">_this</span><span class="p">.</span><span class="nx">deleteReply</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span> <span class="c1">//변경부분</span>
+		<span class="nf">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">button[name=btn-deleteReply]</span><span class="dl">"</span><span class="p">).</span><span class="nf">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>   		 <span class="c1">//변경부분</span>
+			<span class="nx">_this</span><span class="p">.</span><span class="nf">deleteReply</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span> <span class="c1">//변경부분</span>
 		<span class="p">});</span>
 	<span class="p">},</span>
 	<span class="na">deleteReply</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">seq</span><span class="p">)</span> <span class="p">{</span>
-		<span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span>  <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#id</span><span class="dl">"</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span> <span class="c1">//화면 변경을 위한 post id</span>
-		<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span> 
+		<span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span>  <span class="nf">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#id</span><span class="dl">"</span><span class="p">).</span><span class="nf">val</span><span class="p">();</span> <span class="c1">//화면 변경을 위한 post id</span>
+		<span class="nx">$</span><span class="p">.</span><span class="nf">ajax</span><span class="p">({</span> 
 			<span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span> 
 			<span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/reply/</span><span class="dl">"</span><span class="o">+</span><span class="nx">seq</span>
-		<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+		<span class="p">}).</span><span class="nf">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nf">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
 			<span class="nx">location</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/posts/</span><span class="dl">"</span><span class="o">+</span><span class="nx">id</span><span class="p">;</span>
 		<span class="p">});</span>
 	<span class="p">}</span>
 <span class="p">}</span>
-<span class="nx">deleteReply</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+<span class="nx">deleteReply</span><span class="p">.</span><span class="nf">init</span><span class="p">();</span>
 </code></pre></div></div>
 
 <ul>

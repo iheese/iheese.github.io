@@ -1,88 +1,88 @@
-I"�2<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#4873 셀프넘버 
-</span><span class="n">set_natural</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10001</span><span class="p">))</span>
-<span class="n">set_generate</span><span class="o">=</span><span class="nb">set</span><span class="p">()</span>
+I"f5<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#4873 셀프넘버 
+</span><span class="n">set_natural</span><span class="o">=</span><span class="nf">set</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10001</span><span class="p">))</span>
+<span class="n">set_generate</span><span class="o">=</span><span class="nf">set</span><span class="p">()</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10001</span><span class="p">):</span>
-        <span class="n">generate</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span> 
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10001</span><span class="p">):</span>
+        <span class="n">generate</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="nf">sum</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span> 
 <span class="c1">#번호의 자기자신과 각 자릿수를 더하는 것
-</span>        <span class="n">set_generate</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">generate</span><span class="p">)</span>
+</span>        <span class="n">set_generate</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">generate</span><span class="p">)</span>
 
-<span class="n">ans</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">set_natural</span><span class="o">-</span><span class="n">set_generate</span><span class="p">)</span> <span class="c1">#정렬하기
+<span class="n">ans</span><span class="o">=</span><span class="nf">sorted</span><span class="p">(</span><span class="n">set_natural</span><span class="o">-</span><span class="n">set_generate</span><span class="p">)</span> <span class="c1">#정렬하기
 </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ans</span><span class="p">:</span>
-   <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+   <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><br /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#10828 스택
-</span><span class="kn">import</span> <span class="nn">sys</span>
+</span><span class="kn">import</span> <span class="n">sys</span>
 
-<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span><span class="p">())</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="nf">readline</span><span class="p">())</span>
 <span class="c1">#입출력 속도 비교 : sys.stdin.readline &gt; raw_input() &gt; input()  
 #반복문으로 입출력 받을떄 인풋은 오래걸림
 </span>
 <span class="n">stack</span><span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-  <span class="n">command</span> <span class="o">=</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span><span class="p">().</span><span class="n">split</span><span class="p">()</span>  <span class="c1">#순서을 받기
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+  <span class="n">command</span> <span class="o">=</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="nf">readline</span><span class="p">().</span><span class="nf">split</span><span class="p">()</span>  <span class="c1">#순서을 받기
 </span>
-  <span class="k">if</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'push'</span><span class="p">:</span>
-    <span class="n">stack</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="k">if</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">push</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">stack</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span><span class="s">'pop'</span><span class="p">:</span>
-     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-       <span class="k">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span><span class="sh">'</span><span class="s">pop</span><span class="sh">'</span><span class="p">:</span>
+     <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+       <span class="nf">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
      <span class="k">else</span><span class="p">:</span>
-       <span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="n">pop</span><span class="p">())</span>
+       <span class="nf">print</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="nf">pop</span><span class="p">())</span>
 
-  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">'size'</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">))</span>
+  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">size</span><span class="sh">'</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">stack</span><span class="p">))</span>
 
-  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">'empty'</span><span class="p">:</span>
-   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-     <span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">empty</span><span class="sh">'</span><span class="p">:</span>
+   <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+     <span class="nf">print</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
    <span class="k">else</span><span class="p">:</span>
-     <span class="k">print</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+     <span class="nf">print</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">'top'</span><span class="p">:</span>
-   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">top</span><span class="sh">'</span><span class="p">:</span>
+   <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+      <span class="nf">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
    <span class="k">else</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+      <span class="nf">print</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p><br /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 단어 뒤집기 8093
 </span>
-<span class="n">T</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span> <span class="c1">#문장 갯수 받기
+<span class="n">T</span><span class="o">=</span><span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">())</span> <span class="c1">#문장 갯수 받기
 </span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span> <span class="c1"># 문장별로 for문
-</span>  <span class="n">sentence</span><span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span> <span class="c1"># 문장별로 for문
+</span>  <span class="n">sentence</span><span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sentence</span><span class="p">:</span>
-     <span class="k">print</span><span class="p">(</span><span class="n">j</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">end</span><span class="o">=</span><span class="s">" "</span><span class="p">)</span>  <span class="c1">#j[::-1] 뒤부터 출력
+     <span class="nf">print</span><span class="p">(</span><span class="n">j</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">end</span><span class="o">=</span><span class="sh">"</span><span class="s"> </span><span class="sh">"</span><span class="p">)</span>  <span class="c1">#j[::-1] 뒤부터 출력
 </span></code></pre></div></div>
 
 <p><br /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#9012 괄호
-</span><span class="n">T</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+</span><span class="n">T</span><span class="o">=</span><span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">())</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-  <span class="n">s</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+  <span class="n">s</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="nf">input</span><span class="p">())</span>
   <span class="nb">sum</span><span class="o">=</span><span class="mi">0</span>
   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span><span class="s">'('</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span><span class="sh">'</span><span class="s">(</span><span class="sh">'</span><span class="p">:</span>
       <span class="nb">sum</span><span class="o">+=</span><span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="s">')'</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="sh">'</span><span class="s">)</span><span class="sh">'</span><span class="p">:</span>
       <span class="nb">sum</span><span class="o">-=</span><span class="mi">1</span>
     <span class="k">if</span> <span class="nb">sum</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
-      <span class="k">print</span><span class="p">(</span><span class="s">'NO'</span><span class="p">)</span>  <span class="c1">#어차피 ) 이게 많아지면(sum이 음수가 될수 없기 때문에) yes가 나올 수 없기 때문에
+      <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">NO</span><span class="sh">'</span><span class="p">)</span>  <span class="c1">#어차피 ) 이게 많아지면(sum이 음수가 될수 없기 때문에) yes가 나올 수 없기 때문에
 </span>      <span class="k">break</span>
 
   <span class="k">if</span> <span class="nb">sum</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'NO'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">NO</span><span class="sh">'</span><span class="p">)</span>
   <span class="k">elif</span> <span class="nb">sum</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>    <span class="c1">#합이 0이 되어야  "(",")" 갯수가 같다.
-</span>    <span class="k">print</span><span class="p">(</span><span class="s">'YES'</span><span class="p">)</span>
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">YES</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -97,26 +97,26 @@
 <span class="n">op</span><span class="o">=</span><span class="p">[]</span>
 <span class="n">stack</span><span class="o">=</span><span class="p">[]</span>
 
-<span class="n">N</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>  <span class="c1">#몇 개 숫자가 들어있는지
-</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-  <span class="n">num</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">N</span><span class="o">=</span><span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">())</span>  <span class="c1">#몇 개 숫자가 들어있는지
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="n">num</span> <span class="o">=</span><span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">())</span>
   <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;=</span> <span class="n">num</span><span class="p">:</span>   
  <span class="c1">#마지막에 들어간 애가 먼저 나오니까 첫번째 num을 위해 쌓는다.
-</span>    <span class="n">stack</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
-    <span class="n">op</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'+'</span><span class="p">)</span>
+</span>    <span class="n">stack</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">op</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">+</span><span class="sh">'</span><span class="p">)</span>
     <span class="n">count</span><span class="o">+=</span><span class="mi">1</span> 
 
   <span class="k">if</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">num</span><span class="p">:</span> <span class="c1">#뺼 차례 맨 뒤에 있는 것 부터 뺀다.
-</span>    <span class="n">stack</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
-    <span class="n">op</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'-'</span><span class="p">)</span>
+</span>    <span class="n">stack</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>
+    <span class="n">op</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">-</span><span class="sh">'</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
     <span class="n">temp</span><span class="o">=</span><span class="bp">False</span>  
     <span class="k">break</span>
 
 <span class="k">if</span> <span class="n">temp</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">"NO"</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">NO</span><span class="sh">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">op</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div></div>
 :ET

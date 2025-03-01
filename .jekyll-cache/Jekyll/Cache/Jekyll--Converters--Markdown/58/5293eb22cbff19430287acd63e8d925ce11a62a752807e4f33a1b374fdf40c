@@ -1,7 +1,7 @@
-I"h›<p><br /></p>
+I",<p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -10,7 +10,7 @@
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
 <span class="n">s</span>
 </code></pre></div></div>
 
@@ -25,7 +25,7 @@ dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dates</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">"20130101"</span><span class="p">,</span><span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dates</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nf">date_range</span><span class="p">(</span><span class="sh">"</span><span class="s">20130101</span><span class="sh">"</span><span class="p">,</span><span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 <span class="n">dates</span>
 </code></pre></div></div>
 
@@ -36,7 +36,7 @@ dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s">"ABCD"</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="sh">"</span><span class="s">ABCD</span><span class="sh">"</span><span class="p">))</span>
 <span class="n">df</span>
 </code></pre></div></div>
 
@@ -113,11 +113,11 @@ dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"A"</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span><span class="s">"B"</span><span class="p">:</span><span class="n">pd</span><span class="p">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s">"20130102"</span><span class="p">),</span>
-                   <span class="s">"C"</span><span class="p">:</span><span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span><span class="n">dtype</span><span class="o">=</span><span class="s">"float32"</span><span class="p">),</span>
-                   <span class="s">"D"</span><span class="p">:</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s">"int32"</span><span class="p">),</span>
-                   <span class="s">"E"</span><span class="p">:</span><span class="n">pd</span><span class="p">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s">"test"</span><span class="p">,</span><span class="s">"train"</span><span class="p">,</span><span class="s">"test"</span><span class="p">,</span><span class="s">"train"</span><span class="p">]),</span>
-                   <span class="s">"F"</span><span class="p">:</span><span class="s">"foo"</span><span class="p">,})</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span><span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">:</span><span class="n">pd</span><span class="p">.</span><span class="nc">Timestamp</span><span class="p">(</span><span class="sh">"</span><span class="s">20130102</span><span class="sh">"</span><span class="p">),</span>
+                   <span class="sh">"</span><span class="s">C</span><span class="sh">"</span><span class="p">:</span><span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span><span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">float32</span><span class="sh">"</span><span class="p">),</span>
+                   <span class="sh">"</span><span class="s">D</span><span class="sh">"</span><span class="p">:</span><span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="sh">"</span><span class="s">int32</span><span class="sh">"</span><span class="p">),</span>
+                   <span class="sh">"</span><span class="s">E</span><span class="sh">"</span><span class="p">:</span><span class="n">pd</span><span class="p">.</span><span class="nc">Categorical</span><span class="p">([</span><span class="sh">"</span><span class="s">test</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">train</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">test</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">train</span><span class="sh">"</span><span class="p">]),</span>
+                   <span class="sh">"</span><span class="s">F</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,})</span>
 <span class="n">df2</span>
 </code></pre></div></div>
 
@@ -204,7 +204,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">head</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div>
@@ -273,7 +273,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">tail</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">tail</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div>
@@ -360,7 +360,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">to_numpy</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 1.59342018,  2.65239188,  0.49500638, -0.73513749],
@@ -373,7 +373,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="p">.</span><span class="nf">to_numpy</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[1.0, Timestamp('2013-01-02 00:00:00'), 1.0, 3, 'test', 'foo'],
@@ -385,7 +385,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">describe</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div>
@@ -547,7 +547,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'B'</span><span class="p">)</span> 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="sh">'</span><span class="s">B</span><span class="sh">'</span><span class="p">)</span> 
 </code></pre></div></div>
 
 <div>
@@ -627,7 +627,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">'A'</span><span class="p">]</span> <span class="c1">#Getting
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">]</span> <span class="c1">#Getting
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-01-01    1.593420
@@ -696,7 +696,7 @@ Freq: D, Name: A, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">"20130102"</span><span class="p">:</span><span class="s">"20130104"</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">20130102</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">20130104</span><span class="sh">"</span><span class="p">]</span>
 </code></pre></div></div>
 
 <div>
@@ -763,7 +763,7 @@ Name: 2013-01-01 00:00:00, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">]]</span> <span class="c1">#Selection by Label
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">]]</span> <span class="c1">#Selection by Label
 </span></code></pre></div></div>
 
 <div>
@@ -825,7 +825,7 @@ Name: 2013-01-01 00:00:00, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">"20130102"</span><span class="p">:</span><span class="s">"20130104"</span><span class="p">,[</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">]]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="sh">"</span><span class="s">20130102</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">20130104</span><span class="sh">"</span><span class="p">,[</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">]]</span>
 </code></pre></div></div>
 
 <div>
@@ -872,7 +872,7 @@ Name: 2013-01-01 00:00:00, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">"20130102"</span><span class="p">,</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">]]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="sh">"</span><span class="s">20130102</span><span class="sh">"</span><span class="p">,</span> <span class="p">[</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">]]</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A    0.563760
@@ -882,7 +882,7 @@ Name: 2013-01-02 00:00:00, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s">"A"</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">]</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.5934201795971803
@@ -890,7 +890,7 @@ Name: 2013-01-02 00:00:00, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s">"A"</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">]</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.5934201795971803
@@ -1133,7 +1133,7 @@ Name: 2013-01-04 00:00:00, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">"A"</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
 </code></pre></div></div>
 
 <div>
@@ -1264,8 +1264,8 @@ Name: 2013-01-04 00:00:00, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1">#make same DataFrame
-</span><span class="n">df2</span><span class="p">[</span><span class="s">"E"</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s">"one"</span><span class="p">,</span><span class="s">"one"</span><span class="p">,</span><span class="s">"two"</span><span class="p">,</span><span class="s">"three"</span><span class="p">,</span><span class="s">"four"</span><span class="p">,</span><span class="s">"three"</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span> <span class="c1">#make same DataFrame
+</span><span class="n">df2</span><span class="p">[</span><span class="sh">"</span><span class="s">E</span><span class="sh">"</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">three</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">four</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">three</span><span class="sh">"</span><span class="p">]</span>
 <span class="n">df2</span>
 </code></pre></div></div>
 
@@ -1349,7 +1349,7 @@ Name: 2013-01-04 00:00:00, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s">"E"</span><span class="p">].</span><span class="n">isin</span><span class="p">([</span><span class="s">"two"</span><span class="p">,</span><span class="s">"four"</span><span class="p">])]</span> <span class="c1">#isin() method for filtering
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="sh">"</span><span class="s">E</span><span class="sh">"</span><span class="p">].</span><span class="nf">isin</span><span class="p">([</span><span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">four</span><span class="sh">"</span><span class="p">])]</span> <span class="c1">#isin() method for filtering
 </span></code></pre></div></div>
 
 <div>
@@ -1404,7 +1404,7 @@ Name: 2013-01-04 00:00:00, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s1</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">"20130102"</span><span class="p">,</span><span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s1</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nf">date_range</span><span class="p">(</span><span class="sh">"</span><span class="s">20130102</span><span class="sh">"</span><span class="p">,</span><span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">s1</span>
 </code></pre></div></div>
 
@@ -1419,7 +1419,7 @@ Freq: D, dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">'F'</span><span class="p">]</span><span class="o">=</span><span class="n">s1</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">F</span><span class="sh">'</span><span class="p">]</span><span class="o">=</span><span class="n">s1</span>
 <span class="n">df</span>
 </code></pre></div></div>
 
@@ -1503,7 +1503,7 @@ Freq: D, dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s">"A"</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -1513,7 +1513,7 @@ Freq: D, dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">"D"</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span><span class="sh">"</span><span class="s">D</span><span class="sh">"</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="nf">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -1601,7 +1601,7 @@ Freq: D, dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
 <span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span> <span class="o">=-</span><span class="n">df2</span>
 <span class="n">df2</span>
 </code></pre></div></div>
@@ -1690,8 +1690,8 @@ Freq: D, dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span><span class="o">+</span><span class="p">[</span><span class="s">"E"</span><span class="p">])</span>
-<span class="n">df1</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">dates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s">"E"</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="nf">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span><span class="o">+</span><span class="p">[</span><span class="sh">"</span><span class="s">E</span><span class="sh">"</span><span class="p">])</span>
+<span class="n">df1</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">dates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="sh">"</span><span class="s">E</span><span class="sh">"</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
 <span class="n">df1</span>   <span class="c1">#reindexing: to change,add,delete the index on a specified axis
 </span></code></pre></div></div>
 
@@ -1764,7 +1764,7 @@ Freq: D, dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span><span class="p">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s">"any"</span><span class="p">)</span> <span class="c1">#drop any rows that have missing data
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span><span class="p">.</span><span class="nf">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="sh">"</span><span class="s">any</span><span class="sh">"</span><span class="p">)</span> <span class="c1">#drop any rows that have missing data
 </span></code></pre></div></div>
 
 <div>
@@ -1809,7 +1809,7 @@ Freq: D, dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span><span class="p">.</span><span class="nf">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div>
@@ -1881,7 +1881,7 @@ Freq: D, dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="nf">isna</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div>
@@ -1957,7 +1957,7 @@ Freq: D, dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1">#stats
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">mean</span><span class="p">()</span> <span class="c1">#stats
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A   -0.011518
@@ -1970,7 +1970,7 @@ dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#axis=1,row
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#axis=1,row
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-01-01    0.939760
@@ -1984,7 +1984,7 @@ Freq: D, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#axis=0,columns
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#axis=0,columns
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A   -0.011518
@@ -1997,7 +1997,7 @@ dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">).</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#shft: move forward 2
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">).</span><span class="nf">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#shft: move forward 2
 </span><span class="n">s</span>
 </code></pre></div></div>
 
@@ -2012,7 +2012,7 @@ Freq: D, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s">"index"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="sh">"</span><span class="s">index</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div>
@@ -2178,7 +2178,7 @@ Freq: D, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">cumsum</span><span class="p">)</span> <span class="c1">#cumulative
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">cumsum</span><span class="p">)</span> <span class="c1">#cumulative
 </span></code></pre></div></div>
 
 <div>
@@ -2261,7 +2261,7 @@ Freq: D, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="nb">max</span><span class="p">()</span> <span class="o">-</span><span class="n">x</span><span class="p">.</span><span class="nb">min</span><span class="p">())</span> <span class="c1">#apply
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span> <span class="o">-</span><span class="n">x</span><span class="p">.</span><span class="nf">min</span><span class="p">())</span> <span class="c1">#apply
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A    2.082246
@@ -2274,7 +2274,7 @@ dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="c1">#histogramming
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="c1">#histogramming
 </span><span class="n">s</span>
 </code></pre></div></div>
 
@@ -2293,7 +2293,7 @@ dtype: int32
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="p">.</span><span class="n">value_counts</span><span class="p">().</span><span class="n">sort_index</span><span class="p">()</span> <span class="c1">#add sort_index()
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="p">.</span><span class="nf">value_counts</span><span class="p">().</span><span class="nf">sort_index</span><span class="p">()</span> <span class="c1">#add sort_index()
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    1
@@ -2311,8 +2311,8 @@ dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">([</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">,</span><span class="s">"C"</span><span class="p">,</span><span class="s">"Aaba"</span><span class="p">,</span><span class="s">"Baca"</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span><span class="s">"CABA"</span><span class="p">,</span><span class="s">"dog"</span><span class="p">,</span><span class="s">"cat"</span><span class="p">])</span>
-<span class="n">s</span><span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">([</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">C</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">Aaba</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">Baca</span><span class="sh">"</span><span class="p">,</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span><span class="sh">"</span><span class="s">CABA</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">dog</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">cat</span><span class="sh">"</span><span class="p">])</span>
+<span class="n">s</span><span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0       a
@@ -2333,7 +2333,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#concat
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#concat
 </span><span class="n">df</span>
 </code></pre></div></div>
 
@@ -2440,7 +2440,7 @@ dtype: object
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pieces</span><span class="o">=</span><span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span><span class="n">df</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span><span class="n">df</span><span class="p">[</span><span class="mi">7</span><span class="p">:]]</span>
 
-<span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
+<span class="n">pd</span><span class="p">.</span><span class="nf">concat</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div>
@@ -2544,10 +2544,10 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">left</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"foo"</span><span class="p">],</span><span class="s">"lval"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]})</span>
-<span class="n">right</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"foo"</span><span class="p">],</span><span class="s">"rval"</span><span class="p">:[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">left</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">"</span><span class="s">key</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">],</span><span class="sh">"</span><span class="s">lval</span><span class="sh">"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]})</span>
+<span class="n">right</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">"</span><span class="s">key</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">],</span><span class="sh">"</span><span class="s">rval</span><span class="sh">"</span><span class="p">:[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]})</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   key  lval
@@ -2560,7 +2560,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s">"key"</span><span class="p">)</span> <span class="c1">#SQL style merge
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="sh">"</span><span class="s">key</span><span class="sh">"</span><span class="p">)</span> <span class="c1">#SQL style merge
 </span></code></pre></div></div>
 
 <div>
@@ -2617,10 +2617,10 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">left</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"bar"</span><span class="p">],</span><span class="s">"lval"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]})</span>
-<span class="n">right</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"bar"</span><span class="p">],</span><span class="s">"rval"</span><span class="p">:[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">left</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">"</span><span class="s">key</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">],</span><span class="sh">"</span><span class="s">lval</span><span class="sh">"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]})</span>
+<span class="n">right</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">"</span><span class="s">key</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">],</span><span class="sh">"</span><span class="s">rval</span><span class="sh">"</span><span class="p">:[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]})</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   key  lval
@@ -2633,7 +2633,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">"key"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="sh">"</span><span class="s">key</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div>
@@ -2682,10 +2682,10 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"A"</span><span class="p">:[</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"bar"</span><span class="p">,</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"bar"</span><span class="p">,</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"bar"</span><span class="p">,</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"foo"</span><span class="p">],</span>
-                <span class="s">"B"</span><span class="p">:[</span><span class="s">"one"</span><span class="p">,</span><span class="s">"one"</span><span class="p">,</span><span class="s">"two"</span><span class="p">,</span><span class="s">"three"</span><span class="p">,</span><span class="s">"two"</span><span class="p">,</span><span class="s">"two"</span><span class="p">,</span><span class="s">"one"</span><span class="p">,</span><span class="s">"three"</span><span class="p">],</span>
-                <span class="s">"C"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
-                <span class="s">"D"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">:[</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">],</span>
+                <span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">:[</span><span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">three</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">three</span><span class="sh">"</span><span class="p">],</span>
+                <span class="sh">"</span><span class="s">C</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+                <span class="sh">"</span><span class="s">D</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
                 <span class="p">}</span>
                <span class="p">)</span>
 <span class="n">df</span>
@@ -2778,7 +2778,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"A"</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">).</span><span class="nf">sum</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div>
@@ -2825,7 +2825,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">]).</span><span class="nb">sum</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">([</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">]).</span><span class="nf">sum</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div>
@@ -2900,16 +2900,16 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-        <span class="nb">zip</span><span class="p">(</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuples</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span>
+        <span class="nf">zip</span><span class="p">(</span>
             <span class="o">*</span><span class="p">[</span>
-              <span class="p">[</span><span class="s">"bar"</span><span class="p">,</span> <span class="s">"bar"</span><span class="p">,</span> <span class="s">"baz"</span><span class="p">,</span> <span class="s">"baz"</span><span class="p">,</span> <span class="s">"foo"</span><span class="p">,</span> <span class="s">"foo"</span><span class="p">,</span> <span class="s">"qux"</span><span class="p">,</span> <span class="s">"qux"</span><span class="p">],</span>
-              <span class="p">[</span><span class="s">"one"</span><span class="p">,</span> <span class="s">"two"</span><span class="p">,</span> <span class="s">"one"</span><span class="p">,</span> <span class="s">"two"</span><span class="p">,</span> <span class="s">"one"</span><span class="p">,</span> <span class="s">"two"</span><span class="p">,</span> <span class="s">"one"</span><span class="p">,</span> <span class="s">"two"</span><span class="p">],</span>
+              <span class="p">[</span><span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">baz</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">baz</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">qux</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">qux</span><span class="sh">"</span><span class="p">],</span>
+              <span class="p">[</span><span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">],</span>
           <span class="p">]</span>
        <span class="p">)</span>
    <span class="p">)</span>
-<span class="n">index</span><span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">MultiIndex</span><span class="p">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">tuples</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">"first"</span><span class="p">,</span><span class="s">"second"</span><span class="p">])</span>
-<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">])</span>
+<span class="n">index</span><span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">MultiIndex</span><span class="p">.</span><span class="nf">from_tuples</span><span class="p">(</span><span class="n">tuples</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">first</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">second</span><span class="sh">"</span><span class="p">])</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">])</span>
 <span class="n">df2</span><span class="o">=</span><span class="n">df</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
 <span class="n">df2</span>
 </code></pre></div></div>
@@ -2972,7 +2972,7 @@ dtype: object
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stacked</span><span class="o">=</span><span class="n">df2</span><span class="p">.</span><span class="n">stack</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stacked</span><span class="o">=</span><span class="n">df2</span><span class="p">.</span><span class="nf">stack</span><span class="p">()</span>
 <span class="n">stacked</span>  <span class="c1">#compresse a level in DataFrame's columns
 </span>
 </code></pre></div></div>
@@ -2991,7 +2991,7 @@ dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stacked</span><span class="p">.</span><span class="n">unstack</span><span class="p">()</span> <span class="c1"># inverse operation of stack()
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stacked</span><span class="p">.</span><span class="nf">unstack</span><span class="p">()</span> <span class="c1"># inverse operation of stack()
 </span></code></pre></div></div>
 
 <div>
@@ -3052,8 +3052,8 @@ dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">stacked</span><span class="p">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stacked</span><span class="p">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">stacked</span><span class="p">.</span><span class="nf">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">stacked</span><span class="p">.</span><span class="nf">unstack</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first          bar       baz
@@ -3076,12 +3076,12 @@ baz   A -0.562930  0.273894
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s">"A"</span><span class="p">:</span> <span class="p">[</span><span class="s">"one"</span><span class="p">,</span> <span class="s">"one"</span><span class="p">,</span> <span class="s">"two"</span><span class="p">,</span> <span class="s">"three"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="s">"B"</span><span class="p">:</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="s">"C"</span><span class="p">:</span> <span class="p">[</span><span class="s">"foo"</span><span class="p">,</span> <span class="s">"foo"</span><span class="p">,</span> <span class="s">"foo"</span><span class="p">,</span> <span class="s">"bar"</span><span class="p">,</span> <span class="s">"bar"</span><span class="p">,</span> <span class="s">"bar"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s">"D"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
-    <span class="s">"E"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">({</span>
+    <span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">one</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">two</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">three</span><span class="sh">"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C</span><span class="sh">"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">C</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">bar</span><span class="sh">"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">D</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+    <span class="sh">"</span><span class="s">E</span><span class="sh">"</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
 <span class="p">}</span>                
 <span class="p">)</span>
 <span class="n">df</span>
@@ -3215,7 +3215,7 @@ baz   A -0.562930  0.273894
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="s">"D"</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"C"</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="nf">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">values</span><span class="o">=</span><span class="sh">"</span><span class="s">D</span><span class="sh">"</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">C</span><span class="sh">"</span><span class="p">])</span>
 </code></pre></div></div>
 
 <div>
@@ -3306,9 +3306,9 @@ baz   A -0.562930  0.273894
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">"1/1/2012"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s">"S"</span><span class="p">)</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
-<span class="n">ts</span><span class="p">.</span><span class="n">resample</span><span class="p">(</span><span class="s">"5Min"</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span> <span class="c1">#sum every 5 mins
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">date_range</span><span class="p">(</span><span class="sh">"</span><span class="s">1/1/2012</span><span class="sh">"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="sh">"</span><span class="s">S</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+<span class="n">ts</span><span class="p">.</span><span class="nf">resample</span><span class="p">(</span><span class="sh">"</span><span class="s">5Min</span><span class="sh">"</span><span class="p">).</span><span class="nf">sum</span><span class="p">()</span> <span class="c1">#sum every 5 mins
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-01-01    26705
@@ -3317,7 +3317,7 @@ Freq: 5T, dtype: int32
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts</span><span class="p">.</span><span class="n">resample</span><span class="p">(</span><span class="s">"1Min"</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span> <span class="c1">#sum every 1 min
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts</span><span class="p">.</span><span class="nf">resample</span><span class="p">(</span><span class="sh">"</span><span class="s">1Min</span><span class="sh">"</span><span class="p">).</span><span class="nf">sum</span><span class="p">()</span> <span class="c1">#sum every 1 min
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-01-01 00:00:00    15006
@@ -3327,8 +3327,8 @@ Freq: T, dtype: int32
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">"3/6/2012 00:00"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s">"D"</span><span class="p">)</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">rng</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">date_range</span><span class="p">(</span><span class="sh">"</span><span class="s">3/6/2012 00:00</span><span class="sh">"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="sh">"</span><span class="s">D</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">rng</span><span class="p">)</span>
 <span class="n">ts</span>
 </code></pre></div></div>
 
@@ -3342,7 +3342,7 @@ Freq: D, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts_utc</span> <span class="o">=</span> <span class="n">ts</span><span class="p">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s">"UTC"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts_utc</span> <span class="o">=</span> <span class="n">ts</span><span class="p">.</span><span class="nf">tz_localize</span><span class="p">(</span><span class="sh">"</span><span class="s">UTC</span><span class="sh">"</span><span class="p">)</span>
 <span class="n">ts_utc</span>
 </code></pre></div></div>
 
@@ -3356,7 +3356,7 @@ Freq: D, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts_utc</span><span class="p">.</span><span class="n">tz_convert</span><span class="p">(</span><span class="s">"US/Eastern"</span><span class="p">)</span> <span class="c1">#covertion to another time zone
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts_utc</span><span class="p">.</span><span class="nf">tz_convert</span><span class="p">(</span><span class="sh">"</span><span class="s">US/Eastern</span><span class="sh">"</span><span class="p">)</span> <span class="c1">#covertion to another time zone
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-03-05 19:00:00-05:00    1.385727
@@ -3369,8 +3369,8 @@ Freq: D, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">"1/1/2012"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s">"M"</span><span class="p">)</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">date_range</span><span class="p">(</span><span class="sh">"</span><span class="s">1/1/2012</span><span class="sh">"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="sh">"</span><span class="s">M</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
 <span class="n">ts</span>
 </code></pre></div></div>
 
@@ -3384,7 +3384,7 @@ Freq: M, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ps</span><span class="o">=</span><span class="n">ts</span><span class="p">.</span><span class="n">to_period</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ps</span><span class="o">=</span><span class="n">ts</span><span class="p">.</span><span class="nf">to_period</span><span class="p">()</span>
 <span class="n">ps</span>
 </code></pre></div></div>
 
@@ -3398,7 +3398,7 @@ Freq: M, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ps</span><span class="p">.</span><span class="n">to_timestamp</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ps</span><span class="p">.</span><span class="nf">to_timestamp</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-01-01    0.252942
@@ -3411,10 +3411,10 @@ Freq: MS, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prng</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">period_range</span><span class="p">(</span><span class="s">"1990Q1"</span><span class="p">,</span> <span class="s">"2000Q4"</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s">"Q-NOV"</span><span class="p">)</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prng</span><span class="p">)),</span> <span class="n">prng</span><span class="p">)</span>
-<span class="n">ts</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">prng</span><span class="p">.</span><span class="n">asfreq</span><span class="p">(</span><span class="s">"M"</span><span class="p">,</span> <span class="s">"e"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="n">asfreq</span><span class="p">(</span><span class="s">"H"</span><span class="p">,</span> <span class="s">"s"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">9</span>
-<span class="n">ts</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prng</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">period_range</span><span class="p">(</span><span class="sh">"</span><span class="s">1990Q1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">2000Q4</span><span class="sh">"</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="sh">"</span><span class="s">Q-NOV</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">prng</span><span class="p">)),</span> <span class="n">prng</span><span class="p">)</span>
+<span class="n">ts</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">prng</span><span class="p">.</span><span class="nf">asfreq</span><span class="p">(</span><span class="sh">"</span><span class="s">M</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">e</span><span class="sh">"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="nf">asfreq</span><span class="p">(</span><span class="sh">"</span><span class="s">H</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">s</span><span class="sh">"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">9</span>
+<span class="n">ts</span><span class="p">.</span><span class="nf">head</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1990-03-01 09:00    0.747117
@@ -3431,8 +3431,8 @@ Freq: H, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
-         <span class="p">{</span><span class="s">"id"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s">"raw_grade"</span><span class="p">:</span> <span class="p">[</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">,</span> <span class="s">"e"</span><span class="p">]}</span> 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
+         <span class="p">{</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="sh">"</span><span class="s">raw_grade</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">a</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">b</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">b</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">a</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">a</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">e</span><span class="sh">"</span><span class="p">]}</span> 
 <span class="p">)</span>
 <span class="n">df</span>
 </code></pre></div></div>
@@ -3496,8 +3496,8 @@ Freq: H, dtype: float64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">"raw_grade"</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="s">"category"</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">grade</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">raw_grade</span><span class="sh">"</span><span class="p">].</span><span class="nf">astype</span><span class="p">(</span><span class="sh">"</span><span class="s">category</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">grade</span><span class="sh">"</span><span class="p">]</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    a
@@ -3512,8 +3512,8 @@ Categories (3, object): ['a', 'b', 'e']
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">].</span><span class="n">cat</span><span class="p">.</span><span class="n">set_categories</span><span class="p">([</span><span class="s">"very good"</span><span class="p">,</span> <span class="s">"good"</span><span class="p">,</span> <span class="s">"very bad"</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span> <span class="c1">#rename the categories
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">grade</span><span class="sh">"</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">grade</span><span class="sh">"</span><span class="p">].</span><span class="n">cat</span><span class="p">.</span><span class="nf">set_categories</span><span class="p">([</span><span class="sh">"</span><span class="s">very good</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">good</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">very bad</span><span class="sh">"</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="sh">"</span><span class="s">grade</span><span class="sh">"</span><span class="p">]</span> <span class="c1">#rename the categories
 </span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    NaN
@@ -3528,7 +3528,7 @@ Categories (3, object): ['very good', 'good', 'very bad']
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">"grade"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="sh">"</span><span class="s">grade</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div>
@@ -3597,7 +3597,7 @@ Categories (3, object): ['very good', 'good', 'very bad']
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"grade"</span><span class="p">).</span><span class="n">size</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">"</span><span class="s">grade</span><span class="sh">"</span><span class="p">).</span><span class="nf">size</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grade
@@ -3613,34 +3613,34 @@ dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="n">plt</span><span class="p">.</span><span class="n">close</span><span class="p">(</span><span class="s">"all"</span><span class="p">)</span> <span class="c1">#close a figure window
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">close</span><span class="p">(</span><span class="sh">"</span><span class="s">all</span><span class="sh">"</span><span class="p">)</span> <span class="c1">#close a figure window
 </span></code></pre></div></div>
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">"1/1/2000"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span><span class="p">.</span><span class="n">cumsum</span><span class="p">()</span>
-<span class="n">ts</span><span class="p">.</span><span class="n">plot</span><span class="p">();</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nf">date_range</span><span class="p">(</span><span class="sh">"</span><span class="s">1/1/2000</span><span class="sh">"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span><span class="p">.</span><span class="nf">cumsum</span><span class="p">()</span>
+<span class="n">ts</span><span class="p">.</span><span class="nf">plot</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p><img src="/img/posts/ML/ML2/output_102_0.png" alt="plot1" /></p>
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
-                <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">,</span> <span class="s">"D"</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
+                <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">B</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">C</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D</span><span class="sh">"</span><span class="p">]</span>
 <span class="p">)</span>
 </code></pre></div></div>
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">cumsum</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="nf">cumsum</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">();</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">();</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Figure size 432x288 with 0 Axes&gt;
@@ -3648,8 +3648,8 @@ dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">plot</span><span class="p">();</span>
-<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'best'</span><span class="p">);</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">plot</span><span class="p">();</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="sh">'</span><span class="s">best</span><span class="sh">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p><img src="/img/posts/ML/ML2/output_106_0.png" alt="plot2" /></p>
@@ -3660,12 +3660,12 @@ dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"foo.csv"</span><span class="p">)</span> <span class="c1">#writing to c csv file
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">to_csv</span><span class="p">(</span><span class="sh">"</span><span class="s">foo.csv</span><span class="sh">"</span><span class="p">)</span> <span class="c1">#writing to c csv file
 </span></code></pre></div></div>
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"foo.csv"</span><span class="p">)</span> <span class="c1">#reading from a csv file
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">"</span><span class="s">foo.csv</span><span class="sh">"</span><span class="p">)</span> <span class="c1">#reading from a csv file
 </span></code></pre></div></div>
 
 <div>
@@ -3793,12 +3793,12 @@ dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="s">"foo.h5"</span><span class="p">,</span> <span class="s">"df"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">to_hdf</span><span class="p">(</span><span class="sh">"</span><span class="s">foo.h5</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">df</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s">"foo.h5"</span><span class="p">,</span> <span class="s">"df"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="nf">read_hdf</span><span class="p">(</span><span class="sh">"</span><span class="s">foo.h5</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">df</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -3807,12 +3807,12 @@ dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s">"foo.xlsx"</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">"Sheet1"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="nf">to_excel</span><span class="p">(</span><span class="sh">"</span><span class="s">foo.xlsx</span><span class="sh">"</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="sh">"</span><span class="s">Sheet1</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"foo.xlsx"</span><span class="p">,</span> <span class="s">"Sheet1"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s">"NA"</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="nf">read_excel</span><span class="p">(</span><span class="sh">"</span><span class="s">foo.xlsx</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Sheet1</span><span class="sh">"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">NA</span><span class="sh">"</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -3821,8 +3821,8 @@ dtype: int64
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"I was True"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">I was True</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
@@ -3847,8 +3847,8 @@ ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.i
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"I was True"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">I was True</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I was True
@@ -3856,8 +3856,8 @@ ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.i
 
 <p><br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">pd</span><span class="p">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"I was True"</span><span class="p">)</span>  <span class="o">&lt;</span><span class="n">BR</span><span class="o">/&gt;</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">I was True</span><span class="sh">"</span><span class="p">)</span>  <span class="o">&lt;</span><span class="n">BR</span><span class="o">/&gt;</span>
 
 <span class="c1">##None is not definition
 </span></code></pre></div></div>

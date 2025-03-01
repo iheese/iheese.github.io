@@ -1,4 +1,4 @@
-I"�4<h1 id="앙상블-모델">앙상블 모델</h1>
+I")5<h1 id="앙상블-모델">앙상블 모델</h1>
 
 <ul>
   <li>
@@ -134,53 +134,53 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 랜덤포레스트 기본 구현 (1)
 </span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">ShuffleSplit</span>
+<span class="kn">from</span> <span class="n">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">ShuffleSplit</span>
 
 <span class="n">n_trees</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">n_instances</span> <span class="o">=</span> <span class="mi">100</span>
 
 <span class="n">mini_sets</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="n">result_split</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">n_trees</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span> <span class="o">-</span> <span class="n">n_instances</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">mini_train_index</span><span class="p">,</span> <span class="n">mini_test_index</span> <span class="ow">in</span> <span class="n">result_split</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">X_train</span><span class="p">):</span>
+<span class="n">result_split</span> <span class="o">=</span> <span class="nc">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">n_trees</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="nf">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span> <span class="o">-</span> <span class="n">n_instances</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">mini_train_index</span><span class="p">,</span> <span class="n">mini_test_index</span> <span class="ow">in</span> <span class="n">result_split</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="n">X_train</span><span class="p">):</span>
  <span class="n">X_mini_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="n">mini_train_index</span><span class="p">]</span>
  <span class="n">y_mini_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="n">mini_train_index</span><span class="p">]</span>
- <span class="n">mini_sets</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">X_mini_train</span><span class="p">,</span> <span class="n">y_mini_train</span><span class="p">))</span>
+ <span class="n">mini_sets</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">X_mini_train</span><span class="p">,</span> <span class="n">y_mini_train</span><span class="p">))</span>
 <span class="c1">#무작위로 분할하여 1000개 서브셋 생성
 </span>
 <span class="c1"># 랜덤포레스트 기본 구현 (2)
 </span>
-<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">clone</span>
+<span class="kn">from</span> <span class="n">sklearn.base</span> <span class="kn">import</span> <span class="n">clone</span>
 
-<span class="n">forest</span> <span class="o">=</span> <span class="p">[</span><span class="n">clone</span><span class="p">(</span><span class="n">best_clf</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trees</span><span class="p">)]</span>
+<span class="n">forest</span> <span class="o">=</span> <span class="p">[</span><span class="nf">clone</span><span class="p">(</span><span class="n">best_clf</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n_trees</span><span class="p">)]</span>
 
 <span class="n">accuracy_scores</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">for</span> <span class="n">tree</span><span class="p">,</span> <span class="p">(</span><span class="n">X_mini_train</span><span class="p">,</span> <span class="n">y_mini_train</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">forest</span><span class="p">,</span> <span class="n">mini_sets</span><span class="p">):</span>
- <span class="n">tree</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_mini_train</span><span class="p">,</span> <span class="n">y_mini_train</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tree</span><span class="p">,</span> <span class="p">(</span><span class="n">X_mini_train</span><span class="p">,</span> <span class="n">y_mini_train</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">forest</span><span class="p">,</span> <span class="n">mini_sets</span><span class="p">):</span>
+ <span class="n">tree</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">X_mini_train</span><span class="p">,</span> <span class="n">y_mini_train</span><span class="p">)</span>
 
 
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tree</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="n">accuracy_scores</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tree</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">accuracy_scores</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"1000개의 약한 학습기에 대한 정확도 평균:</span><span class="si">{</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">accuracy_scores</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">1000개의 약한 학습기에 대한 정확도 평균:</span><span class="si">{</span><span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">accuracy_scores</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="sh">"</span><span class="p">)</span>
 
 <span class="c1">#1000개의 약한 학습기에 대한 정확도 평균:0.856837
 </span></code></pre></div></div>
 
 <h1 id="랜덤포레스트-기본-구현-3">랜덤포레스트 기본 구현 (3)</h1>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">empty</span><span class="p">([</span><span class="n">n_trees</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">empty</span><span class="p">([</span><span class="n">n_trees</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">tree_index</span><span class="p">,</span> <span class="n">tree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">forest</span><span class="p">):</span>
- <span class="n">Y_pred</span><span class="p">[</span><span class="n">tree_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">tree</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tree_index</span><span class="p">,</span> <span class="n">tree</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">forest</span><span class="p">):</span>
+ <span class="n">Y_pred</span><span class="p">[</span><span class="n">tree_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">tree</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">mode</span>
+<span class="kn">from</span> <span class="n">scipy.stats</span> <span class="kn">import</span> <span class="n">mode</span>
 
-<span class="n">y_pred_votes</span><span class="p">,</span> <span class="n">n_votes</span> <span class="o">=</span> <span class="n">mode</span><span class="p">(</span><span class="n">Y_pred</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="c1"># 랜덤포레스트 기본 구현 (4)
+<span class="n">y_pred_votes</span><span class="p">,</span> <span class="n">n_votes</span> <span class="o">=</span> <span class="nf">mode</span><span class="p">(</span><span class="n">Y_pred</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="c1"># 랜덤포레스트 기본 구현 (4)
 </span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"격자탐색 결정트리의 테스트 데이터셋 예측 정확도: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred3</span><span class="p">)</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"랜덤포레스트의 테스트 데이터셋 예측 정확도: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_votes</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="si">}</span><span class="s">"</span><span class="n">격자탐색</span> <span class="n">결정트리의</span> <span class="n">테스트</span> <span class="n">데이터셋</span> <span class="n">예측</span> <span class="n">정확도</span><span class="p">:</span> <span class="mf">0.9156666666666666</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">격자탐색 결정트리의 테스트 데이터셋 예측 정확도: </span><span class="si">{</span><span class="nf">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred3</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">랜덤포레스트의 테스트 데이터셋 예측 정확도: </span><span class="si">{</span><span class="nf">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_votes</span><span class="p">.</span><span class="nf">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="si">}</span><span class="sh">"</span><span class="n">격자탐색</span> <span class="n">결정트리의</span> <span class="n">테스트</span> <span class="n">데이터셋</span> <span class="n">예측</span> <span class="n">정확도</span><span class="p">:</span> <span class="mf">0.9156666666666666</span><span class="p">)</span>
 
 <span class="c1">#격자탐색 결정트리의 테스트 데이터셋 예측 정확도: 0.9156666666666666
 #랜덤포레스트의 테스트 데이터셋 예측 정확도: 0.9166666666666666

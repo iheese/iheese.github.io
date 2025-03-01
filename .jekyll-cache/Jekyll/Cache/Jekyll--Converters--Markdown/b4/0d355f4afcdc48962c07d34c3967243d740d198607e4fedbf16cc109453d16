@@ -1,4 +1,4 @@
-I"AD<h1 id="퍼셉트론-분류기">퍼셉트론 분류기</h1>
+I"F<h1 id="퍼셉트론-분류기">퍼셉트론 분류기</h1>
 
 <ul>
   <li>
@@ -54,61 +54,61 @@ $
 
 <h2 id="perceptron-구현">Perceptron 구현</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span> <span class="c1">#numpy
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span> <span class="c1">#numpy
 </span>
 <span class="k">class</span> <span class="nc">Perceptron</span><span class="p">():</span>  <span class="c1">#class 정의
-</span>    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">thresholds</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span> <span class="c1">#생성자 정의 및 default값 설정
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">thresholds</span><span class="o">=</span><span class="n">thresholds</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">eta</span><span class="o">=</span><span class="n">eta</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span>
+</span>    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">thresholds</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span> <span class="c1">#생성자 정의 및 default값 설정
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">thresholds</span><span class="o">=</span><span class="n">thresholds</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">eta</span><span class="o">=</span><span class="n">eta</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span>
         
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span> <span class="p">,</span><span class="n">y</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">w_</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1">#0으로 이루어진 +1 된 리스트
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">errors_</span><span class="o">=</span><span class="p">[]</span> <span class="c1"># 오류 회수를 저장하는 변수
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">X</span> <span class="p">,</span><span class="n">y</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">w_</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1">#0으로 이루어진 +1 된 리스트
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">errors_</span><span class="o">=</span><span class="p">[]</span> <span class="c1"># 오류 회수를 저장하는 변수
 </span>        
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">n_iter</span><span class="p">):</span> <span class="c1">#반복
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">n_iter</span><span class="p">):</span> <span class="c1">#반복
 </span>            <span class="n">errors</span><span class="o">=</span><span class="mi">0</span>
-            <span class="k">for</span> <span class="n">xi</span><span class="p">.</span><span class="n">target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">):</span> <span class="c1">#zip은 두 리스트를 행렬로 붙여줌
-</span>                <span class="n">update</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">eta</span><span class="o">*</span><span class="p">(</span><span class="n">target</span><span class="o">-</span><span class="bp">self</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span> <span class="c1">#xi는 트레이닝 데이터의 모든 입력값 ,x0=1 로 정해져 있다.
-</span>                <span class="bp">self</span><span class="p">.</span><span class="n">w_</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+=</span><span class="n">update</span><span class="o">*</span><span class="n">xi</span>
-                <span class="bp">self</span><span class="p">.</span><span class="n">w_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span><span class="n">update</span>
-                <span class="n">errors</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">update</span><span class="o">!=</span><span class="mf">0.0</span><span class="p">)</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">errors_</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">w_</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">xi</span><span class="p">.</span><span class="n">target</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">):</span> <span class="c1">#zip은 두 리스트를 행렬로 붙여줌
+</span>                <span class="n">update</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">eta</span><span class="o">*</span><span class="p">(</span><span class="n">target</span><span class="o">-</span><span class="n">self</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span> <span class="c1">#xi는 트레이닝 데이터의 모든 입력값 ,x0=1 로 정해져 있다.
+</span>                <span class="n">self</span><span class="p">.</span><span class="n">w_</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+=</span><span class="n">update</span><span class="o">*</span><span class="n">xi</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">w_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span><span class="n">update</span>
+                <span class="n">errors</span> <span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">update</span><span class="o">!=</span><span class="mf">0.0</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">errors_</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">w_</span><span class="p">)</span>
             
-        <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="n">self</span>
     
-    <span class="k">def</span> <span class="nf">net_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">w_</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">+</span><span class="bp">self</span><span class="p">.</span><span class="n">w_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#가중치와 X값을 곱한 총합
-</span>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">net_input</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">thresholds</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#임계값보다 크면 1 작으면 -1
+    <span class="k">def</span> <span class="nf">net_input</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">w_</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">+</span><span class="n">self</span><span class="p">.</span><span class="n">w_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#가중치와 X값을 곱한 총합
+</span>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">net_input</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">self</span><span class="p">.</span><span class="n">thresholds</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#임계값보다 크면 1 작으면 -1
 </span></code></pre></div></div>
 
 <h2 id="sklearn의-perceptron-분류기-in-python">sklearn의 Perceptron 분류기 in Python</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Perceptron</span> <span class="c1">#퍼셉트론 분류기 API 생성
-</span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span> <span class="c1"># 훈련 데이터셋과 테스트 데이터셋 나누기
+<span class="kn">from</span> <span class="n">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Perceptron</span> <span class="c1">#퍼셉트론 분류기 API 생성
+</span><span class="kn">from</span> <span class="n">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span> <span class="c1"># 훈련 데이터셋과 테스트 데이터셋 나누기
 </span></code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'./datasets/data.csv'</span><span class="p">)</span> <span class="c1">#데이터 불러오기
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">./datasets/data.csv</span><span class="sh">'</span><span class="p">)</span> <span class="c1">#데이터 불러오기
 </span>
 <span class="n">data</span><span class="p">.</span><span class="n">columns</span> <span class="c1"># 데이터 열이름 확인하기
 </span>
-<span class="n">data</span><span class="p">.</span><span class="n">subset</span> <span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'col1'</span><span class="p">,</span><span class="s">'col2'</span><span class="p">,</span><span class="s">'result'</span><span class="p">]]</span> <span class="c1">#내가 관심있는 특성을 뽑아냈다
+<span class="n">data</span><span class="p">.</span><span class="n">subset</span> <span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="sh">'</span><span class="s">col1</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">col2</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">result</span><span class="sh">'</span><span class="p">]]</span> <span class="c1">#내가 관심있는 특성을 뽑아냈다
 </span>
-<span class="n">data</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#가장 상위 5개 행 데이터 추출; EDA의 일종,
-</span><span class="n">data</span><span class="p">.</span><span class="n">tail</span><span class="p">()</span> <span class="c1"># 하위 5개 데이터 행
+<span class="n">data</span><span class="p">.</span><span class="nf">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#가장 상위 5개 행 데이터 추출; EDA의 일종,
+</span><span class="n">data</span><span class="p">.</span><span class="nf">tail</span><span class="p">()</span> <span class="c1"># 하위 5개 데이터 행
 </span>
-<span class="n">X</span><span class="o">=</span><span class="n">data_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'col1'</span><span class="p">,</span><span class="s">'col2'</span><span class="p">]]</span> <span class="c1">#특성벡터와 레이블의 구분
-</span><span class="n">y</span><span class="o">=</span><span class="n">data_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'result'</span><span class="p">]]</span>
+<span class="n">X</span><span class="o">=</span><span class="n">data_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="sh">'</span><span class="s">col1</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">col2</span><span class="sh">'</span><span class="p">]]</span> <span class="c1">#특성벡터와 레이블의 구분
+</span><span class="n">y</span><span class="o">=</span><span class="n">data_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="sh">'</span><span class="s">result</span><span class="sh">'</span><span class="p">]]</span>
 
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> 
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="nf">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> 
 <span class="c1">#훈련 데이터셋과 테스트 데이터셋 구성; random_state=정수 난수 순서의 시드, 값을 정해주면 일정한 순서로 데이터셋을 구성한다. 
 </span>
-<span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nf">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">/</span><span class="nf">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="c1">#아무 설정 안했으면 이 값은 0.75 가 나올 것 기본적으로 훈련셋 75%, 테스트 셋 25%으로 나눈다.
 #이 값도 변경이 가능하다. test_size=0.2 를 추가하면 테스트 사이즈 20%로 하겠다는 뜻이다.
 </span>
@@ -116,10 +116,10 @@ $
 
 <p><a href="https://teddylee777.github.io/scikit-learn/train-test-split">train_test_split</a> 에 관한 참고 테디 노트님 자료:) 자세하고 좋은 설명 감사합니다.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">classifierP</span><span class="o">=</span><span class="n">Perceptron</span><span class="p">()</span>
-<span class="n">classifierP</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span> <span class="c1">#추정기 객체 생성 및 추정
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">classifierP</span><span class="o">=</span><span class="nc">Perceptron</span><span class="p">()</span>
+<span class="n">classifierP</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span> <span class="c1">#추정기 객체 생성 및 추정
 </span>
-<span class="n">y_test_hat</span><span class="o">=</span><span class="n">classifierP</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="c1">#predict() 메소드를 이용한 예측
+<span class="n">y_test_hat</span><span class="o">=</span><span class="n">classifierP</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="c1">#predict() 메소드를 이용한 예측
 </span>
 </code></pre></div></div>
 
@@ -146,26 +146,26 @@ $
   </ol>
 </blockquote>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_test_org</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="c1">#시리즈로 나온 test결과값을 array 객체로 변경
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_test_org</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">.</span><span class="nf">to_numpy</span><span class="p">()</span> <span class="c1">#시리즈로 나온 test결과값을 array 객체로 변경
 </span>
 <span class="n">correct_prediction</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_test_hat</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span> <span class="c1">#bool 값을 예측에 저장
 </span><span class="n">correct_prediction</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
 
-<span class="n">correct_prediction</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1">#True는 1로, False는 0으로 이해하기 떄문에 평균을 내어도 정확도를 구할 수 있다.
+<span class="n">correct_prediction</span><span class="p">.</span><span class="nf">mean</span><span class="p">()</span> <span class="c1">#True는 1로, False는 0으로 이해하기 떄문에 평균을 내어도 정확도를 구할 수 있다.
 </span>
-<span class="n">classifierP</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span> <span class="c1">#score로 테스트 결과 성능 평가를 할 수 있다.
+<span class="n">classifierP</span><span class="p">.</span><span class="nf">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span> <span class="c1">#score로 테스트 결과 성능 평가를 할 수 있다.
 </span>
-<span class="n">classifierP</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span> <span class="c1">#훈련셋의 성능 평가
+<span class="n">classifierP</span><span class="p">.</span><span class="nf">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span> <span class="c1">#훈련셋의 성능 평가
 </span>
 
 </code></pre></div></div>
 
 <p>테스트의 성능평가 결과가 좋지 않다면 훈련셋 자체의 성능을 의심해볼 필요가 있다.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span> <span class="c1">#산점도를 그려보기 위한 plt
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span> <span class="c1">#산점도를 그려보기 위한 plt
 </span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span> <span class="c1"># 주피터 노트북 내 그래프를 그리게 하는 명령어
 </span>
-<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_subset</span><span class="p">[</span><span class="s">'col1'</span><span class="p">],</span> <span class="n">data_subset</span><span class="p">[</span><span class="s">'col2'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">data_subset</span><span class="p">[</span><span class="s">'result'</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">data_subset</span><span class="p">[</span><span class="sh">'</span><span class="s">col1</span><span class="sh">'</span><span class="p">],</span> <span class="n">data_subset</span><span class="p">[</span><span class="sh">'</span><span class="s">col2</span><span class="sh">'</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">data_subset</span><span class="p">[</span><span class="sh">'</span><span class="s">result</span><span class="sh">'</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="c1"># 순서대로 특성을 x,y로 넣고 c는 점의 색을 넣어 데이터셋 자체가 선형분리가능인지 확인하는 그래프,
 # alpha는 점의 투명도 1로 갈수록 불투명
 </span></code></pre></div></div>

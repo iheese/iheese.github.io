@@ -58,13 +58,13 @@
 <span class="c1"># JPA 설정</span>
   <span class="na">jpa</span><span class="pi">:</span>
     <span class="na">database-platform</span><span class="pi">:</span> <span class="s">org.hibernate.dialect.H2Dialect</span>
-    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>  
+    <span class="na">show-sql</span><span class="pi">:</span> <span class="kc">true</span>  
     <span class="na">hibernate</span><span class="pi">:</span>
       <span class="na">naming</span><span class="pi">:</span>
         <span class="na">physical-strategy</span><span class="pi">:</span> <span class="s">org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl</span> 
       <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">update</span>
-      <span class="na">use-new-id-generator-mappings</span><span class="pi">:</span> <span class="no">false</span>
-    <span class="s">properties[hibernate.format_sql]</span><span class="err">:</span> <span class="no">true</span> <span class="c1">#포맷 유지</span>
+      <span class="na">use-new-id-generator-mappings</span><span class="pi">:</span> <span class="kc">false</span>
+    <span class="s">properties[hibernate.format_sql]</span><span class="err">:</span> <span class="kc">true</span> <span class="c1">#포맷 유지</span>
 </code></pre></div></div>
 
 <ul>

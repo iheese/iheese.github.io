@@ -1,4 +1,4 @@
-I"T<h3 id="먼저-알아야-할--것">먼저 알아야 할  것</h3>
+I"�T<h3 id="먼저-알아야-할--것">먼저 알아야 할  것</h3>
 
 <p><strong>스택</strong>: 선입후출, 후입선출의 구조 , 박스 쌓기</p>
 
@@ -9,10 +9,10 @@
 <hr />
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">recursive_function</span><span class="p">():</span>
-	<span class="k">print</span><span class="p">(</span><span class="s">"재귀 함수 호출"</span><span class="p">)</span>
-	<span class="n">recursive_function</span><span class="p">()</span>
+	<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">재귀 함수 호출</span><span class="sh">"</span><span class="p">)</span>
+	<span class="nf">recursive_function</span><span class="p">()</span>
 	
-<span class="n">recursive_funciton</span><span class="p">()</span>
+<span class="nf">recursive_funciton</span><span class="p">()</span>
 </code></pre></div></div>
 
 <hr />
@@ -55,11 +55,11 @@
 </span>  <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
   	<span class="c1">#현재 노드를 방문 처리
 </span>  	<span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
-  	<span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+  	<span class="nf">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="sh">''</span><span class="p">)</span>
   	<span class="c1">#현재 노드와 연결된 다른 노드를 재귀적으로 방문
 </span>  	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
   		<span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-  			<span class="n">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
+  			<span class="nf">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
   <span class="c1">#각 노트가 연결된 정보를 리스트 자료형으로 표현(2차원 리스트)
 </span>  <span class="n">graph</span><span class="o">=</span><span class="p">[</span>
       <span class="p">[],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">7</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
@@ -67,7 +67,7 @@
   <span class="c1">#각 노드가 방문된 정보를 리스트 자료형으로 표현(1차원 리스트)
 </span>  <span class="n">visited</span> <span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span>
   <span class="c1">#정의된 DFS 함수 호출
-</span>  <span class="n">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
+</span>  <span class="nf">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
   
   <span class="c1">#1 2 7 6 8 3 4 5
 </span></code></pre></div></div>
@@ -85,23 +85,23 @@
 
 <hr />
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span> <span class="c1">#큐 자료 구조 구현
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span> <span class="c1">#큐 자료 구조 구현
 </span>
 <span class="c1">#BFS 메서드 정의
 </span><span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
     <span class="c1"># 큐 구현을 위해 deque 라이브러리 사용
-</span>    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
+</span>    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
     <span class="c1">#현재 노드를 방문 처리
 </span>    <span class="n">visited</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
     <span class="c1">#큐가 빌 때까지 반복
 </span>    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
         <span class="c1">#큐에서 하나의 원소를 뽑아 출력
-</span>        <span class="n">v</span><span class="o">=</span><span class="n">queue</span><span class="p">.</span><span class="n">popleft</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">" "</span><span class="p">)</span>
+</span>        <span class="n">v</span><span class="o">=</span><span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="sh">"</span><span class="s"> </span><span class="sh">"</span><span class="p">)</span>
         <span class="c1">#해당 원소와 연결된, 아직 방문하지 않은 원소들을 큐에 삽입
 </span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span> 
             <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                <span class="n">queqe</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">queqe</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
                     <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="bp">True</span>
  <span class="c1">#각 노드가 연결된 정보를 리스트 자료 형으로 표현 (2차원 리스트)
 </span><span class="n">graph</span><span class="o">=</span><span class="p">[[],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">7</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">]]</span>
@@ -110,7 +110,7 @@
 </span><span class="n">visited</span><span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span>
 
 <span class="c1">#정의된 BFS 함수 호출
-</span><span class="n">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">visited</span><span class="p">)</span>
+</span><span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">visited</span><span class="p">)</span>
 
 <span class="c1">#1 2 3 8 7 4 5 6
 </span></code></pre></div></div>
@@ -135,11 +135,11 @@
 <hr />
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#입력 받기
-</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">intput</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nf">intput</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
 
 <span class="n">graph</span><span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">graph</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">())))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nf">input</span><span class="p">())))</span>
     
 <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
     <span class="c1">#주어진 범위 벗어나면 바로 종료
@@ -150,22 +150,22 @@
         <span class="c1">#해당 노드 방문 처리
 </span>        <span class="n">graph</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
         <span class="c1">#상하좌우의 위치도 모두 재귀적으로 호출
-</span>        <span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span>        <span class="nf">dfs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+        <span class="nf">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nf">dfs</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+        <span class="nf">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">True</span>
     <span class="k">return</span> <span class="bp">False</span>
 
 <span class="c1">#모든 노드(위치)에 대해서 음료수 채우기
 </span><span class="n">result</span> <span class="o">=</span><span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
         <span class="c1">#현재 위치에서 DFS 수행
-</span>        <span class="k">if</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+</span>        <span class="k">if</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">+=</span><span class="mi">1</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div></div>
 
 <hr />
@@ -183,13 +183,13 @@
 
 <hr />
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
   
-  <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+  <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
   
   <span class="n">graph</span><span class="o">=</span><span class="p">[]</span>
-  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-      <span class="n">graph</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">())))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+      <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">())))</span>
   
    <span class="c1">#상 하 좌 우
 </span>  <span class="n">dx</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
@@ -197,12 +197,12 @@
   
   <span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
       <span class="c1">#큐 구현을 위해 deque 라이브러리 사용
-</span>      <span class="n">queue</span><span class="o">=</span><span class="n">deque</span><span class="p">()</span>
-      <span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+</span>      <span class="n">queue</span><span class="o">=</span><span class="nf">deque</span><span class="p">()</span>
+      <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
   	<span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
-          <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span><span class="n">queue</span><span class="p">.</span><span class="n">popleft</span><span class="p">()</span>
+          <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span><span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
           <span class="c1">#현재 위치에서 네 방향으로의 위치 확인
-</span>          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span>          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
            	<span class="n">nx</span><span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
           	<span class="n">ny</span><span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> 
           	<span class="c1">#미로 찾기 공간을 벗어난 경우 무시
@@ -214,12 +214,12 @@
                <span class="c1">#해당 노드를 처음 방문하는 경우에만 최단 거리 기록   
 </span>               <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                   <span class="n">graph</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span><span class="n">gragh</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span>
-                  <span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">))</span>
+                  <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">))</span>
       <span class="c1">#가장 오른쪽 아래까지의 최단 거리 반환   
 </span>      <span class="k">return</span> <span class="n">graph</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
   
   <span class="c1">#BFS를 수행한 결과 출력
-</span>  <span class="k">print</span><span class="p">(</span><span class="n">bfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</span>  <span class="nf">print</span><span class="p">(</span><span class="nf">bfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
           
 </code></pre></div></div>
 

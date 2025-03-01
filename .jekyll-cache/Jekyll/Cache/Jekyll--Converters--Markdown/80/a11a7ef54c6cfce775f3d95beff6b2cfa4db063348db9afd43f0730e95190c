@@ -1,10 +1,11 @@
-I"y	<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#백준2438
-</span><span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+I"
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#백준2438
+</span><span class="n">n</span><span class="o">=</span><span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">())</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'*'</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s">""</span><span class="p">)</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">*</span><span class="sh">'</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="sh">""</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="sh">""</span><span class="p">)</span>
 
 <span class="c1">#3
 </span><span class="o">*</span>
@@ -13,10 +14,10 @@
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#백준2439
-</span><span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+</span><span class="n">n</span><span class="o">=</span><span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">())</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">" "</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"*"</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+  <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s"> </span><span class="sh">"</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="sh">"</span><span class="s">*</span><span class="sh">"</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
 
 <span class="c1">#4
 </span>   <span class="o">*</span>

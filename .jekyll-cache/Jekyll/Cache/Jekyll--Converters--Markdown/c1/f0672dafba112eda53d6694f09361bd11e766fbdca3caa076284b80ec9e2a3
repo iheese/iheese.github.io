@@ -7,13 +7,13 @@
         <li>예시: window.setTimeout() //window는 전역객체라 생략 가능</li>
       </ul>
 
-      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">run</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nf">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">msg</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">hello codesquad</span><span class="dl">"</span><span class="p">;</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>  <span class="c1">//이 메시지는 즉시 실행되지 않습니다.</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>  <span class="c1">//이 메시지는 즉시 실행되지 않습니다.</span>
   <span class="p">},</span> <span class="mi">3000</span><span class="p">);</span> <span class="c1">//3초 뒤 실행된다. (지연실행)</span>
 <span class="p">}</span>
-<span class="nx">run</span><span class="p">();</span> <span class="c1">// 이처럼 늦게 실행되는 것을 비동기라 한다. </span>
+<span class="nf">run</span><span class="p">();</span> <span class="c1">// 이처럼 늦게 실행되는 것을 비동기라 한다. </span>
 </code></pre></div>      </div>
       <ul>
         <li>동기(synchronous): 동시에 일어난다. 요청을 하면 응답을 받아야지만 다음 동작이 일어난다. 직렬적으로 실행된다.</li>
