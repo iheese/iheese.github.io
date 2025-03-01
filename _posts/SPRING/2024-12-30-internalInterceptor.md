@@ -2,7 +2,7 @@
 layout: post
 title: '[JAVA, SPRING] Spring Interceptor 중심으로 DispatcherServlet 내부 구현 파보기'
 subtitle: 'Spring Interceptor, 내부 구현, DispatcherServlet, doDispatch'
-date: 2024-12-31 12:00:00 +0900
+date: 2024-12-30 12:00:00 +0900
 categories: 'SPRING'
 background: '/img/posts/etc/spring.jpg'
 published: true
