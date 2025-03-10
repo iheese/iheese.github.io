@@ -48,7 +48,7 @@ defaults:
       type: "posts"
     values:
       layout: "default"
-      permalink: /posts/:title/
+      permalink: /:categories/:title/
       mathjax: true
       
 tipue_search:
