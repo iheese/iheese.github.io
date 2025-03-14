@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iheese.github.io/sitemap.xml
+Sitemap: https://iheese.github.io/mysitemap.xml
