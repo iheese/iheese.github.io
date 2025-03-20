@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://iheese.github.io/mysitemap.xml
