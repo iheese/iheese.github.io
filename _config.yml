@@ -14,6 +14,7 @@ linkedin_username:  StartBootstrap
 
 # Add your google-analytics ID here to activate google analytics
 google_analytics:   UA-87997801-1 # out your google-analytics code
+google_site_verification: "bNPfRJf7VCinz3xxSGT5KkOw99MVbcZAHwfTF0Z0n84"
 
 # Build settings
 markdown: kramdown
@@ -26,7 +27,6 @@ paginate_path:      "/page:num/"
 plugins:
   - jekyll-feed
   - jekyll-paginate
-  - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
 
 # Math equation
 markdown: kramdown
@@ -34,8 +34,6 @@ highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
-
-permalink: pretty
 
 sass:
   style: compressed
@@ -48,7 +46,7 @@ defaults:
       type: "posts"
     values:
       layout: "default"
-      permalink: /:categories/:title/
+      permalink: /:categories/:title
       mathjax: true
       
 tipue_search:
