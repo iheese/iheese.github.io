@@ -1,6 +1,0 @@
-I"	<h3 id="jspjava-server-pages">JSP(Java Server Pages)</h3>
-<ul>
-  <li>HTML 문서 안에 Java 코드를 넣어 동적 웹페이지를 설정하는 웹 어플리케이션 도구이다.</li>
-  <li>JSP는 서블릿 기술로 변환되어 사용되어진다.</li>
-</ul>
-:ET
