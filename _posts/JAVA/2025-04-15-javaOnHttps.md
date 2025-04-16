@@ -60,6 +60,17 @@ sudo keytool -import \
 
 <br>
 
+4.인증서를 잘 들어갔는지 확인한다.
+
+- window, mac 둘 다 같은 명령어로 확인 가능
+- %JAVA_HOME% 위치 잘 맞춰서 적어주면 된다. 
+
+```bash
+keytool -list -keystore "%JAVA_HOME%\jre\lib\security\cacerts" -alias kifin_cert -storepass changeit
+```
+
+<br>
+
 # JAVA 에서 HTTPS 요청 날리기
 
 ```java
