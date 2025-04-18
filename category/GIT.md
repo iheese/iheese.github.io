@@ -1,5 +1,5 @@
 ---
 layout: category
-category: GIT
+category: git
 background: '/img/category/git.jpg'
 ---

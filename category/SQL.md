@@ -1,5 +1,5 @@
 ---
 layout: category
-category: SQL
+category: sql
 background: '/img/category/sql.png'
 ---

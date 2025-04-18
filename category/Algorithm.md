@@ -1,5 +1,5 @@
 ---
 layout: category
-category: Algorithm
+category: algorithm
 background: '/img/category/algorithm.jpg'
 ---

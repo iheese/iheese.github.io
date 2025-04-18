@@ -1,6 +1,5 @@
 ---
 layout: category
-category: WEB
+category: web
 background: '/img/category/web.jpg'
 ---
-

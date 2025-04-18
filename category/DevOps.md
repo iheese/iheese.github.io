@@ -1,6 +1,5 @@
 ---
 layout: category
-category: DevOps
+category: devops
 background: '/img/category/devops.png'
 ---
-

@@ -1,5 +1,5 @@
 ---
 layout: category
-category: PROJECT
+category: project
 background: '/img/category/project.png'
 ---

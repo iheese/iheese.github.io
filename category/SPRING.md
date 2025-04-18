@@ -1,6 +1,5 @@
 ---
 layout: category
-category: SPRING
+category: spring
 background: '/img/category/spring.jpg'
 ---
-

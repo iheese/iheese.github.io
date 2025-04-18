@@ -1,5 +1,5 @@
 ---
 layout: category
-category: FrontEnd
+category: frontend
 background: '/img/category/frontend.jpg'
 ---

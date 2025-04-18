@@ -1,6 +1,5 @@
 ---
 layout: category
-category: ERROR
+category: error
 background: '/img/category/error.png'
 ---
-

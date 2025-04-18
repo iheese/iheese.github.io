@@ -1,6 +1,5 @@
 ---
 layout: category
-category: TEST
+category: test
 background: '/img/category/test.jpg'
 ---
-

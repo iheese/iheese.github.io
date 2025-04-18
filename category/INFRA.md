@@ -1,6 +1,5 @@
 ---
 layout: category
-category: INFRA
+category: infra
 background: '/img/category/infra.jpg'
 ---
-

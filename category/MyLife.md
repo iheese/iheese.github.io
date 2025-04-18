@@ -1,6 +1,5 @@
 ---
 layout: category
-category: MyLife
+category: mylife
 background: '/img/category/mylife.jpg'
 ---
-

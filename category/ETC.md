@@ -1,5 +1,5 @@
 ---
 layout: category
-category: ETC
+category: etc
 background: '/img/category/etc.jpg'
 ---
