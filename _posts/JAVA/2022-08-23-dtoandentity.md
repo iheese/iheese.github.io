@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA] DTO, ENTITY와 변환 방법'
 subtitle: 'DTO, Entity, 생성자, 메소드, ModelMapper, MapStruct'
 date: 2022-08-23 12:00:00 +0900
-categories: 'JAVA'
+category: 'JAVA'
 background: '/img/posts/etc/datastructure.jpg'
 ---
 
