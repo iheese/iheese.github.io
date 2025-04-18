@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA] 자바로 HTTPS 요청 보내기 '
 subtitle: 'HTTPS, SSL, peer not authenticated, HttpClient'
 date: 2025-04-15 12:00:00 +0900
-categories: [JAVA]
+categories: 'JAVA'
 background: '/img/posts/javaetc/java.png'
 ---
 
