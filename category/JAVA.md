@@ -1,5 +1,5 @@
 ---
 layout: category
-category: JAVA
+category: java
 background: '/img/category/java.png'
 ---

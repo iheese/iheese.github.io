@@ -3,11 +3,11 @@ layout: post
 title: '[JAVA] 자바로 HTTPS 요청 보내기 '
 subtitle: 'HTTPS, SSL, peer not authenticated, HttpClient'
 date: 2025-04-15 12:00:00 +0900
-categories: 'JAVA'
+categories: [java]
 background: '/img/posts/javaetc/java.png'
 ---
 
-# 자바7, Apache HttpClient 4.2.5 에서 HTTPS 요청을 보낼 떄
+# Java7, Apache HttpClient 4.2.5 에서 HTTPS 요청을 보낼 떄
 
 - HTTPS 요청을 보낼 때, 자바는 내부적으로 cacerts 파일을 이용해 서버 인증서를 검증한다.
 - 그런데 사설 인증서나 신뢰할 수 없는 CA의 인증서를 쓰는 서버에 요청할 경우, javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated 오류가 난다.

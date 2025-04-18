@@ -3,7 +3,7 @@ layout: post
 title: "[JAVA] JAVA.IO(INPUT, OUTPUT)"
 subtitle: " InputStream, OutputStream, Reader, Writer, BufferedReader, BufferedWriter "
 date: 2022-04-26 12:00:00 +0900
-categories: "JAVA"
+categories: [java]
 background: "/img/posts/javaetc/java.png"
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA] CompletableFuture 클래스'
 subtitle: '비동기, 멀티쓰레드, Concurrent'
 date: 2023-09-22 18:20:00 +0900
-categories: 'JAVA'
+categories: [java]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 
