@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 28, 배열보다는 리스트를 사용하라'
 subtitle: ''
 date: 2023-07-21 11:40:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 published : true
 ---

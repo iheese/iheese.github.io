@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 25, 톱레벨 클래스는 한 파일에 하나만 담으라'
 subtitle: ''
 date: 2023-07-13 12:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 ---
 

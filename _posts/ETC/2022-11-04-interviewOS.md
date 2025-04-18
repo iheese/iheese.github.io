@@ -3,7 +3,7 @@ layout: post
 title: '운영체제 Interview 대비'
 subtitle: '프로세스, 스레드, 컨텍스트 스위칭, 동기/비동기, 세마포어, 뮤텍스'
 date: 2022-11-29 09:00:00 +0900
-categories: 'ETC'
+categories: [etc]
 background: '/img/posts/etc/git.png'
 ---
 

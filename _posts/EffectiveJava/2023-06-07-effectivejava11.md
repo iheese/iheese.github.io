@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 11, equals를 재정의하려거든 hashCode도 재정의하라'
 subtitle: ''
 date: 2023-06-07 16:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

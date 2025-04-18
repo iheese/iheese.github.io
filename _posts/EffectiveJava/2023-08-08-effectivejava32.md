@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 32, 제네릭과 가변 인수를 함께 쓸 때는 신중하라'
 subtitle: ''
 date: 2023-08-08 12:50:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 published : true
 ---

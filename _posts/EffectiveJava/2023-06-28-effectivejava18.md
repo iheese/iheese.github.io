@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 18, 상속보다는 컴포지션을 사용하라'
 subtitle: ''
 date: 2023-06-28 16:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

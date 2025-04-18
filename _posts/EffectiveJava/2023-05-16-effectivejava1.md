@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 1, 생성자 대신 정적 팩터리 메소드를 고려하라'
 subtitle: ''
 date: 2023-05-16 12:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

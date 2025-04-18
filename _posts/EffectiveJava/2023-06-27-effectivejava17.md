@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 17, 변경 가능성을 최소화하라'
 subtitle: ''
 date: 2023-06-27 14:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

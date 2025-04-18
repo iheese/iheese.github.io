@@ -3,7 +3,7 @@ layout: post
 title: 'Java Interview 대비'
 subtitle: 'JVM, GC, OOP, API, JDBC'
 date: 2023-12-07 11:30:00 +0900
-categories: 'ETC'
+categories: [etc]
 background: '/img/posts/etc/git.png'
 
 ---

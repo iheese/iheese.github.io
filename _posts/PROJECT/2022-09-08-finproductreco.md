@@ -3,7 +3,7 @@ layout: post
 title: 'Finance Product Recommendation Mini Project  회고록 '
 subtitle: 'Spring boot, JPA, MySQL, Docker, AWS, 협업'
 date: 2022-09-08 12:00:00 +0900
-categories: 'PROJECT'
+categories: [project]
 background: '/img/posts/project/project.jpg'
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 42, 익명 클래스보다는 람다를 사용하라'
 subtitle: ''
 date: 2023-10-16 12:20:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 published : true
 ---

@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRING] SPRING MYBATIS'
 subtitle: 'SqlSessionTemplate, MapperFactoryBean'
 date: 2022-06-29 12:00:00 +0900
-categories: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

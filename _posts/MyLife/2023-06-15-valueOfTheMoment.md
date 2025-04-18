@@ -3,7 +3,7 @@ layout: post
 title: ' 순간의 가치를 높이는 방법'
 subtitle: '순간의 가치'
 date: 2023-06-15 10:00:00 +0900
-categories: 'MyLife'
+categories: [mylife]
 background: '/img/posts/MyLife/street.jpg'
 ---
 

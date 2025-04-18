@@ -3,7 +3,7 @@ layout: post
 title: 'Go Together 여행 상품 추천 플랫폼 프로젝트 회고록 '
 subtitle: 'Spring boot, Spring Security, JPA, MySQL, Redis, Docker, AWS, Jenkins'
 date: 2022-10-20 12:00:00 +0900
-categories: 'PROJECT'
+categories: [project]
 background: '/img/posts/project/project.jpg'
 ---
 

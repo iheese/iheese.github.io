@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 35, ordinal 메소드 대신 인스턴스 필드를 사용하라'
 subtitle: ''
 date: 2023-08-18 10:30:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 published : true
 ---

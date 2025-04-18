@@ -3,7 +3,7 @@ layout: post
 title: '[ERROR, HTML] HTML, JSP에서 form 태그 안에 button 태그 에러'
 subtitle: 'form 태그 안에서 작동하는 button 태그, button 태그 타입 설정'
 date: 2022-07-20 12:00:00 +0900
-categories: 'ERROR'
+categories: [error]
 background: '/img/posts/etc/error.jpg'
 ---
 

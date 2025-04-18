@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 40, @Override 애너테이션을 일관되게 사용하라'
 subtitle: ''
 date: 2023-09-21 13:35:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 published : true
 ---

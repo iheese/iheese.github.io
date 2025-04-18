@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 12, toString을 항상 재정의하라'
 subtitle: ''
 date: 2023-06-08 12:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

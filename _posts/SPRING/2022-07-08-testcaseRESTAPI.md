@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRINGBOOT] JUNIT, REST API + Annotations'
 subtitle: 'Test case, @GetMappping, @PostMapping, @PutMapping, @DeleteMapping, @RequestBody, @ResponseBody, etc'
 date: 2022-07-08 12:00:00 +0900
-categories: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

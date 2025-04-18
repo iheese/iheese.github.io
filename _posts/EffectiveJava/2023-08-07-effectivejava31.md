@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 31, 한정적 와일드카드를 사용해 API 유연성을 높이라'
 subtitle: ''
 date: 2023-08-07 13:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 published : true
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "나를 소개하는 홈페이지"
 subtitle: "부스트코스 프로젝트 A"
 date: 2022-01-27 12:00:00 +0900
-categories: "PROJECT"
+categories: [project]
 ---
 
 ### For 나를 소개하는 홈페이지

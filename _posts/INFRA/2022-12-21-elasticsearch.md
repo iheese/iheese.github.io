@@ -3,7 +3,7 @@ layout: post
 title: '[INFRA] ELASTICSEARCH'
 subtitle: '엘라스틱서치, Cluster, Node, Index, Shard, Segment'
 date: 2022-12-21 12:00:00 +0900
-categories: 'INFRA'
+categories: [infra]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

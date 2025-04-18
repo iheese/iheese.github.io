@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 37, ordinal 인덱싱 대신 EnumMap을 사용하라'
 subtitle: ''
 date: 2023-08-22 11:40:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 published : true
 ---

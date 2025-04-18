@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 47, 반환 타입으로는 스트림보다 컬렉션이 낫다'
 subtitle: ''
 date: 2023-10-27 13:52:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 published : true
 ---

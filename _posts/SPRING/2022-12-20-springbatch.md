@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRING BATCH] SPRING BATCH 란? '
 subtitle: '스프링 배치, Job, Step, Chunk, Tasklet, JobRepository'
 date: 2022-12-20 12:00:00 +0900
-categories: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

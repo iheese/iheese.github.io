@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA] 백준_11728, 2164, 9012'
 subtitle: 'ArrayList, Queue, Stack 문제 풀이'
 date: 2022-04-14 12:00:00 +0900
-categories: 'Algorithm'
+categories: [algorithm]
 background: '/img/posts/etc/datastructure.jpg'
 use_math: true
 ---

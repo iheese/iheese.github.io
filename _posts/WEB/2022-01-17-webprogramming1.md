@@ -3,7 +3,7 @@ layout: post
 title: '웹 프로그래밍(풀스택)'
 subtitle: 'Web 개발의 이해'
 date: 2022-01-17 11:00:00 +0900
-categories: 'WEB'
+categories: [web]
 use_math: true
 ---
 

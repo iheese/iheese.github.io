@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 41, 정의하려는 것이 타입이라면 마커 인터페이스를 사용하라'
 subtitle: ''
 date: 2023-10-13 12:10:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 published : true
 ---

@@ -3,7 +3,7 @@ layout: post
 title: '[ETC] Monolithic vs SOA vs MSA'
 subtitle: '모놀리틱(Monolithic), SOA(Service Oriented Architecture), MSA(Micro Service Architecture)'
 date: 2023-07-04 12:00:00 +0900
-categories: 'ETC'
+categories: [etc]
 background: '/img/posts/etc/msa.png'
 published: true
 ---

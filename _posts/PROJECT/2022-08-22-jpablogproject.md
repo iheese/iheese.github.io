@@ -3,7 +3,7 @@ layout: post
 title: 'JPA BLOG TOY PROJECT 회고록'
 subtitle: 'Spring boot, JPA, H2, Test Code'
 date: 2022-08-22 12:00:00 +0900
-categories: 'PROJECT'
+categories: [project]
 background: '/img/posts/project/project.jpg'
 ---
 

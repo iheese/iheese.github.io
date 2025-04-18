@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 3, private 생성자나 열거 타입으로 싱글턴임을 보증하라'
 subtitle: ''
 date: 2023-05-18 16:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

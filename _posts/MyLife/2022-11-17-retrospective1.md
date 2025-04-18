@@ -3,7 +3,7 @@ layout: post
 title: ' 2022년 11월 회고록'
 subtitle: '교육, 취준, 하루'
 date: 2022-11-17 12:00:00 +0900
-categories: 'MyLife'
+categories: [mylife]
 background: '/img/posts/MyLife/street.jpg'
 published: true
 ---

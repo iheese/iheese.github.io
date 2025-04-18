@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 20, 추상 클래스보다는 인터페이스를 우선하라'
 subtitle: ''
 date: 2023-06-30 14:30:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

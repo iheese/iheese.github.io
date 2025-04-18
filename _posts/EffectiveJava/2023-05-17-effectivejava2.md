@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 2, 생성자에 매개변수가 많다면 빌더를 고려하라'
 subtitle: ''
 date: 2023-05-17 11:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

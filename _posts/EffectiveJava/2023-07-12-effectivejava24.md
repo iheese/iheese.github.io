@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 24, 멤버 클래스는 되도록 static으로 만들라'
 subtitle: ''
 date: 2023-07-12 14:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/effectiveJava/effectiveJava.jpg'
 ---
 

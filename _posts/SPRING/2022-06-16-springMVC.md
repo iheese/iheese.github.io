@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRING] SPRING MVC의 이해와 MVC 구현'
 subtitle: 'Container, DispatcherServlet, Controller, HandlerMapping'
 date: 2022-06-16 12:00:00 +0900
-categories: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

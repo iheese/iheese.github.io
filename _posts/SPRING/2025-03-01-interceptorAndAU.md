@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRING] Spring Interceptor로 자동화 공격 막기'
 subtitle: 'Spring, AU, 웹취약점'
 date: 2025-03-01 14:33:00 +0900
-category: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

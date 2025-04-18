@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 15, 클래스와 멤버의 접근 권한을 최소화하라'
 subtitle: ''
 date: 2023-06-21 12:00:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: '보안, 커뮤니케이션 Interview 대비'
 subtitle: 'JWT, OAuth, 함수형 프로그래밍,팀프로젝트'
 date: 2022-11-29 12:00:00 +0900
-categories: 'ETC'
+categories: [etc]
 background: '/img/posts/etc/git.png'
 published : true
 ---

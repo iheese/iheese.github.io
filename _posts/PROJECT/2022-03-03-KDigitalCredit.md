@@ -3,7 +3,7 @@ layout: post
 title: "프로그래밍 기초_fastcampus(KDC) "
 subtitle: "단계별 프로젝트들"
 date: 2022-03-03 11:00:00 +0900
-categories: "PROJECT"
+categories: [project]
 ---
 
 ## phtoupload

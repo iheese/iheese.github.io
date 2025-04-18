@@ -3,7 +3,7 @@ layout: post
 title: 'JPA BOARD TOY PROJECT 회고록'
 subtitle: 'Spring boot, JPA, H2, Ajax, Spring Security, Test Code'
 date: 2022-08-01 12:00:00 +0900
-categories: 'PROJECT'
+categories: [project]
 background: '/img/posts/project/project.jpg'
 ---
 

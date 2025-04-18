@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRING] DI(Dependeny Injection), IoC (Inversion of Control)'
 subtitle: '의존성 주입, 제어의 역전, xml파일, Bean, Annotation'
 date: 2022-06-03 12:00:00 +0900
-categories: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

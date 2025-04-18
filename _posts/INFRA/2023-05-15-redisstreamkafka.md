@@ -3,7 +3,7 @@ layout: post
 title: '[INFRA] Redis Stream vs Kafka'
 subtitle: 'Redis, Redis Stream, Kafka'
 date: 2023-05-15 11:00:00 +0900
-categories: 'INFRA'
+categories: [infra]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

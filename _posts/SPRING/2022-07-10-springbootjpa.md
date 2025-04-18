@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRINGBOOT] JPA(Java Persistence API)'
 subtitle: 'ORM, @Table, @Entity, @Id, @Repository, Query Method'
 date: 2022-07-12 12:00:00 +0900
-categories: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

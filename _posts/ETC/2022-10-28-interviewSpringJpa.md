@@ -3,8 +3,7 @@ layout: post
 title: 'Spring, JPA Interview 대비'
 subtitle: 'Spring DI, IOC, AOP, JPA'
 date: 2024-11-27 09:00:00 +0900
-categories: 
-    - ETC
+categories: [etc]
 background: '/img/posts/etc/git.png'
 ---
 

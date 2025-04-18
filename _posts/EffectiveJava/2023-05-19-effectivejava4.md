@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 4, 인스턴스화를 막으려거든 private 생성자를 사용하라'
 subtitle: ''
 date: 2023-05-19 10:15:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

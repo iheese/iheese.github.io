@@ -3,7 +3,7 @@ layout: post
 title: '네트워크 Interview 대비'
 subtitle: 'HTTP, HTTPS, SSL, Handshake, REST, DNS, TCP, UDP, OSI7, TCP/IP'
 date: 2023-07-03 12:00:00 +0900
-categories: 'ETC'
+categories: [etc]
 background: '/img/posts/etc/git.png'
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: '[DevOps] AWS EC2에 Spring Boot 프로젝트 로컬에서 배포하기'
 subtitle: 'AWS, EC2, Spring Boot, CyberDuck, Git Bash'
 date: 2022-09-05 12:00:00 +0900
-categories: 'DevOps'
+categories: [devops]
 background: '/img/posts/etc/git.png'
 published: false
 ---

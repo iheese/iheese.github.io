@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRINGBOOT] @SpringBootApplication, 외부 설정 파일'
 subtitle: '@SpringConfiguration, @EnableAutoConfiguration, @ComponentScan, @Value, Environment, @ConfigurationProperties, .yml'
 date: 2022-07-06 12:00:00 +0900
-categories: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

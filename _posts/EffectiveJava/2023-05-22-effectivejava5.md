@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 5, 자원을 직접 명시하지 말고 의존 객체 주입을 사용하라'
 subtitle: ''
 date: 2023-05-22 15:20:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

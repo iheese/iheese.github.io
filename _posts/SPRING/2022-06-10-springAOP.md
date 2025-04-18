@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRING] SPRING AOP(Aspect Oriented Programming) '
 subtitle: 'AOP, Aspect, Pointcut, Advice'
 date: 2022-06-09 12:00:00 +0900
-categories: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

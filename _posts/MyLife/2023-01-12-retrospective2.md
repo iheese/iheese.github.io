@@ -3,7 +3,7 @@ layout: post
 title: ' 2023년 01월 취업 회고록'
 subtitle: ' 주니어 백엔드 개발자 취업, 취업 과정, 느낀 점'
 date: 2023-01-12 12:00:00 +0900
-categories: 'MyLife'
+categories: [mylife]
 background: '/img/posts/MyLife/street.jpg'
 published: true
 ---

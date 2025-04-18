@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA, SPRINGBOOT] SPRING SECURITY 훑어보고 커스텀하기'
 subtitle: 'Authentication, Authorization, SecurityFilterChain, UserDetailsService, UserDetails'
 date: 2022-07-27 12:00:00 +0900
-categories: 'SPRING'
+categories: [spring]
 background: '/img/posts/etc/spring.jpg'
 ---
 

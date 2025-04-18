@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 21, 인터페이스는 구현하는 쪽을 생각해 설계하라'
 subtitle: ''
 date: 2023-07-07 12:30:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

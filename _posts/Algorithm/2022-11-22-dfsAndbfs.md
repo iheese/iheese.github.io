@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA] DFS(깊이 우선 탐색), BFS(넓이 우선 탐색) '
 subtitle: 'Depth First Search, Breadth First Search'
 date: 2022-11-22 12:00:00 +0900
-categories: 'Algorithm'
+categories: [algorithm]
 background: '/img/posts/etc/algorithm.jpg'
 use_math: true
 ---

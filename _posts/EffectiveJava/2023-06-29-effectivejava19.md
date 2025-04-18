@@ -3,7 +3,7 @@ layout: post
 title: '[EFFECTIVE JAVA] ITEM 19, 상속을 고려해 설계하고 문서화하라. 그러지 않았다면 상속을 금지해라'
 subtitle: ''
 date: 2023-06-29 15:30:00 +0900
-categories: 'EffectiveJava'
+categories: [effectivejava]
 background: '/img/posts/etc/datastructure.jpg'
 ---
 

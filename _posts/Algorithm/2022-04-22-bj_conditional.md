@@ -3,7 +3,7 @@ layout: post
 title: '[JAVA] 백준_2884, 2525, 2480'
 subtitle: '조건문(conditional)'
 date: 2022-04-22 12:00:00 +0900
-categories: 'Algorithm'
+categories: [algorithm]
 ---
 
 ## 2884
