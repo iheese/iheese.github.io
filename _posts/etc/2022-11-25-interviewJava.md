@@ -231,10 +231,19 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-### 정적(static)이란 무엇인가요?
-- static은 클래스 멤버라고 합니다. JVM의 클래스 로더가 클래스를 로딩해서 Runtime Data Area의 메소드 영역에 저장할 때 클래스별로 관리됩니다. 
-- static 키워드를 통해 생성된 정적멤버들은 Permanent Generation(자바7) 또는 Metaspace(자바8부터)에 저장되고 해당 메모리는 모든 객체가 공유하게 됩니다.
-- 하지만 GC 관리 밖에 존재하기 때문에 프로그램 종료까지 존재하게 됩니다. 남발하게 되면 시스템 성능에 문제가 될 수 있습니다. 
+### 정적(static)이란 무엇인가요? + PermGen, Metaspace는 뭔지 아시나요?
+- static은 클래스 멤버라고 합니다. JVM의 클래스 로더가 클래스를 로딩해서 Runtime Data Area에 올릴 때 로딩됩니다.
+- static 키워드를 통해 생성된 정적멤버들은 모든 객체가 공유하게 됩니다.
+> - Java7 이하 
+> > - JVM의 메소드 영역(개념)을 구현한 Permanent Generation(PermGen) 영역(HotSpot JVM 이 구현한 실제 메모리 공간)에 클래스 메타데이터, static 변수 저장
+> > - 크기 고정 or 제한 가능
+> > - GC 대상이긴 하나 Full GC가 일어나야 청소 가능
+> - Java8 이상 
+> > - static 변수 Heap 영역에 저장
+> > > - Heap에 속하므로 Heap GC 대상
+> > - 클래스 메타데이터는 Metaspace 저장
+> > > - Metaspace는 네이티브 메소드 영역에 속함(네이티브 메소드 영역은 OS 관리 대상)
+> > - Metaspace를 관리하는 Metaspace GC가 존재. Metaspace 사용량이 커지면 Class unloading + 메타데이터 수거로 정리 
 
 <br>
 
