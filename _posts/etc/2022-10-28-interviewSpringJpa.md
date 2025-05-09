@@ -153,10 +153,24 @@ background: '/img/posts/etc/git.png'
 
 <br>
 
-### JPA Propagation 전파단계를 설명해주세요.
-- JPA Propagation은 트랜잭션 동작 도중 다른 트랜잭션을 호출하는 상황에 선택할 수 있는 옵션입니다. 
-- Default 값은 REQUIRED이며 부모 트랜잭션 안에서 실행되며 부모 트랜잭션이 없을 경우 새로운 트랜잭션을 생성합니다.
-- 이외의 값 REQUIRES_NEW, SUPPORTS, MANDATORY, NOT_SUPPORT, NEVER, NESTED 
+### JPA Transaction Propagation (전파속성) 를 설명해주세요.
+- JPA 전파속성은 트랜잭션 동작 도중 다른 트랜잭션을 호출하는 상황에 선택할 수 있는 옵션입니다. 
+- 물리 트랜잭션: 실제 데이터베이스에 적용되는 트랜잭션으로, 커넥션을 통해 커밋/롤백하는 단위
+- 논리 트랜잭션: 스프링이 트랜잭션 매니저를 통해 트랜잭션을 처리하는 단위
+- 트랜잭션의 원칙
+> - 모든 논리 트랜잭션이 커밋되어야 물리 트랜잭션이 커밋됨
+> - 하나의 논리 트랜잭션이라도 롤백되면 물리 트랜잭션은 롤백됨
+- 7 가지 옵션
+> - REQUIRED(default): 트랜잭션 필요함, 기존 트랜잭션 없으면 새롭게 생성, 있으면 참여
+> - REQUIRES_NEW: 항상 새로운 트랜잭션 필요, 기존 트랜잭션 없으면 생성, 있으면 기존꺼 보류하고 새로운 트랜잭션 생성
+> - SUPPORTS: 트랜잭션 없어도 되지만 있으면 지원, 기존 트랜잭션 없으면 없이 진행, 있으면 참여
+> - MANDATORY: 트랙잭션 의무, 기존 트랜잭션 없으면 IllegalTransactionStateException 예외 발생, 있으면 참여
+> - NOT_SUPPORTED: 트랜잭션 지원X, 기존 트랜잭션 없으면 없이 진행, 있으면 기존꺼 보류하고 트랜잭션 없이 진행
+> - NEVER: 트랜잭션 사용X, 기존 트랜잭션 없으면 없이 진행, 있으면  IllegalTransactionStateException 예외 발생
+> - NESTED: 중첩(자식) 트랜잭션 생성, 기존 트랜잭션 없으면 새롭게 생성, 있으면 중첩 트랜잭션 생성
+> > - 중첩 트랜잭션은 부모 트랜잭션의 영향을 받지만, 외부에 영향을 주지 않는다. 즉 중첩 트랜잭션이 롤백되어도 외부 트랜잭션은 커밋 가능, 외부 트랜잭션이 롤백되면 중첩 트랜잭션도 롤백된다.
+> > - JDBC의 savepoint 기능을 사용, DB 드라이버가 이를 지원하는지 확인 필요, JPA에서는 사용이 불가능
+[출처:  [MangKyu's Diary:티스토리]](https://mangkyu.tistory.com/269)
 
 <BR>
 

@@ -67,7 +67,7 @@ background: '/img/posts/etc/git.png'
 <br>
 
 ### GC의 종류와 차이점
-- Serial GC : GC를 싱글 스레드로 처리, stop-the-world 시간이 긴 편
+- Serial GC : 싱글코어에서 사용, GC를 싱글 스레드로 처리, stop-the-world 시간이 긴 편
 > - young 영역에서는 Mark-sweep, old 영역에서는 Mark and Sweep Compact 알고리즘 사용
 > > - compact는 Heap 영역을 정리하기 위한 단계로 유효한 객체들이 연속되게 쌓이도록 힙의 앞부터 채우게 하는 것이다.
 
