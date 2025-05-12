@@ -22,8 +22,9 @@ markdown: kramdown
 #   input: GFM
 highlighter: rouge
 
-paginate:           10
-paginate_path:      "/page:num/" 
+paginate: 10
+paginate_path: /page:num/
+permalink: /:categories/:title
 plugins:
   - jekyll-feed
   - jekyll-paginate
@@ -42,11 +43,10 @@ sass:
 defaults:
   # _posts
   - scope:
-      path: "_posts"
+      path: ""
       type: "posts"
     values:
       layout: "default"
-      permalink: /:categories/:title
       mathjax: true
       
 tipue_search:
