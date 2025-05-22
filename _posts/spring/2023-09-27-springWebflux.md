@@ -5,6 +5,7 @@ subtitle: 'Spring MVC, WebFlux, WebClient'
 date: 2023-09-27 15:00:00 +0900
 categories: [spring]
 background: '/img/posts/etc/spring.jpg'
+sitemap: true
 ---
 
 # Spring WebFlux
