@@ -154,7 +154,7 @@
             {% capture jekyll_toc %}{{ jekyll_toc }}</li>{% endcapture %}
         {% endif %}
 
-        {% capture jekyll_toc %}{{ jekyll_toc }}<li{{ listItemClass }}>{{ listItem }}{% endcapture %}
+        {% capture jekyll_toc %}{{ jekyll_toc }}<li{{ listItemClass }}>- {{ listItem }}{% endcapture %}
 
         {% assign lastLevel = currLevel %}
         {% assign firstHeader = false %}
