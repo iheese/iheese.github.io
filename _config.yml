@@ -1,7 +1,7 @@
-title:              Modest Study
-email:              imbc0224@gmail.com
-description:        keep going
-author:             iheese
+title:             "Modest Study"
+email:              "imbc0224@gmail.com"
+description:        "keep going"
+author:             "iheese"
 baseurl:            
 url:                "https://iheese.github.io"
 
@@ -13,7 +13,7 @@ instagram_username:  StartBootstrap
 linkedin_username:  StartBootstrap
 
 # Add your google-analytics ID here to activate google analytics
-google_analytics:   UA-87997801-1 # out your google-analytics code
+google_analytics:   "UA-87997801-1" # out your google-analytics code
 google-site-verification: "bNPfRJf7VCinz3xxSGT5KkOw99MVbcZAHwfTF0Z0n84"
 
 # Build settings
@@ -55,5 +55,3 @@ tipue_search:
     pages: false
   exclude:
     files: [search.html, tags.html, index.html]
-
-google-site-verification : "bNPfRJf7VCinz3xxSGT5KkOw99MVbcZAHwfTF0Z0n84"
