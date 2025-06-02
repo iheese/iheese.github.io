@@ -6,11 +6,11 @@ baseurl:
 url:                "https://iheese.github.io"
 
 # Social Profiles
-twitter_username:   SBootstrap
-github_username:    StartBootstrap
-facebook_username:  StartBootstrap
-instagram_username:  StartBootstrap
-linkedin_username:  StartBootstrap
+#twitter_username:   SBootstrap
+#github_username:    StartBootstrap
+#facebook_username:  StartBootstrap
+#instagram_username:  StartBootstrap
+#linkedin_username:  StartBootstrap
 
 # Add your google-analytics ID here to activate google analytics
 google_analytics:   "UA-87997801-1" # out your google-analytics code
