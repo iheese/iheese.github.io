@@ -38,6 +38,8 @@ public class TestController {
 
 - 아래 적어논 것들을 순서대로 잘 확인해보자.
 
+<br>
+
 #### 1. JSP 파일 인코딩 설정
 
 - 해당 JSP 화면 위에 아래 코드 확인하기
@@ -97,9 +99,9 @@ public FilterRegistrationBean<CharacterEncodingFilter> characterEncodingFilter()
 
 <br>
 
-## 추가) @ResponseBody 또는 @RestController을 이용해 JSON 응답으로 보낼 때
+### 추가) @ResponseBody 또는 @RestController을 이용해 JSON 응답으로 보낼 때
 
-### 과정
+#### 과정
 
 1. 한글 데이터 객체에 담아 전달 
 2. JSON 변환 (Jackson 등) 
@@ -123,7 +125,7 @@ public class TestController {
 
 <br>
 
-### converter 인코딩 설정
+#### converter 인코딩 설정
 
 - 스프링 4 이후는 기본적으로 UTF-8 이지만 혹시 모를 설정 문제가 있는 버전이면 아래처럼 Bean 등록을 해줘야 한다.
 
